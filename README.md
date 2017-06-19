@@ -1,9 +1,9 @@
-This is Humoto -– is a software framework for manipulation of linear
-least-squares problems with (in)equality constraints. It supports both
-weighting and lexicographic prioritization and can be characterized as a tool
-for goal programming. However, the development was driven by works in other
-fields –- robotics, control, and numerical optimization; for this reason our
-terminology and interpretations are different.
+This is Humoto - a software framework for manipulation of linear least-squares
+problems with (in)equality constraints. It supports both weighting and
+lexicographic prioritization and can be characterized as a tool for goal
+programming. However, the development was driven by works in other fields -
+robotics, control, and numerical optimization; for this reason our terminology
+and interpretations are different.
 
 
 The core functionalities of Humoto are formulation of least-squares problems
@@ -17,7 +17,7 @@ real-time scenarios.
 
 
 In addition to the core components, the distribution of Humoto includes several
-modules –- implementations of specific controllers. The modules serve as
+modules - implementations of specific controllers. The modules serve as
 examples of using the framework, but can also be used in accordance with their
 primary purpose.
 
