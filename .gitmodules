@@ -1,9 +1,9 @@
 [submodule "bridges/googletest/googletest"]
 	path = bridges/googletest/googletest
-	url = git://github.com/google/googletest.git
+	url = https://github.com/google/googletest.git
 [submodule "bridges/config_yaml/yaml-cpp"]
 	path = bridges/config_yaml/yaml-cpp
-	url = git://github.com/jbeder/yaml-cpp.git
+	url = https://github.com/jbeder/yaml-cpp.git
 [submodule "bridges/rbdl/rbdl"]
 	path = bridges/rbdl/rbdl
 	url = https://github.com/bip-team/rbdl.git
