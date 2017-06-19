@@ -1,0 +1,14 @@
+WalkParameters:
+  com_velocity: [0.0, 0]
+  first_stance_com_velocity: [0.0, 0]
+  last_stance_com_velocity: [0, 0]
+  ss_duration_ms: 700
+  tds_duration_ms: 100
+  first_stance_duration_ms: 300
+  last_stance_duration_ms: 2900
+  num_steps: 7
+  first_stance: 1
+  first_ss_type: 3
+  last_stance: 1
+  step_height: 0.07
+  theta_increment: 0.0

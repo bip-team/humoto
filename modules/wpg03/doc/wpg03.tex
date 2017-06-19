@@ -1,0 +1,703 @@
+\input{wpg03_notation_define.tex}
+
+%%%
+\chapter{WPG v.03: WPG considering external forces}
+
+\gbox{
+    \red{Warning:}
+    This module is unsupported -- the documentation may contain errors. Refer
+    to \cite{Agravante2016preprint} and \cite{Agravante2016icra} for more
+    information.
+}
+
+This version of the pattern generator is based on a model that considers external forces.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Model}
+Separating the coplanar contact forces $\fCoplanar$ and an external wrench in the CoM frame:
+$[\fExt^\top ~ \tExt^\top]^\top$, the equations of motion are:
+
+\begin{align}
+ m(\comA + \gravity) &= \fExt + \sum_i \fCoplanar  \\
+ \momAngD &= \tExt + \sum_i (\pCoplanar - \comP) \times \fCoplanar
+\end{align}
+
+By following the derivations:
+\begin{equation}
+ m \comP \times (\comA + \gravity) + \momAngD - \tExt - (\comP \times \fExt)
+ =
+ \sum_i \pCoplanar \times \fCoplanar
+\end{equation}
+
+Dividing to get the Center of Pressure expression on the right hand part:
+\begin{equation}
+ \frac{m \comP \times (\comA + \gravity) + \momAngD - \tExt - (\comP \times \fExt) }
+ {m(\ddot{c}^z + g^z) - f_{ext}^z}
+ =
+ \frac{\sum_i \pCoplanar \times \fCoplanar}
+ {\sum_i f_i^z}
+\end{equation}
+
+For a flat ground $p_i^z = 0$ and $\gravity^{x,y} = \mathbf{0}$ and using the approximations: $\ddot{c}^z = 0$ and $\momAngD = 0$ the ZMP in the
+plane is:
+\begin{equation}
+ \zmp^{x,y}
+ =
+ \frac{\sum_i f^z_i \pCoplanar^{x,y}}{\sum_i f_i^z}
+ =
+ \left( \frac{m g^z}{m g^z - f^z_{ext}} \right)
+ \left( \comP^{x,y} - \frac{c^z}{g^z} \comA^{x,y} \right)
+ -
+ \mathbf{S}
+ \left( \frac{\tExt^{x,y} + (\comP \times \fExt)^{x,y} }{mg^z - f^z_{ext}} \right)
+\end{equation}
+where
+\begin{equation}
+ \mathbf{S} =
+ \begin{bmatrix}
+  0 & -1 \\
+  1 & 0
+ \end{bmatrix}
+\end{equation}
+
+Developing further:
+
+\begin{equation}
+ \zmp^{x,y}
+ =
+ \left( \frac{m g^z}{m g^z - f^z_{ext}} \right)
+ \left( \comP^{x,y} - \frac{c^z}{g^z} \comA^{x,y} \right)
+ -
+ \mathbf{S}
+ \left( \frac{\tExt^{x,y} }{mg^z - f^z_{ext}} \right)
+ -
+ \left( \frac{\comP^{x,y}\fExt^z - \comP^z\fExt^{x,y}}{mg^z - f^z_{ext}} \right)
+\end{equation}
+
+Grouping the terms:
+\begin{equation}
+ \zmp^{x,y}
+ =
+ \left( \comP^{x,y} - \left( \frac{c^z}{g^z} \right) \left( \frac{m g^z }{m g^z - f^z_{ext}} \right) \comA^{x,y}  \right)
+ -
+ \mathbf{S}
+ \left( \frac{\tExt^{x,y} }{mg^z - f^z_{ext}} \right)
+ +
+ \left( \frac{\comP^z\fExt^{x,y}}{mg^z - f^z_{ext}} \right)
+\end{equation}
+
+\section{MPC}
+The model in $x$ is:
+\begin{equation}
+ \begin{bmatrix}
+ \dot{c}^x \\
+ \ddot{c}^x \\
+ \dddot{c}^x
+ \end{bmatrix}
+ =
+ \begin{bmatrix}
+  0 & 1 & 0 \\
+  0 & 0 & 1 \\
+  0 & 0 & 0
+ \end{bmatrix}
+ \begin{bmatrix}
+ c^x \\
+ \dot{c}^x \\
+ \ddot{c}^x
+ \end{bmatrix}
+ +
+ \begin{bmatrix}
+ 0 \\
+ 0 \\
+ 1
+ \end{bmatrix}
+ \dddot{c}^x
+\end{equation}
+
+\begin{equation}
+ z^x
+ =
+ \begin{bmatrix}
+ 1 &
+ 0 &
+ -\frac{m g^z}{(m g^z - f^z_{ext} ) \omega^2}
+ \end{bmatrix}
+ \begin{bmatrix}
+ c^x \\
+ \dot{c}^x \\
+ \ddot{c}^x
+ \end{bmatrix}
+ +
+ \frac{n^y_{ext} + c^z f^x_{ext}}{mg^z - f^z_{ext}}
+\end{equation}
+
+Rewriting:
+\begin{equation}
+ \begin{bmatrix}
+ \dot{c}^x \\
+ \ddot{c}^x \\
+ \dddot{c}^x
+ \end{bmatrix}
+ =
+ \begin{bmatrix}
+  0 & 1 & 0 \\
+  0 & 0 & 1 \\
+  0 & 0 & 0
+ \end{bmatrix}
+ \begin{bmatrix}
+ c^x \\
+ \dot{c}^x \\
+ \ddot{c}^x
+ \end{bmatrix}
+ +
+ \begin{bmatrix}
+  0 \\
+  0 \\
+  1
+ \end{bmatrix}
+ \dddot{c}^x
+\end{equation}
+
+\begin{equation}
+ z^x
+ =
+ \begin{bmatrix}
+  1 &
+  0 &
+  -\frac{m g^z}{(m g^z - f^z_{ext} ) \omega^2}
+ \end{bmatrix}
+ \begin{bmatrix}
+ c^x \\
+ \dot{c}^x \\
+ \ddot{c}^x
+ \end{bmatrix}
+ +
+ \begin{bmatrix}
+  \frac{1}{m g^z - f^z_{ext}} &
+  \frac{c^z}{m g^z - f^z_{ext}}
+ \end{bmatrix}
+ \begin{bmatrix}
+  n^y \\
+  f^x
+ \end{bmatrix}
+\end{equation}
+
+The model is of the form
+\begin{align}
+ \mathbf{\dot{x}} &= \mathbf{A} \mathbf{x} + \mathbf{B} \mathbf{u} \\
+ \mathbf{y} &= \mathbf{D} \mathbf{x} + \mathbf{G} \mathbf{f}
+\end{align}
+
+Discretization and concatenating the $x$ and $y$ DOFs leads to:
+\begin{align}
+ \cstate_{k+1}	=& \M{A}_k \cstate_k	  + \M{B}_k \mathbf{u}_k \\
+ \cop_{k+1} 	=& \M{D}_{k+1} \cstate_{k+1} + \M{G}_{k+1} \mathbf{f}_{k+1} \\
+		=& \M{D}_{k+1}\M{A}_k\cstate_{k} + \M{D}_{k+1}\M{B}_k \mathbf{u}_k + \M{G}_{k+1} \mathbf{f}_{k+1}
+\end{align}
+\begin{equation}
+\M{A}_k =
+\begin{bmatrix}
+    1       & T_k   & T_k^2/2   & 0 & 0 & 0\\
+    0       & 1     & T_k       & 0 & 0 & 0\\
+    0       & 0     & 1         & 0 & 0 & 0\\
+    0 & 0 & 0                   & 1       & T_k   & T_k^2/2   \\
+    0 & 0 & 0                   & 0       & 1     & T_k       \\
+    0 & 0 & 0                   & 0       & 0     & 1         \\
+\end{bmatrix}
+\quad
+\M{B}_k =
+\begin{bmatrix}
+    T_k^3/6 & 0 \\
+    T_k^2/2 & 0 \\
+    T       & 0 \\
+    0       & T_k^3/6 \\
+    0       & T_k^2/2 \\
+    0       & T
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\M{D}_{k} =
+\begin{bmatrix}
+    1 & 0 & -\frac{m g^z}{(m g^z - f^z_k ) \omega_k^2}
+  & 0 & 0 & 0 \\
+
+    0 & 0 & 0
+  & 1 & 0 & -\frac{m g^z}{(m g^z - f^z_k ) \omega_k^2}  \\
+\end{bmatrix}
+\M{G}_{k} =
+\begin{bmatrix}
+  \frac{1}{m g^z - f^z_k}  & \frac{c^z_k}{m g^z - f^z_k} & 0 & 0 \\
+  0 & 0 & -\frac{1}{m g^z - f^z_k}  & \frac{c^z_k}{m g^z - f^z_k}  \\
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+ \omega_k = \sqrt{\frac{g}{c^z_k}}
+ \quad
+ \mathbf{u}_k =
+ \begin{bmatrix}
+  \dddot{c}^x_k \\
+  \dddot{c}^y_k
+ \end{bmatrix}
+ \quad
+ \mathbf{f}_k =
+ \begin{bmatrix}
+  n^y_k \\
+  f^x_k \\
+  n^x_k \\
+  f^y_k
+ \end{bmatrix}
+\end{equation}
+
+Condensing the model results in:
+\begin{align}
+    \begin{bmatrix}
+        \cstate_1 \\
+        \vdots\\
+        \cstate_{N}\\
+    \end{bmatrix}
+    =&
+    \M{U}_x \cstate_0
+    +
+    \M{U}_u
+    \begin{bmatrix}
+        \mathbf{u}_0 \\
+        \vdots \\
+        \mathbf{u}_{N-1} \\
+    \end{bmatrix} \\
+%
+    \begin{bmatrix}
+        \cop_1 \\
+        \vdots \\
+        \cop_{N} \\
+    \end{bmatrix}
+    =&
+    \M{O}_x \cstate_0
+    +
+    \M{O}_u
+    \begin{bmatrix}
+        \mathbf{u}_0 \\
+        \vdots \\
+        \mathbf{u}_{N-1} \\
+    \end{bmatrix}
+    +
+    \M{O}_f
+    \begin{bmatrix}
+        \mathbf{f}_1 \\
+        \vdots \\
+        \mathbf{f}_{N} \\
+    \end{bmatrix} \\
+\end{align}
+
+or:
+\begin{align}
+    \cState
+    =&
+    \M{U}_x \cstate_0
+    +
+    \M{U}_u
+    \dddot{\M{C}}\\
+%
+    \hat{\M{Z}}
+    =&
+    \M{O}_x \cstate_0
+    +
+    \M{O}_u
+    \dddot{\M{C}}
+    +
+    \M{O}_f
+    \hat{\M{F}}\\
+\end{align}
+
+expressing the ZMP to local coordinates:
+\begin{align}
+    \cState
+    =&
+    \M{U}_x \cstate_0
+    +
+    \M{U}_u
+    \dddot{\M{C}}\\
+%
+    \left(
+        \M{V}_0 \fp_0
+        +
+        \M{V} \FP
+        +
+        \diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}}
+        \CoP
+    \right)
+    =&
+    \M{O}_x \cstate_0
+    +
+    \M{O}_u
+    \dddot{\M{C}}
+    +
+    \M{O}_f
+    \hat{\M{F}}\\
+\end{align}
+
+rearranging and grouping the unknowns: $\dddot{\M{C}}$ and $\FP$
+\begin{align}
+    \cState
+    =&
+    \underbrace{
+    \begin{bmatrix}
+        \M{U}_u    &   \M{0} \\
+    \end{bmatrix}
+    }_{\M{S}}
+    \underbrace{
+    \begin{bmatrix}
+        \dddot{\M{C}}\\
+        \FP\\
+    \end{bmatrix}
+    }_{\V{X}}
+    +
+    \underbrace{
+    \M{U}_x \cstate_0
+    }_{\V{s}}\\
+%
+    \CoP
+    =&
+    \underbrace{
+    \begin{bmatrix}
+        \diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}^\top} \M{O}_u    &
+       -\diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}^\top} \M{V} \\
+    \end{bmatrix}
+    }_{\M{S}_{z}}
+    \underbrace{
+    \begin{bmatrix}
+        \dddot{\M{C}}\\
+        \FP\\
+    \end{bmatrix}
+    }_{\V{X}}
+    +
+    \underbrace{
+    \diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}^\top}
+    \left(
+    \M{O}_x \cstate_0
+    +
+    \M{O}_f \hat{\M{F}}
+    -
+    \M{V}_0 \fp_0
+    \right)
+    }_{\V{s}_{z}}\\
+\end{align}
+
+The CoM velocity is:
+\begin{equation}
+    \cVel =
+        \diag{N}{\M{I}_{v}} \cState =
+        \diag{N}{\M{I}_{v}} \left( \M{S}\V{X} + \V{s} \right)=
+        \M{S}_v \V{X} + \V{s}_v
+\end{equation}
+
+\section{QP}
+The Constraints are:
+
+CoP positions
+\begin{align}
+  \ubarV{Z} \le \CoP \le \barV{Z} \\
+  \ubarV{Z} \le \M{S}_{z} \V{X} + \V{s}_{z} \le \barV{Z}
+\end{align}
+
+
+Foot positions
+\begin{equation}
+  \ubarV{P} \le \FP \le \barV{P}
+\end{equation}
+
+The Objectives are:
+
+Tracking a reference velocity:
+\begin{equation}
+    \NORME{\cVel - \cVel_{ref}} = \NORME{\M{S}_v \V{X} + \V{s}_v - \cVel_{ref}},
+\end{equation}
+
+Minimize CoM jerk:
+\begin{equation}
+    \NORME{\dddot{\M{C}}},
+\end{equation}
+
+Minimize the distance between the CoP positions and the centers of the feet
+\begin{equation}
+    \NORME{\CoP} = \NORME{\M{S}_{z} \V{X} + \V{s}_{z}}.
+\end{equation}
+
+\section{General notes on the external wrench term}
+
+
+\subsection{Prediction of future values}
+Knowledge of future forces and torques $f^x, f^y, n^x, n^y$ is required in the vector $\hat{\M{F}}$ and $f^z$ in the matrices $\M{D}_{k}, \M{G}_{k}$
+and consequently $\M{O}_{x}, \M{O}_{u}, \M{O}_{f}$. Note, $n^z$ was implicitly ignored during the modeling.
+
+Here, we assume knowledge of the present wrench $\mathbf{h}_0$. So a prediction model is required to obtain $\mathbf{h}_1 \ldots \mathbf{h}_N$
+
+Some simple models can be used (mostly for testing):
+
+Constant throughout the preview horizon
+\begin{equation}
+ \mathbf{h}_1 = \mathbf{h}_2 = \ldots = \mathbf{h}_N = \mathbf{h}_0
+\end{equation}
+
+Linear
+\begin{equation}
+ \mathbf{h}_k = m k T_k +  \mathbf{h}_0
+\end{equation}
+
+Other prediction models are also presented in the specific use cases
+
+\subsection{Frame of reference}
+Note that the modeling placed the external wrench in the CoM frame. However, $\mathbf{h}_0$ may be expressed in another frame, the hand force sensor
+frames for example. For this, the wrench transformation matrix $^{com}\M{H}^{ref}$ can be used:
+\begin{equation}
+ \mathbf{h}_k = {}^{com}\M{H}^{ref}_k ~^{ref}\mathbf{h}
+\end{equation}
+
+where:
+\begin{equation}
+  \M{H}
+  =
+  \begin{bmatrix}
+  \M{R} & \M{0}\\
+  [\mathbf{t}]_\times \M{R} & \M{R}
+ \end{bmatrix}
+\end{equation}
+
+\section{Case 1: Solo-carrying an object}
+For an object of known mass $m^{obj}$ and location (relative to the CoM), the external wrench is:
+\begin{equation}
+ \mathbf{h}_k
+  =
+ \begin{bmatrix}
+  \M{I} & \M{0}\\
+  [\mathbf{t}_k]_\times & \M{I}
+ \end{bmatrix}
+ \begin{bmatrix}
+  0\\
+  0\\
+  m^{obj} g^z\\
+  0\\
+  0\\
+  0
+ \end{bmatrix}
+ =
+ \begin{bmatrix}
+  0\\
+  0\\
+  m^{obj} g^z\\
+  y_k m^{obj} g^z\\
+ -x_k m^{obj} g^z\\
+  0
+ \end{bmatrix}
+\end{equation}
+where $x$ and $y$ are the distances between the 2 CoMs (object and robot)
+
+In general:
+\begin{equation}
+ \mathbf{t}_k = {}^{rob}\mathbf{t}_k^{obj} = {}^w\mathbf{t}_k^{obj} - {}^{w}\mathbf{t}_k^{com}
+\end{equation}
+
+A first approximation is to assume $x_0, y_0$ from the current configuration remains constant.
+\begin{equation}
+ \mathbf{t}_1 = \mathbf{t}_2 = \ldots = \mathbf{t}_N = \mathbf{t}_0
+\end{equation}
+
+A better model might be to use: the future com positions from the model $\hat{\M{C}}$
+\begin{equation}
+    \cPos =
+        \diag{N}{\M{I}_{p}} \cState =
+        \diag{N}{\M{I}_{p}} \left( \M{S}\V{X} + \V{s} \right)=
+        \M{S}_p \V{X} + \V{s}_p
+\end{equation}
+
+Along with this, knowledge of the future object position in the plane ${}^wx_k, {}^wy_k$ is required. If a trajectory is available, it can be used to
+obtain
+this.
+
+Without having the object trajectory, one approximation is that the reference com velocity is
+perfectly imparted on the object such that:
+\begin{equation}
+ \hat{\V{t}} =
+ \begin{bmatrix}
+  x_1 \\
+  y_1 \\
+  \vdots \\
+  x_N \\
+  y_N
+ \end{bmatrix}
+ =
+ \begin{bmatrix}
+  1 & 0 \\
+  0 & 1 \\
+  \vdots \\
+  1 & 0 \\
+  0 & 1 \\
+ \end{bmatrix}
+ \begin{bmatrix}
+  x_0 \\
+  y_0
+ \end{bmatrix}
+ +
+ \diag{k = 1 \dots N}{k T_k} \cVel_{ref}
+ -
+ \M{S}_p \V{X} - \V{s}_p
+\end{equation}
+
+Finally, the external wrench vector required in the QP is:
+\begin{equation}
+ \hat{\V{F}}
+ =
+ \begin{bmatrix}
+  n_1^y \\
+  f_1^x \\
+  n_1^x \\
+  f_1^y \\
+  \vdots \\
+  n_N^y \\
+  f_N^x \\
+  n_N^x \\
+  f_N^y
+ \end{bmatrix}
+ =
+ \diag{N}{\begin{bmatrix}
+           -1 & 0 \\
+            0 & 0 \\
+            0 & 1 \\
+            0 & 0
+          \end{bmatrix}}
+ \hat{\V{t}}
+ ~
+ (m^{obj} g^z)
+\end{equation}
+
+This slightly changes the ZMP formulation for the QP since $\hat{\V{F}}$ is now a function of $\V{X}$
+
+\section{Case 2: Collaborative-carrying}
+% One general thing to exploit could be giving a meaning to the weights of the QP objectives. The external wrench term only appears in the CoP and
+% there is already an objective where an external CoM velocity is given. Using these 2 tasks together can be seen as a form of damping control, with the
+% ratio of these task weights the damping factor.
+
+\subsection{As leader}
+For leading, a clear and independent intention is necessary. However, a good leader still needs to account for what the follower is doing, this is
+where the external wrench model comes in.
+
+% often we use the reference CoM velocity $\cVel_{ref}$.
+%
+% Another idea is to add the external wrench as a decision variable of the QP, trying to track the result as a target force in the whole-body control
+% part
+
+\textbf{Idea 1: Reference trajectory tracking}
+
+If a clear trajectory is known before hand, a better objective for the leader might be a ``trajectory tracking task'' instead of just a reference
+velocity . This can be formulated as:
+\begin{equation}
+  \NORME{
+  g_m(\cAcc_{ref} - \cAcc) +
+  g_b(\cVel_{ref} - \cVel) +
+  g_k(\cPos_{ref} - \cPos)
+  }
+\end{equation}
+where $g_m, g_b, g_k$ are gains. To be concise, an appropriate gain matrix can be used:
+\begin{equation}
+  \NORME{
+  \M{G}_{mbk}(\cState_{ref} - \cState)
+  }
+\end{equation}
+
+\textbf{Idea 2: Wrench in the QP decision variables}
+
+Another idea was to place the external wrench as a decision variable of the QP. This will result in:
+\begin{align}
+    \cState
+    =&
+    \underbrace{
+    \begin{bmatrix}
+        \M{U}_u    &   \M{0}  &   \M{0}\\
+    \end{bmatrix}
+    }_{\M{S}}
+    \underbrace{
+    \begin{bmatrix}
+        \dddot{\M{C}}\\
+        \FP\\
+        \hat{\M{F}}
+    \end{bmatrix}
+    }_{\V{X}}
+    +
+    \underbrace{
+    \M{U}_x \cstate_0
+    }_{\V{s}}\\
+%
+    \CoP
+    =&
+    \underbrace{
+    \begin{bmatrix}
+        \diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}^\top} \M{O}_u    &
+       -\diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}^\top} \M{V} &
+	\diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}^\top} \M{O}_f
+    \end{bmatrix}
+    }_{\M{S}_{z}}
+    \underbrace{
+    \begin{bmatrix}
+        \dddot{\M{C}}\\
+        \FP\\
+        \hat{\M{F}}
+    \end{bmatrix}
+    }_{\V{X}}
+    +
+    \underbrace{
+    \diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}^\top}
+    \left(
+    \M{O}_x \cstate_0
+    -
+    \M{V}_0 \fp_0
+    \right)
+    }_{\V{s}_{z}}\\
+\end{align}
+
+As the force is part of the ZMP expression, this might allow the robot to balance itself by applying the appropriate forces. For
+safety, the applied wrench may need to be constrained
+\begin{equation}
+  \hat{\ubarV{F}} \le \hat{\M{F}} \le \hat{\barV{F}}
+\end{equation}
+
+and/or minimized as:
+\begin{equation}
+  \NORME{\hat{\M{F}}}
+\end{equation}
+
+\subsection{As follower}
+For following, the robot needs to act based on the leader's intention.
+
+% To do this, we used to change the target reference $\cVel_{ref}$ as a function
+% of the sensed force (a damping-based control). With the new model, it might be possible to do the same concept but using the QP weights.
+
+\textbf{Idea 1: Impedance control objective}
+
+It may be possible to do planar impedance control, first defining the selection matrix $\M{S}_{xy}$ to select only the $f^x, f^y$ components. The
+impedance parameter matrix $\M{G}_{mbk}$ is defined similar to the trajectory tracking task gain.
+\begin{equation}
+  \NORME{
+  \M{G}_{mbk}\cState -\M{S}_{xy}\hat{\M{F}}
+  }
+\end{equation}
+
+This could replace the reference velocity objective and the external controller to compute this reference.
+
+\textbf{Idea 2: Force prediction models}
+
+A better following behavior requires a ``proactive'' behavior which attempts to predict the intention of the leader. This corresponds
+to predicting the future external wrench. A better prediction model should correspond to a better
+proactive behavior.
+
+Since the target application is for collaborating with humans, this model amounts to predicting the human partner's intention. One possible
+assumption is to take the results presented in Bussy:IROS:2012 and infer from this 2 models to predict the forces:
+\begin{enumerate}
+ \item constant acceleration model - constant force
+ \item constant jerk model - linear force
+\end{enumerate}
+
+
+\subsection{A combined approach}
+Once a good leader and follower approach are formulated, it might be possible to reformulate it into a combined approach
+
+
+\input{wpg03_notation_undefine.tex}

@@ -1,0 +1,40 @@
+\usepackage{cancel}
+\usepackage{longtable}
+\usepackage[hyperref=true,list-style=longtable]{acro}
+\usepackage{mymath}
+
+
+% remove extra white space around long tables
+\setlength{\LTpre}{4pt}
+\setlength{\LTpost}{4pt}
+
+
+\newcommand{\projectname}{\mono{Humoto}\xspace}
+\newcommand{\sn}[1]{\mono{#1}}
+
+
+\acsetup{list-short-format=\bf,list-heading=chapter*,list-name=List of Acronyms}
+\acsetup{long-format=\emph}
+
+\DeclareAcronym{API}{   short = API,    long = Application Programming Interface}
+\DeclareAcronym{CPU}{   short = CPU,    long = Central Processing Unit}
+\DeclareAcronym{CAS}{   short = CAS,    long = Computer Algebra System}
+\DeclareAcronym{CoM}{   short = CoM,    long = Center of Mass}
+\DeclareAcronym{CoP}{   short = CoP,    long = Center of Pressure}
+\DeclareAcronym{FSM}{   short = FSM,    long = Finite State Machine}
+\DeclareAcronym{KKT}{   short = KKT,    long = Karush-Kuhn-Tucker}
+\DeclareAcronym{LIPM}{  short = LIPM,   long = Linear Inverted Pendulum Model}
+\DeclareAcronym{MPC}{   short = MPC,    long = Model Predictive Control}
+\DeclareAcronym{QP}{    short = QP,     long = Quadratic Program}
+\DeclareAcronym{ZMP}{   short = ZMP,    long = Zero Moment Point}
+\DeclareAcronym{PD}{    short = PD,     long = Proportional-Derivative}
+\DeclareAcronym{WPG}{   short = WPG,    long = Walking Pattern Generator}
+\DeclareAcronym{DS}{    short = DS ,    long = Double Support: both feet on the ground (see {\bf SS})}
+\DeclareAcronym{TDS}{   short = TDS,    long = Transitional Double Support: {\bf DS} between adjacent {\bf LSS} and {\bf RSS}}
+\DeclareAcronym{ADS}{   short = ADS,    long = Aligned Double Support: \bf{DS} in which the right and left feet are aligned}
+\DeclareAcronym{SS}{    short = SS ,    long = Single Support: one foot on the ground (see {\bf DS})}
+\DeclareAcronym{LSS}{   short = LSS,    long = Left Single Support (see {\bf SS})}
+\DeclareAcronym{RSS}{   short = RSS,    long = Right Single Support (see {\bf SS})}
+
+
+\sloppy

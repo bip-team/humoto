@@ -1,0 +1,303 @@
+\documentclass[12pt,a4paper]{book}
+
+\usepackage{morewrites}
+
+\usepackage{import}
+\usepackage[sort]{standalone}
+
+\usepackage{graphicx,color,psfrag}
+\usepackage{tabularx,colortbl}
+
+\usepackage{epsfig}
+
+
+%\usepackage{listings}
+%\usepackage{verbatim}   % useful for program listings
+\usepackage{color}      % use if color is used in text
+\usepackage{subfigure}  % use for side-by-side figures
+\usepackage[colorlinks=true]{hyperref}   % use for hypertext links, including those to external documents and URLs
+
+\usepackage{scalefnt}
+
+%\usepackage{theorem}
+
+\usepackage{tabu}
+%\usepackage{forest}
+\usepackage{cleveref}
+\usepackage{xspace}
+\usepackage[backend=bibtex,sorting=ydnt,firstinits=true,maxbibnames=99]{biblatex}
+
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+
+\usepackage{placeins}
+
+
+% number chapters in each part separately
+\makeatletter
+\@addtoreset{chapter}{part}
+\makeatother
+
+
+\addbibresource{bibliography.bib}
+\addbibresource{wpg.bib}
+\addbibresource{pepper.bib}
+
+\input{texsetup.tex}
+
+\newcommand{\x}{\V{\chi}}
+\newcommand{\objb}{b}
+\newcommand{\violation}{\V{v}}
+\newcommand{\objA}{\M{\mathcal{A}}}
+
+
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+\let\cleardoublepage\clearpage
+
+
+\title{\projectname}
+\author{}
+\date{\today}
+
+
+\begin{document}
+\begin{refsection}
+\maketitle
+\tableofcontents
+
+\clearpage
+\phantomsection
+%\pdfbookmark[1]{List of Acronyms}{listofacronyms}
+\printacronyms
+\addcontentsline{toc}{chapter}{List of Acronyms}
+
+
+\part{Core}
+
+\chapter{Introduction}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{What is Humoto}\label{sec.intro}
+
+\projectname{} -- is a software framework for manipulation of linear
+    least-squares problems with (in)equality constraints. It supports both
+    weighting and lexicographic prioritization and can be characterized as a
+    tool for goal programming \cite{wiki2017gp}. However, the development was
+    driven by works in other fields -- robotics, control, and numerical
+    optimization, \EG, \cite{Dimitrov2015preprint, Saab2012tranrob,
+    Escande2014ijrr}; for this reason our terminology and interpretations are
+    different.
+
+
+The core functionalities of \projectname are formulation of least-squares
+    problems and their resolution using various third-party software. Both of
+    these operations are performed through unified \ac{API}. Moreover, due to
+    our interest in robotic applications, the framework facilitates formulation
+    and implementation of optimization problems for control of robots, in
+    particular, \ac{MPC} problems. For the same reason, we pay special
+    attention to computational performance in order to be able to employ the
+    framework in real-time scenarios.
+
+
+In addition to the core components, the distribution of \projectname includes
+    several modules -- implementations of specific controllers. The modules
+    serve as examples of using the framework, but can also be used in
+    accordance with their primary purpose. You can learn more about the
+    provided modules in \cref{part.wpg} and \cref{part.pepper}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Outline}\label{sec.intro}
+
+The present document introduces basic concepts behind the \projectname and
+    contains various mathematical derivations which are used in the framework
+    and the modules. However, this document cannot serve as a comprehensive
+    guide -- you have to refer to \sn{Doxygen} documentation in order to learn
+    how to use \projectname in your applications or learn more about
+    implementation details.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Notation}\label{sec.notation}
+
+\begin{description}
+    \item[Software names] \hfill \\
+        Names of programs and software libraries, names of constants, variables
+        and functions that are used in programs are typed in a monospaced font:
+        \sn{Eigen}.
+
+    \item[Scalars, vectors, matrices] \hfill
+        \begin{itemize}
+            \item Vectors and matrices are denoted by letters in a bold font:
+                $\V{v}$, $\M{M}$, $\M{\mathcal{A}}$.
+
+            \item Scalars are denoted using the standard italic or calligraphic
+                font: $N, n, \mathcal{K}$.
+
+            \item $\T{(\cdot)}$ -- transpose of a matrix or a vector.
+
+            \item $\CROSS[(\cdot)]$ -- a skew-symmetric matrix used for
+                representation of a cross product of two three dimensional
+                vectors as a product of a matrix and a vector:
+                %
+                \begin{equation}
+                    \V{v}
+                    =
+                    \begin{bmatrix}
+                        v^x\\
+                        v^y\\
+                        v^z
+                    \end{bmatrix},
+                    \quad
+                    \CROSS[\V{v}]
+                    =
+                    \begin{bmatrix}
+                        0      &   -v^z   &   v^y\\
+                        v^z    &   0      &   -v^x\\
+                        -v^y   &   v^x    &   0 \\
+                    \end{bmatrix}.
+                \end{equation}
+
+            \item Block diagonal matrices:
+                %
+                \begin{equation}
+                    \begin{gathered}
+                        \diag{2}{\M{M}} =
+                        \begin{bmatrix}
+                            \M{M}   &   \M{0}\\
+                            \M{0}   &   \M{M}\\
+                        \end{bmatrix}
+                        ,
+                        \quad
+                        \diag{k = 1 \dots 2}{\M{M}_k} =
+                        \begin{bmatrix}
+                            \M{M}_1 &   \M{0}  \\
+                            \M{0}   &   \M{M}_2\\
+                        \end{bmatrix}
+                        ,
+                        \\
+                        \diag{}{\M{M}, \M{R}} =
+                        \begin{bmatrix}
+                            \M{M} &   \M{0}  \\
+                            \M{0}   &   \M{R}\\
+                        \end{bmatrix}
+                        .
+                    \end{gathered}
+               \end{equation}
+
+            \item Stacked vectors and matrices:
+                %
+                \begin{equation}
+                    \V{v} = (\V{v}_1, \dots, \V{v}_n) = \begin{bmatrix} \V{v}_1 \\ \vdots \\ \V{v}_n \\ \end{bmatrix},
+                    \quad
+                    \M{M} = (\M{M}_1, \dots, \M{M}_n) = \begin{bmatrix} \M{M}_1 \\ \vdots \\ \M{M}_n \\ \end{bmatrix}.
+                \end{equation}
+
+            \item Inequalities between vectors $\V{v} \ge \V{r}$ are interpreted
+                component-wise.
+        \end{itemize}
+
+
+    \item[Special matrices and vectors] \hfill
+        \begin{itemize}
+            \item $\M{I}$ -- an identity matrix. $\M{I}_n$ -- $n \CROSS n$ identity matrix.
+
+            \item $\M{I}_{(\cdot)}$ -- a selection matrix.
+
+            \item $\M{0}$ -- a matrix of zeros. $\M{0}_{n,m}$ -- $n \CROSS m$ matrix of zeros.
+        \end{itemize}
+
+
+    \item[Reference frames] \hfill
+        \begin{itemize}
+            \item Frames are denoted using a sans-serif font: $\FRAME{A}$. All
+                considered frames are orthonormal.
+
+            \item $\V[A]{v}$ -- vector expressed in frame $\FRAME{A}$.
+
+            \item $\M[B][A]{R}$ -- rotation matrix from from frame $\FRAME{B}$
+                to frame $\FRAME{A}$. For example, 2-d rotation matrix is defined
+                as
+                %
+                \begin{equation}
+                    \M[B][A]{R}
+                    =
+                    \begin{bmatrix}
+                        \cos(\theta) &   -\sin(\theta)\\
+                        \sin(\theta) &   \cos(\theta)\\
+                    \end{bmatrix},
+                \end{equation}
+                %
+                where $\theta$ is the rotation angle of frame $\FRAME{B}$ with
+                respect to $\FRAME{A}$.
+
+            \item The global frame is implicit and is not denoted by any
+                letter, \EG, $\M[B][]{R}$ rotates from frame $\FRAME{B}$ to the
+                global frame.
+        \end{itemize}
+
+
+    \item[Sets] \hfill
+        \begin{itemize}
+            \item The sets are denoted using a blackboard bold font: $\SET{A}$.
+
+            \item $\RR$ is the set of real numbers.
+
+            \item $\RR_{\ge 0}, \RR_{> 0}$ are the sets of non-negative and positive real numbers.
+
+            \item $\RR^n$ is the set of real-valued vectors.
+
+            \item $\RR^{n \CROSS m}$ is the set of real-valued matrices.
+        \end{itemize}
+
+
+    \item[Other] \hfill
+        \begin{itemize}
+            \item Function names in mathematical expressions are written in the
+                regular font: $\FUNC{func}(\V{x}, \V{y})$.
+
+            \item $\NORME{\cdot}$ denotes the Euclidean norm.
+        \end{itemize}
+\end{description}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{optimization}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{reference}
+
+
+\printbibliography[heading=bibintoc, title=Bibliography]
+\end{refsection}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% modules
+\input{wpg}
+\input{pepper.tex}
+
+
+%\appendix
+\end{document}

@@ -1,0 +1,3 @@
+This module contains implementation of a walking pattern generator, which
+accounts for an external force acting on the CoM. The module was developed
+by Joven Agravante during his reasearch on human-robot collaboration.

@@ -1,0 +1,18 @@
+# Default
+Hierarchy00:
+  task_class_names: [[TaskBaseCoMTracking, TaskBodyCoMTracking, TaskBaseOrientation], [TaskJointsReference]]
+  task_ids: [[TaskBaseCoMTracking, TaskBodyCoMTracking, TaskBaseOrientation], [TaskJointsReference]]
+  TaskBaseCoMTracking:
+    gain: 1
+    k_position_gain: 1
+  TaskBodyCoMTracking:
+    gain: 1
+    k_position_gain: 1
+    axis_flag: 7
+  TaskBaseOrientation:
+    gain: 1
+    k_orientation_gain: 1
+  TaskJointsReference:
+    gain: 1
+    k_position_gain: 1
+    joint_angles_reference: [0, -0.2, 0, -0.04, -0.01, 1.57, 0.12, -1.2217007, -0.52345699, 0, 1.57, -0.12, 1.2217007, 0.52345699, 0]

@@ -1,0 +1,9 @@
+tmp/
+**/doc-tmp/
+*.pdf
+*~
+bridges/qpOASES/qpOASES
+*.a
+*.o
+build/
+build-*/

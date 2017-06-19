@@ -1,0 +1,69 @@
+# Standard
+Hierarchy00:
+  task_class_names: [[TaskFootstepBounds, TaskCoPBounds], [TaskCoMVelocity, TaskCoPPosition, TaskCoPVelocity]]
+  task_ids: [[TaskFootstepBounds, TaskCoPBounds], [TaskCoMVelocity, TaskCoPPosition, TaskCoPVelocity]]
+  TaskFootstepBounds:
+    fix_footsteps: false
+  TaskCoPBounds:
+    {}
+  TaskCoPVelocity:
+    gain: 0.223606797749979
+  TaskCoMVelocity:
+    gain: 0.707106781186548
+  TaskCoPPosition:
+    gain: 12.2474487139159
+    variables_id: CoP
+
+
+# Fixed footsteps
+Hierarchy01:
+  task_class_names: [[TaskFootstepBounds, TaskCoPBounds], [TaskCoMVelocity, TaskCoPPosition, TaskCoPVelocity]]
+  task_ids: [[TaskFootstepBounds, TaskCoPBounds], [TaskCoMVelocity, TaskCoPPosition, TaskCoPVelocity]]
+  TaskFootstepBounds:
+    fix_footsteps: true
+  TaskCoPBounds:
+    {}
+  TaskCoPVelocity:
+    gain: 0.223606797749979
+  TaskCoMVelocity:
+    gain: 0.707106781186548
+  TaskCoPPosition:
+    gain: 12.2474487139159
+    variables_id: CoP
+
+# Terminal constraint (two levels)
+Hierarchy02:
+  task_class_names: [[TaskFootstepBounds, TaskCoPBounds, TaskTerminalConstraint], [TaskCoMVelocity, TaskCoPPosition, TaskCoPVelocity]]
+  task_ids: [[TaskFootstepBounds, TaskCoPBounds, TaskTerminalConstraint], [TaskCoMVelocity, TaskCoPPosition, TaskCoPVelocity]]
+  TaskFootstepBounds:
+    fix_footsteps: false
+  TaskTerminalConstraint:
+    gain: 1.0
+  TaskCoPBounds:
+    {}
+  TaskCoPVelocity:
+    gain: 0.223606797749979
+  TaskCoMVelocity:
+    gain: 0.707106781186548
+  TaskCoPPosition:
+    gain: 12.2474487139159
+    variables_id: CoP
+
+
+# Terminal constraint on a separate level (3 levels)
+Hierarchy03:
+  task_class_names: [[TaskFootstepBounds, TaskCoPBounds], [TaskTerminalConstraint], [TaskCoMVelocity, TaskCoPPosition, TaskCoPVelocity]]
+  task_ids: [[TaskFootstepBounds, TaskCoPBounds], [TaskTerminalConstraint], [TaskCoMVelocity, TaskCoPPosition, TaskCoPVelocity]]
+  TaskFootstepBounds:
+    fix_footsteps: false
+  TaskTerminalConstraint:
+    gain: 1.0
+  TaskCoPBounds:
+    {}
+  TaskCoPVelocity:
+    gain: 0.223606797749979
+  TaskCoMVelocity:
+    gain: 0.707106781186548
+  TaskCoPPosition:
+    gain: 12.2474487139159
+    variables_id: CoP

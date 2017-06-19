@@ -1,0 +1,7 @@
+RobotFootParameters:
+  max_step_len: 0.2
+  min_feet_dist: 0.19
+  max_feet_dist: 0.3
+  feet_dist_default: 0.19
+  foot_length: 0.1372
+  foot_width: 0.058

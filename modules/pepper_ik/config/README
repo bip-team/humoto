@@ -1,0 +1,5 @@
+Naming convention
+    [configurable-object-id]_[root-type]_[body-configuration-id].yaml
+
+    'body-configuration-id' = 'default' corresponds to the default
+    standing configuration.

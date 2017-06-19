@@ -1,0 +1,12 @@
+{
+    global: *;
+    local:
+        extern "C++"
+        {
+            Eigen::*;
+            *Eigen::internal::*;
+            *::checkTransposeAliasing*;
+            *qpOASES::*;
+            *YAML::*;
+        };
+};

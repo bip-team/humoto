@@ -1,0 +1,691 @@
+\chapter{Reference}
+
+This chapter contains various derivations and definitions which are used by
+multiple modules of \projectname.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Model Predictive Control}\label{sec.condensing}
+
+\acf{MPC} is a branch of control theory, where the control inputs are generated
+by optimizing behavior of a system over certain preview horizon.
+
+A linear model of the system has the following form:
+%
+\begin{equation}
+        \V{x}_{k+1} = \M{A}_k \V{x}_k + \M{B}_k \V{u}_k, \quad k = 0, \dots, N
+\end{equation}
+%
+where $\V{x}_k$ and $\V{u}_k$ are $k$-th state and control input respectively,
+while $N$ is the length of preview (prediction) horizon.
+
+Ouptput of the system can be defined in different ways, here we assume that it
+depends on the preceding state and control
+%
+\begin{equation}
+        \V{y}_{k+1} = \M{D}_k \V{x}_k + \M{E}_k \V{u}_k, \quad k = 0, \dots, N
+\end{equation}
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Condensing}\label{sec.condensing}
+
+Condensing amounts to finding such matrices $\M{U}_{x}$ and $\M{U}_{u}$ that
+%
+\begin{equation}
+    \V{v}_{x} = \M{U}_{x} \V{x}_0 + \M{U}_{u} \V{v}_{u},
+\end{equation}
+%
+where
+%
+\begin{equation}
+\begin{split}
+    \V{v}_{x} &= (\V{x}_1, \dots, \V{x}_N), \\
+    \V{v}_{u} &= (\V{u}_0, \dots, \V{u}_{N-1}).
+\end{split}
+\end{equation}
+%
+
+Similarly for the output
+\begin{equation}
+    \V{v}_{y} = \M{O}_{x} \V{x}_0 + \M{O}_{u} \V{v}_{u}.
+\end{equation}
+Note that
+\begin{equation}
+    \M{O}_{x}
+    =
+    \begin{bmatrix}
+        \diag{k=0 \dots N-1}{D_k}  &  \M{0} \\
+    \end{bmatrix}
+    \begin{bmatrix}
+        \M{0} \\
+        \M{U}_{x} \\
+    \end{bmatrix}
+    \quad
+    \quad
+    \M{O}_{u}
+    =
+    \begin{bmatrix}
+        \diag{k=0 \dots N-1}{D_k}  &  \M{0} \\
+    \end{bmatrix}
+    \begin{bmatrix}
+        \M{0} \\
+        \M{U}_{u} \\
+    \end{bmatrix}
+    +
+    \diag{k=0 \dots N-1}{E_k}
+    \M{U}_{u}
+\end{equation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Time-variant system}\label{sec.condensing_gen}
+\begin{equation}
+    \M{U}_{x} =
+        \begin{bmatrix}
+        \M{A}_0    \\
+        \M{A}_1 \M{A}_0  \\
+        \vdots           \\
+        \M{A}_{N-1} \dots \M{A}_0 \\
+        \end{bmatrix}
+    \quad\quad
+    \M{U}_{u} =
+        \begin{bmatrix}
+        \M{B}_0                             & \M{0}                                 & \dots & \M{0} \\
+        \M{A}_1 \M{B}_0                     & \M{B}_1                               & \dots & \M{0} \\
+        \vdots                              & \vdots                                & \ddots& \vdots \\
+        \M{A}_{N-1} \dots \M{A}_1 \M{B}_0   & \M{A}_{N-1} \dots \M{A}_2 \M{B}_1     & \dots & \M{B}_{N-1} \\
+        \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+    \M{O}_{x} =
+        \begin{bmatrix}
+        \M{D}_0    \\
+        \M{D}_1 \M{A}_0    \\
+        \M{D}_2 \M{A}_1 \M{A}_0  \\
+        \vdots           \\
+        \M{D}_{N-1} \M{A}_{N-2} \dots \M{A}_0 \\
+        \end{bmatrix}
+    \quad\quad
+    \M{O}_{u} =
+        \begin{bmatrix}
+        \M{E}_0                             & \M{0}                                 & \dots & \M{0} \\
+        \M{D}_1 \M{B}_0                     & \M{E}_1                               & \dots & \M{0} \\
+        \M{D}_2 \M{A}_1 \M{B}_0             & \M{D}_2 \M{B}_1                       & \dots & \M{0} \\
+        \vdots                              & \vdots                                & \ddots& \vdots \\
+        \M{D}_{N-1} \M{A}_{N-2} \dots \M{A}_1 \M{B}_0   & \M{D}_{N-1} \M{A}_{N-2} \dots \M{A}_2 \M{B}_1     & \dots & \M{E}_{N-1} \\
+        \end{bmatrix}
+\end{equation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{System is varying in the first preview interval}
+\begin{equation}
+    \M{U}_{x} =
+        \begin{bmatrix}
+        \M{A}_0    \\
+        \M{A} \M{A}_0  \\
+        \vdots   \\
+        \M{A}^{N-1} \M{A}_0 \\
+        \end{bmatrix}
+    \quad\quad
+    \M{U}_{u} =
+        \begin{bmatrix}
+        \M{B}_0                 & \M{0}                 & \dots & \M{0} \\
+        \M{A} \M{B}_0           & \M{B}                 & \dots & \M{0} \\
+        \vdots                  & \vdots                & \ddots& \vdots \\
+        \M{A}^{N-1} \M{B}_0     & \M{A}^{N-2} \M{B}     & \dots & \M{B} \\
+        \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+    \M{O}_{x} =
+        \begin{bmatrix}
+        \M{D}_0    \\
+        \M{D} \M{A}_0    \\
+        \M{D} \M{A} \M{A}_0  \\
+        \vdots           \\
+        \M{D} \M{A}^{N-2} \M{A}_0 \\
+        \end{bmatrix}
+    \quad\quad
+    \M{O}_{u} =
+        \begin{bmatrix}
+        \M{E}_0                             & \M{0}                                 & \dots & \M{0} \\
+        \M{D} \M{B}_0                       & \M{E}                                 & \dots & \M{0} \\
+        \M{D} \M{A} \M{B}_0                 & \M{D} \M{B}                           & \dots & \M{0} \\
+        \vdots                              & \vdots                                & \ddots& \vdots \\
+        \M{D} \M{A}^{N-2} \M{B}_0           & \M{D} \M{A}^{N-3} \M{B}               & \dots & \M{E} \\
+        \end{bmatrix}
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Time-invariant system}
+\begin{equation}
+    \M{U}_{x} =
+        \begin{bmatrix}
+        \M{A}    \\
+        \M{A}^2  \\
+        \vdots   \\
+        \M{A}^N  \\
+        \end{bmatrix}
+    \quad\quad
+    \M{U}_{u} =
+        \begin{bmatrix}
+        \M{B}                   & \M{0}                 & \dots & \M{0} \\
+        \M{A} \M{B}             & \M{B}                 & \dots & \M{0} \\
+        \vdots                  & \vdots                & \ddots& \vdots \\
+        \M{A}^{N-1} \M{B}       & \M{A}^{N-2} \M{B}     & \dots & \M{B} \\
+        \end{bmatrix}
+\end{equation}
+
+
+\begin{equation}
+    \M{O}_{x} =
+        \begin{bmatrix}
+        \M{D}    \\
+        \M{D} \M{A}    \\
+        \M{D} \M{A}^2  \\
+        \vdots           \\
+        \M{D} \M{A}^{N-1} \\
+        \end{bmatrix}
+    \quad\quad
+    \M{O}_{u} =
+        \begin{bmatrix}
+        \M{E}                               & \M{0}                                 & \dots & \M{0} \\
+        \M{D} \M{B}                         & \M{E}                                 & \dots & \M{0} \\
+        \M{D} \M{A} \M{B}                   & \M{D} \M{B}                           & \dots & \M{0} \\
+        \vdots                              & \vdots                                & \ddots& \vdots \\
+        \M{D} \M{A}^{N-2} \M{B}             & \M{D} \M{A}^{N-3} \M{B}               & \dots & \M{E} \\
+        \end{bmatrix}
+\end{equation}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Triple integrator (discrete-time)}
+
+In some cases it is convenient to represent model of the system with triple
+integrator
+%
+\begin{equation}
+    \V{x}_{k+1}
+    =
+    \M{A}_k
+    \V{x}_{k}
+    +
+    \M{B}_k
+    \dddot{x}_{k},
+    \quad
+    \V{x}_{k}
+    =
+    (
+        x_k,
+        \dot{x}_k,
+        \ddot{x}_k
+    )
+\end{equation}
+%
+%
+\begin{equation}
+    \M{A}_k
+    =
+    \begin{bmatrix}
+        1 & T_k & \frac{T_k^2}{2}\\
+        0 & 1 & T_k\\
+        0 & 0 & 1
+    \end{bmatrix}
+    ,
+    \quad
+    \M{B}_k
+    =
+    \begin{bmatrix}
+        \frac{T_k^3}{6} \\
+        \frac{T_k^2}{2} \\
+        T_k
+    \end{bmatrix}
+\end{equation}
+%
+
+
+The corresponding matrices are defined in \sn{Maxima} as
+%
+\begin{listingtcb}{Maxima}
+\begin{deflisting}
+A: matrix([1, T_k, T_k^2/2], [0, 1, T_k], [0, 0, 1]);
+B: matrix([T_k^3/6], [T_k^2/2], [T_k]);
+X0: matrix([x0],[dx0],[ddx0]);
+U: matrix([dddx0]);
+X1: matrix([x1],[dx1],[ddx1]);
+As: matrix([1, T_s, T_s^2/2], [0, 1, T_s], [0, 0, 1]);
+Bs: matrix([T_s^3/6], [T_s^2/2], [T_s]);
+\end{deflisting}
+\end{listingtcb}
+%
+
+
+It is possible to reformulate the triple integrator model in order to use
+acceleration, velocity, or position from the next state as control input
+instead of the jerk. This may be useful in the cases when constraints on the
+state variables can be represented with simple bounds. The adjusted model
+produces the same motions, but numerical properties of its matrices may be
+different.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Controlled using acceleration}
+
+\begin{align}
+    \V{x}_{k+1}
+    &=
+    \M{A}_k
+    \V{x}_{k}
+    +
+    \M{B}_k
+    \ddot{x}_{k+1}
+    \\
+    \dddot{x}_{k}
+    &=
+    \M{D}_k
+    \V{x}_{k}
+    +
+    \M{E}_k
+    \ddot{x}_{k+1}
+\end{align}
+
+
+%
+\begin{equation}
+    \M{A}_k =
+        \begin{bmatrix}
+            1   & T_k   & \frac{T_k^2}{3} \\
+            0   & 1     & \frac{T_k}{2} \\
+            0   & 0     & 0 \\
+        \end{bmatrix},
+    \quad
+    \M{B}_k =
+        \begin{bmatrix}
+            \frac{T_k^2}{6} \\
+            \frac{T_k}{2} \\
+            1 \\
+        \end{bmatrix},
+    \quad
+    \M{D}_k =
+        \begin{bmatrix}
+            0 & 0 & - \frac{1}{T_k}
+        \end{bmatrix},
+    \quad
+    \M{E}_k =
+        \begin{bmatrix}
+            \frac{1}{T_k} \\
+        \end{bmatrix}
+\end{equation}
+%
+
+For $T_s \in [0, T_k]$
+%
+\begin{equation}
+    \M{A}_{s,k} =
+        \begin{bmatrix}
+            1 & {T_s}   &  - \frac{{T_s}^3 - 3 {T_k} {T_s}^2}{6 {T_k}} \\
+            0 & 1       &  - \frac{{T_s}^2 - 2 {T_k} {T_s}}{2 {T_k}} \\
+            0 & 0       &  - \frac{{T_s} - {T_k}}{{T_k}} \\
+        \end{bmatrix}
+    ,
+    \quad
+    \M{B}_{s,k} =
+        \begin{bmatrix}
+            \frac{{T_s}^3}{6 {T_k}} \\
+            \frac{{T_s}^2}{2 {T_k}} \\
+            \frac{{T_s}}{{T_k}} \\
+        \end{bmatrix}
+\end{equation}
+%
+
+
+\begin{listingtcb}{Maxima}
+\begin{deflisting}
+e: solve([(A.X0 + B.U)[3][1] = (X1)[3][1]], [dddx0]);
+Dnew: coefmatrix([rhs(e[1])], list_matrix_entries(X0));
+Enew: coefmatrix([rhs(e[1])], [ddx1]);
+e: subst(e, A.X0 + B.U);
+Anew: coefmatrix(list_matrix_entries(e), list_matrix_entries(X0));
+Bnew: coefmatrix(list_matrix_entries(e), [ddx1]);
+tex(Anew);
+tex(Bnew);
+tex(Dnew);
+tex(Enew);
+/* subsampling */
+e: solve([(A.X0 + B.U)[3][1] = (X1)[3][1]], [dddx0]);
+e: subst(e, As.X0 + Bs.U);
+Asnew: coefmatrix(list_matrix_entries(e), list_matrix_entries(X0));
+Bsnew: coefmatrix(list_matrix_entries(e), [ddx1]);
+tex(Asnew);
+tex(Bsnew);
+/* check */
+subst([T_s = T_k], Asnew) - Anew;
+subst([T_s = T_k], Bsnew) - Bnew;
+\end{deflisting}
+\end{listingtcb}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Controlled using velocity}
+
+%
+\begin{align}
+    \V{x}_{k+1}
+    &=
+    \M{A}_k
+    \V{x}_{k}
+    +
+    \M{B}_k
+    \dot{x}_{k+1}
+    \\
+    \dddot{x}_{k}
+    &=
+    \M{D}_k
+    \V{x}_{k}
+    +
+    \M{E}_k
+    \dot{x}_{k+1}
+\end{align}
+%
+
+%
+\begin{equation}
+    \M{A}_k =
+        \begin{bmatrix}
+            1     & \frac{2 T_k}{3}     & \frac{T_k^2}{6} \\
+            0     & 0                   & 0 \\
+            0     & -\frac{2}{T_k}      &  - 1 \\
+        \end{bmatrix},
+    \quad
+    \M{B}_k =
+        \begin{bmatrix}
+            \frac{T_k}{3} \\
+            1 \\
+            \frac{2}{T_k} \\
+        \end{bmatrix},
+    \quad
+    \M{D}_k =
+        \begin{bmatrix}
+            0 & -\frac{2}{T_k^2} & -\frac{2}{T_k} \\
+        \end{bmatrix},
+    \quad
+    \M{E}_k =
+        \begin{bmatrix}
+            \frac{2}{T_k^2} \\
+        \end{bmatrix}
+\end{equation}
+%
+
+
+For $T_s \in [0, T_k]$
+%
+\begin{equation}
+    \M{A}_{s,k} =
+        \begin{bmatrix}
+            1 &  - \frac{{T_s}^3 - 3  {T_k}^2 {T_s}}{3 {T_k}^2} &  - \frac{2 {T_s}^3 - 3 {T_k} {T_s}^2}{6 {T_k}} \\
+            0 &  - \frac{{T_s}^2 - {T_k}^2}{{T_k}^2}            &  - \frac{{T_s}^2 - {T_k} {T_s}}{{T_k}} \\
+            0 &  - \frac{2 {T_s}}{{T_k}^2}                      &  - \frac{2 {T_s} - {T_k}}{{T_k}} \\
+        \end{bmatrix}
+    ,
+    \quad
+    \M{B}_{s,k} =
+        \begin{bmatrix}
+            \frac{{T_s}^3}{3 {T_k}^2} \\
+            \frac{{T_s}^2}{{T_k}^2} \\
+            \frac{2 {T_s}}{{T_k}^2} \\
+        \end{bmatrix}
+\end{equation}
+
+
+\begin{listingtcb}{Maxima}
+\begin{deflisting}
+e: solve([(A.X0 + B.U)[2][1] = (X1)[2][1]], [dddx0]);
+Dnew: coefmatrix([rhs(e[1])], list_matrix_entries(X0));
+Enew: coefmatrix([rhs(e[1])], [dx1]);
+e: subst(e, A.X0 + B.U);
+Anew: coefmatrix(list_matrix_entries(e), list_matrix_entries(X0));
+Bnew: coefmatrix(list_matrix_entries(e), [dx1]);
+tex(Anew);
+tex(Bnew);
+tex(Dnew);
+tex(Enew);
+/* subsampling */
+e: solve([(A.X0 + B.U)[2][1] = (X1)[2][1]], [dddx0]);
+e: subst(e, As.X0 + Bs.U);
+Asnew: coefmatrix(list_matrix_entries(e), list_matrix_entries(X0));
+Bsnew: coefmatrix(list_matrix_entries(e), [dx1]);
+tex(Asnew);
+tex(Bsnew);
+/* check */
+subst([T_s = T_k], Asnew) - Anew;
+subst([T_s = T_k], Bsnew) - Bnew;
+\end{deflisting}
+\end{listingtcb}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Controlled using position}
+
+\begin{align}
+    \V{x}_{k+1}
+    &=
+    \M{A}_k
+    \V{x}_{k}
+    +
+    \M{B}_k
+    {x}_{k+1}
+    \\
+    \dddot{x}_{k}
+    &=
+    \M{D}_k
+    \V{x}_{k}
+    +
+    \M{E}_k
+    {x}_{k+1}
+\end{align}
+
+
+%
+\begin{equation}
+    \M{A}_k =
+        \begin{bmatrix}
+            0                   &   0               & 0 \\
+            - \frac{3}{T_k}     &  - 2              &  - \frac{T_k}{2} \\
+            - \frac{6}{T_k^2}   &  - \frac{6}{T_k}  &  - 2 \\
+        \end{bmatrix},
+    \quad
+    \M{B}_k =
+        \begin{bmatrix}
+            1 \\
+            \frac{3}{T_k} \\
+            \frac{6}{T_k^2} \\
+        \end{bmatrix},
+    \quad
+    \M{D}_k =
+        \begin{bmatrix}
+            -\frac{6}{T_k^3} &   -\frac{6}{T_k^2} & -\frac{3}{T_k} \\
+        \end{bmatrix},
+    \quad
+    \M{E}_k =
+        \begin{bmatrix}
+            \frac{6}{T_k^3} \\
+        \end{bmatrix}
+\end{equation}
+%
+
+
+For $T_s \in [0, T_k]$
+%
+\begin{equation}
+    \M{A}_{s,k} =
+        \begin{bmatrix}
+            - \frac{{T_s}^3 - {T_k}^3}{{T_k}^3} &  - \frac{{T_s}^3 - {T_k}^2 {T_s}}{{T_k}^2}    &  - \frac{{T_s}^3 - {T_k}{T_s}^2}{2 {T_k}} \\
+            - \frac{3 {T_s}^2}{{T_k}^3}         &  - \frac{3 {T_s}^2 - {T_k}^2}{{T_k}^2}        &  -  \frac{3 {T_s}^2 - 2 {T_k} {T_s}}{2 {T_k}} \\
+            - \frac{6 {T_s}}{{T_k}^3}           &  - \frac{6 {T_s}}{{T_k}^2}                    &  - \frac{3 {T_s} - {T_k}}{{T_k}} \\
+        \end{bmatrix}
+    ,
+    \quad
+    \M{B}_{s,k} =
+        \begin{bmatrix}
+            \frac{{T_s}^3}{{T_k}^3} \\
+            \frac{3 {T_s}^2}{{T_k}^3} \\
+            \frac{6 {T_s}}{{T_k}^3} \\
+        \end{bmatrix}
+\end{equation}
+%
+
+\begin{listingtcb}{Maxima}
+\begin{deflisting}
+e: solve([(A.X0 + B.U)[1][1] = (X1)[1][1]], [dddx0]);
+Dnew: coefmatrix([rhs(e[1])], list_matrix_entries(X0));
+Enew: coefmatrix([rhs(e[1])], [x1]);
+e: subst(e, A.X0 + B.U);
+Anew: coefmatrix(list_matrix_entries(e), list_matrix_entries(X0));
+Bnew: coefmatrix(list_matrix_entries(e), [x1]);
+tex(Anew);
+tex(Bnew);
+tex(Dnew);
+tex(Enew);
+/* subsampling */
+e: solve([(A.X0 + B.U)[1][1] = (X1)[1][1]], [dddx0]);
+e: subst(e, As.X0 + Bs.U);
+Asnew: coefmatrix(list_matrix_entries(e), list_matrix_entries(X0));
+Bsnew: coefmatrix(list_matrix_entries(e), [x1]);
+tex(Asnew);
+tex(Bsnew);
+/* check */
+subst([T_s = T_k], Asnew) - Anew;
+subst([T_s = T_k], Bsnew) - Bnew;
+\end{deflisting}
+\end{listingtcb}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Kronecker and Block Kronecker products}
+
+The standard Kronecker product is defined as follows:
+%
+\begin{equation}
+    \M{A} \kron \M{B}
+    =
+    \begin{bmatrix}
+        A_{1,1} \M{B} & \dots  & A_{1,m} \M{B} \\
+        \vdots        & \vdots & \vdots \\
+        A_{n,1} \M{B} & \dots  & A_{n,m} \M{B} \\
+    \end{bmatrix},
+\end{equation}
+%
+where $\M{A} \in \RR^{n \times m}$ and $A_{i,j}$ denotes a scalar standing in
+the $i$-th row and $j$-th column.
+
+
+Derivations presented in this manual can often be expressed using a slightly
+different operator:
+%
+\begin{equation}
+    \M{A} \bkron \M{B}
+    =
+    \begin{bmatrix}
+        \M{A} \kron \M{B}_{[1,1]}   & \dots  & \M{A} \kron \M{B}_{[1,m]} \\
+        \vdots                      & \vdots & \vdots \\
+        \M{A} \kron \M{B}_{[n,1]}   & \dots  & \M{A} \kron \M{B}_{[n,m]} \\
+    \end{bmatrix},
+\end{equation}
+%
+where $\M{B}_{[i,j]}$ denotes a block of matrix $\M{B}$. The operator $\bkron$
+is called block Kronecker product and is usually defined in a more general
+form, where matrix $\M{A}$ is also partitioned \cite{Tracy1972sn,
+Hyland1989jmaa, Koning1991laa}. For the purpose of the present work
+partitioning of $\M{A}$ and nonuniform partitioning of $\M{B}$ are not
+necessary and therefore not considered.
+
+
+Block Kronecker product has several valuable properties, notably:
+%
+\begin{equation}
+    (\M{I} \bkron \M{A})
+    (\M{I} \bkron \M{B})
+    =
+    \M{I}
+    \bkron
+    (\M{A} \M{B})
+    ,
+\end{equation}
+%
+which allows for more efficient computations. Another commonly used property is
+the following:
+%
+\begin{equation}
+    \diag{k = 1...N}
+    {
+        \M{I} \kron \M{A}_k
+    }
+    =
+    \M{I}
+    \bkron
+    \diag{k = 1...N}
+    {
+        \M{A}_k
+    }
+\end{equation}
+%
+
+
+For example, consider a time-invariant system with the state transition matrix
+$\M{A} = \M{I} \kron \barM{A}$ and control matrix $\M{B} = \M{I} \kron
+\barM{B}$. Then the condensing matrices $\M{U}_{x}$ and $\M{U}_{u}$ can be
+expressed as
+%
+\begin{equation}
+    \M{U}_{x} =
+        \M{I}
+        \bkron
+        \barM{U}_{x}
+        =
+        \M{I}
+        \bkron
+        \begin{bmatrix}
+            \barM{A}    \\
+            \barM{A}^2  \\
+            \vdots   \\
+            \barM{A}^N  \\
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            \M{I} \kron \barM{A}    \\
+            \M{I} \kron \barM{A}^2  \\
+            \vdots   \\
+            \M{I} \kron \barM{A}^N  \\
+        \end{bmatrix}
+\end{equation}
+%
+\begin{equation}
+    \M{U}_{u} =
+        \M{I}
+        \bkron
+        \barM{U}_{u}
+        =
+        \M{I}
+        \bkron
+        \begin{bmatrix}
+            \barM{B}                    & \barM{0}                  & \dots & \barM{0} \\
+            \barM{A} \barM{B}           & \barM{B}                  & \dots & \barM{0} \\
+            \vdots                      & \vdots                    & \ddots& \vdots \\
+            \barM{A}^{N-1} \barM{B}     & \barM{A}^{N-2} \barM{B}   & \dots & \barM{B} \\
+        \end{bmatrix}
+\end{equation}
+%

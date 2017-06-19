@@ -1,0 +1,938 @@
+\input{../../../doc/latex/Styles/wpg_notation_define.tex}
+\chapter{WPG v.04}
+
+This version of the pattern generator is based on triple integrator with
+piece-wise constant \acs{CoP} velocity. The control input is position of the
+\acs{CoP}. Apart from that it is very similar to the \acs{WPG} proposed in
+\cite{Herdt2010auro}, for more information refer to \cite{Sherikov2016phd}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Variables}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Footstep positions}
+Any preview horizon contains $1$ fixed and $0$ or more variable footstep
+positions.  Let $M$ be the number of variable steps in the preview horizon,
+$\FRAME{p_j}$ -- frame fixed to $j$-th footstep with $j = 0 \dots M$ ($0$-th
+footstep is fixed), $\fp_j = (p^x_j, p^y_j)$ -- position of the $j$-th footstep
+on the ground plane.
+
+
+Coordinate transformation matrix from the frame fixed to the $j$-th footstep to
+the global frame is defined as
+%
+\begin{equation}
+    \M[p_j][]{R} =
+    \begin{bmatrix}
+        \cos{\theta_j}  &   -\sin{\theta_j} \\
+        \sin{\theta_j}  &   \cos{\theta_j} \\
+    \end{bmatrix}
+\end{equation}
+%
+Orientations $\theta_j$ of the footsteps are predetermined to avoid
+nolinearity. Position of the $j$-th footstep in the global frame can be found
+as
+%
+\begin{equation}
+    \fp_j = \fp_0 + \sum_{i=1}^{j}  \M[p_{i-1}][]{R} \fp[p_{i-1}]_j,
+\end{equation}
+%
+which leads to
+%
+\begin{equation}
+    \begin{bmatrix}
+        \fp_0\\
+        \fp_1\\
+        \vdots\\
+        \fp_M\\
+    \end{bmatrix}
+    =
+    \V{1}_M
+    \kron
+%    \begin{bmatrix}
+%        \M{I}\\
+%        \M{I}\\
+%        \vdots\\
+%        \M{I}\\
+%    \end{bmatrix}
+    \fp_0
+    +
+    \begin{bmatrix}
+        \M{0}           & \M{0}             & \dots & \M{0}             \\
+        \M[p_{0}][]{R}  & \M{0}             & \dots & \M{0}             \\
+        \vdots          & \vdots            & \dots & \vdots            \\
+        \M[p_{0}][]{R}  & \M[p_{1}][]{R}    & \dots & \M[p_{M-1}][]{R}  \\
+    \end{bmatrix}
+    \begin{bmatrix}
+        \fp[p_0]_1\\
+        \vdots\\
+        \fp[p_{M-1}]_M\\
+    \end{bmatrix}.
+\end{equation}
+%
+It is preferable to express variable footstep positions in a frame fixed to the
+preceding footstep in order to impose simple bounds on variable footstep
+positions.
+
+
+The number of sampling intervals in the preview horizon is denoted by $N \ge
+M$. The footstep position corresponding to $k$-th ($k = 1,\dots,N$) sampling
+interval is denoted as $\fph_k = (\hat{p}^x_k, \hat{p}^y_k)$. These positions
+can be found using a selection matrices as
+%
+\begin{equation}
+\begin{split}
+    \underbrace{
+    \begin{bmatrix}
+        \fph_1 \\
+        \vdots \\
+        \fph_N
+    \end{bmatrix}
+    }_{\FPh}
+    & =
+    \underbrace{
+    \begin{bmatrix}
+        \M{I}   &  \M{0}   &   \dots   &   \M{0} \\
+        \M{I}   &  \M{0}   &   \dots   &   \M{0} \\
+        \M{0}   &  \M{I}   &   \dots   &   \M{0} \\
+        \M{0}   &  \M{I}   &   \dots   &   \M{0} \\
+        \M{0}   &  \M{I}   &   \dots   &   \M{0} \\
+        \vdots  &  \vdots  &   \ddots  &   \vdots \\
+        \M{0}   &  \M{0}   &   \dots   &   \M{I} \\
+    \end{bmatrix}
+    }_{\M{I}_{\mathit{fps}}}
+    \begin{bmatrix}
+        \fp_0 \\
+        \fp_1 \\
+        \vdots\\
+        \fp_M \\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        \M{I}   \\
+        \M{I}   \\
+        \M{0}   \\
+        \M{0}   \\
+        \M{0}   \\
+        \vdots  \\
+        \M{0}   \\
+    \end{bmatrix}
+    \fp_0
+    +
+    \begin{bmatrix}
+        \M{0}   &   \dots   &   \M{0} \\
+        \M{0}   &   \dots   &   \M{0} \\
+        \M{I}   &   \dots   &   \M{0} \\
+        \M{I}   &   \dots   &   \M{0} \\
+        \M{I}   &   \dots   &   \M{0} \\
+        \vdots  &   \ddots  &   \vdots \\
+        \M{0}   &   \dots   &   \M{I} \\
+    \end{bmatrix}
+    \begin{bmatrix}
+        \fp_1 \\
+        \vdots\\
+        \fp_M\\
+    \end{bmatrix}\\
+    & =
+%    \underbrace{
+%    \begin{bmatrix}
+%        \M{I}   \\
+%        \M{I}   \\
+%        \M{I}   \\
+%        \M{I}   \\
+%        \M{I}   \\
+%        \vdots  \\
+%        \M{I}   \\
+%    \end{bmatrix}
+%    }_{\M{V}_0}
+    \underbrace{
+        \V{1}_N
+        \kron
+        \fp_0
+    }_{\V{V}_0}
+    +
+    \underbrace{
+    \begin{bmatrix}
+        \M{0}   &   \dots   &   \M{0} \\
+        \M{0}   &   \dots   &   \M{0} \\
+        \M{I}   &   \dots   &   \M{0} \\
+        \M{I}   &   \dots   &   \M{0} \\
+        \M{I}   &   \dots   &   \M{0} \\
+        \vdots  &   \ddots  &   \vdots \\
+        \M{0}   &   \dots   &   \M{I} \\
+    \end{bmatrix}
+    \begin{bmatrix}
+        \M[p_{0}][]{R}  & \M{0}             & \dots & \M{0}             \\
+        \vdots          & \vdots            & \dots & \vdots            \\
+        \M[p_{0}][]{R}  & \M[p_{1}][]{R}    & \dots & \M[p_{M-1}][]{R}  \\
+    \end{bmatrix}
+    }_{\M{V}}
+    \underbrace{
+    \begin{bmatrix}
+        \fp[p_0]_1\\
+        \vdots\\
+        \fp[p_{M-1}]_M\\
+    \end{bmatrix}
+    }_{\FP},
+\end{split}
+\end{equation}
+%
+where $\M{V}$ has the following structure
+%
+\begin{equation}
+    \M{V}
+    =
+    \begin{bmatrix}
+        \M{0}           &   \dots   &   \M{0} \\
+        \M{0}           &   \dots   &   \M{0} \\
+        \M[p_{0}][]{R}  &   \dots   &   \M{0} \\
+        \M[p_{0}][]{R}  &   \dots   &   \M{0} \\
+        \M[p_{0}][]{R}  &   \dots   &   \M{0} \\
+        \vdots          &   \ddots  &   \vdots \\
+        \M[p_{0}][]{R}  &   \dots   &   \M[p_{M-1}][]{R} \\
+    \end{bmatrix}
+    =
+    \underbrace{
+        \begin{bmatrix}
+            \M{0}   &   \dots   &   \M{0} \\
+            \M{0}   &   \dots   &   \M{0} \\
+            \M{I}   &   \dots   &   \M{0} \\
+            \M{I}   &   \dots   &   \M{0} \\
+            \M{I}   &   \dots   &   \M{0} \\
+            \vdots  &   \ddots  &   \vdots \\
+            \M{I}   &   \dots   &   \M{I} \\
+        \end{bmatrix}
+    }_{\M{I}_R \kron \M{I}}
+    \diag{k = 0...M-1}{ \M[p_{k}][]{R} }
+\end{equation}
+%
+where
+%
+\begin{equation}
+    \M{I}_R
+    =
+    \begin{bmatrix}
+        0   &   \dots   &   0 \\
+        0   &   \dots   &   0 \\
+        1   &   \dots   &   0 \\
+        1   &   \dots   &   0 \\
+        1   &   \dots   &   0 \\
+        \vdots  &   \ddots  &   \vdots \\
+        1   &   \dots   &   1 \\
+    \end{bmatrix}.
+\end{equation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Positions of the CoP}
+Position of the center of pressure in the end of $k$-th ($k = 1,\dots,N$)
+sampling interval is denoted as $\cop_k = (z^x_k, z^y_k)$. The current
+\acs{CoP} position is $\cop_0$. In order to obtain simple bounds on the
+\acs{CoP} positions instead of general constraints, their positions are
+expressed in the local frames fixed to the respective feet, \emph{i.e.}
+%
+\begin{equation}
+    \cop_k = \fph_k + \M[\hat{p}_k][]{R} \cop[\hat{p}_k]_k.
+\end{equation}
+%
+Orientation matrices $\M[\hat{p}_k][]{R}$ can also be selected with
+$\M{I}_{\mathit{fps}}$
+%
+\begin{equation}
+    \begin{bmatrix}
+        \M[\hat{p}_1][]{R}\\
+        \vdots\\
+        \M[\hat{p}_N][]{R}\\
+    \end{bmatrix}
+    =
+    \M{I}_{\mathit{fps}}
+    \begin{bmatrix}
+        \M[p_0][]{R}\\
+        \vdots\\
+        \M[p_M][]{R}\\
+    \end{bmatrix}
+\end{equation}
+%
+All positions of the \acs{CoP} within the preview horizon are
+%
+\begin{equation}
+    \begin{split}
+        \begin{bmatrix}
+            \cop_1 \\
+            \vdots \\
+            \cop_N \\
+        \end{bmatrix}
+        & =
+        \FPh
+        +
+        \diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}}
+        \underbrace{
+        \begin{bmatrix}
+            \cop[\hat{p}_1]_1 \\
+            \vdots \\
+            \cop[\hat{p}_N]_N \\
+        \end{bmatrix}
+        }_{\V{Z}}
+        =
+        \M{V}_0
+        +
+        \M{V} \FP
+        +
+        \diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}}
+        \CoP\\
+        & =
+        \V{1}_N
+        \kron
+        \fp_0
+        +
+        \left(
+            \M{I}_R \kron \M{I}
+        \right)
+        \diag{k = 0...M-1}{ \M[p_{k}][]{R} }
+        \FP
+        +
+        \diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}}
+        \CoP
+    \end{split}
+\end{equation}
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Model of the system}
+
+The model has the following form
+%
+\begin{align}
+    \cstate_{k+1} =& \M{A} \cstate_k + \M{B} \cop_{k+1}\\
+    \dcop_k =& \M{D} \cstate_k + \M{E} \cop_{k+1}.
+\end{align}
+%
+
+After condensing we obtain
+%
+\begin{align}
+    \begin{bmatrix}
+        \cstate_1 \\
+        \vdots\\
+        \cstate_{N}\\
+    \end{bmatrix}
+    =&
+    \M{U}_x \cstate_0
+    +
+    \M{U}_u
+    \begin{bmatrix}
+        \cop_1 \\
+        \vdots \\
+        \cop_N \\
+    \end{bmatrix} \\
+%
+    \underbrace{
+    \begin{bmatrix}
+        \dcop_0 \\
+        \vdots\\
+        \dcop_{N-1}\\
+    \end{bmatrix}
+    }_{\dCoP}
+    =&
+    \M{O}_x \cstate_0
+    +
+    \M{O}_u
+    \begin{bmatrix}
+        \cop_1 \\
+        \vdots \\
+        \cop_N \\
+    \end{bmatrix} \\
+\end{align}
+%
+or
+%
+\begin{align}
+    \cState
+    =&
+    \M{U}_x \cstate_0
+    +
+    \M{U}_u
+    \left(
+        \M{V}_0
+        +
+        \M{V} \FP
+        +
+        \diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}}
+        \CoP
+    \right)\\
+%
+    \dCoP
+    =&
+    \M{O}_x \cstate_0
+    +
+    \M{O}_u
+    \left(
+        \M{V}_0
+        +
+        \M{V} \FP
+        +
+        \diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}}
+        \CoP
+    \right)\\
+\end{align}
+%
+
+The unknowns $\CoP$ and $\FP$ can be grouped together
+%
+\begin{align}
+    \cState
+    =&
+    \underbrace{
+    \begin{bmatrix}
+        \M{U}_u \diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}}   &   \M{U}_u \M{V} \\
+    \end{bmatrix}
+    }_{\M{S}}
+    \underbrace{
+    \begin{bmatrix}
+        \CoP\\
+        \FP\\
+    \end{bmatrix}
+    }_{\V{X}}
+    +
+    \underbrace{
+    \M{U}_x \cstate_0
+    +
+    \M{U}_u \M{V}_0
+    }_{\V{s}}\\
+%
+    \dCoP
+    =&
+    \underbrace{
+    \begin{bmatrix}
+        \M{O}_u \diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}}   &   \M{O}_u \M{V} \\
+    \end{bmatrix}
+    }_{\M{S}_{\dot{z}}}
+    \underbrace{
+    \begin{bmatrix}
+        \CoP\\
+        \FP\\
+    \end{bmatrix}
+    }_{\V{X}}
+    +
+    \underbrace{
+    \M{O}_x \cstate_0
+    +
+    \M{O}_u \M{V}_0
+    }_{\V{s}_{\dot{z}}}\\
+\end{align}
+%
+or
+%
+\begin{align}
+    \cState
+    =&
+    \begin{bmatrix}
+        \left(\M{I} \bkron \M{U}_u^x \right) \diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}}
+        &
+        \left(\M{I} \bkron \M{U}_u^x \right)
+        \left(
+            \M{I}_R \kron \M{I}
+        \right)
+        \diag{k = 0...M-1}{ \M[p_{k}][]{R} }\\
+    \end{bmatrix}
+    \V{X}
+    \\
+    &
+    +
+    \left(\M{I} \bkron \M{U}_x^x \right)
+    \cstate_0
+    +
+    \left(\M{I} \bkron \M{U}_u^x \right)
+    \left(\V{1}_N \kron \fp_0 \right)
+    \\
+    =&
+    \begin{bmatrix}
+        \left(\M{I} \bkron \M{U}_u^x \right) \diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}}
+        &
+        \left(
+            \M{I}
+            \bkron
+            \left(
+                \M{U}_u^x
+                \M{I}_R
+            \right)
+        \right)
+        \diag{k = 0...M-1}{ \M[p_{k}][]{R} }\\
+    \end{bmatrix}
+    \V{X}
+    \\
+    &
+    +
+    \left(\M{I} \bkron \M{U}_x^x \right)
+    \cstate_0
+    +
+    \left(
+        \M{I}
+        \bkron
+        \left(
+            \M{U}_u^x
+            \V{1}_N
+        \right)
+    \right)
+    \fp_0
+    \\
+\end{align}
+%
+and
+%
+\begin{align}
+    \dCoP
+    =&
+    \begin{bmatrix}
+        \left(\M{I} \bkron \M{O}_u^x \right) \diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}}
+        &
+        \left(\M{I} \bkron \M{O}_u^x \right)
+        \left(
+            \M{I}_R \kron \M{I}
+        \right)
+        \diag{k = 0...M-1}{ \M[p_{k}][]{R} }\\
+    \end{bmatrix}
+    \V{X}
+    \\
+    &
+    +
+    \left(\M{I} \bkron \M{U}_x^x \right) \cstate_0
+    +
+    \left(\M{I} \bkron \M{O}_u^x \right)
+    \left(\V{1}_N \kron \fp_0 \right)
+    \\
+    = &
+    \begin{bmatrix}
+        \left(\M{I} \bkron \M{O}_u^x \right) \diag{k = 1 \dots N}{\M[\hat{p}_k][]{R}}
+        &
+        \left(
+            \M{I}
+            \bkron
+            \left(
+                \M{O}_u^x
+                \M{I}_R
+            \right)
+        \right)
+        \diag{k = 0...M-1}{ \M[p_{k}][]{R} }\\
+    \end{bmatrix}
+    \V{X}
+    \\
+    &
+    +
+    \left(\M{I} \bkron \M{U}_x^x \right) \cstate_0
+    +
+    \left(
+        \M{I}
+        \bkron
+        \left(
+            \M{O}_u^x
+            \V{1}_N
+        \right)
+    \right)
+    \fp_0
+    \\
+\end{align}
+%
+
+Velocity of the \acs{CoM} can be expressed as
+%
+\begin{equation}
+    \cVel =
+        \diag{N}{\M{I}_{v}} \cState =
+        \diag{N}{\M{I}_{v}} \left( \M{S}\V{X} + \V{s} \right)=
+        \M{S}_v \V{X} + \V{s}_v
+\end{equation}
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Constraints}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{CoP positions}
+Simple bounds in the case when supports are rectangular.
+
+\begin{equation}
+    \ubarV{z}_k \le \cop[\hat{p}_k]_k \le \barV{z}_k, \quad k = 1 \dots N\\
+\end{equation}
+
+\begin{equation}
+    \ubarV{Z} \le \CoP \le \barV{Z}
+\end{equation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Foot positions}
+Simple bounds when feasible regions are rectangular.
+
+\begin{equation}
+    \ubarV{p}_j \le \fp[p_{j-1}]_j \le \barV{p}_j, \quad j = 1 \dots M
+\end{equation}
+
+\begin{equation}
+    \ubarV{P} \le \FP \le \barV{P}
+\end{equation}
+
+Only initial and final double supports are handled, the respective constraints
+can also be represented as simple bounds provided that the feet are aligned.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objectives}
+Three objectives are minimized: difference between the actual and reference
+\acs{CoM} velocity
+%
+\begin{equation}
+    \NORME{\cVel - \cVel_{ref}} = \NORME{\M{S}_v \V{X} + \V{s}_v - \cVel_{ref}},
+\end{equation}
+%
+the \acs{CoP} velocity
+%
+\begin{equation}
+    \NORME{\dCoP} = \NORME{\M{S}_{\dot{z}} \V{X} + \V{s}_{\dot{z}}},
+\end{equation}
+%
+distance between the \acs{CoP} positions and the centers of the feet
+%
+\begin{equation}
+    \NORME{\CoP}.
+\end{equation}
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{QP}
+\begin{equation}
+\begin{split}
+    \MINIMIZE{\CoP, \FP}  & \frac{\alpha}{2} \NORM{\cVel - \cVel_{ref}}^2 +
+                              \frac{\beta}{2}  \NORM{\dCoP}^2 +
+                              \frac{\gamma}{2} \NORM{\CoP}^2\\
+    \SUBJECTTO          & \ubarV{Z} \le \CoP \le \barV{Z} \\
+                        & \ubarV{P} \le \FP \le \barV{P}
+\end{split}
+\end{equation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Reference velocity}
+\begin{equation}
+\begin{split}
+    &\NORM{\cVel - \cVel_{ref}}^2
+    =
+    \NORM{\M{S}_v \V{X} + \V{s}_v   -  \cVel_{ref}}^ 2
+    = \\
+    &
+    \V{X}^T \M{S}_v^T \M{S}_v \V{X}
+    +
+    \V{X}^T \M{S}_v^T \V{s}_v
+    -
+    \V{X}^T \M{S}_v^T \cVel_{ref}\\
+    &
+    +
+    \V{s}_v^T \M{S}_v \V{X}
+    +
+    \cancel{\V{s}_v^T \V{s}_v}
+    -
+    \cancel{\V{s}_v^T \cVel_{ref}} \\
+    &
+    -
+    \cVel_{ref}^T \M{S}_v \V{X}
+    -
+    \cancel{\cVel_{ref}^T \V{s}_v}
+    +
+    \cancel{\cVel_{ref}^T \cVel_{ref}}
+\end{split}
+\end{equation}
+
+Omitting the  constant terms we obtain
+\begin{equation}
+    \frac{\alpha}{2} \V{X}^T \M{S}_v^T \M{S}_v \V{X}
+    -
+    \alpha \cVel_{ref}^T \M{S}_v \V{X}
+    +
+    \alpha \V{s}^T_v \M{S}_v \V{X}
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{CoP velocity}
+\begin{equation}
+    \NORM{\dCoP}^2 =
+    \NORM{\M{S}_{\dot{z}} \V{X} + \V{s}_{\dot{z}}}^2 =
+        \V{X}^T \M{S}_{\dot{z}}^T \M{S}_{\dot{z}} \V{X}
+        +
+        \V{X}^T \M{S}_{\dot{z}}^T \V{s}_{\dot{z}}
+        +
+        \V{s}_{\dot{z}}^T \M{S}_{\dot{z}} \V{X}
+        +
+        \cancel{\V{s}_{\dot{z}}^T \V{s}_{\dot{z}}}
+\end{equation}
+
+Omitting the constant terms we obtain
+\begin{equation}
+    \frac{\beta}{2}
+    \V{X}^T \M{S}_{\dot{z}}^T \M{S}_{\dot{z}} \V{X}
+    +
+    \beta
+    \V{s}_{\dot{z}}^T \M{S}_{\dot{z}} \V{X}
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Displacement from the reference CoP}
+\begin{equation}
+    \frac{\gamma}{2} \NORM{\CoP}^2
+        = \frac{\gamma}{2} \CoP^T \CoP
+\end{equation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Objective in the matrix form}
+\begin{equation}
+\begin{split}
+    \MINIMIZE{\V{X}}    & \frac{1}{2} \V{X}^T\M{H}\V{X} + \V{h}^T \V{X}
+\end{split}
+\end{equation}
+
+\begin{equation}
+    \M{H} =
+        \alpha \M{S}_v^T \M{S}_v
+        +
+        \beta  \M{S}_{\dot{z}}^T \M{S}_{\dot{z}}
+        +
+        \gamma
+            \begin{bmatrix}
+                \M{0} & \M{0} & \M{0}\\
+                \M{0} & \M{I} & \M{0}\\
+                \M{0} & \M{0} & \M{0}\\
+            \end{bmatrix}\\
+\end{equation}
+
+\begin{equation}
+    \V{h} =
+        -
+        \alpha \cVel_{ref}^T \M{S}_v
+        +
+        \alpha \V{s}_v^T \M{S}_v
+        +
+        \beta  \V{s}_{\dot{z}}^T \M{S}_{\dot{z}}
+\end{equation}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Hierarchical least squares problem}
+\begin{description}
+    \item[Level 1:]
+        \begin{equation}
+        \begin{split}
+            & \ubarV{Z} \le \CoP \le \barV{Z} \\
+            & \ubarV{P} \le \FP \le \barV{P}
+        \end{split}
+        \end{equation}
+
+    \item[Level 2:]
+        \begin{equation}
+        \begin{split}
+            & \sqrt{\frac{\alpha}{2}} \M{S}_v \V{X} = \sqrt{\frac{\alpha}{2}} \left(\cVel_{ref} - \V{s}_v\right) \\
+            & \sqrt{\frac{\beta}{2}} \M{S}_{\dot{z}} \V{X} = \sqrt{\frac{\beta}{2}} \V{s}_{\dot{z}}\\
+            & \sqrt{\frac{\gamma}{2}} \CoP = 0\\
+        \end{split}
+        \end{equation}
+\end{description}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Swing foot trajectory}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Polynomial and boundary conditions}
+Trajectory is generated using cubic polynomial of the form
+\begin{equation}
+    at^3 + bt^2 + ct + d = y_{swing},
+\end{equation}
+where $t$ is time instance; $a,b,c,d$ are coefficients; and $y_{swing}$ is position of the swing
+foot at time $t$.
+
+Derivatives of the cubic polynomial are
+\begin{equation}
+\begin{split}
+    & 3at^2 + 2bt + c = \dot{y}_{swing},\\
+    & 6at + 2b = \ddot{y}_{swing},\\
+    & 6a = \dddot{y}_{swing}.\\
+\end{split}
+\end{equation}
+
+There are four boundary conditions for the polynomial, the first two are defined for
+the current swing foot state at $t_i = 0$:
+\begin{equation}\label{wpg04.eq.swtraj_bc1}
+\begin{split}
+    & d = y_{swing,i}, \\
+    & c = \dot{y}_{swing,i}, \\
+\end{split}
+\end{equation}
+where $y_{swing,i}$ and $\dot{y}_{swing,i}$ are initial position and velocity; the other two
+conditions for landing time instance $t_f$ are:
+\begin{equation}\label{wpg04.eq.swtraj_bc2}
+\begin{split}
+    & at_f^3 + bt_f^2 + ct_f + d = y_{swing,f},\\
+    & 3at^2 + 2bt + c = \dot{y}_{swing,f},\\
+\end{split}
+\end{equation}
+where $y_{swing,f}$ and $\dot{y}_{swing,f}$ are final position and velocity.
+Trajectories along $z$ axis and $x,y$ axes are computed separately. Final position
+$y_{swing,f}^z$ for trajectory along $z$ axis is set to the step height during the first
+half of the support and to $0$ during the second half:
+\begin{equation}
+    y_{swing,f}^z =
+    \left\{
+        \begin{array}{ll}
+            h_{step}    & t \le \frac{1}{2}T_{support}; \\
+            0           & t > \frac{1}{2}T_{support}. \\
+        \end{array}
+    \right.
+\end{equation}
+The final $x,y$ positions are set to the next landing position computed as
+\begin{equation}
+    \begin{bmatrix}
+        y_{swing,f}^x\\
+        y_{swing,f}^y\\
+    \end{bmatrix}
+    =
+    \M{V}_{land}\FP,
+\end{equation}
+where
+\begin{equation}
+    \M{V}_{land} =
+    \begin{bmatrix}
+        \M[p_0][]{R} & \M{0}
+    \end{bmatrix}.
+\end{equation}
+Velocity at the end of trajectory is set to zero.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Computation of the desired acceleration}
+
+Whole body control requires current acceleration (at time $t_i$) of the swing foot,
+which can be found as
+\begin{equation}\label{wpg04.eq.swtraj_acc1}
+    2b = \ddot{y}_{swing,i}.
+\end{equation}
+Hence it is necessary to find coefficient $b$ from equations~\eqref{wpg04.eq.swtraj_bc1}
+and~\eqref{wpg04.eq.swtraj_bc2}.
+
+Substitution of~\eqref{wpg04.eq.swtraj_bc1} to~\eqref{wpg04.eq.swtraj_bc2} using $\dot{y}_{swing,f} = 0$
+yields
+\begin{equation}\label{wpg04.eq.swtraj_bc3}
+\begin{split}
+    & at_f^3 + bt_f^2 + \dot{y}_{swing,i}t_f + y_{swing,i} = y_{swing,f},\\
+    & 3at_f^2 + 2bt_f + \dot{y}_{swing,i} = 0.\\
+\end{split}
+\end{equation}
+
+Trivial algebraic operations on~\eqref{wpg04.eq.swtraj_bc3} and~\eqref{wpg04.eq.swtraj_acc1}
+lead to the following equation:
+\begin{equation}\label{wpg04.eq.swtraj_acc2}
+    \ddot{y}_{swing,i}
+    =
+    \frac{6(y_{swing,f} - y_{swing,i})}{t_f^2} - \frac{4\dot{y}_{swing,i}}{t_f}
+    =
+    \frac{6}{t_f^2}y_{swing,f} -
+    \underbrace{
+        \frac{6}{t_f^2}y_{swing,i} - \frac{4}{t_f} \dot{y}_{swing,i}
+    }_{\mbox{constant}}.
+\end{equation}
+
+Consequently
+\begin{equation}
+    \V{\ddot{y}}_{swing}
+    =
+    \begin{bmatrix}
+        \ddot{y}_{swing,i}^x\\
+        \ddot{y}_{swing,i}^y\\
+        \ddot{y}_{swing,i}^z\\
+    \end{bmatrix}
+    =
+    \underbrace{
+        \frac{6}{t_f^2}
+        \begin{bmatrix}
+            \M{V}_{land} \\
+            \M{0}
+        \end{bmatrix}
+    }_{\M{V}_{sa}}
+    \FP
+    +
+    \underbrace{
+        \frac{6}{t_f^2}
+        \begin{bmatrix}
+            \M{0} \\
+            y_{swing,f}^z
+        \end{bmatrix}
+        -
+        \frac{6}{t_f^2}
+        \V{y}_{swing,i}
+        -
+        \frac{4}{t_f}
+        \V{\dot{y}}_{swing,i}
+    }_{\V{b}_{sa}},
+\end{equation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Computation of the initial jerk}
+Jerk at the beginning of the swing foot trajectory characterizes behaviour of the
+polynomial near this point. High values of the jerk indicate rapid change of
+acceleration, which in turn increases error in trajectory tracking using piece-wise
+constant acceleration. Due to this reason we penalize the jerk at the starting point
+of trajectory. Obviously, only $x,y$ components are penalized, since $z$ component
+is directly computed.
+
+The jerk can be computed as:
+\begin{equation}\label{wpg04.eq.swtraj_jerk}
+    \dddot{y}_{swing,i}
+    =
+    - \frac{12(y_{swing,f} - y_{swing,i})}{t_f^3} + \frac{6\dot{y}_{swing,i}}{t_f^2}
+    =
+    - \frac{12}{t_f^3}y_{swing,f}
+    +
+    \underbrace{
+        \frac{12}{t_f^3}y_{swing,i} + \frac{6}{t_f} \dot{y}_{swing,i}
+    }_{\mbox{constant}}.
+\end{equation}
+
+Therefore $x,y$ components of the jerk are expressed as
+\begin{equation}
+    \V{\dddot{y}}_{swing}^{x,y}
+    =
+    \begin{bmatrix}
+        \dddot{y}_{swing,i}^x\\
+        \dddot{y}_{swing,i}^y\\
+    \end{bmatrix}
+    =
+    \underbrace{
+        -
+        \frac{12}{t_f^3}
+        \M{V}_{land}
+    }_{\M{V}_{sj}}
+    \FP
+    +
+    \underbrace{
+        \frac{12}{t_f^3}
+        \V{y}_{swing,i}
+        +
+        \frac{6}{t_f^2}
+        \V{\dot{y}}_{swing,i}
+    }_{\V{b}_{sj}}
+    =
+    \underbrace{
+        \begin{bmatrix}
+            \M{0}   &   \M{0}   &   \M{V}_{sj}
+        \end{bmatrix}
+    }_{\M{A}_{sj}}
+    \V{X}_{mpc}
+    +
+    \V{b}_{sj}
+    .
+\end{equation}
+\input{../../../doc/latex/Styles/wpg_notation_undefine.tex}

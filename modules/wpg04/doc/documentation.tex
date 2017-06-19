@@ -1,0 +1,27 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[colorlinks=true]{hyperref}   % use for hypertext links, including those to external documents and URLs
+
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage[backend=bibtex,sorting=ydnt,firstinits=true,maxbibnames=99]{biblatex}
+
+
+\addbibresource{../../../doc/latex/bibliography.bib}
+\addbibresource{../../../doc/latex/wpg.bib}
+
+\input{../../../doc/latex/texsetup.tex}
+
+\begin{document}
+
+\clearpage
+\phantomsection
+\pdfbookmark[1]{List of Acronyms}{listofacronyms}
+\printacronyms
+
+\begin{refsection}
+\input{wpg04}
+\printbibliography[heading=subbibintoc, title=Bibliography]
+\end{refsection}
+
+\end{document}
+

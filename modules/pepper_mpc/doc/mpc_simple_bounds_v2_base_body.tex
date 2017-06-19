@@ -1,0 +1,352 @@
+\section{With simple bounds (Version 2: base velocity and body position)}
+
+\gbox{
+    \red{Warning:} This version was rejected due to poor conditioning.
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Model}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Intermediate step 1}
+Control variables
+%
+\begin{equation}
+    \V{u}_k = (\cvbase[,k+1]^{x}, \cbody[,k+1]^{x}, \cvbase[,k+1]^{y}, \cbody[,k+1]^{y})
+\end{equation}
+%
+
+%
+\begin{align}
+    \cstate_{k+1}   &= \M{A}_k \cstate_{k} + \M{B}_k \V{u}_k\\
+    \cop[S_k]_{k}   &= \M{D}_{ps,k} \cstate_{k} \\
+    \cjerk_{k}      &= \M{D}_{\cjerk,k} \cstate_{k} + \M{E}_{\cjerk,k} \V{u}_{k}
+\end{align}
+%
+
+%
+\begin{equation}
+    \M{A}_k = \diag{2}{
+        \diag{}{
+            \begin{bmatrix}
+                1     & \frac{2 T_k}{3}     & \frac{T_k^2}{6} \\
+                0     & 0                   & 0 \\
+                0     & -\frac{2}{T_k}      &  - 1 \\
+            \end{bmatrix}
+            ,
+            \begin{bmatrix}
+                0                   &   0               & 0 \\
+                - \frac{3}{T_k}     &  - 2              &  - \frac{T_k}{2} \\
+                - \frac{6}{T_k^2}   &  - \frac{6}{T_k}  &  - 2 \\
+            \end{bmatrix}
+        }
+    }
+\end{equation}
+%
+
+%
+\begin{equation}
+    \M{B}_k = \diag{2}{
+        \diag{}{
+            \begin{bmatrix}
+                \frac{T_k}{3} \\
+                1 \\
+                \frac{2}{T_k} \\
+            \end{bmatrix}
+            ,
+            \begin{bmatrix}
+                1 \\
+                \frac{3}{T_k} \\
+                \frac{6}{T_k^2} \\
+            \end{bmatrix}
+        }
+    }
+\end{equation}
+%
+
+%
+\begin{align}
+    \M{D}_{\cjerk,k} &=
+    \diag{2}{
+        \diag{}{
+            \begin{bmatrix}
+                0 & - \frac{2}{T_k^2} &  - \frac{2}{T_k}\\
+            \end{bmatrix}
+            ,
+            \begin{bmatrix}
+                - \frac{6}{T_k^3} &  - \frac{6}{T_k^2} &  - \frac{3}{T_k} \\
+            \end{bmatrix}
+        }
+    }
+    \\
+    \M{E}_{\cjerk,k} &=
+    \diag{2}{
+        \diag{}{
+            \begin{bmatrix}
+                \frac{2}{T_k^2} \\
+            \end{bmatrix}
+            ,
+            \begin{bmatrix}
+                \frac{6}{T_k^3}  \\
+            \end{bmatrix}
+        }
+    },
+\end{align}
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Intermediate step 2}
+Control variables
+%
+\begin{equation}
+    \V{u}_k = (\cvbase[,k+1]^{x}, \V[S]{c}_{d,k+1}^{x}, \cvbase[,k+1]^{y}, \V[S]{c}_{d,k+1}^{y}),
+\end{equation}
+%
+where
+%
+\begin{equation}
+    \begin{bmatrix}
+        \V[S]{c}_{d,k+1}^{x}\\
+        \V[S]{c}_{d,k+1}^{y}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        \cbody[,k+1]^{x}\\
+        \cbody[,k+1]^{y}
+    \end{bmatrix}
+    -
+    \begin{bmatrix}
+        \cbase[,k+1]^{x}\\
+        \cbase[,k+1]^{y}
+    \end{bmatrix}
+\end{equation}
+%
+
+\begin{listingtcb}{Maxima}
+\begin{deflisting}
+A: matrix([1, T, T^2/2], [0, 1, T], [0, 0, 1]);
+B: matrix([T^3/6], [T^2/2], [T]);
+X: matrix([x],[dx],[ddx]);
+U: matrix([dddx]);
+Xp: matrix([xp],[dxp],[ddxp]);
+
+
+e: solve([(A.X + B.U)[2][1] = (Xp)[2][1]], [dddx]);
+Ds: coefmatrix([rhs(e[1])], list_matrix_entries(X));
+Es: coefmatrix([rhs(e[1])], [dxp]);
+e: subst(e, A.X + B.U);
+As: coefmatrix(list_matrix_entries(e), list_matrix_entries(X));
+Bs: coefmatrix(list_matrix_entries(e), [dxp]);
+
+e: solve([(A.X + B.U)[1][1] = (Xp)[1][1]], [dddx]);
+Dd: coefmatrix([rhs(e[1])], list_matrix_entries(X));
+Ed: coefmatrix([rhs(e[1])], [xp]);
+e: subst(e, A.X + B.U);
+Ad: coefmatrix(list_matrix_entries(e), list_matrix_entries(X));
+Bd: coefmatrix(list_matrix_entries(e), [xp]);
+
+Xs: matrix([xs],[dxs],[ddxs]);
+Xd: matrix([xd],[dxd],[ddxd]);
+Xsp: matrix([xsp],[dxsp],[ddxsp]);
+Xdp: matrix([xdp],[dxdp],[ddxdp]);
+
+e: xsp = (As[1].Xs + Bs[1]*dxsp)[1];
+e1: subst(e, Ad.Xd + Bd*(xsp + xdp));
+e2: subst(e, Dd.Xd + Ed*(xsp + xdp));
+Anew: coefmatrix(list_matrix_entries(e1),
+    append(list_matrix_entries(Xs),list_matrix_entries(Xd)));
+Bnew: coefmatrix(list_matrix_entries(e1), [dxsp, xdp]);
+Dnew: coefmatrix(list_matrix_entries(e2),
+    append(list_matrix_entries(Xs),list_matrix_entries(Xd)));
+Enew: coefmatrix(list_matrix_entries(e2), [dxsp, xdp]);
+
+tex(Anew);
+tex(Bnew);
+tex(Dnew);
+tex(Enew);
+\end{deflisting}
+\end{listingtcb}
+
+
+%
+\begin{align}
+    \cstate_{k+1}   &= \M{A}_k \cstate_{k} + \M{B}_k \V{u}_k\\
+    \cop[S_k]_{k}   &= \M{D}_{ps,k} \cstate_{k} \\
+    \cjerk_{k}      &= \M{D}_{\cjerk,k} \cstate_{k} + \M{E}_{\cjerk,k} \V{u}_{k}
+\end{align}
+%
+
+%
+\begin{equation}
+    \M{A}_k = \diag{2}{
+        \begin{bmatrix}
+            1     & \frac{2 T_k}{3}     & \frac{T_k^2}{6}  & 0 & 0 & 0 \\
+            0     & 0                   & 0                & 0 & 0 & 0 \\
+            0     & -\frac{2}{T_k}      &  - 1             & 0 & 0 & 0 \\
+            1               & \frac{2 T_k}{3}   & \frac{T_k^2}{6}   & 0 & 0 & 0 \\
+            \frac{3}{T_k}   & 2                 & \frac{T_k}{2}     &  - \frac{3}{T_k}      &  - 2              &  - \frac{T_k}{2} \\
+            \frac{6}{T_k^2} & \frac{4}{T_k}     & 1                 &  - \frac{6}{T_k^2}    &  - \frac{6}{T_k}  &  - 2 \\
+        \end{bmatrix}
+    },
+    \quad
+    \M{B}_k = \diag{2}{
+        \begin{bmatrix}
+            \frac{T_k}{3}   & 0 \\
+            1               & 0 \\
+            \frac{2}{T_k}   & 0 \\
+            \frac{T_k}{3}   & 1 \\
+            1               & \frac{3}{T_k} \\
+            \frac{2}{T_k}   & \frac{6}{T_k^2} \\
+        \end{bmatrix}
+    }
+\end{equation}
+%
+
+
+%
+\begin{equation}
+    \M{D}_{\cjerk,k} =
+    \diag{2}{
+        \begin{bmatrix}
+            0 & - \frac{2}{T_k^2} & - \frac{2}{T_k} & 0 & 0 & 0\\
+            \frac{6}{T_k^3}     & \frac{4}{T_k^2}   & \frac{1}{T_k} &  - \frac{6}{T_k^3} &  - \frac{6}{T_k^2} &  - \frac{3}{T_k}
+        \end{bmatrix}
+    },
+    \quad
+    \M{E}_{\cjerk,k} =
+    \diag{2}{
+        \begin{bmatrix}
+            \frac{2}{T_k^2}  & 0\\
+            \frac{2}{T_k^2} & \frac{6}{T_k^3}\\
+        \end{bmatrix}
+    }
+\end{equation}
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Final}
+Control variables
+%
+\begin{equation}
+    \V{u}_k = (\cvbase[,k+1]^{x}, \V[S]{c}_{d,k+1}^{x}, \cvbase[,k+1]^{y}, \V[S]{c}_{d,k+1}^{y}),
+\end{equation}
+%
+where
+%
+\begin{equation}
+    \begin{bmatrix}
+        \V[S]{c}_{d,k+1}^{x}\\
+        \V[S]{c}_{d,k+1}^{y}
+    \end{bmatrix}
+    =
+    \M[][S_{k+1}]{R}
+    \left(
+        \begin{bmatrix}
+            \cbody[,k+1]^{x}\\
+            \cbody[,k+1]^{y}
+        \end{bmatrix}
+        -
+        \begin{bmatrix}
+            \cbase[,k+1]^{x}\\
+            \cbase[,k+1]^{y}
+        \end{bmatrix}
+    \right)
+\end{equation}
+%
+
+\begin{listingtcb}{Maxima}
+\begin{deflisting}
+SR: zeromatrix (4, 4);
+SR[1][2]: 1;
+SR[2][4]: 1;
+SR[3][1]: 1;
+SR[4][3]: 1;
+R: matrix([cos(t), -sin(t)], [sin(t), cos(t)]);
+SR: transpose(SR).diag([R,ident(2)]).SR;
+tex(SR);
+\end{deflisting}
+\end{listingtcb}
+
+%
+\begin{align}
+    \cstate_{k+1}   &= \M{A}_k \cstate_{k} + \M{B}_k \M{S}_{\M[S_{k+1}]{R}} \V{u}_k\\
+    \cop[S_k]_{k}   &= \M{D}_{ps,k} \cstate_{k} \\
+    \cjerk_{k}      &= \M{D}_{\cjerk,k} \cstate_{k} + \M{E}_{\cjerk,k} \M{S}_{\M[S_{k+1}]{R}} \V{u}_{k}
+\end{align}
+%
+
+%
+\begin{equation}
+    \M{A}_k = \diag{2}{
+        \begin{bmatrix}
+            1     & \frac{2 T_k}{3}     & \frac{T_k^2}{6}  & 0 & 0 & 0 \\
+            0     & 0                   & 0                & 0 & 0 & 0 \\
+            0     & -\frac{2}{T_k}      &  - 1             & 0 & 0 & 0 \\
+            1               & \frac{2 T_k}{3}   & \frac{T_k^2}{6}   & 0 & 0 & 0 \\
+            \frac{3}{T_k}   & 2                 & \frac{T_k}{2}     &  - \frac{3}{T_k}      &  - 2              &  - \frac{T_k}{2} \\
+            \frac{6}{T_k^2} & \frac{4}{T_k}     & 1                 &  - \frac{6}{T_k^2}    &  - \frac{6}{T_k}  &  - 2 \\
+        \end{bmatrix}
+    },
+    \quad
+    \M{B}_k = \diag{2}{
+        \begin{bmatrix}
+            \frac{T_k}{3}   & 0 \\
+            1               & 0 \\
+            \frac{2}{T_k}   & 0 \\
+            \frac{T_k}{3}   & 1 \\
+            1               & \frac{3}{T_k} \\
+            \frac{2}{T_k}   & \frac{6}{T_k^2} \\
+        \end{bmatrix}
+    }
+\end{equation}
+%
+
+%
+\begin{equation}
+    \M{D}_{ps,k}
+    =
+        \frac{1}{m_s + m_d}
+        \diag{2}
+        {
+            \begin{bmatrix}
+                -{m_d}      & 0     & - \frac{c^z_{s,k}}{g}{m_s}
+                &
+                {m_d}       & 0     & - \frac{c^z_{d,k}}{g}{m_d} \\
+            \end{bmatrix}
+        }
+\end{equation}
+%
+
+%
+\begin{equation}
+    \M{D}_{\cjerk,k} =
+    \diag{2}{
+        \begin{bmatrix}
+            0 & - \frac{2}{T_k^2} & - \frac{2}{T_k} & 0 & 0 & 0\\
+            \frac{6}{T_k^3}     & \frac{4}{T_k^2}   & \frac{1}{T_k} &  - \frac{6}{T_k^3} &  - \frac{6}{T_k^2} &  - \frac{3}{T_k}
+        \end{bmatrix}
+    },
+    \quad
+    \M{E}_{\cjerk,k} =
+    \diag{2}{
+        \begin{bmatrix}
+            \frac{2}{T_k^2}  & 0\\
+            \frac{2}{T_k^2} & \frac{6}{T_k^3}\\
+        \end{bmatrix}
+    }
+\end{equation}
+%
+
+\begin{equation}
+    \M{S}_{\M[S_{k+1}]{R}}
+    =
+    \begin{bmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & \cos(\theta_{k+1}) & 0 & - \sin(\theta_{k+1}) \\
+        0 & 0 & 1 & 0 \\
+        0 & \sin(\theta_{k+1}) & 0 & \cos(\theta_{k+1}) \\
+    \end{bmatrix}
+\end{equation}
