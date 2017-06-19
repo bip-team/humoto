@@ -1,0 +1,5 @@
+<map id="t_Constraints" name="t_Constraints">
+<area shape="rect" id="node2" href="$classhumoto_1_1GeneralTaskBaseMixin.html" title="General task mixin – should be used in building general tasks. " alt="" coords="5,131,227,311"/>
+<area shape="rect" id="node3" href="$classhumoto_1_1SimpleTaskBaseMixin.html" title="simple task mixin – should be used in building general tasks " alt="" coords="251,160,463,281"/>
+<area shape="rect" id="node4" href="$classhumoto_1_1WeightedSimpleTaskBaseMixin.html" title="simple task mixin – should be used in building general tasks " alt="" coords="488,131,739,311"/>
+</map>

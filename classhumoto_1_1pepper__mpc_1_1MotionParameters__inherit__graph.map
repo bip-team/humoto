@@ -1,0 +1,4 @@
+<map id="humoto::pepper_mpc::MotionParameters" name="humoto::pepper_mpc::MotionParameters">
+<area shape="rect" id="node2" href="$classhumoto_1_1config_1_1StrictConfigurableBase.html" title="The same as humoto::config::RelaxedConfigurableBase, but requires all configuration entries to be set..." alt="" coords="17,365,247,457"/>
+<area shape="rect" id="node3" href="$classhumoto_1_1config_1_1CommonConfigurableBase.html" title="{humoto::config::CommonConfigurable\lBase\&lt; true \&gt;\n|# default_crash_on_missing\l_entry_\l|+ readConfig()\l+ readConfig()\l+ readNestedConfig()\l+ writeConfig()\l+ writeConfig()\l+ writeNestedConfig()\l# CommonConfigurableBase()\l# ~CommonConfigurableBase()\l# finalize()\l# getConfigSectionID()\l# setDefaults()\l# writeConfigEntries()\l# readConfigEntries()\l* writeConfigEntries()\l* readConfigEntries()\l}" alt="" coords="5,5,259,317"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="humoto::rigidbody::RigidBodyState" name="humoto::rigidbody::RigidBodyState">
+<area shape="rect" id="node2" href="$classhumoto_1_1rigidbody_1_1PointMassState.html" title="Class that groups together parmeters related to a robot foot. " alt="" coords="5,505,149,685"/>
+<area shape="rect" id="node3" href="$classhumoto_1_1config_1_1StrictConfigurableBase.html" title="The same as humoto::config::RelaxedConfigurableBase, but requires all configuration entries to be set..." alt="" coords="55,365,284,457"/>
+<area shape="rect" id="node5" href="$classhumoto_1_1rigidbody_1_1RotaryState.html" title="Class that groups together parameters related to a robot foot. " alt="" coords="174,505,349,685"/>
+<area shape="rect" id="node4" href="$classhumoto_1_1config_1_1CommonConfigurableBase.html" title="{humoto::config::CommonConfigurable\lBase\&lt; true \&gt;\n|# default_crash_on_missing\l_entry_\l|+ readConfig()\l+ readConfig()\l+ readNestedConfig()\l+ writeConfig()\l+ writeConfig()\l+ writeNestedConfig()\l# CommonConfigurableBase()\l# ~CommonConfigurableBase()\l# finalize()\l# getConfigSectionID()\l# setDefaults()\l# writeConfigEntries()\l# readConfigEntries()\l* writeConfigEntries()\l* readConfigEntries()\l}" alt="" coords="43,5,296,317"/>
+</map>

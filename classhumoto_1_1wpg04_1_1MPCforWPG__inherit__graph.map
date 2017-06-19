@@ -1,0 +1,4 @@
+<map id="humoto::wpg04::MPCforWPG" name="humoto::wpg04::MPCforWPG">
+<area shape="rect" id="node2" href="$classhumoto_1_1MPC.html" title="Abstract base class for Model Predictive Control problems. " alt="" coords="13,189,205,355"/>
+<area shape="rect" id="node3" href="$classhumoto_1_1ControlProblem.html" title="Abstract base class (for control problems) " alt="" coords="24,5,195,141"/>
+</map>

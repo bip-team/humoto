@@ -1,0 +1,4 @@
+<map id="humoto::quadprogpp::Solver" name="humoto::quadprogpp::Solver">
+<area shape="rect" id="node2" href="$classhumoto_1_1QPSolverMixin.html" title="{humoto::QPSolverMixin\l\&lt; humoto::Solver\&lt; SolverParameters \&gt; \&gt;\n||# QPSolverMixin()\l# ~QPSolverMixin()\l# checkInputs()\l}" alt="" coords="5,263,280,384"/>
+<area shape="rect" id="node3" href="$classhumoto_1_1Solver.html" title="{humoto::Solver\&lt; SolverParameters \&gt;\n|# parameters_\l|+ setParameters()\l+ solve()\l+ solve()\l# Solver()\l# ~Solver()\l# checkInputs()\l# checkResults()\l# initialize()\l# reset()\l# solveHierarchy()\l}" alt="" coords="17,5,268,215"/>
+</map>

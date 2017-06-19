@@ -1,4 +1,0 @@
-MPCParameters:
-  preview_horizon_length: 15
-  sampling_time_ms: 100
-  subsampling_time_ms: 100

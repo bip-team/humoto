@@ -1,4 +1,0 @@
-MotionParameters:
-  base_orientation_rpy: [0, 0, 0]
-  base_com_position: [0.002531976618098, 0.0, 0.125564931735602]
-  body_com_position: [-4.18093905757091e-03, 0.0, 0.763104597149514]

@@ -1,5 +1,0 @@
-WBCParameters:
-  control_interval_ms: 10
-  joint_angle_error_tolerance: 0.01
-  maximal_number_of_iterations: 3
-  motion_parameters_tolerance: 0.001

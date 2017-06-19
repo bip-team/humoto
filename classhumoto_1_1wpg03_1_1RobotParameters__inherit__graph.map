@@ -1,0 +1,7 @@
+<map id="humoto::wpg03::RobotParameters" name="humoto::wpg03::RobotParameters">
+<area shape="rect" id="node5" href="$classhumoto_1_1wpg03_1_1Robot.html" title="Class that defines the robot used in walking pattern generation. " alt="" coords="31,1152,233,1405"/>
+<area shape="rect" id="node2" href="$classhumoto_1_1walking_1_1RobotFootParameters.html" title="Parameters. " alt="" coords="31,505,233,949"/>
+<area shape="rect" id="node3" href="$classhumoto_1_1config_1_1StrictConfigurableBase.html" title="The same as humoto::config::RelaxedConfigurableBase, but requires all configuration entries to be set..." alt="" coords="17,365,247,457"/>
+<area shape="rect" id="node4" href="$classhumoto_1_1config_1_1CommonConfigurableBase.html" title="{humoto::config::CommonConfigurable\lBase\&lt; true \&gt;\n|# default_crash_on_missing\l_entry_\l|+ readConfig()\l+ readConfig()\l+ readNestedConfig()\l+ writeConfig()\l+ writeConfig()\l+ writeNestedConfig()\l# CommonConfigurableBase()\l# ~CommonConfigurableBase()\l# finalize()\l# getConfigSectionID()\l# setDefaults()\l# writeConfigEntries()\l# readConfigEntries()\l* writeConfigEntries()\l* readConfigEntries()\l}" alt="" coords="5,5,259,317"/>
+<area shape="rect" id="node6" href="$classhumoto_1_1wpg03_1_1Model.html" title="[initialize_model.m] " alt="" coords="29,1453,235,1619"/>
+</map>

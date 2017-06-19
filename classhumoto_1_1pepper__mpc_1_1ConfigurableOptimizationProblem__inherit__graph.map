@@ -1,0 +1,6 @@
+<map id="humoto::pepper_mpc::ConfigurableOptimizationProblem" name="humoto::pepper_mpc::ConfigurableOptimizationProblem">
+<area shape="rect" id="node2" href="$classhumoto_1_1ConfigurableOptimizationProblem.html" title="Class representing the hierarchy of the problem. " alt="" coords="149,755,379,964"/>
+<area shape="rect" id="node3" href="$classhumoto_1_1config_1_1StrictConfigurableBase.html" title="The same as humoto::config::RelaxedConfigurableBase, but requires all configuration entries to be set..." alt="" coords="5,490,267,582"/>
+<area shape="rect" id="node4" href="$classhumoto_1_1config_1_1CommonConfigurableBase.html" title="{humoto::config::CommonConfigurable\lBase\&lt; true \&gt;\n|# default_crash_on_missing\l_entry_\l|+ readConfig()\l+ readConfig()\l+ readNestedConfig()\l+ writeConfig()\l+ writeConfig()\l+ writeNestedConfig()\l# CommonConfigurableBase()\l# ~CommonConfigurableBase()\l# finalize()\l# getConfigSectionID()\l# setDefaults()\l# writeConfigEntries()\l# readConfigEntries()\l* writeConfigEntries()\l* readConfigEntries()\l}" alt="" coords="9,5,263,317"/>
+<area shape="rect" id="node5" href="$classhumoto_1_1OptimizationProblem.html" title="An optimization problem [initialize_stack.m, simulation_loop.m]. " alt="" coords="291,365,493,707"/>
+</map>

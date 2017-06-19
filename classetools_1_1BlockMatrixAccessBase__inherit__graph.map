@@ -1,0 +1,6 @@
+<map id="etools::BlockMatrixAccessBase&lt; t_MatrixType, t_block_rows_num, t_block_cols_num &gt;" name="etools::BlockMatrixAccessBase&lt; t_MatrixType, t_block_rows_num, t_block_cols_num &gt;">
+<area shape="rect" id="node2" href="$classetools_1_1BlockMatrixSizeSpecificBase.html" title="Extra layer for handling of specific sizes of blocks using partial template specialization. " alt="" coords="230,453,463,663"/>
+<area shape="rect" id="node3" href="$classetools_1_1BlockMatrixBase.html" title="Base class of a block matrix. " alt="" coords="5,747,229,898"/>
+<area shape="rect" id="node4" href="$classetools_1_1BlockMatrixBase_3_01t__MatrixType_00_01t__block__rows__num_00_01t__block__cols__na999d07bdc2ca69f7b3faafaa243d59e.html" title="Base class of a block matrix. " alt="" coords="254,711,439,935"/>
+<area shape="rect" id="node5" href="$classetools_1_1BlockMatrixBase_3_01t__MatrixType_00_01t__block__rows__num_00_01t__block__cols__n047e334b0da7045047d840d5f2d58e0a.html" title="Base class of a block matrix. " alt="" coords="463,725,694,920"/>
+</map>

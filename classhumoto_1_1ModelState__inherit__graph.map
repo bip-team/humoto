@@ -1,0 +1,6 @@
+<map id="humoto::ModelState" name="humoto::ModelState">
+<area shape="rect" id="node2" href="$classhumoto_1_1pepper__ik_1_1GeneralizedCoordinates.html" title="State of the model. " alt="" coords="5,160,216,443"/>
+<area shape="rect" id="node3" href="$classhumoto_1_1pepper__mpc_1_1ModelState.html" title="{humoto::pepper_mpc\l::ModelState\n|+ base_mass_\l+ base_state_\l+ body_mass_\l+ body_state_\l|+ ModelState()\l+ ModelState()\l+ ModelState()\l+ log()\l+ set()\l+ set()\l+ update()\l# setDefaults()\l# setParameters()\l}" alt="" coords="239,175,393,428"/>
+<area shape="rect" id="node4" href="$classhumoto_1_1wpg03_1_1ModelState.html" title="{humoto::wpg03::ModelState\n|+ cstate_\l+ next_state_type_\l+ next_support_position_\l+ next_support_rotation_\l+ next_support_set_\l+ state_type_\l|+ ModelState()\l+ log()\l}" alt="" coords="417,219,612,384"/>
+<area shape="rect" id="node5" href="$classhumoto_1_1wpg04_1_1ModelState.html" title="{humoto::wpg04::ModelState\n|+ com_state_\l+ feet_\l+ next_stance_type_\l+ stance_type_\l|+ ModelState()\l+ ModelState()\l+ log()\l+ set()\l+ set()\l+ setDefaults()\l# setDefaults()\l&#45; initializeFoot()\l}" alt="" coords="636,189,831,413"/>
+</map>
