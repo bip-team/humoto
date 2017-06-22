@@ -52,7 +52,7 @@ MPCMotionParameters:
   base_position: [0, 0]
   base_angular_velocity: 0
   motion_mode: 1
-  duration_ms: 9900
+  duration_ms: 20000
 MPCOptimizationProblem:
   task_class_names: [[TaskBaseVelocityBounds, TaskBodyPositionBounds, TaskCoPPositionBounds,
   TaskBaseAccelerationBounds], [TaskBasePositionReference, TaskBaseJerkMinimization, TaskBodyJerkMinimization, TaskCoPCentering]]

@@ -152,11 +152,17 @@ int main(int argc, char **argv)
         
         std::vector<etools::Vector3> head_angular_velocities;
         readVelocityFromFile(head_angular_velocities, "velocity-log.m");
-
+        etools::Vector3 velocity;
+        
         // -------------------read head motion from file --------------
 
-        for (std::size_t i = 0; i < head_angular_velocities.size(); ++i)
+        for(std::size_t i = 0;; ++i)
         {
+            if(head_angular_velocities.empty())
+            {
+                break;
+            }
+
             // -----------------feedback--------------------------------
             if (i > 0)
             {
@@ -226,8 +232,23 @@ int main(int argc, char **argv)
             //mpc_model_state.log(logger, prefix, "next_state");
             //logger.log(humoto::LogEntryName(prefix).add("next_cop"), mpc_model.getCoP(mpc_model_state));
 
-            //update tag angular velocity
-            ik_wbc.setTagRefAngularVelocity(head_angular_velocities[i]);
+            // ---------------- decay velocity ----------    
+
+            //update tag angular velocity - decay velocity
+            if(!(i % 10))
+            {
+                std::cout << i << std::endl;
+                velocity = head_angular_velocities.front();
+                ik_wbc.setTagRefAngularVelocity(velocity);
+                head_angular_velocities.erase(head_angular_velocities.begin());
+            }
+            else
+            {
+                velocity = 0.01 * velocity;
+                ik_wbc.setTagRefAngularVelocity(velocity);
+            }
+            
+            // ---------------- decay velocity ----------    
 
             //ik_model.log(logger, prefix);
             //HUMOTO_LOG_RAW("===================");
