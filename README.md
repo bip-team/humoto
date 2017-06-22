@@ -124,4 +124,4 @@ What is the difference between humoto and ...   {#md_readme_faq_comparison}
 
 More information    {#md_readme_faq_more}
 ================
-* Todo: see [doxygen todo page](@ref todo)
+* Todo: see [doxygen todo page](@ref todo) and [doc/known_issues.md](@ref md_known_issues)

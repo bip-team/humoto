@@ -774,6 +774,7 @@ INPUT                  +=   ./doxygen_initialization.dox \
                             ../coding_policies.md \
                             ../howto_configurable.md \
                             ../howto_tasks.md \
+                            ../known_issues.md \
                             ../../core/include/ \
                             ../../bridges/QuadProgpp/interface \
                             ../../bridges/qpOASES/interface \
