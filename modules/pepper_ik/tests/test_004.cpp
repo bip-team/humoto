@@ -32,6 +32,44 @@
 HUMOTO_INITIALIZE_GLOBAL_LOGGER(std::cout);
 
 /**
+ * @param[in, out] head_angular_velocities
+ * @param[in]      filename
+ *
+ * @brief          Read velocity log file from pepper-visual-servoing and get head angular velocity
+ */
+void readVelocityFromFile(std::vector<etools::Vector3>& head_angular_velocities, const char* filename)
+{
+    std::ifstream input_file(filename);
+    std::string line;
+
+    // skip first line
+    std::getline(input_file, line);
+    while(std::getline(input_file, line, ';'))
+    {
+        if(line.find(']') != std::string::npos)
+        {
+            break;
+        }
+
+        line.erase(std::remove(line.begin(), line.end(), ','), line.end());
+        std::istringstream stream(line);
+        etools::Vector3    inner_vector;
+        double value;
+        int i = -1;
+        while(stream >> value)
+        {
+            i++;
+            if(i < 3)
+            {
+                continue;
+            }
+            inner_vector(i - 3) = value;
+        }
+        head_angular_velocities.push_back(inner_vector);
+    }
+}
+
+/**
  * @param[in] argc number of arguments
  * @param[in] argv arguments
  *
@@ -77,8 +115,6 @@ int main(int argc, char **argv)
         //humoto::pepper_ik::GeneralizedCoordinates<MODEL_FEATURES>   ik_generalized_coordinates;
         humoto::pepper_ik::GeneralizedCoordinates<MODEL_FEATURES> ik_generalized_coordinates(config_path + "initial_state_pepper_ik_planar.yaml", true);
         ik_model.updateState(ik_generalized_coordinates);
-        //camera angular velocity
-        etools::Vector3 camera_angular_vel = etools::Vector3::Zero();
 
         // -----------------ik--------------------------------
         
@@ -112,7 +148,14 @@ int main(int argc, char **argv)
         humoto::Timer                   timer;
         humoto::pepper_ik::RobotCommand command;
 
-        for (std::size_t i = 0;; ++i)
+        // -------------------read head motion from file --------------
+        
+        std::vector<etools::Vector3> head_angular_velocities;
+        readVelocityFromFile(head_angular_velocities, "velocity-log.m");
+
+        // -------------------read head motion from file --------------
+
+        for (std::size_t i = 0; i < head_angular_velocities.size(); ++i)
         {
             // -----------------feedback--------------------------------
             if (i > 0)
@@ -184,8 +227,7 @@ int main(int argc, char **argv)
             //logger.log(humoto::LogEntryName(prefix).add("next_cop"), mpc_model.getCoP(mpc_model_state));
 
             //update tag angular velocity
-            camera_angular_vel << 0.001, 0.001, 0.0;
-            ik_wbc.setTagRefAngularVelocity(camera_angular_vel);
+            ik_wbc.setTagRefAngularVelocity(head_angular_velocities[i]);
 
             //ik_model.log(logger, prefix);
             //HUMOTO_LOG_RAW("===================");

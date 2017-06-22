@@ -46,7 +46,7 @@ namespace humoto
                 /**
                  * @brief Set tag angular velocity
                  */
-                void setTagRefAngularVelocity(const etools::Vector3 tag_angular_velocity)
+                void setTagRefAngularVelocity(const etools::Vector3& tag_angular_velocity)
                 {
                     tag_angular_velocity_ = tag_angular_velocity;
                 }
