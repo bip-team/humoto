@@ -10,3 +10,6 @@
 [submodule "bridges/QuadProgpp/QuadProgpp"]
 	path = bridges/QuadProgpp/QuadProgpp
 	url = https://github.com/asherikov/QuadProgpp.git
+[submodule "bridges/qpmad/qpmad"]
+	path = bridges/qpmad/qpmad
+	url = https://github.com/asherikov/qpmad.git

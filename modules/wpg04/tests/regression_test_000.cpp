@@ -78,5 +78,17 @@ HUMOTO_INITIALIZE_GLOBAL_LOGGER(std::cout);
 #endif
 //===================================================
 
+//===================================================
+// qpmad
+//===================================================
+#ifdef HUMOTO_BRIDGE_qpmad
+
+#include "humoto/qpmad.h"
+#define HUMOTO_TEST_SOLVER_NAMESPACE            qpmad
+#define HUMOTO_TEST_DISABLE_HOT_STARTING        1
+#include "regression_test_000_body.h"
+#endif
+//===================================================
+
 
 HUMOTO_DEFINE_REGRESSION_TEST_MAIN()

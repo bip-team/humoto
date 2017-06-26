@@ -54,7 +54,7 @@ if (HUMOTO_BUILD_REGRESSION_TESTS)
     #Various solvers and hotstarting options.
     #- qpOASES, LexLS, eiQuadProg, QuadProgpp
     #- compare the last solution with the reference
-    humoto_define_regression_test(${HUMOTO_MODULE} "000" "config_yaml" "qpOASES;lexls;eiquadprog;QuadProgpp")
+    humoto_define_regression_test(${HUMOTO_MODULE} "000" "config_yaml" "qpOASES;lexls;eiquadprog;QuadProgpp;qpmad")
 
     #Fixed footstep positions
     #Rotating feet

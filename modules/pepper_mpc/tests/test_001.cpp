@@ -55,7 +55,6 @@
 // eiQuadProg
 //===================================================
 #ifdef HUMOTO_BRIDGE_eiquadprog
-// specific solver (many can be included simultaneously)
 #include "humoto/eiquadprog.h"
 
 #define HUMOTO_TEST_SOLVER_NAMESPACE            eiquadprog
@@ -70,7 +69,6 @@
 // QuadProgpp
 //===================================================
 #ifdef HUMOTO_BRIDGE_QuadProgpp
-// specific solver (many can be included simultaneously)
 #include "humoto/quadprogpp.h"
 
 #define HUMOTO_TEST_SOLVER_NAMESPACE            quadprogpp
@@ -80,6 +78,19 @@
 #endif
 //===================================================
 
+
+//===================================================
+// qpmad
+//===================================================
+#ifdef HUMOTO_BRIDGE_qpmad
+#include "humoto/qpmad.h"
+
+#define HUMOTO_TEST_SOLVER_NAMESPACE            qpmad
+#define HUMOTO_TEST_DISABLE_HOT_STARTING        1
+#include "test_001_body.h"
+
+#endif
+//===================================================
 
 
 /**
@@ -120,6 +131,10 @@ int main(int argc, char **argv)
 
         #ifdef HUMOTO_BRIDGE_QuadProgpp
         humoto_tests::pepper_mpc::quadprogpp::run(n_of_simulations, config_path);
+        #endif
+
+        #ifdef HUMOTO_BRIDGE_qpmad
+        humoto_tests::pepper_mpc::qpmad::run(n_of_simulations, config_path);
         #endif
     }
     catch (std::exception & e)

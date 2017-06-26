@@ -39,3 +39,12 @@ if (exist('time_perf_quadprogpp.m', 'file'))
     plot(quadprogpp_simulation.no_hotstart.average_time_to_run_full_loop, 'b')
     hold off
 end
+
+if (exist('time_perf_qpmad.m', 'file'))
+    source time_perf_qpmad.m
+    figure
+    title('qpmad')
+    hold on
+    plot(qpmad_simulation.no_hotstart.average_time_to_run_full_loop, 'b')
+    hold off
+end

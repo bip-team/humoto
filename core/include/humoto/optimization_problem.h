@@ -331,19 +331,25 @@ namespace humoto
 
 
             /**
-             * @brief Generates objective containing all simple constraints on this level
+             * @brief Generates objective containing all simple constraints on
+             * this level
              *
              * @param[in] sol_structure     structure of the solution
+             * @param[out] lb               standard form (lb<=x)
+             * @param[out] ub               standard form (x>=ub)
              * @param[out] constraints      constraints
              *
              * @attention Simple constraints always precede general
              * constraints, e.g., in an active set.
              */
-            void getSimpleConstraints(  constraints::ContainerILU & constraints,
+            void getSimpleConstraints(  constraints::ContainerILU       & constraints,
+                                        Eigen::VectorXd                 & lb,
+                                        Eigen::VectorXd                 & ub,
                                         const humoto::SolutionStructure & sol_structure) const
             {
+                std::size_t number_of_bounds = sol_structure.getNumberOfVariables();
                 constraints.reset(getNumberOfSimpleConstraints(),
-                                  sol_structure.getNumberOfVariables());
+                                  number_of_bounds);
 
 
                 std::size_t offset = 0;
@@ -355,6 +361,37 @@ namespace humoto
                     {
                         offset = it->ptr_->copyTo(constraints, offset);
                     }
+                }
+
+                lb.setConstant(number_of_bounds, -humoto::g_infinity);
+                ub.setConstant(number_of_bounds,  humoto::g_infinity);
+
+                for (std::size_t i = 0; i < constraints.getNumberOfConstraints(); ++i)
+                {
+                    unsigned int    variable_index = constraints.getIndices()[i];
+
+                    if (lb[variable_index] < constraints.getLowerBounds()[i])
+                    {
+                        lb[variable_index] = constraints.getLowerBounds()[i];
+                    }
+
+                    if (ub[variable_index] > constraints.getUpperBounds()[i])
+                    {
+                        ub[variable_index] = constraints.getUpperBounds()[i];
+                    }
+
+#ifndef DNDEBUG
+                    if (lb[variable_index] > ub[variable_index])
+                    {
+                        std::stringstream err_msg;
+                        err_msg << std::setprecision(std::numeric_limits<double>::digits10);
+                        err_msg << "Inconsistent bounds (lb > ub): variable index = '" << variable_index
+                                << "', lb = '" << lb[variable_index]
+                                << "', ub = '" << ub[variable_index]
+                                << "'.";
+                        HUMOTO_THROW_MSG(err_msg.str());
+                    }
+#endif
                 }
             }
 
