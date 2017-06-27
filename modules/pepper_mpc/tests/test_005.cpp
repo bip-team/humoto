@@ -13,13 +13,17 @@
 
 #define HUMOTO_GLOBAL_LOGGER_ENABLED
 
-// common & abstract classes (must be first)
+// Enable YAML configuration files (must be first)
+#include "humoto/config_yaml.h"
+// common & abstract classes
 #include "humoto/humoto.h"
 // specific solver (many can be included simultaneously)
 #include "humoto/qpoases.h"
+#ifdef HUMOTO_BRIDGE_lexls
 #include "humoto/lexls.h"
+#endif
 // specific control problem (many can be included simultaneously)
-#include "humoto/wpg04.h"
+#include "humoto/pepper_mpc.h"
 
 #include "utilities.h"
 
@@ -37,56 +41,72 @@ HUMOTO_INITIALIZE_GLOBAL_LOGGER(std::cout);
  */
 int main(int argc, char **argv)
 {
-    std::string     log_file_name = humoto_tests::getLogFileName(argc, argv);
+    std::string config_path = humoto_tests::getConfigPath(argc, argv, 1);
+    std::string log_file_name = humoto_tests::getLogFileName(argc, argv, 2);
 
     try
     {
         // optimization problem (a stack of tasks / hierarchy)
-        humoto::OptimizationProblem               opt_problem;
+        humoto::pepper_mpc::ConfigurableOptimizationProblem     opt_problem;
 
         // a solver which is giong to be used
         humoto::qpoases::SolverParameters         qpoases_solver_parameters;
         //solver_parameters.crash_on_any_failure_ = false;
         humoto::qpoases::Solver                   qpoases_solver(qpoases_solver_parameters);
 
+#ifdef HUMOTO_BRIDGE_lexls
         humoto::lexls::SolverParameters         lexls_solver_parameters;
         //solver_parameters.crash_on_any_failure_ = false;
         humoto::lexls::Solver                   lexls_solver(lexls_solver_parameters);
+#endif
 
 
         // solution
         humoto::qpoases::Solution               qpoases_solution;
+#ifdef HUMOTO_BRIDGE_lexls
         humoto::lexls::Solution                 lexls_solution;
+#endif
+
+
+        humoto::pepper_mpc::RobotParameters         robot_parameters(config_path + "robot_parameters.yaml");
+        // model representing the controlled system
+        humoto::pepper_mpc::Model                   model(robot_parameters);
+
+        // parameters of the control problem
+        humoto::pepper_mpc::MPCParameters           mg_parameters(config_path + "mpc_parameters.yaml");
+        // control problem, which is used to construct an optimization problem
+        humoto::pepper_mpc::MPCforMG                mg(mg_parameters);
 
 
         // options for walking
-        humoto::wpg04::WalkParameters                walk_parameters;
-        walk_parameters.com_velocity_ << 0.1, 0.;
-        walk_parameters.first_stance_com_velocity_ = walk_parameters.com_velocity_;
-        walk_parameters.num_steps_ = 7;
-        //FSM for walking
-        humoto::walking::StanceFiniteStateMachine stance_fsm(walk_parameters);
-        // model representing the controlled system
-        humoto::wpg04::Model                      model;
-        // parameters of the control problem
-        humoto::wpg04::MPCParameters              wpg_parameters;
-        // control problem, which is used to construct an optimization problem
-        humoto::wpg04::MPCforWPG                  wpg(wpg_parameters);
+        humoto::pepper_mpc::MotionParameters        motion_parameters(config_path + "motion_parameters_circle_fast.yaml");
 
+        switch (motion_parameters.motion_mode_)
+        {
+            case humoto::pepper_mpc::MotionMode::MAINTAIN_POSITION:
+                opt_problem.readConfig(config_path + "hierarchies.yaml", true, "Hierarchy01");
+                break;
+            case humoto::pepper_mpc::MotionMode::MAINTAIN_VELOCITY:
+                opt_problem.readConfig(config_path + "hierarchies.yaml", true, "Hierarchy00");
+                break;
+            default:
+                HUMOTO_THROW_MSG("Unsupported motion mode.");
+        }
 
-        setupHierarchy_v5(opt_problem);
+        humoto::pepper_mpc::ModelState   model_state(config_path + "initial_state_pepper.yaml");
+        model.updateState(model_state);
 
-        humoto::wpg04::ModelState model_state;
 
         humoto::ActiveSet qpoases_active_set_actual;
         humoto::ActiveSet qpoases_active_set_determined;
         humoto::Violations  qpoases_violations;
 
+#ifdef HUMOTO_BRIDGE_lexls
         humoto::ActiveSet lexls_active_set_actual;
         humoto::ActiveSet lexls_active_set_determined;
         humoto::Violations  lexls_violations;
+#endif
 
-        humoto::Timer       timer;
         humoto::Logger      logger(log_file_name);
         humoto::LogEntryName    prefix;
 
@@ -94,28 +114,34 @@ int main(int argc, char **argv)
         {
             prefix = humoto::LogEntryName("humoto").add(i);
 
-            timer.start();
             // prepare control problem for new iteration
-            if (wpg.update(model, stance_fsm, walk_parameters) != humoto::ControlProblemStatus::OK)
+            if (mg.updateAndShift(  motion_parameters,
+                                    model,
+                                    mg_parameters.sampling_time_ms_) != humoto::ControlProblemStatus::OK)
             {
                 break;
             }
 
             // form an optimization problem
-            opt_problem.form(qpoases_solution, model, wpg);
-            wpg.initSolutionStructure(lexls_solution);
+            opt_problem.form(qpoases_solution, model, mg);
+#ifdef HUMOTO_BRIDGE_lexls
+            mg.initSolutionStructure(lexls_solution);
+#endif
 
             // solve an optimization problem
             qpoases_solver.solve(qpoases_solution, qpoases_active_set_actual, opt_problem);
+#ifdef HUMOTO_BRIDGE_lexls
             lexls_solver.solve(lexls_solution, lexls_active_set_actual, opt_problem);
+#endif
 
-            timer.stop();
 
             opt_problem.determineActiveSet(qpoases_active_set_determined, qpoases_solution);
             opt_problem.computeViolations(qpoases_violations, qpoases_solution);
 
+#ifdef HUMOTO_BRIDGE_lexls
             opt_problem.determineActiveSet(lexls_active_set_determined, lexls_solution);
             opt_problem.computeViolations(lexls_violations, lexls_solution);
+#endif
 
 
             //========================
@@ -128,14 +154,15 @@ int main(int argc, char **argv)
             qpoases_solver.log(logger, prefix);
             qpoases_solution.log(logger, prefix);
 
+#ifdef HUMOTO_BRIDGE_lexls
             lexls_violations.log(logger, prefix);
             lexls_active_set_actual.log(logger, prefix, "lexls_active_set_lexls");
             lexls_active_set_determined.log(logger, prefix, "lexls_active_set_determined");
             lexls_solver.log(logger, prefix);
             lexls_solution.log(logger, prefix);
+#endif
 
-            stance_fsm.log(logger, prefix);
-            wpg.log(logger, prefix);
+            mg.log(logger, prefix);
             model.log(logger, prefix);
             //========================
 
@@ -146,15 +173,24 @@ int main(int argc, char **argv)
                 {
                     if (qpoases_active_set_determined[l][k] != qpoases_active_set_actual[l][k])
                     {
-                        if (!(qpoases_active_set_determined[l][k] == humoto::ConstraintActivationType::EQUALITY)
-                            && (qpoases_active_set_actual[l][k] ==  humoto::ConstraintActivationType::LOWER_BOUND))
+                        if (
+                            ! ( (qpoases_active_set_determined[l][k] == humoto::ConstraintActivationType::EQUALITY)
+                            && (qpoases_active_set_actual[l][k] ==  humoto::ConstraintActivationType::LOWER_BOUND) )
+                            )
                         {
-                            if ((qpoases_active_set_actual[l][k] == humoto::ConstraintActivationType::LOWER_BOUND)
-                                && (std::abs(qpoases_violations[l].getLower(k)) < 1e-12))
+                            switch (qpoases_active_set_actual[l][k])
                             {
-                                if ((qpoases_active_set_actual[l][k] == humoto::ConstraintActivationType::UPPER_BOUND)
-                                    && (std::abs(qpoases_violations[l].getUpper(k)) < 1e-12))
-                                {
+                                case humoto::ConstraintActivationType::LOWER_BOUND:
+                                    if (std::abs(qpoases_violations[l].getLower(k)) < 1e-10)
+                                    {
+                                        break;
+                                    }
+                                case humoto::ConstraintActivationType::UPPER_BOUND:
+                                    if (std::abs(qpoases_violations[l].getUpper(k)) < 1e-10)
+                                    {
+                                        break;
+                                    }
+                                default:
                                     std::cout   << "QPOASES:  "
                                                 << "Iteration = " << std::setw(3) << i
                                                 << " | "
@@ -171,11 +207,12 @@ int main(int argc, char **argv)
                                                     << qpoases_violations[l].getLower(k) << ", "
                                                     << qpoases_violations[l].getUpper(k) << "]"
                                                 << std::endl;
-                                }
+                                    break;
                             }
                         }
                     }
 
+#ifdef HUMOTO_BRIDGE_lexls
                     if (lexls_active_set_determined[l][k] != lexls_active_set_actual[l][k])
                     {
                         std::cout   << "LEXLS:    "
@@ -195,13 +232,13 @@ int main(int argc, char **argv)
                                         << lexls_violations[l].getUpper(k) << "]"
                                     << std::endl;
                     }
+#endif
                 }
             }
             //========================
 
             // extract next model state from the solution and update model
-            stance_fsm.shiftTime(wpg_parameters.sampling_time_ms_);
-            model_state = wpg.getNextModelState(qpoases_solution, stance_fsm, model);
+            model_state = mg.getNextModelState(qpoases_solution, model);
             model.updateState(model_state);
         }
     }

@@ -338,9 +338,6 @@ namespace humoto
              * @param[out] lb               standard form (lb<=x)
              * @param[out] ub               standard form (x>=ub)
              * @param[out] constraints      constraints
-             *
-             * @attention Simple constraints always precede general
-             * constraints, e.g., in an active set.
              */
             void getSimpleConstraints(  constraints::ContainerILU       & constraints,
                                         Eigen::VectorXd                 & lb,
@@ -401,9 +398,6 @@ namespace humoto
              *
              * @param[in] sol_structure     structure of the solution
              * @param[out] constraints      constraints
-             *
-             * @attention Simple constraints always precede general
-             * constraints, e.g., in an active set.
              */
             void getGeneralConstraints( constraints::ContainerALU & constraints,
                                         const humoto::SolutionStructure & sol_structure) const

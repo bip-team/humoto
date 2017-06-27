@@ -171,6 +171,9 @@ namespace humoto
                 qpOASES::Constraints    qpoases_active_set_guess_constraints_;
                 ///@}
 
+                Eigen::VectorXd     qpoases_active_set_bounds_;
+                Eigen::VectorXd     qpoases_active_set_constraints_;
+
 
                 /// Nonzero if constraints are specified
                 std::size_t    number_of_constraints_;
@@ -327,23 +330,18 @@ namespace humoto
 
                 /// @copydoc humoto::SolverGuessActiveSetMixin::getActiveSet
                 void getActiveSet(  humoto::ActiveSet                   &active_set,
-                                    const humoto::OptimizationProblem   &hierarchy) const
+                                    const humoto::OptimizationProblem   &hierarchy)
                 {
-                    Eigen::VectorXd     qpoases_active_set_bounds;
-                    Eigen::VectorXd     qpoases_active_set_constraints;
-
-
-
                     if (bounds_.getNumberOfConstraints() > 0)
                     {
-                        qpoases_active_set_bounds.resize(bounds_.getNumberOfVariables());
-                        qp_->getWorkingSetBounds(qpoases_active_set_bounds.data());
+                        qpoases_active_set_bounds_.resize(bounds_.getNumberOfVariables());
+                        qp_->getWorkingSetBounds(qpoases_active_set_bounds_.data());
                     }
 
                     if (number_of_constraints_ > 0)
                     {
-                        qpoases_active_set_constraints.resize(number_of_constraints_);
-                        qp_->getWorkingSetConstraints(qpoases_active_set_constraints.data());
+                        qpoases_active_set_constraints_.resize(number_of_constraints_);
+                        qp_->getWorkingSetConstraints(qpoases_active_set_constraints_.data());
                     }
 
 
@@ -353,39 +351,23 @@ namespace humoto
                     active_set.set(objective_level_, ConstraintActivationType::EQUALITY);
 
 
-                    for (std::size_t i = 0; i < bounds_.getNumberOfConstraints(); ++i)
+                    for (std::size_t i = 0; i < number_of_constraints_; ++i)
                     {
-                        std::size_t var_index = bounds_.getIndices()[i];
-
-                        if (qpoases_active_set_bounds[var_index] == -1.0)
+                        if (qpoases_active_set_constraints_[i] == -1.0)
                         {
-                            if (bounds_.getLowerBounds()[i] < lb_[var_index])
-                            {
-                                active_set[0][i] = ConstraintActivationType::INACTIVE;
-                            }
-                            else
-                            {
-                                active_set[0][i] = ConstraintActivationType::LOWER_BOUND;
-                            }
+                            active_set[0][i] = ConstraintActivationType::LOWER_BOUND;
                         }
                         else
                         {
-                            if (qpoases_active_set_bounds[var_index] == 0.0)
+                            if (qpoases_active_set_constraints_[i] == 0.0)
                             {
                                 active_set[0][i] = ConstraintActivationType::INACTIVE;
                             }
                             else
                             {
-                                if (qpoases_active_set_bounds[var_index] == 1.0)
+                                if (qpoases_active_set_constraints_[i] == 1.0)
                                 {
-                                    if (bounds_.getUpperBounds()[i] > ub_[var_index])
-                                    {
-                                        active_set[0][i] = ConstraintActivationType::INACTIVE;
-                                    }
-                                    else
-                                    {
-                                        active_set[0][i] = ConstraintActivationType::UPPER_BOUND;
-                                    }
+                                    active_set[0][i] = ConstraintActivationType::UPPER_BOUND;
                                 }
                                 else
                                 {
@@ -396,24 +378,39 @@ namespace humoto
                     }
 
 
-                    std::size_t number_of_bounds_ = bounds_.getNumberOfConstraints();
-                    for (std::size_t i = 0; i < number_of_constraints_; ++i)
+                    for (std::size_t i = 0; i < bounds_.getNumberOfConstraints(); ++i)
                     {
-                        if (qpoases_active_set_constraints[i] == -1.0)
+                        std::size_t var_index = bounds_.getIndices()[i];
+
+                        if (qpoases_active_set_bounds_[var_index] == -1.0)
                         {
-                            active_set[0][number_of_bounds_ + i] = ConstraintActivationType::LOWER_BOUND;
-                        }
-                        else
-                        {
-                            if (qpoases_active_set_constraints[i] == 0.0)
+                            if (bounds_.getLowerBounds()[i] < lb_[var_index])
                             {
-                                active_set[0][number_of_bounds_ + i] = ConstraintActivationType::INACTIVE;
+                                active_set[0][number_of_constraints_ + i] = ConstraintActivationType::INACTIVE;
                             }
                             else
                             {
-                                if (qpoases_active_set_constraints[i] == 1.0)
+                                active_set[0][number_of_constraints_ + i] = ConstraintActivationType::LOWER_BOUND;
+                            }
+                        }
+                        else
+                        {
+                            if (qpoases_active_set_bounds_[var_index] == 0.0)
+                            {
+                                active_set[0][number_of_constraints_ + i] = ConstraintActivationType::INACTIVE;
+                            }
+                            else
+                            {
+                                if (qpoases_active_set_bounds_[var_index] == 1.0)
                                 {
-                                    active_set[0][number_of_bounds_ + i] = ConstraintActivationType::UPPER_BOUND;
+                                    if (bounds_.getUpperBounds()[i] > ub_[var_index])
+                                    {
+                                        active_set[0][number_of_constraints_ + i] = ConstraintActivationType::INACTIVE;
+                                    }
+                                    else
+                                    {
+                                        active_set[0][number_of_constraints_ + i] = ConstraintActivationType::UPPER_BOUND;
+                                    }
                                 }
                                 else
                                 {
@@ -439,13 +436,37 @@ namespace humoto
 
                     qpoases_active_set_guess_constraints_.init(number_of_constraints_);
 
+                    for (std::size_t i = 0; i < number_of_constraints_; ++i)
+                    {
+                        ConstraintActivationType::Type type = active_set[0][i];
+
+                        switch (type)
+                        {
+                            case ConstraintActivationType::LOWER_BOUND:
+                                qpoases_active_set_guess_constraints_.setupConstraint(i, qpOASES::ST_LOWER);
+                                break;
+                            case ConstraintActivationType::INACTIVE:
+                                qpoases_active_set_guess_constraints_.setupConstraint(i, qpOASES::ST_INACTIVE);
+                                break;
+                            case ConstraintActivationType::UPPER_BOUND:
+                                qpoases_active_set_guess_constraints_.setupConstraint(i, qpOASES::ST_UPPER);
+                                break;
+                            case ConstraintActivationType::EQUALITY:
+                                qpoases_active_set_guess_constraints_.setupConstraint(i, qpOASES::ST_LOWER);
+                                break;
+                            default:
+                                HUMOTO_THROW_MSG("Incorrectly initialized active set guess.");
+                                break;
+                        }
+                    }
+
 
                     qpoases_active_set_guess_bounds_.init(bounds_.getNumberOfVariables());
                     qpoases_active_set_guess_bounds_.setupAllFree();
                     for (std::size_t i = 0; i < bounds_.getNumberOfConstraints() ; ++i)
                     {
                         std::size_t var_index = bounds_.getIndices()[i];
-                        ConstraintActivationType::Type type = active_set[0][i];
+                        ConstraintActivationType::Type type = active_set[0][number_of_constraints_+i];
 
                         switch (type)
                         {
@@ -461,32 +482,6 @@ namespace humoto
                                 break;
                             case ConstraintActivationType::EQUALITY:
                                 qpoases_active_set_guess_bounds_.setupBound(var_index, qpOASES::ST_LOWER);
-                                break;
-                            default:
-                                HUMOTO_THROW_MSG("Incorrectly initialized active set guess.");
-                                break;
-                        }
-                    }
-
-
-                    std::size_t number_of_bounds_ = bounds_.getNumberOfConstraints();
-                    for (std::size_t i = 0; i < number_of_constraints_; ++i)
-                    {
-                        ConstraintActivationType::Type type = active_set[0][number_of_bounds_ + i];
-
-                        switch (type)
-                        {
-                            case ConstraintActivationType::LOWER_BOUND:
-                                qpoases_active_set_guess_constraints_.setupConstraint(i, qpOASES::ST_LOWER);
-                                break;
-                            case ConstraintActivationType::INACTIVE:
-                                qpoases_active_set_guess_constraints_.setupConstraint(i, qpOASES::ST_INACTIVE);
-                                break;
-                            case ConstraintActivationType::UPPER_BOUND:
-                                qpoases_active_set_guess_constraints_.setupConstraint(i, qpOASES::ST_UPPER);
-                                break;
-                            case ConstraintActivationType::EQUALITY:
-                                qpoases_active_set_guess_constraints_.setupConstraint(i, qpOASES::ST_LOWER);
                                 break;
                             default:
                                 HUMOTO_THROW_MSG("Incorrectly initialized active set guess.");

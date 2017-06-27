@@ -45,9 +45,6 @@ if (HUMOTO_BUILD_TESTS)
 
     # QuadProgpp demo
     humoto_define_test(${HUMOTO_MODULE} "009" "QuadProgpp")
-
-    # testing active set handling, multiple solvers
-    humoto_define_test(${HUMOTO_MODULE} "010" "qpOASES;lexls")
 endif()
 
 if (HUMOTO_BUILD_REGRESSION_TESTS)
@@ -78,7 +75,4 @@ if (HUMOTO_BUILD_REGRESSION_TESTS)
     #- terminal constraint on the first or second level
     #- compare the last solution with the reference (output from the qpOASES solution of the same problem)
     humoto_define_regression_test(${HUMOTO_MODULE} "007" "lexls;config_yaml")
-
-    # Active set handling
-    humoto_define_regression_test(${HUMOTO_MODULE} "010" "qpOASES;lexls")
 endif()

@@ -1,0 +1,6 @@
+MotionParameters:
+  base_velocity: [0.5, 0]
+  base_position: [0, 0]
+  base_angular_velocity: 0.2
+  motion_mode: 2
+  duration_ms: 9900

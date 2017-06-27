@@ -20,9 +20,15 @@ if (HUMOTO_BUILD_TESTS)
 
     # Stand still + 10 ms state shift
     humoto_define_test(${HUMOTO_MODULE} "004" "qpOASES;config_yaml")
+
+    # testing active set handling, multiple solvers
+    humoto_define_test(${HUMOTO_MODULE} "005" "qpOASES;config_yaml" "lexls")
 endif()
 
 if (HUMOTO_BUILD_REGRESSION_TESTS)
     # Circular motion
     humoto_define_regression_test(${HUMOTO_MODULE} "000" "config_yaml" "QuadProgpp;qpOASES;qpmad")
+
+    # Active set handling
+    humoto_define_regression_test(${HUMOTO_MODULE} "001" "qpOASES;config_yaml" "lexls")
 endif()

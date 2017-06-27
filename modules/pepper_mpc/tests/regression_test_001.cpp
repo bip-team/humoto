@@ -13,13 +13,17 @@
 
 #define HUMOTO_GLOBAL_LOGGER_ENABLED
 
-// common & abstract classes (must be first)
+// Enable YAML configuration files (must be first)
+#include "humoto/config_yaml.h"
+// common & abstract classes
 #include "humoto/humoto.h"
 // specific solver (many can be included simultaneously)
+#ifdef HUMOTO_BRIDGE_lexls
 #include "humoto/lexls.h"
+#endif
 #include "humoto/qpoases.h"
 // specific control problem (many can be included simultaneously)
-#include "humoto/wpg04.h"
+#include "humoto/pepper_mpc.h"
 
 //testing
 #include "gtest/gtest.h"
@@ -31,49 +35,72 @@ HUMOTO_INITIALIZE_GLOBAL_LOGGER(std::cout);
 
 namespace humoto_tests
 {
-    namespace wpg04
+    namespace pepper_mpc
     {
         class TestFixture : public ::testing::Test
         {
             protected:
                 TestFixture()
                 {
-                    setupHierarchy_v5(opt_problem);
+                    robot_parameters.readConfig(g_config_path + "robot_parameters.yaml");
+                    mg_parameters.readConfig(g_config_path + "mpc_parameters.yaml");
+                    motion_parameters.readConfig(g_config_path + "motion_parameters_circle_fast.yaml");
+                    model_state.readConfig(g_config_path + "initial_state_pepper.yaml");
+                    model.updateState(model_state);
+
+
+                    switch (motion_parameters.motion_mode_)
+                    {
+                        case humoto::pepper_mpc::MotionMode::MAINTAIN_POSITION:
+                            opt_problem.readConfig(g_config_path + "hierarchies.yaml", true, "Hierarchy01");
+                            break;
+                        case humoto::pepper_mpc::MotionMode::MAINTAIN_VELOCITY:
+                            opt_problem.readConfig(g_config_path + "hierarchies.yaml", true, "Hierarchy00");
+                            break;
+                        default:
+                            HUMOTO_THROW_MSG("Unsupported motion mode.");
+                    }
                 }
 
 
                 // optimization problem (a stack of tasks / hierarchy)
-                humoto::OptimizationProblem               opt_problem;
+                humoto::pepper_mpc::ConfigurableOptimizationProblem     opt_problem;
                 // a solver which is giong to be used
                 humoto::qpoases::Solver                   qpoases_solver;
+#ifdef HUMOTO_BRIDGE_lexls
                 humoto::lexls::Solver                   lexls_solver;
-
+#endif
 
                 // solution
                 humoto::qpoases::Solution               qpoases_solution;
+#ifdef HUMOTO_BRIDGE_lexls
                 humoto::lexls::Solution                 lexls_solution;
+#endif
 
+
+                // parameters of the control problem
+                humoto::pepper_mpc::MPCParameters           mg_parameters;
+                // control problem, which is used to construct an optimization problem
+                humoto::pepper_mpc::MPCforMG                mg;
+                // model representing the controlled system
+                humoto::pepper_mpc::RobotParameters         robot_parameters;
+                humoto::pepper_mpc::Model                   model;
 
                 // options for walking
-                humoto::wpg04::WalkParameters             walk_parameters;
-                //FSM for walking
-                humoto::walking::StanceFiniteStateMachine stance_fsm;
-                // model representing the controlled system
-                humoto::wpg04::Model                      model;
-                // parameters of the control problem
-                humoto::wpg04::MPCParameters              wpg_parameters;
-                // control problem, which is used to construct an optimization problem
-                humoto::wpg04::MPCforWPG                  wpg;
-                humoto::wpg04::ModelState                 model_state;
+                humoto::pepper_mpc::MotionParameters        motion_parameters;
+
+                humoto::pepper_mpc::ModelState              model_state;
 
 
                 humoto::ActiveSet qpoases_active_set_actual;
                 humoto::ActiveSet qpoases_active_set_determined;
                 humoto::Violations  qpoases_violations;
 
+#ifdef HUMOTO_BRIDGE_lexls
                 humoto::ActiveSet lexls_active_set_actual;
                 humoto::ActiveSet lexls_active_set_determined;
                 humoto::Violations  lexls_violations;
+#endif
 
 
                 /**
@@ -88,24 +115,32 @@ namespace humoto_tests
                     for (unsigned int i = 0;; ++i)
                     {
                         // prepare control problem for new iteration
-                        if (wpg.update(model, stance_fsm, walk_parameters) != humoto::ControlProblemStatus::OK)
+                        if (mg.updateAndShift(  motion_parameters,
+                                                model,
+                                                mg_parameters.sampling_time_ms_) != humoto::ControlProblemStatus::OK)
                         {
                             break;
                         }
 
                         // form an optimization problem
-                        opt_problem.form(qpoases_solution, model, wpg);
-                        wpg.initSolutionStructure(lexls_solution);
+                        opt_problem.form(qpoases_solution, model, mg);
+#ifdef HUMOTO_BRIDGE_lexls
+                        mg.initSolutionStructure(lexls_solution);
+#endif
 
                         // solve an optimization problem
                         qpoases_solver.solve(qpoases_solution, qpoases_active_set_actual, opt_problem);
+#ifdef HUMOTO_BRIDGE_lexls
                         lexls_solver.solve(lexls_solution, lexls_active_set_actual, opt_problem);
+#endif
 
                         opt_problem.determineActiveSet(qpoases_active_set_determined, qpoases_solution);
                         opt_problem.computeViolations(qpoases_violations, qpoases_solution);
 
+#ifdef HUMOTO_BRIDGE_lexls
                         opt_problem.determineActiveSet(lexls_active_set_determined, lexls_solution);
                         opt_problem.computeViolations(lexls_violations, lexls_solution);
+#endif
 
 
                         //========================
@@ -115,33 +150,43 @@ namespace humoto_tests
                             {
                                 if (qpoases_active_set_determined[l][k] != qpoases_active_set_actual[l][k])
                                 {
-                                    if (!(qpoases_active_set_determined[l][k] == humoto::ConstraintActivationType::EQUALITY)
-                                        && (qpoases_active_set_actual[l][k] ==  humoto::ConstraintActivationType::LOWER_BOUND))
+                                    if (
+                                        ! ( (qpoases_active_set_determined[l][k] == humoto::ConstraintActivationType::EQUALITY)
+                                        && (qpoases_active_set_actual[l][k] ==  humoto::ConstraintActivationType::LOWER_BOUND) )
+                                        )
                                     {
-                                        if ((qpoases_active_set_actual[l][k] == humoto::ConstraintActivationType::LOWER_BOUND)
-                                            && (std::abs(qpoases_violations[l].getLower(k)) < 1e-12))
+                                        switch (qpoases_active_set_actual[l][k])
                                         {
-                                            if ((qpoases_active_set_actual[l][k] == humoto::ConstraintActivationType::UPPER_BOUND)
-                                                && (std::abs(qpoases_violations[l].getUpper(k)) < 1e-12))
-                                            {
+                                            case humoto::ConstraintActivationType::LOWER_BOUND:
+                                                if (std::abs(qpoases_violations[l].getLower(k)) < 1e-10)
+                                                {
+                                                    break;
+                                                }
+                                            case humoto::ConstraintActivationType::UPPER_BOUND:
+                                                if (std::abs(qpoases_violations[l].getUpper(k)) < 1e-10)
+                                                {
+                                                    break;
+                                                }
+                                            default:
                                                 ++mismatch_count;
-                                            }
+                                                break;
                                         }
                                     }
                                 }
 
+#ifdef HUMOTO_BRIDGE_lexls
                                 if (lexls_active_set_determined[l][k] != lexls_active_set_actual[l][k])
                                 {
                                     ++mismatch_count;
                                 }
+#endif
                             }
                         }
                         //========================
 
 
                         // extract next model state from the solution and update model
-                        stance_fsm.shiftTime(wpg_parameters.sampling_time_ms_);
-                        model_state = wpg.getNextModelState(qpoases_solution, stance_fsm, model);
+                        model_state = mg.getNextModelState(qpoases_solution, model);
                         model.updateState(model_state);
                     }
 
@@ -160,16 +205,4 @@ namespace humoto_tests
 }
 
 
-/**
- * @brief main
- *
- * @param[in] argc number of args
- * @param[in] argv args
- *
- * @return status
- */
-int main(int argc, char **argv)
-{
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}
+HUMOTO_DEFINE_REGRESSION_TEST_MAIN()

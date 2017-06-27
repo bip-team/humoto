@@ -282,7 +282,7 @@ namespace humoto
              * @param[in] hierarchy
              */
             virtual void getActiveSet(  humoto::ActiveSet                   &active_set,
-                                        const humoto::OptimizationProblem   &hierarchy) const = 0;
+                                        const humoto::OptimizationProblem   &hierarchy) = 0;
 
         public:
             using t_Solver::solve;
