@@ -44,7 +44,7 @@ namespace humoto_tests
                     {
                         robot_parameters_.readConfig (config_path + "robot_parameters.yaml");
                         mg_parameters_.readConfig    (config_path + "mpc_parameters.yaml");
-                        motion_parameters_.readConfig(config_path + "motion_parameters_circle.yaml");
+                        motion_parameters_.readConfig(config_path + "motion_parameters_circle_fast.yaml");
                         model_state_.readConfig      (config_path + "initial_state_pepper.yaml");
 
                         model_.updateState(model_state_);
