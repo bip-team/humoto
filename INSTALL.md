@@ -23,6 +23,7 @@ System dependencies
 
 
 <br />
+
 Dependencies which are fetched, compiled and installed by humoto
 ----------------------------------------------------------------
 
@@ -38,6 +39,7 @@ avoid conflicts.
 | googletest    | tests                     | optional                                  | 3-clause BSD          |
 | qpOASES       | QP solver                 | optional                                  | LGPL 2.1              |
 | QuadProgpp    | QP solver                 | optional                                  | MIT                   |
+| qpmad         | QP solver                 | optional                                  | Apache 2.0            |
 | LexLS         | hierarchical solver       | not distributed                           | non-public software   |
 | eiQuadProg    | QP solver                 | not distributed                           | GPL                   |
 
@@ -47,6 +49,7 @@ avoid conflicts.
 
 
 <br />
+
 Dependencies included in the main distribution
 ----------------------------------------------
 
@@ -68,6 +71,7 @@ Dependencies included in the main distribution
 
 
 <br />
+
 Compilation & installation
 --------------------------
 
