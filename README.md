@@ -43,14 +43,16 @@ Learning Humoto     {#md_readme_learn}
 
 The framework is distributed with two kinds of documentation:
 
-* [PDF manual](./humoto_doc.pdf) overviews the main concepts and contains
-  mathematical derivations. If the precompiled version is not available, you
-  have to go to '`doc/latex`' and execute '`make`' to compile it.
+* [PDF manual](https://bip-team.github.io/humoto/humoto_doc.pdf) overviews the
+  main concepts and contains mathematical derivations. If the precompiled
+  version is not available, you have to go to '`doc/latex`' and execute
+  '`make`' to compile it.
 
 * Doxygen documentation for developers which incorporates a number of files in
   `markdown` format stored in the root and '`doc`' directories. It can be
   compiled by calling '`make`' in '`doc/doxygen`' folder.
 
+Precompiled documentation is available at https://bip-team.github.io/humoto/.
 
 The first step is to read the introductory chapter of LaTeX documentation,
 then, depending on your interests, you may
