@@ -46,10 +46,10 @@ namespace humoto
                         I[i]     = loc_var.offset_ + i;
                     }
 
-                    lb =    model.constraints_.joint_position_bounds_min_.segment(loc_var.offset_, loc_var.length_)
+                    lb =    model.constraints_.joint_position_bounds_min_
                             -
                             model.getState().joint_angles_;
-                    ub =    model.constraints_.joint_position_bounds_max_.segment(loc_var.offset_, loc_var.length_)
+                    ub =    model.constraints_.joint_position_bounds_max_
                             -
                             model.getState().joint_angles_;
                 }
