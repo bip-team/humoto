@@ -214,8 +214,8 @@ namespace humoto
              * @param[in] shift_size shift size
              * @param[in] type       type of the trailing elements
              */
-            void shift(const std::size_t shift_size,
-            const ConstraintActivationType::Type type)
+            void shift( const std::size_t shift_size,
+                        const ConstraintActivationType::Type type)
             {
                 HUMOTO_ASSERT(  shift_size < size(),
                                 "Shift size exceeded size of the active set.");
@@ -227,6 +227,32 @@ namespace humoto
                 std::fill(  data_.begin() + (size() - shift_size),
                             data_.end(),
                             type);
+            }
+
+
+            /**
+             * @brief Returns number of active inequality constraints.
+             *
+             * @return number of active inequality constraints.
+             */
+            std::size_t     countActiveInequalities() const
+            {
+                std::size_t num_activated_inequalities = 0;
+
+                for (std::size_t i = 0; i < data_.size(); ++i)
+                {
+                    switch (data_[i])
+                    {
+                        case ConstraintActivationType::LOWER_BOUND:
+                        case ConstraintActivationType::UPPER_BOUND:
+                            ++num_activated_inequalities;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                return(num_activated_inequalities);
             }
 
 
