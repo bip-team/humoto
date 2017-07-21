@@ -63,6 +63,10 @@ namespace humoto
                     {
                         return (humoto::TaskSharedPointer(new humoto::pepper_ik::TaskTagAngularVelocity<t_features>));
                     }
+                    if (string_id == "TaskTagCompleteVelocity")
+                    {
+                        return (humoto::TaskSharedPointer(new humoto::pepper_ik::TaskTagCompleteVelocity<t_features>));
+                    }
 
                     return(humoto::ConfigurableOptimizationProblem::getTask(string_id));
                 }

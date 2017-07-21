@@ -19,7 +19,6 @@
 // common & abstract classes
 #include "humoto/humoto.h"
 // specific solver (many can be included simultaneously)
-#include "humoto/kktsolver.h"
 #include "humoto/qpoases.h"
 // specific control problem (many can be included simultaneously)
 #include "humoto/pepper_mpc.h"
@@ -32,12 +31,12 @@
 HUMOTO_INITIALIZE_GLOBAL_LOGGER(std::cout);
 
 /**
- * @param[in, out] head_angular_velocities
+ * @param[in, out] head_complete_velocity
  * @param[in]      filename
  *
  * @brief          Read velocity log file from pepper-visual-servoing and get head angular velocity
  */
-void readVelocityFromFile(std::vector<etools::Vector3>& head_angular_velocities, const char* filename)
+void readCompleteVelocityFromFile(std::vector<etools::Vector6>& head_complete_velocity, const char* filename)
 {
     std::ifstream input_file(filename);
     std::string line;
@@ -53,19 +52,15 @@ void readVelocityFromFile(std::vector<etools::Vector3>& head_angular_velocities,
 
         line.erase(std::remove(line.begin(), line.end(), ','), line.end());
         std::istringstream stream(line);
-        etools::Vector3    inner_vector;
+        etools::Vector6    inner_vector;
         double value;
-        int i = -1;
+        int i = 0;
         while(stream >> value)
         {
+            inner_vector(i) = value;
             i++;
-            if(i < 3)
-            {
-                continue;
-            }
-            inner_vector(i - 3) = value;
         }
-        head_angular_velocities.push_back(inner_vector);
+        head_complete_velocity.push_back(inner_vector);
     }
 }
 
@@ -96,10 +91,9 @@ int main(int argc, char **argv)
         ik_opt_problem.readConfig(config_reader, true, "IKOptimizationProblem");
 
         // parameters of the solver
-        humoto::kktsolver::SolverParameters   ik_solver_parameters;
-        //ik_solver_parameters.solution_method_ = humoto::kktsolver::SolverParameters::CONSTRAINT_ELIMINATION_LLT;
+        humoto::qpoases::SolverParameters   ik_solver_parameters;
         // a solver which is giong to be used
-        humoto::kktsolver::Solver             ik_solver(ik_solver_parameters);
+        humoto::qpoases::Solver             ik_solver(ik_solver_parameters);
 
         // solution
         humoto::Solution                                       ik_solution;
@@ -150,15 +144,15 @@ int main(int argc, char **argv)
 
         // -------------------read head motion from file --------------
         
-        std::vector<etools::Vector3> head_angular_velocities;
-        readVelocityFromFile(head_angular_velocities, "velocity-log.m");
-        etools::Vector3 velocity;
+        std::vector<etools::Vector6> head_complete_velocity;
+        readCompleteVelocityFromFile(head_complete_velocity, "velocity-log.m");
+        etools::Vector6 velocity;
         
         // -------------------read head motion from file --------------
 
         for(std::size_t i = 0;; ++i)
         {
-            if(head_angular_velocities.empty())
+            if(head_complete_velocity.empty())
             {
                 break;
             }
@@ -232,23 +226,22 @@ int main(int argc, char **argv)
             //mpc_model_state.log(logger, prefix, "next_state");
             //logger.log(humoto::LogEntryName(prefix).add("next_cop"), mpc_model.getCoP(mpc_model_state));
 
-            // ---------------- decay velocity ----------    
+            // ---------------- set tag velocity ----------    
 
-            //update tag angular velocity - decay velocity
+            //update tag velocity
             if(!(i % 10))
             {
                 std::cout << i << std::endl;
-                velocity = head_angular_velocities.front();
-                ik_wbc.setTagRefAngularVelocity(velocity);
-                head_angular_velocities.erase(head_angular_velocities.begin());
+                velocity = head_complete_velocity.front();
+                ik_wbc.setTagRefVelocity(velocity);
+                head_complete_velocity.erase(head_complete_velocity.begin());
             }
             else
             {
-                velocity = 0.01 * velocity;
-                ik_wbc.setTagRefAngularVelocity(velocity);
+                ik_wbc.setTagRefVelocity(velocity);
             }
             
-            // ---------------- decay velocity ----------    
+            // ---------------- set tag velocity ----------    
 
             //ik_model.log(logger, prefix);
             //HUMOTO_LOG_RAW("===================");

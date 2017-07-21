@@ -465,6 +465,19 @@ namespace humoto
                 {
                     return (rbdl_model_.getTagOrientation(tag));
                 }
+                
+                
+                /**
+                 * @brief Get tag position.
+                 *
+                 * @param[in] tag
+                 *
+                 * @return position vector
+                 */
+                etools::Vector3 getTagPosition(const rbdl::TagLinkPtr  tag) const
+                {
+                    return (rbdl_model_.getTagPosition(tag));
+                }
 
 
                 /**
@@ -477,6 +490,19 @@ namespace humoto
                                                 const rbdl::TagLinkPtr  tag) const
                 {
                     rbdl_model_.getTagJacobian<rbdl::SpatialType::ROTATION>(jacobian, tag);
+                }
+                
+                
+                /**
+                 * @brief Get tag complete Jacobian
+                 *
+                 * @param[out] jacobian
+                 * @param[in] tag
+                 */
+                void getTagCompleteJacobian( Eigen::MatrixXd &jacobian,
+                                             const rbdl::TagLinkPtr  tag) const
+                {
+                    rbdl_model_.getTagJacobian<rbdl::SpatialType::COMPLETE>(jacobian, tag);
                 }
 
 

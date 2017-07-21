@@ -28,29 +28,29 @@ namespace humoto
 
             public:
                 humoto::pepper_ik::MotionParameters motion_parameters_;
-                etools::Vector3                     tag_angular_velocity_;
+                etools::Vector6                     tag_velocity_;
 
 
             public:
                 /**
-                 * @brief Get tag angular velocity
+                 * @brief Get tag velocity
                  *
-                 * @return Tag angular velocity
+                 * @return Tag velocity
                  */
-                const etools::Vector3& getTagRefAngularVelocity() const
+                const etools::Vector6& getTagRefVelocity() const
                 {
-                    return(tag_angular_velocity_);
+                    return(tag_velocity_);
                 }
                 
                 
                 /**
-                 * @brief Set tag angular velocity
+                 * @brief Set tag velocity
                  */
-                void setTagRefAngularVelocity(const etools::Vector3& tag_angular_velocity)
+                void setTagRefVelocity(const etools::Vector6& tag_velocity)
                 {
-                    tag_angular_velocity_ = tag_angular_velocity;
+                    tag_velocity_ = tag_velocity;
                 }
-
+                
 
                 /**
                  * @brief Constructor
@@ -71,7 +71,7 @@ namespace humoto
                  */
                 ControlProblemStatus::Status
                     update( humoto::pepper_ik::Model<t_features>          &model,
-                            const humoto::pepper_ik::MotionParameters           &motion_parameters)
+                            const humoto::pepper_ik::MotionParameters     &motion_parameters)
                 {
                     humoto::ControlProblemStatus::Status    control_status = ControlProblemStatus::OK;
                     solution_is_parsed_ = false;

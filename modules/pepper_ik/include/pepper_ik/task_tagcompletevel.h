@@ -14,13 +14,13 @@ namespace humoto
     namespace pepper_ik
     {
         /**
-         * @brief Tag angular velocity
+         * @brief Tag complete velocity (translational and rotational)
          */
         template <int t_features>
-            class HUMOTO_LOCAL TaskTagAngularVelocity : public humoto::TaskAB
+            class HUMOTO_LOCAL TaskTagCompleteVelocity : public humoto::TaskAB
         {
             protected:
-                double           k_angular_velocity_gain_;
+                double           k_complete_velocity_gain_;
                 std::string      tag_string_id_;
 
                 rbdl::TagLinkPtr tag_;
@@ -29,7 +29,7 @@ namespace humoto
             protected:
                 #define HUMOTO_CONFIG_ENTRIES \
                     HUMOTO_CONFIG_PARENT_CLASS(TaskAB); \
-                    HUMOTO_CONFIG_SCALAR_(k_angular_velocity_gain); \
+                    HUMOTO_CONFIG_SCALAR_(k_complete_velocity_gain); \
                     HUMOTO_CONFIG_SCALAR_(tag_string_id);
                 #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
@@ -37,7 +37,7 @@ namespace humoto
                 virtual void setDefaults()
                 {
                     TaskAB::setDefaults();
-                    k_angular_velocity_gain_ = 0.0;
+                    k_complete_velocity_gain_ = 0.0;
                 }
 
 
@@ -54,26 +54,26 @@ namespace humoto
                 {
                     LogEntryName subname = parent; subname.add(name);
                     TaskAB::logTask(logger, subname, "");
-                    logger.log(LogEntryName(subname).add("k_angular_velocity_gain"), k_angular_velocity_gain_);
-                    logger.log(LogEntryName(subname).add("tag_string_id"),           tag_string_id_);
+                    logger.log(LogEntryName(subname).add("k_complete_velocity_gain"), k_complete_velocity_gain_);
+                    logger.log(LogEntryName(subname).add("tag_string_id"),            tag_string_id_);
                 }
 
 
             public:
-                TaskTagAngularVelocity(const std::string& tag_string_id = "",
-                                       const double       gain = 1.0,
-                                       const double       k_angular_velocity_gain = 1.0)
-                    : TaskAB(std::string("TaskTagAngularVelocity_") + tag_string_id, gain)
+                TaskTagCompleteVelocity(const std::string& tag_string_id = "",
+                                        const double       gain = 1.0,
+                                        const double       k_complete_velocity_gain = 1.0)
+                    : TaskAB(std::string("TaskTagCompleteVelocity_") + tag_string_id, gain)
                 {
-                    k_angular_velocity_gain_ = k_angular_velocity_gain;
-                    tag_string_id_           = tag_string_id;
+                    k_complete_velocity_gain_ = k_complete_velocity_gain;
+                    tag_string_id_            = tag_string_id;
                 }
 
 
                 /// @copydoc humoto::TaskBase::form
                 void form(const humoto::SolutionStructure &sol_structure,
-                          const humoto::Model &model_base,
-                          const humoto::ControlProblem &control_problem)
+                          const humoto::Model             &model_base,
+                          const humoto::ControlProblem    &control_problem)
                 {
                     const Model<t_features>& model =
                         dynamic_cast <const Model<t_features>& >(model_base);
@@ -89,13 +89,21 @@ namespace humoto
                     Eigen::MatrixXd &A = getA();
                     Eigen::VectorXd &b = getB();
 
-                    model.getTagOrientationJacobian(A, tag_);
-                    
+                    model.getTagCompleteJacobian(A, tag_);
+
+                    b.resize(rbdl::SpatialType::getNumberOfElements(rbdl::SpatialType::COMPLETE));
+                   
+                    std::size_t linear_part  = rbdl::SpatialType::getNumberOfElements(rbdl::SpatialType::TRANSLATION);
                     std::size_t angular_part = rbdl::SpatialType::getNumberOfElements(rbdl::SpatialType::ROTATION);
 
-                    b.noalias() = k_angular_velocity_gain_
-                                    * model.getTagOrientation(tag_)
-                                    * wb_controller.getTagRefVelocity().tail(angular_part);
+                    b.head(angular_part) = model.getTagOrientation(tag_) * wb_controller.getTagRefVelocity().tail(angular_part);
+                    
+                    b.tail(linear_part)  = model.getTagPosition(tag_).cross(model.getTagOrientation(tag_)
+                                            * wb_controller.getTagRefVelocity().tail(angular_part))
+                                            + model.getTagOrientation(tag_) *
+                                            wb_controller.getTagRefVelocity().head(linear_part);
+                    
+                    b.noalias() = k_complete_velocity_gain_ * b;
 
                     if(!isApproximatelyEqual(1.0, getGain()))
                     {
