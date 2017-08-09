@@ -82,13 +82,13 @@ then, depending on your interests, you may
           [doc/howto_configurable.md](@ref md_howto_configurable)
 
 
-4. **develop** your own **module**
+4. **implement** your own **module**
 
     * you can start by cloning a template module from
         https://github.com/bip-team/humoto-module-template
 
 
-5. **develop** a **controller** using a humoto
+5. **develop** a **controller** for a robot using Humoto
 
     * you can take a look at the controller for Pepper robot at
         https://github.com/bip-team/humoto-controller-pepper
