@@ -27,26 +27,36 @@ namespace humoto
 
 
             public:
-                humoto::pepper_ik::MotionParameters motion_parameters_;
-                etools::Vector6                     tag_velocity_;
+                humoto::pepper_ik::MotionParameters    motion_parameters_;
+                std::map<std::string, etools::Vector6> tag_velocity_;
 
 
             public:
                 /**
                  * @brief Get tag velocity
                  *
-                 * @return Tag velocity
+                 * @param[in, out] tag_velocity
+                 * @param[in]      tag_name
                  */
-                const etools::Vector6& getTagRefVelocity() const
+                void getTagRefVelocity(etools::Vector6& tag_velocity, const std::string& tag_name) const
                 {
-                    return(tag_velocity_);
+                    if((tag_velocity_.find(tag_name) != tag_velocity_.end()))
+                    {
+                        tag_velocity = tag_velocity_.at(tag_name);
+                    }
+                    else
+                    {
+                        tag_velocity.setZero();
+                    }
                 }
                 
                 
                 /**
-                 * @brief Set tag velocity
+                 * @brief Set tag(s) velocity
+                 *
+                 * @param[in] tag_name
                  */
-                void setTagRefVelocity(const etools::Vector6& tag_velocity)
+                void setTagRefVelocity(const std::map<std::string, etools::Vector6>& tag_velocity)
                 {
                     tag_velocity_ = tag_velocity;
                 }

@@ -93,9 +93,12 @@ namespace humoto
                     
                     std::size_t angular_part = rbdl::SpatialType::getNumberOfElements(rbdl::SpatialType::ROTATION);
 
+                    etools::Vector6 tag_ref_velocity;
+                    wb_controller.getTagRefVelocity(tag_ref_velocity, tag_string_id_);
+                    
                     b.noalias() = k_angular_velocity_gain_
                                     * model.getTagOrientation(tag_)
-                                    * wb_controller.getTagRefVelocity().tail(angular_part);
+                                    * tag_ref_velocity.tail(angular_part);
 
                     if(!isApproximatelyEqual(1.0, getGain()))
                     {
