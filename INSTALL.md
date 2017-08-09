@@ -6,7 +6,7 @@ System dependencies
 
 - utilities
     - cmake
-    - git and/or SVN to fetch bridges (3-rd party software)
+    - git and/or SVN to fetch 3-rd party software
     - C++98 compatible compiler
 
 - libraries

@@ -10,7 +10,7 @@ Types of tasks          {#md_howto_tasks_types}
 Tasks are composed of two main elements
 
 > * body -- a matrix, which multiplies the vector of decision variables 'x';
-> * bounds -- a vector(s) which constraint result of multiplication of the body
+> * bounds -- a vector(s) which constrain result of multiplication of the body
 >   by 'x'.
 
 
