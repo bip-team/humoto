@@ -122,8 +122,8 @@ namespace humoto
              * @param[in] Ux        matrix Ux
              * @param[in] Uu        vector of Uu matrices
              */
-            template<std::ptrdiff_t t_num_vars,
-                     std::ptrdiff_t t_num_outputs,
+            template<int t_num_vars,
+                     int t_num_outputs,
                      typename t_DMatrix,
                      typename t_EMatrix>
             void condenseOutput(etools::GenericBlockMatrix<t_num_outputs, t_num_vars>                               &Ox,
@@ -203,9 +203,9 @@ namespace humoto
              * @param[in] Ux        matrix Ux
              * @param[in] Uu        matrix Uu
              */
-            template<std::ptrdiff_t t_num_vars,
-                     std::ptrdiff_t t_num_controls,
-                     std::ptrdiff_t t_num_outputs,
+            template<int t_num_vars,
+                     int t_num_controls,
+                     int t_num_outputs,
                      typename t_DMatrix,
                      typename t_EMatrix>
             void condenseOutput(etools::GenericBlockMatrix<t_num_outputs, t_num_vars>                       &Ox,
@@ -255,8 +255,8 @@ namespace humoto
              * @param[in] A
              * @param[in] B
              */
-            template<std::ptrdiff_t t_num_vars,
-                     std::ptrdiff_t t_num_controls,
+            template<int t_num_vars,
+                     int t_num_controls,
                      typename t_AMatrix,
                      typename t_BMatrix,
                      etools::MatrixSparsityType::Type t_bmatrix_sparsity_type>

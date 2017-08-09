@@ -102,8 +102,8 @@ namespace etools
      * @tparam t_block_cols_num number of columns in one block
      */
     template<   typename t_MatrixType,
-                std::ptrdiff_t t_block_rows_num,
-                std::ptrdiff_t t_block_cols_num>
+                int t_block_rows_num,
+                int t_block_cols_num>
     class EIGENTOOLS_VISIBILITY_ATTRIBUTE BlockMatrixAccessBase
     {
         public:
@@ -540,8 +540,8 @@ namespace etools
      * @tparam t_block_cols_num number of columns in one block
      */
     template<   typename t_MatrixType,
-                std::ptrdiff_t t_block_rows_num,
-                std::ptrdiff_t t_block_cols_num>
+                int t_block_rows_num,
+                int t_block_cols_num>
     class EIGENTOOLS_VISIBILITY_ATTRIBUTE BlockMatrixSizeSpecificBase : public EIGENTOOLS_PARENT_CLASS_SHORTHAND
     {
         public:
@@ -842,8 +842,8 @@ namespace etools
      * @tparam t_sparsity_type  sparsity type
      */
     template<   typename t_MatrixType,
-                std::ptrdiff_t t_block_rows_num,
-                std::ptrdiff_t t_block_cols_num,
+                int t_block_rows_num,
+                int t_block_cols_num,
                 MatrixSparsityType::Type t_sparsity_type>
     class EIGENTOOLS_VISIBILITY_ATTRIBUTE BlockMatrixBase : public EIGENTOOLS_PARENT_CLASS_SHORTHAND
     {
@@ -886,8 +886,8 @@ namespace etools
      * @tparam t_sparsity_type  sparsity type
      */
     template<   typename t_MatrixType,
-                std::ptrdiff_t t_block_rows_num,
-                std::ptrdiff_t t_block_cols_num >
+                int t_block_rows_num,
+                int t_block_cols_num >
     class EIGENTOOLS_VISIBILITY_ATTRIBUTE BlockMatrixBase<  t_MatrixType,
                                                             t_block_rows_num,
                                                             t_block_cols_num,
@@ -973,8 +973,8 @@ namespace etools
              * @param[in] rhs       right hand side
              */
             template<   typename t_MatrixType_in,
-                        std::ptrdiff_t t_block_rows_num_in,
-                        std::ptrdiff_t t_block_cols_num_in,
+                        int t_block_rows_num_in,
+                        int t_block_cols_num_in,
                         MatrixSparsityType::Type t_sparsity_type_in,
                         class t_DerivedOutput>
                 void multiplyRight (Eigen::PlainObjectBase<t_DerivedOutput>         & result,
@@ -1018,8 +1018,8 @@ namespace etools
      * @tparam t_sparsity_type  sparsity type
      */
     template<   typename t_MatrixType,
-                std::ptrdiff_t t_block_rows_num,
-                std::ptrdiff_t t_block_cols_num >
+                int t_block_rows_num,
+                int t_block_cols_num >
     class EIGENTOOLS_VISIBILITY_ATTRIBUTE BlockMatrixBase<  t_MatrixType,
                                                             t_block_rows_num,
                                                             t_block_cols_num,
@@ -1183,8 +1183,8 @@ namespace etools
      * @return result of multiplication
      */
     template<   typename t_MatrixType,
-                std::ptrdiff_t t_block_rows_num,
-                std::ptrdiff_t t_block_cols_num,
+                int t_block_rows_num,
+                int t_block_cols_num,
                 MatrixSparsityType::Type t_sparsity_type,
                 class t_Derived>
         EIGENTOOLS_DYNAMIC_MATRIX( typename TypeDecayed<t_MatrixType>::Type::Scalar )
@@ -1220,8 +1220,8 @@ namespace etools
      */
     template<   class t_Derived,
                 typename t_MatrixType,
-                std::ptrdiff_t t_block_rows_num,
-                std::ptrdiff_t t_block_cols_num,
+                int t_block_rows_num,
+                int t_block_cols_num,
                 MatrixSparsityType::Type t_sparsity_type,
                 int t_rows_in,
                 int t_cols_in>
@@ -1259,11 +1259,11 @@ namespace etools
      * @return result of multiplication
      */
     template<   typename t_left_MatrixType,
-                std::ptrdiff_t t_left_block_rows_num,
-                std::ptrdiff_t t_left_block_cols_num,
+                int t_left_block_rows_num,
+                int t_left_block_cols_num,
                 MatrixSparsityType::Type t_left_sparsity_type,
                 typename t_right_MatrixType,
-                std::ptrdiff_t t_right_block_cols_num>
+                int t_right_block_cols_num>
         EIGENTOOLS_DYNAMIC_MATRIX( typename TypeDecayed<t_left_MatrixType>::Type::Scalar )
         EIGENTOOLS_VISIBILITY_ATTRIBUTE
             operator* ( const BlockMatrixBase<  t_left_MatrixType,
@@ -1300,11 +1300,11 @@ namespace etools
      * @return result of multiplication
      */
     template<   typename t_left_MatrixType,
-                std::ptrdiff_t t_left_block_rows_num,
-                std::ptrdiff_t t_left_block_cols_num,
+                int t_left_block_rows_num,
+                int t_left_block_cols_num,
                 MatrixSparsityType::Type t_left_sparsity_type,
                 typename t_right_MatrixType,
-                std::ptrdiff_t t_right_block_cols_num,
+                int t_right_block_cols_num,
                 MatrixSparsityType::Type t_right_sparsity_type>
         EIGENTOOLS_DYNAMIC_MATRIX( typename TypeDecayed<t_left_MatrixType>::Type::Scalar )
         EIGENTOOLS_VISIBILITY_ATTRIBUTE

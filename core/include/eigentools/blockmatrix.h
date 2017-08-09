@@ -19,8 +19,8 @@
 namespace etools
 {
 #define EIGENTOOLS_CODE_GENERATOR(ClassName, MatrixType) \
-        template<   std::ptrdiff_t t_block_rows_num, \
-                    std::ptrdiff_t t_block_cols_num, \
+        template<   int t_block_rows_num, \
+                    int t_block_cols_num, \
                     MatrixSparsityType::Type t_sparsity_type> \
             class EIGENTOOLS_VISIBILITY_ATTRIBUTE ClassName : \
                 public BlockMatrixBase<MatrixType, t_block_rows_num, t_block_cols_num, t_sparsity_type> \
@@ -56,8 +56,8 @@ namespace etools
 
 
 #define EIGENTOOLS_CODE_GENERATOR(class_name, sparsity_type) \
-        template<   std::ptrdiff_t t_block_rows_num,\
-                    std::ptrdiff_t t_block_cols_num>\
+        template<   int t_block_rows_num,\
+                    int t_block_cols_num>\
             class EIGENTOOLS_VISIBILITY_ATTRIBUTE class_name \
                 : public BlockKroneckerProductBase< const DefaultDynamicMatrix &, \
                                                     t_block_rows_num, \
@@ -110,8 +110,8 @@ namespace etools
     template<   typename t_Scalar,
                 int t_alignment,
                 class t_Stride,
-                std::ptrdiff_t t_block_rows_num,
-                std::ptrdiff_t t_block_cols_num,
+                int t_block_rows_num,
+                int t_block_cols_num,
                 MatrixSparsityType::Type t_sparsity_type>
         class EIGENTOOLS_VISIBILITY_ATTRIBUTE BlockMatrixMap : public EIGENTOOLS_PARENT_CLASS_SHORTHAND
     {
@@ -172,8 +172,8 @@ namespace etools
      * @tparam t_block_cols_num number of columns in one block
      * @tparam t_sparsity_type  sparsity type
      */
-    template<   std::ptrdiff_t t_block_rows_num,
-                std::ptrdiff_t t_block_cols_num,
+    template<   int t_block_rows_num,
+                int t_block_cols_num,
                 MatrixSparsityType::Type t_sparsity_type>
     class EIGENTOOLS_VISIBILITY_ATTRIBUTE BlockMatrix : public EIGENTOOLS_PARENT_CLASS_SHORTHAND
     {
@@ -240,8 +240,8 @@ namespace etools
     // ===========================================================================
 
 #define EIGENTOOLS_CODE_GENERATOR(class_name, sparsity_type) \
-        template<   std::ptrdiff_t t_block_rows_num,\
-                    std::ptrdiff_t t_block_cols_num>\
+        template<   int t_block_rows_num,\
+                    int t_block_cols_num>\
         class EIGENTOOLS_VISIBILITY_ATTRIBUTE class_name : public BlockMatrix<t_block_rows_num, t_block_cols_num, sparsity_type> \
         {\
             public:\
