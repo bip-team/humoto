@@ -229,16 +229,18 @@ int main(int argc, char **argv)
             // ---------------- set tag velocity ----------    
 
             //update tag velocity
+            std::map<std::string, etools::Vector6> tag_velocity;
             if(!(i % 10))
             {
                 std::cout << i << std::endl;
                 velocity = head_complete_velocity.front();
-                ik_wbc.setTagRefVelocity(velocity);
+                tag_velocity["CameraTop_optical_frame"] = velocity;
+                ik_wbc.setTagRefVelocity(tag_velocity);
                 head_complete_velocity.erase(head_complete_velocity.begin());
             }
             else
             {
-                ik_wbc.setTagRefVelocity(velocity);
+                ik_wbc.setTagRefVelocity(tag_velocity);
             }
             
             // ---------------- set tag velocity ----------    
