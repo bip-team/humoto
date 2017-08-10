@@ -147,6 +147,7 @@ int main(int argc, char **argv)
         std::vector<etools::Vector6> head_complete_velocity;
         readCompleteVelocityFromFile(head_complete_velocity, "velocity-log.m");
         etools::Vector6 velocity;
+        std::map<std::string, etools::Vector6> tag_velocity;
         
         // -------------------read head motion from file --------------
 
@@ -229,7 +230,6 @@ int main(int argc, char **argv)
             // ---------------- set tag velocity ----------    
 
             //update tag velocity
-            std::map<std::string, etools::Vector6> tag_velocity;
             if(!(i % 10))
             {
                 std::cout << i << std::endl;
