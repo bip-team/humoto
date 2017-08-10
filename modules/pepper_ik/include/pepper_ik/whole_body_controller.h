@@ -54,7 +54,7 @@ namespace humoto
                 /**
                  * @brief Set tag(s) velocity
                  *
-                 * @param[in] tag_name
+                 * @param[in] tag_velocity
                  */
                 void setTagRefVelocity(const std::map<std::string, etools::Vector6>& tag_velocity)
                 {
