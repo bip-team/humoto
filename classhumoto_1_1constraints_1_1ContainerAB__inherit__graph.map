@@ -1,5 +1,0 @@
-<map id="humoto::constraints::ContainerAB" name="humoto::constraints::ContainerAB">
-<area shape="rect" id="node2" href="$classhumoto_1_1constraints_1_1BodyAMixin.html" title="{humoto::constraints\l::BodyAMixin\&lt; BoundsBMixin\l\&lt; ContainerBase \&gt; \&gt;\n|# A_\l|+ copyBodyTo()\l+ copyNegativeBodyTo()\l+ getA()\l+ getA()\l+ getNumberOfConstraints()\l+ getProduct()\l# BodyAMixin()\l# ~BodyAMixin()\l# addATA()\l# getATA()\l# logBody()\l# resetBody()\l}" alt="" coords="21,549,224,817"/>
-<area shape="rect" id="node3" href="$classhumoto_1_1constraints_1_1BoundsBMixin.html" title="{humoto::constraints\l::BoundsBMixin\&lt; ContainerBase \&gt;\n|# b_\l|+ copyBoundsTo()\l+ getB()\l+ getB()\l# BoundsBMixin()\l# ~BoundsBMixin()\l# copyEqualityBoundsTo()\l# logBounds()\l# resetBounds()\l}" alt="" coords="5,307,240,501"/>
-<area shape="rect" id="node4" href="$classhumoto_1_1constraints_1_1ContainerBase.html" title="Constraints abstract interface class. " alt="" coords="23,5,223,259"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="humoto::wpg03::Model" name="humoto::wpg03::Model">
-<area shape="rect" id="node2" href="$classhumoto_1_1wpg03_1_1PointMassModel6z.html" title="Point Mass Model with piece&#45;wise constant CoM jerk. " alt="" coords="5,1152,193,1420"/>
-<area shape="rect" id="node3" href="$classhumoto_1_1wpg03_1_1Robot.html" title="Class that defines the robot used in walking pattern generation. " alt="" coords="218,1159,421,1413"/>
-<area shape="rect" id="node4" href="$classhumoto_1_1wpg03_1_1RobotParameters.html" title="Parameters. " alt="" coords="203,997,435,1104"/>
-<area shape="rect" id="node5" href="$classhumoto_1_1walking_1_1RobotFootParameters.html" title="Parameters. " alt="" coords="218,505,421,949"/>
-<area shape="rect" id="node6" href="$classhumoto_1_1config_1_1StrictConfigurableBase.html" title="The same as humoto::config::RelaxedConfigurableBase, but requires all configuration entries to be set..." alt="" coords="205,365,434,457"/>
-<area shape="rect" id="node7" href="$classhumoto_1_1config_1_1CommonConfigurableBase.html" title="{humoto::config::CommonConfigurable\lBase\&lt; true \&gt;\n|# default_crash_on_missing\l_entry_\l|+ readConfig()\l+ readConfig()\l+ readNestedConfig()\l+ writeConfig()\l+ writeConfig()\l+ writeNestedConfig()\l# CommonConfigurableBase()\l# ~CommonConfigurableBase()\l# finalize()\l# getConfigSectionID()\l# setDefaults()\l# writeConfigEntries()\l# readConfigEntries()\l* writeConfigEntries()\l* readConfigEntries()\l}" alt="" coords="193,5,446,317"/>
-<area shape="rect" id="node8" href="$classhumoto_1_1Model.html" title="Instances of this class are passed to a virtual method &#39;humoto::TaskBase::form()&#39;, so even though this class is basically useless in its present form we cannot avoid its definition using a template. " alt="" coords="445,1218,567,1354"/>
-</map>

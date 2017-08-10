@@ -1,4 +1,0 @@
-<map id="etools::BlockMatrixBase&lt; t_MatrixType, t_block_rows_num, t_block_cols_num, MatrixSparsityType::LEFT_LOWER_TRIANGULAR &gt;" name="etools::BlockMatrixBase&lt; t_MatrixType, t_block_rows_num, t_block_cols_num, MatrixSparsityType::LEFT_LOWER_TRIANGULAR &gt;">
-<area shape="rect" id="node2" href="$classetools_1_1BlockMatrixSizeSpecificBase.html" title="Extra layer for handling of specific sizes of blocks using partial template specialization. " alt="" coords="5,453,239,663"/>
-<area shape="rect" id="node3" href="$classetools_1_1BlockMatrixAccessBase.html" title="Block matrix basic functions. " alt="" coords="5,5,239,405"/>
-</map>

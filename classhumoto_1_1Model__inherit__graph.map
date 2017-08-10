@@ -1,6 +1,0 @@
-<map id="humoto::Model" name="humoto::Model">
-<area shape="rect" id="node2" href="$classhumoto_1_1pepper__ik_1_1Model.html" title="Model. " alt="" coords="5,189,216,575"/>
-<area shape="rect" id="node3" href="$classhumoto_1_1pepper__mpc_1_1Model.html" title="{humoto::pepper_mpc\l::Model\n|+ current_base_position_\l+ robot_parameters_\l+ state_\l|+ Model()\l+ Model()\l+ EIGENTOOLS_CONSTANT\l_SIZE_VECTOR()\l+ getBaseHeight()\l+ getBaseMass()\l+ getBaseOrientation()\l+ getBaseState()\l+ getBodyHeight()\l+ getBodyMass()\l+ getBodyState()\land 13 more...\l&#45; finalize()\l}" alt="" coords="240,233,451,531"/>
-<area shape="rect" id="node4" href="$classhumoto_1_1wpg03_1_1Model.html" title="[initialize_model.m] " alt="" coords="475,299,682,465"/>
-<area shape="rect" id="node5" href="$classhumoto_1_1wpg04_1_1Model.html" title="[initialize_model.m] " alt="" coords="707,277,909,487"/>
-</map>

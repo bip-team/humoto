@@ -1,6 +1,0 @@
-<map id="humoto::rbdl::TagBase" name="humoto::rbdl::TagBase">
-<area shape="rect" id="node2" href="$classhumoto_1_1rbdl_1_1TagCoM.html" title="CoM tag. " alt="" coords="5,138,164,215"/>
-<area shape="rect" id="node3" href="$classhumoto_1_1rbdl_1_1TagLink.html" title="Link tag. " alt="" coords="189,138,343,215"/>
-<area shape="rect" id="node4" href="$classhumoto_1_1rbdl_1_1TagPartialCoM.html" title="Partial CoM tag (subset of links) " alt="" coords="368,131,567,223"/>
-<area shape="rect" id="node5" href="$classhumoto_1_1rbdl_1_1TagPoint.html" title="Link point tag. " alt="" coords="590,131,750,223"/>
-</map>

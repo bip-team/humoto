@@ -1,5 +1,0 @@
-<map id="humoto::pepper_ik::ModelDescriptionBase&lt; ModelFeatures::FIXED_WHEELS &gt;" name="humoto::pepper_ik::ModelDescriptionBase&lt; ModelFeatures::FIXED_WHEELS &gt;">
-<area shape="rect" id="node2" href="$classhumoto_1_1pepper__ik_1_1ModelDescription_3_01ModelFeatures_1_1FIXED__WHEELS_7ModelFeatures_1_1ROOT__PLANAR_01_4.html" title="Specific model description (planar root joint) " alt="" coords="5,307,268,575"/>
-<area shape="rect" id="node3" href="$classhumoto_1_1pepper__ik_1_1ModelDescription_3_01ModelFeatures_1_1FIXED__WHEELS_7ModelFeatures_1_1ROOT__TIBIA_01_4.html" title="Specific model description (relocated root) " alt="" coords="292,307,555,575"/>
-<area shape="rect" id="node4" href="$classhumoto_1_1pepper__ik_1_1ModelDescription_3_01ModelFeatures_1_1FIXED__WHEELS_7ModelFeatures_1_1ROOT__TORSO_01_4.html" title="Specific model description (default model) " alt="" coords="579,307,841,575"/>
-</map>

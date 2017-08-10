@@ -31,6 +31,7 @@ var searchData=
   ['task_5fjointsbounds_2eh',['task_jointsbounds.h',['../task__jointsbounds_8h.html',1,'']]],
   ['task_5fjointsref_2eh',['task_jointsref.h',['../task__jointsref_8h.html',1,'']]],
   ['task_5ftagangularvel_2eh',['task_tagangularvel.h',['../task__tagangularvel_8h.html',1,'']]],
+  ['task_5ftagcompletevel_2eh',['task_tagcompletevel.h',['../task__tagcompletevel_8h.html',1,'']]],
   ['task_5ftagorient_2eh',['task_tagorient.h',['../task__tagorient_8h.html',1,'']]],
   ['task_5fterminalconstraint_2eh',['task_terminalconstraint.h',['../task__terminalconstraint_8h.html',1,'']]],
   ['time_2eh',['time.h',['../time_8h.html',1,'']]],

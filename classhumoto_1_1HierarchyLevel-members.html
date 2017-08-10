@@ -82,7 +82,7 @@ $(function() {
   <tr class="even"><td class="entry"><a class="el" href="classhumoto_1_1HierarchyLevel.html#a09f0855aa54dfd4bdf541781b831ded4">getNumberOfInequalityConstraints</a>() const</td><td class="entry"><a class="el" href="classhumoto_1_1HierarchyLevel.html">humoto::HierarchyLevel</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="classhumoto_1_1HierarchyLevel.html#ab9acc9b622e1599908e2154548a8c888">getNumberOfSimpleConstraints</a>() const</td><td class="entry"><a class="el" href="classhumoto_1_1HierarchyLevel.html">humoto::HierarchyLevel</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classhumoto_1_1HierarchyLevel.html#ac66e6aa59a88b4e9d4a8ab26a066b4c3">getObjective</a>(Eigen::MatrixXd &amp;H, Eigen::VectorXd &amp;g) const</td><td class="entry"><a class="el" href="classhumoto_1_1HierarchyLevel.html">humoto::HierarchyLevel</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classhumoto_1_1HierarchyLevel.html#af969cc0df3512b2b7b1a4f68407cb500">getSimpleConstraints</a>(constraints::ContainerILU &amp;constraints, const humoto::SolutionStructure &amp;sol_structure) const</td><td class="entry"><a class="el" href="classhumoto_1_1HierarchyLevel.html">humoto::HierarchyLevel</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classhumoto_1_1HierarchyLevel.html#ae53f51b28165c62bc2bc291192389829">getSimpleConstraints</a>(constraints::ContainerILU &amp;constraints, Eigen::VectorXd &amp;lb, Eigen::VectorXd &amp;ub, const humoto::SolutionStructure &amp;sol_structure) const</td><td class="entry"><a class="el" href="classhumoto_1_1HierarchyLevel.html">humoto::HierarchyLevel</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classhumoto_1_1HierarchyLevel.html#a876599eb8157944d0c661695ab9eb103">guessActiveSet</a>(ActiveSetConstraints &amp;active_set) const</td><td class="entry"><a class="el" href="classhumoto_1_1HierarchyLevel.html">humoto::HierarchyLevel</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span></td></tr>
   <tr><td class="entry"><a class="el" href="classhumoto_1_1HierarchyLevel.html#a1c933b412de383bd0eff0eab0cdd09df">HierarchyLevel</a>()</td><td class="entry"><a class="el" href="classhumoto_1_1HierarchyLevel.html">humoto::HierarchyLevel</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classhumoto_1_1HierarchyLevel.html#a1281f10a73491ad3dcdd866aa60b135d">isEquality</a>() const</td><td class="entry"><a class="el" href="classhumoto_1_1HierarchyLevel.html">humoto::HierarchyLevel</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
@@ -100,7 +100,7 @@ $(function() {
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 19 2017 17:19:38 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 10 2017 18:11:40 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

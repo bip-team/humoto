@@ -107,9 +107,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a67dce8645334de9e0e18f810b81b1deb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhumoto_1_1pepper__ik_1_1GeneralizedCoordinates.html">humoto::pepper_ik::GeneralizedCoordinates</a>&lt; t_features &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html#a67dce8645334de9e0e18f810b81b1deb">getNextGeneralizedCoordinates</a> (const <a class="el" href="classhumoto_1_1pepper__ik_1_1Model.html">humoto::pepper_ik::Model</a>&lt; t_features &gt; &amp;model) const</td></tr>
 <tr class="memdesc:a67dce8645334de9e0e18f810b81b1deb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get next model state.  <a href="#a67dce8645334de9e0e18f810b81b1deb">More...</a><br /></td></tr>
 <tr class="separator:a67dce8645334de9e0e18f810b81b1deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84933bbc022f6bb7e36a9fec022b528e"><td class="memItemLeft" align="right" valign="top">const etools::Vector3 &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html#a84933bbc022f6bb7e36a9fec022b528e">getTagRefAngularVelocity</a> () const</td></tr>
-<tr class="memdesc:a84933bbc022f6bb7e36a9fec022b528e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get tag angular velocity.  <a href="#a84933bbc022f6bb7e36a9fec022b528e">More...</a><br /></td></tr>
-<tr class="separator:a84933bbc022f6bb7e36a9fec022b528e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5371a2572224112a1d1b0aa034283ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html#ac5371a2572224112a1d1b0aa034283ab">getTagRefVelocity</a> (etools::Vector6 &amp;tag_velocity, const std::string &amp;tag_name) const</td></tr>
+<tr class="memdesc:ac5371a2572224112a1d1b0aa034283ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get tag velocity.  <a href="#ac5371a2572224112a1d1b0aa034283ab">More...</a><br /></td></tr>
+<tr class="separator:ac5371a2572224112a1d1b0aa034283ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a102f2e3ebc431c2ac5ceca0a43cf0b42"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1ControlProblem.html#a102f2e3ebc431c2ac5ceca0a43cf0b42">guessSolution</a> (<a class="el" href="classhumoto_1_1Solution.html">Solution</a> &amp;solution_guess, const <a class="el" href="classhumoto_1_1Solution.html">Solution</a> &amp;old_solution) const</td></tr>
 <tr class="memdesc:a102f2e3ebc431c2ac5ceca0a43cf0b42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Guess solution.  <a href="#a102f2e3ebc431c2ac5ceca0a43cf0b42">More...</a><br /></td></tr>
 <tr class="separator:a102f2e3ebc431c2ac5ceca0a43cf0b42"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -122,9 +122,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a441bbf271ef578274dd1aa424eb09563"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html#a441bbf271ef578274dd1aa424eb09563">parseSolution</a> (const <a class="el" href="classhumoto_1_1Solution.html">humoto::Solution</a> &amp;solution)</td></tr>
 <tr class="memdesc:a441bbf271ef578274dd1aa424eb09563"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process solution.  <a href="#a441bbf271ef578274dd1aa424eb09563">More...</a><br /></td></tr>
 <tr class="separator:a441bbf271ef578274dd1aa424eb09563"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a064cf8cc11c98dd85ef7cf1b89b35f5a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html#a064cf8cc11c98dd85ef7cf1b89b35f5a">setTagRefAngularVelocity</a> (const etools::Vector3 tag_angular_velocity)</td></tr>
-<tr class="memdesc:a064cf8cc11c98dd85ef7cf1b89b35f5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set tag angular velocity.  <a href="#a064cf8cc11c98dd85ef7cf1b89b35f5a">More...</a><br /></td></tr>
-<tr class="separator:a064cf8cc11c98dd85ef7cf1b89b35f5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a898dc77af56c4d4e50f14211b050191e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html#a898dc77af56c4d4e50f14211b050191e">setTagRefVelocity</a> (const std::map&lt; std::string, etools::Vector6 &gt; &amp;tag_velocity)</td></tr>
+<tr class="memdesc:a898dc77af56c4d4e50f14211b050191e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set tag(s) velocity.  <a href="#a898dc77af56c4d4e50f14211b050191e">More...</a><br /></td></tr>
+<tr class="separator:a898dc77af56c4d4e50f14211b050191e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41497c2030d1d945e0900e77889af4dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhumoto_1_1ControlProblemStatus.html#aced9d1566269fc8fa611c0197207151a">ControlProblemStatus::Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html#a41497c2030d1d945e0900e77889af4dd">update</a> (<a class="el" href="classhumoto_1_1pepper__ik_1_1Model.html">humoto::pepper_ik::Model</a>&lt; t_features &gt; &amp;model, const <a class="el" href="classhumoto_1_1pepper__ik_1_1MotionParameters.html">humoto::pepper_ik::MotionParameters</a> &amp;motion_parameters)</td></tr>
 <tr class="memdesc:a41497c2030d1d945e0900e77889af4dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update control problem.  <a href="#a41497c2030d1d945e0900e77889af4dd">More...</a><br /></td></tr>
 <tr class="separator:a41497c2030d1d945e0900e77889af4dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,8 +133,8 @@ Public Member Functions</h2></td></tr>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ab55262586d5b3c85981d9746b94ddc48"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhumoto_1_1pepper__ik_1_1MotionParameters.html">humoto::pepper_ik::MotionParameters</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html#ab55262586d5b3c85981d9746b94ddc48">motion_parameters_</a></td></tr>
 <tr class="separator:ab55262586d5b3c85981d9746b94ddc48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ac761602f693c34343c407840a3de19"><td class="memItemLeft" align="right" valign="top">etools::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html#a3ac761602f693c34343c407840a3de19">tag_angular_velocity_</a></td></tr>
-<tr class="separator:a3ac761602f693c34343c407840a3de19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51e79a013eeb75b59e20f6552daa925e"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, etools::Vector6 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html#a51e79a013eeb75b59e20f6552daa925e">tag_velocity_</a></td></tr>
+<tr class="separator:a51e79a013eeb75b59e20f6552daa925e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -174,7 +174,7 @@ template&lt;int t_features&gt; </div>
 
 <p>Constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="whole__body__controller_8h_source.html#l00058">58</a> of file <a class="el" href="whole__body__controller_8h_source.html">whole_body_controller.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="whole__body__controller_8h_source.html#l00068">68</a> of file <a class="el" href="whole__body__controller_8h_source.html">whole_body_controller.h</a>.</p>
 
 </div>
 </div>
@@ -225,7 +225,7 @@ template&lt;int t_features&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>next model state. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="whole__body__controller_8h_source.html#l00110">110</a> of file <a class="el" href="whole__body__controller_8h_source.html">whole_body_controller.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="whole__body__controller_8h_source.html#l00120">120</a> of file <a class="el" href="whole__body__controller_8h_source.html">whole_body_controller.h</a>.</p>
 
 </div>
 </div>
@@ -264,12 +264,12 @@ template&lt;int t_features&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>next model state. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="whole__body__controller_8h_source.html#l00134">134</a> of file <a class="el" href="whole__body__controller_8h_source.html">whole_body_controller.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="whole__body__controller_8h_source.html#l00144">144</a> of file <a class="el" href="whole__body__controller_8h_source.html">whole_body_controller.h</a>.</p>
 
 </div>
 </div>
-<a id="a84933bbc022f6bb7e36a9fec022b528e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84933bbc022f6bb7e36a9fec022b528e">&#9670;&nbsp;</a></span>getTagRefAngularVelocity()</h2>
+<a id="ac5371a2572224112a1d1b0aa034283ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5371a2572224112a1d1b0aa034283ab">&#9670;&nbsp;</a></span>getTagRefVelocity()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -280,10 +280,21 @@ template&lt;int t_features&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const etools::Vector3&amp; <a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html">humoto::pepper_ik::WholeBodyController</a>&lt; t_features &gt;::getTagRefAngularVelocity </td>
+          <td class="memname">void <a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html">humoto::pepper_ik::WholeBodyController</a>&lt; t_features &gt;::getTagRefVelocity </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">etools::Vector6 &amp;&#160;</td>
+          <td class="paramname"><em>tag_velocity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>tag_name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
@@ -293,10 +304,16 @@ template&lt;int t_features&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Get tag angular velocity. </p>
-<dl class="section return"><dt>Returns</dt><dd>Tag angular velocity </dd></dl>
+<p>Get tag velocity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">tag_velocity</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tag_name</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="whole__body__controller_8h_source.html#l00040">40</a> of file <a class="el" href="whole__body__controller_8h_source.html">whole_body_controller.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="whole__body__controller_8h_source.html#l00041">41</a> of file <a class="el" href="whole__body__controller_8h_source.html">whole_body_controller.h</a>.</p>
 
 </div>
 </div>
@@ -441,7 +458,7 @@ template&lt;int t_features&gt; </div>
 
 <p>Implements <a class="el" href="classhumoto_1_1ControlProblem.html#ae786cb74f88a9e40a1bf05f5f6fd5b4c">humoto::ControlProblem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="whole__body__controller_8h_source.html#l00149">149</a> of file <a class="el" href="whole__body__controller_8h_source.html">whole_body_controller.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="whole__body__controller_8h_source.html#l00159">159</a> of file <a class="el" href="whole__body__controller_8h_source.html">whole_body_controller.h</a>.</p>
 
 </div>
 </div>
@@ -479,12 +496,12 @@ template&lt;int t_features&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="whole__body__controller_8h_source.html#l00095">95</a> of file <a class="el" href="whole__body__controller_8h_source.html">whole_body_controller.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="whole__body__controller_8h_source.html#l00105">105</a> of file <a class="el" href="whole__body__controller_8h_source.html">whole_body_controller.h</a>.</p>
 
 </div>
 </div>
-<a id="a064cf8cc11c98dd85ef7cf1b89b35f5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a064cf8cc11c98dd85ef7cf1b89b35f5a">&#9670;&nbsp;</a></span>setTagRefAngularVelocity()</h2>
+<a id="a898dc77af56c4d4e50f14211b050191e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a898dc77af56c4d4e50f14211b050191e">&#9670;&nbsp;</a></span>setTagRefVelocity()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -495,10 +512,10 @@ template&lt;int t_features&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html">humoto::pepper_ik::WholeBodyController</a>&lt; t_features &gt;::setTagRefAngularVelocity </td>
+          <td class="memname">void <a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html">humoto::pepper_ik::WholeBodyController</a>&lt; t_features &gt;::setTagRefVelocity </td>
           <td>(</td>
-          <td class="paramtype">const etools::Vector3&#160;</td>
-          <td class="paramname"><em>tag_angular_velocity</em></td><td>)</td>
+          <td class="paramtype">const std::map&lt; std::string, etools::Vector6 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>tag_velocity</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -509,9 +526,15 @@ template&lt;int t_features&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set tag angular velocity. </p>
+<p>Set tag(s) velocity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">tag_velocity</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="whole__body__controller_8h_source.html#l00049">49</a> of file <a class="el" href="whole__body__controller_8h_source.html">whole_body_controller.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="whole__body__controller_8h_source.html#l00059">59</a> of file <a class="el" href="whole__body__controller_8h_source.html">whole_body_controller.h</a>.</p>
 
 </div>
 </div>
@@ -561,7 +584,7 @@ template&lt;int t_features&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>ControlProblemStatus::OK/ControlProblemStatusSTOPPED </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="whole__body__controller_8h_source.html#l00073">73</a> of file <a class="el" href="whole__body__controller_8h_source.html">whole_body_controller.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="whole__body__controller_8h_source.html#l00083">83</a> of file <a class="el" href="whole__body__controller_8h_source.html">whole_body_controller.h</a>.</p>
 
 </div>
 </div>
@@ -634,8 +657,8 @@ template&lt;int t_features&gt; </div>
 
 </div>
 </div>
-<a id="a3ac761602f693c34343c407840a3de19"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ac761602f693c34343c407840a3de19">&#9670;&nbsp;</a></span>tag_angular_velocity_</h2>
+<a id="a51e79a013eeb75b59e20f6552daa925e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51e79a013eeb75b59e20f6552daa925e">&#9670;&nbsp;</a></span>tag_velocity_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -643,7 +666,7 @@ template&lt;int t_features&gt; </div>
 template&lt;int t_features&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">etools::Vector3 <a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html">humoto::pepper_ik::WholeBodyController</a>&lt; t_features &gt;::tag_angular_velocity_</td>
+          <td class="memname">std::map&lt;std::string, etools::Vector6&gt; <a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html">humoto::pepper_ik::WholeBodyController</a>&lt; t_features &gt;::tag_velocity_</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -658,7 +681,7 @@ template&lt;int t_features&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 19 2017 17:19:39 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 10 2017 18:11:41 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

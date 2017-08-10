@@ -1,6 +1,0 @@
-<map id="t_Solver" name="t_Solver">
-<area shape="rect" id="node2" href="$classhumoto_1_1QPSolverMixin.html" title="Mixin solver interface (QP solver) " alt="" coords="5,160,172,281"/>
-<area shape="rect" id="node3" href="$classhumoto_1_1SolverGuessActiveSetMixin.html" title="Mixin solver interface (active set guessing) " alt="" coords="197,131,421,311"/>
-<area shape="rect" id="node4" href="$classhumoto_1_1SolverGuessSolutionActiveSetMixin.html" title="Mixin solver interface (active set and solution guessing) " alt="" coords="445,131,655,311"/>
-<area shape="rect" id="node5" href="$classhumoto_1_1SolverGuessSolutionMixin.html" title="Mixin solver interface (solution guessing) " alt="" coords="680,153,895,289"/>
-</map>

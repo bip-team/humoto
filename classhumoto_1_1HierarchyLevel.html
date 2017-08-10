@@ -123,9 +123,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac66e6aa59a88b4e9d4a8ab26a066b4c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1HierarchyLevel.html#ac66e6aa59a88b4e9d4a8ab26a066b4c3">getObjective</a> (Eigen::MatrixXd &amp;H, Eigen::VectorXd &amp;g) const</td></tr>
 <tr class="memdesc:ac66e6aa59a88b4e9d4a8ab26a066b4c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Form objective of a QP.  <a href="#ac66e6aa59a88b4e9d4a8ab26a066b4c3">More...</a><br /></td></tr>
 <tr class="separator:ac66e6aa59a88b4e9d4a8ab26a066b4c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af969cc0df3512b2b7b1a4f68407cb500"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1HierarchyLevel.html#af969cc0df3512b2b7b1a4f68407cb500">getSimpleConstraints</a> (<a class="el" href="classhumoto_1_1constraints_1_1ContainerILU.html">constraints::ContainerILU</a> &amp;constraints, const <a class="el" href="classhumoto_1_1SolutionStructure.html">humoto::SolutionStructure</a> &amp;sol_structure) const</td></tr>
-<tr class="memdesc:af969cc0df3512b2b7b1a4f68407cb500"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates objective containing all simple constraints on this level.  <a href="#af969cc0df3512b2b7b1a4f68407cb500">More...</a><br /></td></tr>
-<tr class="separator:af969cc0df3512b2b7b1a4f68407cb500"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae53f51b28165c62bc2bc291192389829"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1HierarchyLevel.html#ae53f51b28165c62bc2bc291192389829">getSimpleConstraints</a> (<a class="el" href="classhumoto_1_1constraints_1_1ContainerILU.html">constraints::ContainerILU</a> &amp;constraints, Eigen::VectorXd &amp;lb, Eigen::VectorXd &amp;ub, const <a class="el" href="classhumoto_1_1SolutionStructure.html">humoto::SolutionStructure</a> &amp;sol_structure) const</td></tr>
+<tr class="memdesc:ae53f51b28165c62bc2bc291192389829"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates objective containing all simple constraints on this level.  <a href="#ae53f51b28165c62bc2bc291192389829">More...</a><br /></td></tr>
+<tr class="separator:ae53f51b28165c62bc2bc291192389829"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1281f10a73491ad3dcdd866aa60b135d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1HierarchyLevel.html#a1281f10a73491ad3dcdd866aa60b135d">isEquality</a> () const</td></tr>
 <tr class="memdesc:a1281f10a73491ad3dcdd866aa60b135d"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if all constraints on this level are equalitites.  <a href="#a1281f10a73491ad3dcdd866aa60b135d">More...</a><br /></td></tr>
 <tr class="separator:a1281f10a73491ad3dcdd866aa60b135d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -503,13 +503,12 @@ Friends</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">sol_structure</td><td>structure of the solution </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">constraints</td><td>constraints</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">constraints</td><td>constraints </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section attention"><dt>Attention</dt><dd>Simple constraints always precede general constraints, e.g., in an active set. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00371">371</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00402">402</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
 
 </div>
 </div>
@@ -593,7 +592,7 @@ Friends</h2></td></tr>
 <p>Get total number of constraints. </p>
 <dl class="section return"><dt>Returns</dt><dd>total number of constraints </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00392">392</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00423">423</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
 
 </div>
 </div>
@@ -623,7 +622,7 @@ Friends</h2></td></tr>
 <p>Get number of inequality constraints. </p>
 <dl class="section return"><dt>Returns</dt><dd>number of inequality constraints </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00427">427</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00458">458</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
 
 </div>
 </div>
@@ -653,7 +652,7 @@ Friends</h2></td></tr>
 <p>Get number of general constraints. </p>
 <dl class="section return"><dt>Returns</dt><dd>number of general constraints </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00416">416</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00447">447</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
 
 </div>
 </div>
@@ -683,7 +682,7 @@ Friends</h2></td></tr>
 <p>Get number of inequality constraints. </p>
 <dl class="section return"><dt>Returns</dt><dd>number of inequality constraints </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00438">438</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00469">469</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
 
 </div>
 </div>
@@ -713,7 +712,7 @@ Friends</h2></td></tr>
 <p>Get number of simple constraints. </p>
 <dl class="section return"><dt>Returns</dt><dd>number of simple constraints </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00405">405</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00436">436</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
 
 </div>
 </div>
@@ -760,12 +759,12 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00472">472</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00503">503</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
 
 </div>
 </div>
-<a id="af969cc0df3512b2b7b1a4f68407cb500"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af969cc0df3512b2b7b1a4f68407cb500">&#9670;&nbsp;</a></span>getSimpleConstraints()</h2>
+<a id="ae53f51b28165c62bc2bc291192389829"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae53f51b28165c62bc2bc291192389829">&#9670;&nbsp;</a></span>getSimpleConstraints()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -778,6 +777,18 @@ Friends</h2></td></tr>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classhumoto_1_1constraints_1_1ContainerILU.html">constraints::ContainerILU</a> &amp;&#160;</td>
           <td class="paramname"><em>constraints</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>lb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>ub</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -802,11 +813,12 @@ Friends</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">sol_structure</td><td>structure of the solution </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">constraints</td><td>constraints</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">lb</td><td>standard form (lb&lt;=x) </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ub</td><td>standard form (x&gt;=ub) </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">constraints</td><td>constraints </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section attention"><dt>Attention</dt><dd>Simple constraints always precede general constraints, e.g., in an active set. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00342">342</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
 
@@ -874,7 +886,7 @@ Friends</h2></td></tr>
 <p>True if all constraints on this level are equalitites. </p>
 <dl class="section return"><dt>Returns</dt><dd>true/false </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00460">460</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00491">491</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
 
 </div>
 </div>
@@ -904,7 +916,7 @@ Friends</h2></td></tr>
 <p>True if all constraints on this level are simple. </p>
 <dl class="section return"><dt>Returns</dt><dd>true/false </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00449">449</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00480">480</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
 
 </div>
 </div>
@@ -958,7 +970,7 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00503">503</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="optimization__problem_8h_source.html#l00534">534</a> of file <a class="el" href="optimization__problem_8h_source.html">optimization_problem.h</a>.</p>
 
 </div>
 </div>
@@ -1209,7 +1221,7 @@ Friends</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 19 2017 17:19:38 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 10 2017 18:11:40 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

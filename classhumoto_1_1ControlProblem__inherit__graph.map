@@ -1,7 +1,0 @@
-<map id="humoto::ControlProblem" name="humoto::ControlProblem">
-<area shape="rect" id="node2" href="$classhumoto_1_1MPC.html" title="Abstract base class for Model Predictive Control problems. " alt="" coords="277,226,469,391"/>
-<area shape="rect" id="node6" href="$classhumoto_1_1pepper__ik_1_1WholeBodyController.html" title="Whole body controller. " alt="" coords="493,189,741,428"/>
-<area shape="rect" id="node3" href="$classhumoto_1_1pepper__mpc_1_1MPCforMG.html" title="Model Predictive Control problem for walking pattern generation [determine_solution_structure.m, form_rotation_matrices.m, form_foot_pos_matrices.m, form_condensing_matrices.m]. " alt="" coords="5,476,248,1023"/>
-<area shape="rect" id="node4" href="$classhumoto_1_1wpg03_1_1MPCforWPG.html" title="Model Predictive Control problem for walking pattern generation [determine_solution_structure.m, form_rotation_matrices.m, form_foot_pos_matrices.m, form_condensing_matrices.m]. " alt="" coords="272,535,475,964"/>
-<area shape="rect" id="node5" href="$classhumoto_1_1wpg04_1_1MPCforWPG.html" title="Model Predictive Control problem for walking pattern generation [determine_solution_structure.m, form_rotation_matrices.m, form_foot_pos_matrices.m, form_condensing_matrices.m]. " alt="" coords="499,513,707,986"/>
-</map>

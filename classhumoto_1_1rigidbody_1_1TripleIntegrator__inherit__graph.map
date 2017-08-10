@@ -1,4 +1,0 @@
-<map id="humoto::rigidbody::TripleIntegrator" name="humoto::rigidbody::TripleIntegrator">
-<area shape="rect" id="node2" href="$classhumoto_1_1pepper__mpc_1_1TwoPointMassModel.html" title="Two Point Mass Model. " alt="" coords="22,292,199,516"/>
-<area shape="rect" id="node3" href="$classhumoto_1_1pepper__mpc_1_1Model.html" title="{humoto::pepper_mpc\l::Model\n|+ current_base_position_\l+ robot_parameters_\l+ state_\l|+ Model()\l+ Model()\l+ EIGENTOOLS_CONSTANT\l_SIZE_VECTOR()\l+ getBaseHeight()\l+ getBaseMass()\l+ getBaseOrientation()\l+ getBaseState()\l+ getBodyHeight()\l+ getBodyMass()\l+ getBodyState()\land 13 more...\l&#45; finalize()\l}" alt="" coords="5,564,216,861"/>
-</map>

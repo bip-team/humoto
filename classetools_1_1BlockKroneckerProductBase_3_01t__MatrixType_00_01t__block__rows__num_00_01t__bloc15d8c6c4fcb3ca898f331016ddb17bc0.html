@@ -75,7 +75,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt;<br />
+<div class="textblock"><h3>template&lt;class t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt;<br />
 class etools::BlockKroneckerProductBase&lt; t_MatrixType, t_block_rows_num, t_block_cols_num, MatrixSparsityType::LEFT_LOWER_TRIANGULAR &gt;</h3>
 
 <p>Represents block kronecker product "Identity(size) [X] Matrix", without computing it explicitly. </p>
@@ -123,7 +123,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2c49ea034cd526dd62d4f530b2f50be9"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classetools_1_1BlockKroneckerProductBase_3_01t__MatrixType_00_01t__block__rows__num_00_01t__bloc15d8c6c4fcb3ca898f331016ddb17bc0.html#a2c49ea034cd526dd62d4f530b2f50be9">evaluate</a> (Eigen::Block&lt; t_Derived, t_rows, t_cols, t_flag &gt; output) const</td></tr>
 <tr class="memdesc:a2c49ea034cd526dd62d4f530b2f50be9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Conversion to a matrix.  <a href="#a2c49ea034cd526dd62d4f530b2f50be9">More...</a><br /></td></tr>
 <tr class="separator:a2c49ea034cd526dd62d4f530b2f50be9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bc041fd1474ed9ce8c184eec0facb2f"><td class="memTemplParams" colspan="2">template&lt;class t_Derived , typename t_DBMMatrixType , std::ptrdiff_t t_dbm_block_rows_num, std::ptrdiff_t t_dbm_block_cols_num&gt; </td></tr>
+<tr class="memitem:a0bc041fd1474ed9ce8c184eec0facb2f"><td class="memTemplParams" colspan="2">template&lt;class t_Derived , typename t_DBMMatrixType , int t_dbm_block_rows_num, int t_dbm_block_cols_num&gt; </td></tr>
 <tr class="memitem:a0bc041fd1474ed9ce8c184eec0facb2f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classetools_1_1BlockKroneckerProductBase_3_01t__MatrixType_00_01t__block__rows__num_00_01t__bloc15d8c6c4fcb3ca898f331016ddb17bc0.html#a0bc041fd1474ed9ce8c184eec0facb2f">multiplyRight</a> (Eigen::PlainObjectBase&lt; t_Derived &gt; &amp;result, const <a class="el" href="classetools_1_1BlockMatrixBase.html">BlockMatrixBase</a>&lt; t_DBMMatrixType, t_dbm_block_rows_num, t_dbm_block_cols_num, <a class="el" href="classetools_1_1MatrixSparsityType.html#aef7f8b13fe3d047c062e75c1055ae8daa3ed3a57f5d19854a20c67593e4185fc7">MatrixSparsityType::DIAGONAL</a> &gt; &amp;dbm) const</td></tr>
 <tr class="memdesc:a0bc041fd1474ed9ce8c184eec0facb2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">this&lt;LEFT_LOWER_TRIANGULAR&gt; * BlockMatrix&lt;DIAGONAL&gt;  <a href="#a0bc041fd1474ed9ce8c184eec0facb2f">More...</a><br /></td></tr>
 <tr class="separator:a0bc041fd1474ed9ce8c184eec0facb2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -316,7 +316,7 @@ Private Attributes</h2></td></tr>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;class t_MatrixType , int t_block_rows_num, int t_block_cols_num&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="classetools_1_1BlockMatrixBase.html">BlockMatrixBase</a>&lt; const typename <a class="el" href="structetools_1_1TypeWithoutConst.html">TypeWithoutConst</a>&lt;t_MatrixType&gt;::Type, t_block_rows_num, t_block_cols_num, <a class="el" href="classetools_1_1MatrixSparsityType.html#aef7f8b13fe3d047c062e75c1055ae8daade1d58cb5a2f36e4c2aaef5920546580">MatrixSparsityType::LEFT_LOWER_TRIANGULAR</a>&gt;::<a class="el" href="classetools_1_1BlockKroneckerProductBase_3_01t__MatrixType_00_01t__block__rows__num_00_01t__bloc15d8c6c4fcb3ca898f331016ddb17bc0.html#afa245459acabebd5b6c13142ce14df20">DecayedRawMatrix</a> <a class="el" href="classetools_1_1BlockKroneckerProductBase.html">etools::BlockKroneckerProductBase</a>&lt; t_MatrixType, t_block_rows_num, t_block_cols_num, <a class="el" href="classetools_1_1MatrixSparsityType.html#aef7f8b13fe3d047c062e75c1055ae8daade1d58cb5a2f36e4c2aaef5920546580">MatrixSparsityType::LEFT_LOWER_TRIANGULAR</a> &gt;::<a class="el" href="classetools_1_1BlockKroneckerProductBase_3_01t__MatrixType_00_01t__block__rows__num_00_01t__bloc15d8c6c4fcb3ca898f331016ddb17bc0.html#afa245459acabebd5b6c13142ce14df20">DecayedRawMatrix</a></td>
@@ -411,7 +411,7 @@ template&lt;class t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;class t_MatrixType , int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -681,7 +681,7 @@ template&lt;class t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;class t_MatrixType , int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -713,7 +713,7 @@ template&lt;class t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;class t_MatrixType , int t_block_rows_num, int t_block_cols_num&gt; </div>
 <div class="memtemplate">
 template&lt;class t_Derived &gt; </div>
 <table class="mlabels">
@@ -759,7 +759,7 @@ template&lt;class t_Derived &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;class t_MatrixType , int t_block_rows_num, int t_block_cols_num&gt; </div>
 <div class="memtemplate">
 template&lt;class t_Derived , int t_rows, int t_cols, bool t_flag&gt; </div>
 <table class="mlabels">
@@ -808,7 +808,7 @@ template&lt;class t_Derived , int t_rows, int t_cols, bool t_flag&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;class t_MatrixType , int t_block_rows_num, int t_block_cols_num&gt; </div>
 <div class="memtemplate">
 template&lt;class t_Derived &gt; </div>
 <table class="mlabels">
@@ -1133,9 +1133,9 @@ template&lt;class t_Derived &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;class t_MatrixType , int t_block_rows_num, int t_block_cols_num&gt; </div>
 <div class="memtemplate">
-template&lt;class t_Derived , typename t_DBMMatrixType , std::ptrdiff_t t_dbm_block_rows_num, std::ptrdiff_t t_dbm_block_cols_num&gt; </div>
+template&lt;class t_Derived , typename t_DBMMatrixType , int t_dbm_block_rows_num, int t_dbm_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1958,7 +1958,7 @@ template&lt;class t_Derived , typename t_DBMMatrixType , std::ptrdiff_t t_dbm_bl
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;class t_MatrixType , int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -2056,7 +2056,7 @@ template&lt;class t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 19 2017 17:19:38 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 10 2017 18:11:40 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

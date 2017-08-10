@@ -37,6 +37,7 @@ var searchData=
   ['taskjointsbounds',['TaskJointsBounds',['../classhumoto_1_1pepper__ik_1_1TaskJointsBounds.html#a521f1332e8b90e6c7ef0d742d1b6c57f',1,'humoto::pepper_ik::TaskJointsBounds']]],
   ['taskjointsreference',['TaskJointsReference',['../classhumoto_1_1pepper__ik_1_1TaskJointsReference.html#a2dd077eb54e69d26c8ce2fa6d12605eb',1,'humoto::pepper_ik::TaskJointsReference']]],
   ['tasktagangularvelocity',['TaskTagAngularVelocity',['../classhumoto_1_1pepper__ik_1_1TaskTagAngularVelocity.html#a1adc772e337c9849d233b8d0e7dec3fc',1,'humoto::pepper_ik::TaskTagAngularVelocity']]],
+  ['tasktagcompletevelocity',['TaskTagCompleteVelocity',['../classhumoto_1_1pepper__ik_1_1TaskTagCompleteVelocity.html#a3a22b501b9bfc01fca4ac77caab9de27',1,'humoto::pepper_ik::TaskTagCompleteVelocity']]],
   ['tasktagorientation',['TaskTagOrientation',['../classhumoto_1_1pepper__ik_1_1TaskTagOrientation.html#a104d5ee494c1aa0f9942bc62f93b3787',1,'humoto::pepper_ik::TaskTagOrientation']]],
   ['taskterminalconstraint',['TaskTerminalConstraint',['../classhumoto_1_1wpg04_1_1TaskTerminalConstraint.html#ac64c6c8733db83d8408c57cef78a782d',1,'humoto::wpg04::TaskTerminalConstraint']]],
   ['taskzeroselectedvariables',['TaskZeroSelectedVariables',['../classhumoto_1_1TaskZeroSelectedVariables.html#aeefcda4409a5e0226b97363cd7f28ea3',1,'humoto::TaskZeroSelectedVariables']]],

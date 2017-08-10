@@ -7,6 +7,6 @@ var searchData=
   ['robot',['Robot',['../classhumoto_1_1wpg03_1_1Robot.html',1,'humoto::wpg03']]],
   ['robotcommand',['RobotCommand',['../classhumoto_1_1pepper__ik_1_1RobotCommand.html',1,'humoto::pepper_ik']]],
   ['robotfootparameters',['RobotFootParameters',['../classhumoto_1_1walking_1_1RobotFootParameters.html',1,'humoto::walking']]],
-  ['robotparameters',['RobotParameters',['../classhumoto_1_1pepper__mpc_1_1RobotParameters.html',1,'humoto::pepper_mpc::RobotParameters'],['../classhumoto_1_1wpg03_1_1RobotParameters.html',1,'humoto::wpg03::RobotParameters']]],
+  ['robotparameters',['RobotParameters',['../classhumoto_1_1wpg03_1_1RobotParameters.html',1,'humoto::wpg03::RobotParameters'],['../classhumoto_1_1pepper__mpc_1_1RobotParameters.html',1,'humoto::pepper_mpc::RobotParameters']]],
   ['rotarystate',['RotaryState',['../classhumoto_1_1rigidbody_1_1RotaryState.html',1,'humoto::rigidbody']]]
 ];

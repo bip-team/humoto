@@ -73,7 +73,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt;<br />
+<div class="textblock"><h3>template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt;<br />
 class etools::BlockMatrixBase&lt; t_MatrixType, t_block_rows_num, t_block_cols_num, MatrixSparsityType::DIAGONAL &gt;</h3>
 
 <p>Base class of a block matrix. </p>
@@ -162,7 +162,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5abe533c7e2f006f0e4b3d9497f942c0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classetools_1_1BlockMatrixBase_3_01t__MatrixType_00_01t__block__rows__num_00_01t__block__cols__na999d07bdc2ca69f7b3faafaa243d59e.html#a5abe533c7e2f006f0e4b3d9497f942c0">multiplyRight</a> (Eigen::PlainObjectBase&lt; t_DerivedOutput &gt; &amp;result, const Eigen::MatrixBase&lt; t_DerivedInput &gt; &amp;matrix) const</td></tr>
 <tr class="memdesc:a5abe533c7e2f006f0e4b3d9497f942c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">this * Matrix  <a href="#a5abe533c7e2f006f0e4b3d9497f942c0">More...</a><br /></td></tr>
 <tr class="separator:a5abe533c7e2f006f0e4b3d9497f942c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a068bc9649dfb166d995d744a4c638bd6"><td class="memTemplParams" colspan="2">template&lt;typename t_MatrixType_in , std::ptrdiff_t t_block_rows_num_in, std::ptrdiff_t t_block_cols_num_in, MatrixSparsityType::Type t_sparsity_type_in, class t_DerivedOutput &gt; </td></tr>
+<tr class="memitem:a068bc9649dfb166d995d744a4c638bd6"><td class="memTemplParams" colspan="2">template&lt;typename t_MatrixType_in , int t_block_rows_num_in, int t_block_cols_num_in, MatrixSparsityType::Type t_sparsity_type_in, class t_DerivedOutput &gt; </td></tr>
 <tr class="memitem:a068bc9649dfb166d995d744a4c638bd6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classetools_1_1BlockMatrixBase_3_01t__MatrixType_00_01t__block__rows__num_00_01t__block__cols__na999d07bdc2ca69f7b3faafaa243d59e.html#a068bc9649dfb166d995d744a4c638bd6">multiplyRight</a> (Eigen::PlainObjectBase&lt; t_DerivedOutput &gt; &amp;result, const <a class="el" href="classetools_1_1BlockMatrixBase.html">BlockMatrixBase</a>&lt; t_MatrixType_in, t_block_rows_num_in, t_block_cols_num_in, t_sparsity_type_in &gt; &amp;rhs) const</td></tr>
 <tr class="memdesc:a068bc9649dfb166d995d744a4c638bd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">this * BlockMatrix  <a href="#a068bc9649dfb166d995d744a4c638bd6">More...</a><br /></td></tr>
 <tr class="separator:a068bc9649dfb166d995d744a4c638bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -251,7 +251,7 @@ Protected Attributes</h2></td></tr>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -279,7 +279,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -307,7 +307,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType , int t_block_rows_num, int t_block_cols_num&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="classetools_1_1BlockMatrixSizeSpecificBase.html">BlockMatrixSizeSpecificBase</a>&lt;t_MatrixType, t_block_rows_num, t_block_cols_num&gt;::<a class="el" href="classetools_1_1BlockMatrixAccessBase.html#a3794261d24e586997cdf6c8651a79fba">DecayedRawMatrix</a> <a class="el" href="classetools_1_1BlockMatrixBase.html">etools::BlockMatrixBase</a>&lt; t_MatrixType, t_block_rows_num, t_block_cols_num, <a class="el" href="classetools_1_1MatrixSparsityType.html#aef7f8b13fe3d047c062e75c1055ae8daa3ed3a57f5d19854a20c67593e4185fc7">MatrixSparsityType::DIAGONAL</a> &gt;::<a class="el" href="classetools_1_1BlockMatrixAccessBase.html#a3794261d24e586997cdf6c8651a79fba">DecayedRawMatrix</a></td>
@@ -325,7 +325,7 @@ template&lt;typename t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdif
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -353,7 +353,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -379,7 +379,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -408,7 +408,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType , int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -439,7 +439,7 @@ template&lt;typename t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdif
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType , int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -479,7 +479,7 @@ template&lt;typename t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdif
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType , int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -525,7 +525,7 @@ template&lt;typename t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdif
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType , int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -572,7 +572,7 @@ template&lt;typename t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdif
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -629,7 +629,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -679,7 +679,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -736,7 +736,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -786,7 +786,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -817,7 +817,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -849,7 +849,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -881,7 +881,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -913,7 +913,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -945,7 +945,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -977,7 +977,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1009,7 +1009,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1041,7 +1041,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1083,7 +1083,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType , int t_block_rows_num, int t_block_cols_num&gt; </div>
 <div class="memtemplate">
 template&lt;class t_DerivedInput , class t_DerivedOutput &gt; </div>
 <table class="mlabels">
@@ -1141,7 +1141,7 @@ template&lt;class t_DerivedInput , class t_DerivedOutput &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType , int t_block_rows_num, int t_block_cols_num&gt; </div>
 <div class="memtemplate">
 template&lt;class t_DerivedOutput , class t_DerivedInput &gt; </div>
 <table class="mlabels">
@@ -1199,9 +1199,9 @@ template&lt;class t_DerivedOutput , class t_DerivedInput &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType , std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType , int t_block_rows_num, int t_block_cols_num&gt; </div>
 <div class="memtemplate">
-template&lt;typename t_MatrixType_in , std::ptrdiff_t t_block_rows_num_in, std::ptrdiff_t t_block_cols_num_in, MatrixSparsityType::Type t_sparsity_type_in, class t_DerivedOutput &gt; </div>
+template&lt;typename t_MatrixType_in , int t_block_rows_num_in, int t_block_cols_num_in, MatrixSparsityType::Type t_sparsity_type_in, class t_DerivedOutput &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1257,7 +1257,7 @@ template&lt;typename t_MatrixType_in , std::ptrdiff_t t_block_rows_num_in, std::
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1307,7 +1307,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1357,7 +1357,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1396,7 +1396,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1435,7 +1435,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1484,7 +1484,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1522,7 +1522,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1579,7 +1579,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1629,7 +1629,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1686,7 +1686,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1736,7 +1736,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1775,7 +1775,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <div class="memtemplate">
 template&lt;class t_Derived &gt; </div>
 <table class="mlabels">
@@ -1821,7 +1821,7 @@ template&lt;class t_Derived &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1864,7 +1864,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1913,7 +1913,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1952,7 +1952,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1978,7 +1978,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -2004,7 +2004,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -2030,7 +2030,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -2056,7 +2056,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff_t t_block_cols_num&gt; </div>
+template&lt;typename t_MatrixType, int t_block_rows_num, int t_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -2082,7 +2082,7 @@ template&lt;typename t_MatrixType, std::ptrdiff_t t_block_rows_num, std::ptrdiff
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 19 2017 17:19:38 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 10 2017 18:11:40 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

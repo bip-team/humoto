@@ -71,5 +71,6 @@ var searchData=
   ['copytwosidedinequalitytoalmixin',['CopyTwoSidedInequalityToALMixin',['../classhumoto_1_1constraints_1_1CopyTwoSidedInequalityToALMixin.html#ae3a3841c5c325d529d60126276a2d333',1,'humoto::constraints::CopyTwoSidedInequalityToALMixin']]],
   ['copyupperinequalitytoalmixin',['CopyUpperInequalityToALMixin',['../classhumoto_1_1constraints_1_1CopyUpperInequalityToALMixin.html#acd47bcb9e171975719c22d7be1dc1dde',1,'humoto::constraints::CopyUpperInequalityToALMixin']]],
   ['correct',['correct',['../classhumoto_1_1pepper__ik_1_1Model.html#a78e7e99fa8ad6eb16fd9b3f69cf63326',1,'humoto::pepper_ik::Model::correct(const RobotCommand &amp;command, const double time_interval)'],['../classhumoto_1_1pepper__ik_1_1Model.html#a2e0307905dc22e30bf0cb74d45328aaa',1,'humoto::pepper_ik::Model::correct(const humoto::pepper_ik::GeneralizedCoordinates&lt; t_features &gt; &amp;generalized_coordinates, const RobotCommand &amp;command, const double time_interval)']]],
+  ['countactiveinequalities',['countActiveInequalities',['../classhumoto_1_1ActiveSetConstraints.html#ab2ce351d21331f3096ab1f73f30643b8',1,'humoto::ActiveSetConstraints']]],
   ['cubicpolynomial1d',['CubicPolynomial1D',['../classhumoto_1_1rigidbody_1_1CubicPolynomial1D.html#ad2fa4e85b79f1d5bcc1976ab24c199a8',1,'humoto::rigidbody::CubicPolynomial1D']]]
 ];

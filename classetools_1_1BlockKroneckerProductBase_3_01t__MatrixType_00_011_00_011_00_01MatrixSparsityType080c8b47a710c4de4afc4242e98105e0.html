@@ -121,11 +121,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa8f1ecfd57acb5269fcde7a7afea8f31"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classetools_1_1BlockKroneckerProductBase_3_01t__MatrixType_00_011_00_011_00_01MatrixSparsityType080c8b47a710c4de4afc4242e98105e0.html#aa8f1ecfd57acb5269fcde7a7afea8f31">evaluate</a> (Eigen::Block&lt; t_Derived, t_rows, t_cols, t_flag &gt; output) const</td></tr>
 <tr class="memdesc:aa8f1ecfd57acb5269fcde7a7afea8f31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Conversion to a matrix.  <a href="#aa8f1ecfd57acb5269fcde7a7afea8f31">More...</a><br /></td></tr>
 <tr class="separator:aa8f1ecfd57acb5269fcde7a7afea8f31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2eddc70e58050247babecd59f1ee5ce9"><td class="memTemplParams" colspan="2">template&lt;class t_Derived , typename t_DBMMatrixType , std::ptrdiff_t t_dbm_block_rows_num, std::ptrdiff_t t_dbm_block_cols_num&gt; </td></tr>
+<tr class="memitem:a2eddc70e58050247babecd59f1ee5ce9"><td class="memTemplParams" colspan="2">template&lt;class t_Derived , typename t_DBMMatrixType , int t_dbm_block_rows_num, int t_dbm_block_cols_num&gt; </td></tr>
 <tr class="memitem:a2eddc70e58050247babecd59f1ee5ce9"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classetools_1_1BlockKroneckerProductBase_3_01t__MatrixType_00_011_00_011_00_01MatrixSparsityType080c8b47a710c4de4afc4242e98105e0.html#a2eddc70e58050247babecd59f1ee5ce9">multiplyLeft</a> (Eigen::PlainObjectBase&lt; t_Derived &gt; &amp;result, const <a class="el" href="classetools_1_1BlockMatrixBase.html">BlockMatrixBase</a>&lt; t_DBMMatrixType, t_dbm_block_rows_num, t_dbm_block_cols_num, <a class="el" href="classetools_1_1MatrixSparsityType.html#aef7f8b13fe3d047c062e75c1055ae8daa3ed3a57f5d19854a20c67593e4185fc7">MatrixSparsityType::DIAGONAL</a> &gt; &amp;dbm) const</td></tr>
 <tr class="memdesc:a2eddc70e58050247babecd59f1ee5ce9"><td class="mdescLeft">&#160;</td><td class="mdescRight">BlockMatrix&lt;DIAGONAL&gt; * this&lt;LEFT_LOWER_TRIANGULAR&gt;  <a href="#a2eddc70e58050247babecd59f1ee5ce9">More...</a><br /></td></tr>
 <tr class="separator:a2eddc70e58050247babecd59f1ee5ce9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaaa0e9726d9a28034b1dcac8c50e0a23"><td class="memTemplParams" colspan="2">template&lt;class t_Derived , typename t_DBMMatrixType , std::ptrdiff_t t_dbm_block_rows_num, std::ptrdiff_t t_dbm_block_cols_num&gt; </td></tr>
+<tr class="memitem:aaaa0e9726d9a28034b1dcac8c50e0a23"><td class="memTemplParams" colspan="2">template&lt;class t_Derived , typename t_DBMMatrixType , int t_dbm_block_rows_num, int t_dbm_block_cols_num&gt; </td></tr>
 <tr class="memitem:aaaa0e9726d9a28034b1dcac8c50e0a23"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classetools_1_1BlockKroneckerProductBase_3_01t__MatrixType_00_011_00_011_00_01MatrixSparsityType080c8b47a710c4de4afc4242e98105e0.html#aaaa0e9726d9a28034b1dcac8c50e0a23">multiplyRight</a> (Eigen::PlainObjectBase&lt; t_Derived &gt; &amp;result, const <a class="el" href="classetools_1_1BlockMatrixBase.html">BlockMatrixBase</a>&lt; t_DBMMatrixType, t_dbm_block_rows_num, t_dbm_block_cols_num, <a class="el" href="classetools_1_1MatrixSparsityType.html#aef7f8b13fe3d047c062e75c1055ae8daa3ed3a57f5d19854a20c67593e4185fc7">MatrixSparsityType::DIAGONAL</a> &gt; &amp;dbm) const</td></tr>
 <tr class="memdesc:aaaa0e9726d9a28034b1dcac8c50e0a23"><td class="mdescLeft">&#160;</td><td class="mdescRight">this&lt;LEFT_LOWER_TRIANGULAR&gt; * BlockMatrix&lt;DIAGONAL&gt;  <a href="#aaaa0e9726d9a28034b1dcac8c50e0a23">More...</a><br /></td></tr>
 <tr class="separator:aaaa0e9726d9a28034b1dcac8c50e0a23"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1137,7 +1137,7 @@ template&lt;class t_Derived &gt; </div>
 <div class="memtemplate">
 template&lt;class t_MatrixType &gt; </div>
 <div class="memtemplate">
-template&lt;class t_Derived , typename t_DBMMatrixType , std::ptrdiff_t t_dbm_block_rows_num, std::ptrdiff_t t_dbm_block_cols_num&gt; </div>
+template&lt;class t_Derived , typename t_DBMMatrixType , int t_dbm_block_rows_num, int t_dbm_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1197,7 +1197,7 @@ template&lt;class t_Derived , typename t_DBMMatrixType , std::ptrdiff_t t_dbm_bl
 <div class="memtemplate">
 template&lt;class t_MatrixType &gt; </div>
 <div class="memtemplate">
-template&lt;class t_Derived , typename t_DBMMatrixType , std::ptrdiff_t t_dbm_block_rows_num, std::ptrdiff_t t_dbm_block_cols_num&gt; </div>
+template&lt;class t_Derived , typename t_DBMMatrixType , int t_dbm_block_rows_num, int t_dbm_block_cols_num&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -2118,7 +2118,7 @@ template&lt;class t_MatrixType &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 19 2017 17:19:38 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 10 2017 18:11:40 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

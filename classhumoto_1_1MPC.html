@@ -107,7 +107,7 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a13d85bd3e2d771ebe4073fe0d53737e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1MPC.html#a13d85bd3e2d771ebe4073fe0d53737e7">~MPC</a> ()</td></tr>
 <tr class="memdesc:a13d85bd3e2d771ebe4073fe0d53737e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Protected destructor: prevent destruction of the child classes through a base pointer.  <a href="#a13d85bd3e2d771ebe4073fe0d53737e7">More...</a><br /></td></tr>
 <tr class="separator:a13d85bd3e2d771ebe4073fe0d53737e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af347520dfb3f649414cd28e1f6a423c8"><td class="memTemplParams" colspan="2">template&lt;std::ptrdiff_t t_num_vars, std::ptrdiff_t t_num_controls, typename t_AMatrix , typename t_BMatrix , etools::MatrixSparsityType::Type t_bmatrix_sparsity_type&gt; </td></tr>
+<tr class="memitem:af347520dfb3f649414cd28e1f6a423c8"><td class="memTemplParams" colspan="2">template&lt;int t_num_vars, int t_num_controls, typename t_AMatrix , typename t_BMatrix , etools::MatrixSparsityType::Type t_bmatrix_sparsity_type&gt; </td></tr>
 <tr class="memitem:af347520dfb3f649414cd28e1f6a423c8"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhumoto_1_1MPC.html#af347520dfb3f649414cd28e1f6a423c8">condense</a> (<a class="el" href="classetools_1_1GenericBlockMatrix.html">etools::GenericBlockMatrix</a>&lt; t_num_vars, t_num_vars &gt; &amp;S, <a class="el" href="classetools_1_1BlockMatrix.html">etools::BlockMatrix</a>&lt; t_num_vars, t_num_controls, t_bmatrix_sparsity_type &gt; &amp;U, const std::vector&lt; t_AMatrix &gt; &amp;A, const std::vector&lt; t_BMatrix &gt; &amp;B)</td></tr>
 <tr class="memdesc:af347520dfb3f649414cd28e1f6a423c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the condensed matrices (S,U) of a Model Predictive Control problem such that X = S*x0 + U*u.  <a href="#af347520dfb3f649414cd28e1f6a423c8">More...</a><br /></td></tr>
 <tr class="separator:af347520dfb3f649414cd28e1f6a423c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,11 +115,11 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:afbd80b5bcb8c8d460946e5b5f026b23d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhumoto_1_1MPC.html#afbd80b5bcb8c8d460946e5b5f026b23d">condense</a> (Eigen::MatrixXd &amp;S, Eigen::MatrixXd &amp;U, const std::vector&lt; t_AMatrix &gt; &amp;A, const std::vector&lt; t_BMatrix &gt; &amp;B)</td></tr>
 <tr class="memdesc:afbd80b5bcb8c8d460946e5b5f026b23d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the condensed matrices (S,U) of a Model Predictive Control problem such that X = S*x0 + U*u.  <a href="#afbd80b5bcb8c8d460946e5b5f026b23d">More...</a><br /></td></tr>
 <tr class="separator:afbd80b5bcb8c8d460946e5b5f026b23d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84ad88163a9afa26e03ec32b350ce9db"><td class="memTemplParams" colspan="2">template&lt;std::ptrdiff_t t_num_vars, std::ptrdiff_t t_num_outputs, typename t_DMatrix , typename t_EMatrix &gt; </td></tr>
+<tr class="memitem:a84ad88163a9afa26e03ec32b350ce9db"><td class="memTemplParams" colspan="2">template&lt;int t_num_vars, int t_num_outputs, typename t_DMatrix , typename t_EMatrix &gt; </td></tr>
 <tr class="memitem:a84ad88163a9afa26e03ec32b350ce9db"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhumoto_1_1MPC.html#a84ad88163a9afa26e03ec32b350ce9db">condenseOutput</a> (<a class="el" href="classetools_1_1GenericBlockMatrix.html">etools::GenericBlockMatrix</a>&lt; t_num_outputs, t_num_vars &gt; &amp;Ox, std::vector&lt; <a class="el" href="classetools_1_1LeftLowerTriangularBlockMatrix.html">etools::LeftLowerTriangularBlockMatrix</a>&lt; t_num_outputs, <a class="el" href="classetools_1_1MatrixBlockSizeType.html#acb351eec27278425817d97b43e73fb33a611a2b305084af855ddb45e91c127924">etools::MatrixBlockSizeType::DYNAMIC</a> &gt; &gt; &amp;Ou, const std::vector&lt; t_DMatrix &gt; &amp;D, const std::vector&lt; t_EMatrix &gt; &amp;E, const <a class="el" href="classetools_1_1GenericBlockMatrix.html">etools::GenericBlockMatrix</a>&lt; t_num_vars, t_num_vars &gt; &amp;Ux, const std::vector&lt; <a class="el" href="classetools_1_1LeftLowerTriangularBlockMatrix.html">etools::LeftLowerTriangularBlockMatrix</a>&lt; t_num_vars, <a class="el" href="classetools_1_1MatrixBlockSizeType.html#acb351eec27278425817d97b43e73fb33a611a2b305084af855ddb45e91c127924">etools::MatrixBlockSizeType::DYNAMIC</a> &gt; &gt; &amp;Uu)</td></tr>
 <tr class="memdesc:a84ad88163a9afa26e03ec32b350ce9db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Condense output of the system.  <a href="#a84ad88163a9afa26e03ec32b350ce9db">More...</a><br /></td></tr>
 <tr class="separator:a84ad88163a9afa26e03ec32b350ce9db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b29dc21b873d425a1783d4d09c522da"><td class="memTemplParams" colspan="2">template&lt;std::ptrdiff_t t_num_vars, std::ptrdiff_t t_num_controls, std::ptrdiff_t t_num_outputs, typename t_DMatrix , typename t_EMatrix &gt; </td></tr>
+<tr class="memitem:a7b29dc21b873d425a1783d4d09c522da"><td class="memTemplParams" colspan="2">template&lt;int t_num_vars, int t_num_controls, int t_num_outputs, typename t_DMatrix , typename t_EMatrix &gt; </td></tr>
 <tr class="memitem:a7b29dc21b873d425a1783d4d09c522da"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhumoto_1_1MPC.html#a7b29dc21b873d425a1783d4d09c522da">condenseOutput</a> (<a class="el" href="classetools_1_1GenericBlockMatrix.html">etools::GenericBlockMatrix</a>&lt; t_num_outputs, t_num_vars &gt; &amp;Ox, <a class="el" href="classetools_1_1LeftLowerTriangularBlockMatrix.html">etools::LeftLowerTriangularBlockMatrix</a>&lt; t_num_outputs, t_num_controls &gt; &amp;Ou, const std::vector&lt; t_DMatrix &gt; &amp;D, const std::vector&lt; t_EMatrix &gt; &amp;E, const <a class="el" href="classetools_1_1GenericBlockMatrix.html">etools::GenericBlockMatrix</a>&lt; t_num_vars, t_num_vars &gt; &amp;Ux, const <a class="el" href="classetools_1_1LeftLowerTriangularBlockMatrix.html">etools::LeftLowerTriangularBlockMatrix</a>&lt; t_num_vars, t_num_controls &gt; &amp;Uu)</td></tr>
 <tr class="memdesc:a7b29dc21b873d425a1783d4d09c522da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Condense output of the system.  <a href="#a7b29dc21b873d425a1783d4d09c522da">More...</a><br /></td></tr>
 <tr class="separator:a7b29dc21b873d425a1783d4d09c522da"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,7 +196,7 @@ Protected Attributes</h2></td></tr>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::ptrdiff_t t_num_vars, std::ptrdiff_t t_num_controls, typename t_AMatrix , typename t_BMatrix , etools::MatrixSparsityType::Type t_bmatrix_sparsity_type&gt; </div>
+template&lt;int t_num_vars, int t_num_controls, typename t_AMatrix , typename t_BMatrix , etools::MatrixSparsityType::Type t_bmatrix_sparsity_type&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -338,7 +338,7 @@ template&lt;typename t_AMatrix , typename t_BMatrix &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::ptrdiff_t t_num_vars, std::ptrdiff_t t_num_outputs, typename t_DMatrix , typename t_EMatrix &gt; </div>
+template&lt;int t_num_vars, int t_num_outputs, typename t_DMatrix , typename t_EMatrix &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -425,7 +425,7 @@ template&lt;std::ptrdiff_t t_num_vars, std::ptrdiff_t t_num_outputs, typename t_
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::ptrdiff_t t_num_vars, std::ptrdiff_t t_num_controls, std::ptrdiff_t t_num_outputs, typename t_DMatrix , typename t_EMatrix &gt; </div>
+template&lt;int t_num_vars, int t_num_controls, int t_num_outputs, typename t_DMatrix , typename t_EMatrix &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -737,7 +737,7 @@ template&lt;std::ptrdiff_t t_num_vars, std::ptrdiff_t t_num_controls, std::ptrdi
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 19 2017 17:19:38 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 10 2017 18:11:40 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

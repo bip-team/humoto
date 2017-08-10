@@ -66,7 +66,7 @@ $(function() {
 <ul>
 <li>utilities<ul>
 <li>cmake</li>
-<li>git and/or SVN to fetch bridges (3-rd party software)</li>
+<li>git and/or SVN to fetch 3-rd party software</li>
 <li>C++98 compatible compiler</li>
 </ul>
 </li>
@@ -91,7 +91,8 @@ $(function() {
 </li>
 </ul>
 <p><br />
- </p><h2>Dependencies which are fetched, compiled and installed by humoto </h2>
+</p>
+<h2>Dependencies which are fetched, compiled and installed by humoto </h2>
 <p>Humoto does not use system-wide versions the following packages to avoid compatibility issues. However, they are installed with humoto &ndash; be careful to avoid conflicts.</p>
 <table class="doxtable">
 <tr>
@@ -107,13 +108,16 @@ $(function() {
 <tr>
 <td>QuadProgpp </td><td>QP solver </td><td>optional </td><td>MIT </td></tr>
 <tr>
+<td>qpmad </td><td>QP solver </td><td>optional </td><td>Apache 2.0 </td></tr>
+<tr>
 <td>LexLS </td><td>hierarchical solver </td><td>not distributed </td><td>non-public software </td></tr>
 <tr>
 <td>eiQuadProg </td><td>QP solver </td><td>not distributed </td><td>GPL </td></tr>
 </table>
 <p>(*) An old version of yaml-cpp is used in order to avoid dependency on C++11.</p>
 <p><br />
- </p><h2>Dependencies included in the main distribution </h2>
+</p>
+<h2>Dependencies included in the main distribution </h2>
 <h3>cmake scripts</h3>
 <table class="doxtable">
 <tr>
@@ -131,7 +135,8 @@ $(function() {
 <td>pepper_<code>*</code>.urdf </td><td>URDF models of Pepper robot </td><td>mandatory for <a class="el" href="group__pepper__ik.html">pepper_ik</a> </td><td>Apache 2.0 </td></tr>
 </table>
 <p><br />
- </p><h2>Compilation &amp; installation </h2>
+</p>
+<h2>Compilation &amp; installation </h2>
 <p>Compilation of tests and / or installation of headers is performed using cmake. While it is possible to use cmake directly it is recommended to use Makefile which automates common tasks.</p>
 <p>Makefile abides the following conventions: </p><pre class="fragment">- Compilation is performed in subdirectories of 'build/'. Names of
   subdirectories consist of three parts: [toolchain]-[buildtype]-[options].
@@ -175,7 +180,7 @@ $(function() {
 make wpg04_test_000</pre> </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 19 2017 17:19:38 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 10 2017 18:11:40 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

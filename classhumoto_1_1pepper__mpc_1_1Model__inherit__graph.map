@@ -1,5 +1,0 @@
-<map id="humoto::pepper_mpc::Model" name="humoto::pepper_mpc::Model">
-<area shape="rect" id="node2" href="$classhumoto_1_1Model.html" title="Instances of this class are passed to a virtual method &#39;humoto::TaskBase::form()&#39;, so even though this class is basically useless in its present form we cannot avoid its definition using a template. " alt="" coords="5,336,127,472"/>
-<area shape="rect" id="node3" href="$classhumoto_1_1pepper__mpc_1_1TwoPointMassModel.html" title="Two Point Mass Model. " alt="" coords="151,292,328,516"/>
-<area shape="rect" id="node4" href="$classhumoto_1_1rigidbody_1_1TripleIntegrator.html" title="Triple integrator class Class supports arbitrary number of integrators in the system. " alt="" coords="171,5,308,244"/>
-</map>
