@@ -60,6 +60,35 @@ namespace humoto
                 {
                     tag_velocity_ = tag_velocity;
                 }
+
+
+                /**
+                 * @brief Get velocity in global frame
+                 *
+                 * @param[in, out] velocity_in_global
+                 * @param[in]      model
+                 * @param[in]      tag_name
+                 */
+                void getTagVelocityInGlobalFrame(Eigen::VectorXd&                            velocity_in_global, 
+                                                 const humoto::pepper_ik::Model<t_features>& model, 
+                                                 const std::string&                          tag_name) const
+                {
+                    velocity_in_global.resize(rbdl::SpatialType::getNumberOfElements(rbdl::SpatialType::COMPLETE));
+                    
+                    rbdl::TagLinkPtr tag_ = model.getLinkTag(tag_name);
+
+                    etools::Vector6 tag_ref_velocity;
+                    getTagRefVelocity(tag_ref_velocity, tag_name);
+
+                    std::size_t velocity_size = 3;
+                    velocity_in_global.head(velocity_size) = model.getTagOrientation(tag_) *
+                                            tag_ref_velocity.tail(velocity_size);
+                    
+                    velocity_in_global.tail(velocity_size) = model.getTagPosition(tag_).cross(model.getTagOrientation(tag_)
+                                            * tag_ref_velocity.tail(velocity_size))
+                                            + model.getTagOrientation(tag_) *
+                                              tag_ref_velocity.head(velocity_size);
+                }
                 
 
                 /**
