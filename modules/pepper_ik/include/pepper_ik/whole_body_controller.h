@@ -71,23 +71,37 @@ namespace humoto
                  */
                 void getTagVelocityInGlobalFrame(Eigen::VectorXd&                            velocity_in_global, 
                                                  const humoto::pepper_ik::Model<t_features>& model, 
-                                                 const std::string&                          tag_name) const
+                                                 const std::string&                          tag_name, 
+                                                 const rbdl::SpatialType::Type&              spatial_type) const
                 {
-                    velocity_in_global.resize(rbdl::SpatialType::getNumberOfElements(rbdl::SpatialType::COMPLETE));
+                    rbdl::TagLinkPtr tag = model.getLinkTag(tag_name);
                     
-                    rbdl::TagLinkPtr tag_ = model.getLinkTag(tag_name);
-
                     etools::Vector6 tag_ref_velocity;
                     getTagRefVelocity(tag_ref_velocity, tag_name);
+                    
+                    velocity_in_global.resize(rbdl::SpatialType::getNumberOfElements(spatial_type));
 
                     std::size_t velocity_size = 3;
-                    velocity_in_global.head(velocity_size) = model.getTagOrientation(tag_) *
-                                            tag_ref_velocity.tail(velocity_size);
-                    
-                    velocity_in_global.tail(velocity_size) = model.getTagPosition(tag_).cross(model.getTagOrientation(tag_)
-                                            * tag_ref_velocity.tail(velocity_size))
-                                            + model.getTagOrientation(tag_) *
-                                              tag_ref_velocity.head(velocity_size);
+                    switch(spatial_type)
+                    {
+                        case rbdl::SpatialType::ROTATION:
+                            velocity_in_global.head(velocity_size) = model.getTagOrientation(tag) *
+                                                    tag_ref_velocity.tail(velocity_size);
+                            break;
+                        
+                        case rbdl::SpatialType::COMPLETE:
+                            velocity_in_global.head(velocity_size) = model.getTagOrientation(tag) *
+                                                    tag_ref_velocity.tail(velocity_size);
+                        
+                            velocity_in_global.tail(velocity_size) = model.getTagPosition(tag).cross(model.getTagOrientation(tag)
+                                                    * tag_ref_velocity.tail(velocity_size))
+                                                    + model.getTagOrientation(tag) *
+                                                      tag_ref_velocity.head(velocity_size);
+                            break;
+                        
+                        default:
+                            HUMOTO_THROW_MSG("Unsupported velocity type.");
+                    }
                 }
                 
 

@@ -90,15 +90,10 @@ namespace humoto
                     Eigen::VectorXd &b = getB();
 
                     model.getTagOrientationJacobian(A, tag_);
-                    
-                    std::size_t angular_part = rbdl::SpatialType::getNumberOfElements(rbdl::SpatialType::ROTATION);
 
-                    etools::Vector6 tag_ref_velocity;
-                    wb_controller.getTagRefVelocity(tag_ref_velocity, tag_string_id_);
+                    wb_controller.getTagVelocityInGlobalFrame(b, model, tag_string_id_, rbdl::SpatialType::ROTATION);
                     
-                    b.noalias() = k_angular_velocity_gain_
-                                    * model.getTagOrientation(tag_)
-                                    * tag_ref_velocity.tail(angular_part);
+                    b.noalias() = k_angular_velocity_gain_ * b;
 
                     if(!isApproximatelyEqual(1.0, getGain()))
                     {
