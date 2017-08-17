@@ -100,7 +100,7 @@ int main(int argc, char **argv)
         // parameters of the control problem
         humoto::pepper_ik::WBCParameters                       ik_wbc_parameters(config_reader, crash_on_missing_config_entry);
         // control problem, which is used to construct an optimization problem
-        humoto::pepper_ik::WholeBodyController<MODEL_FEATURES> ik_wbc;
+        humoto::pepper_ik::WholeBodyController<MODEL_FEATURES> ik_wbc(ik_wbc_parameters);
         // model representing the controlled system
         humoto::pepper_ik::Model<MODEL_FEATURES>               ik_model;
         ik_model.loadParameters(config_path + "pepper_fixedwheels_roottibia_planar.urdf");
@@ -183,8 +183,8 @@ int main(int argc, char **argv)
 
             // -----------------set base velocity in mpc----------------
             
-            ik_wbc.getTagVelocityInGlobalFrame(base_velocity, ik_model, "CameraTop_optical_frame",
-                                                                        humoto::rbdl::SpatialType::COMPLETE);
+            base_velocity = ik_wbc.getTagVelocityInGlobal(ik_model, "CameraTop_optical_frame",
+                                                           humoto::rbdl::SpatialType::COMPLETE);
             
             mpc_motion_parameters.base_velocity_          << base_velocity(0), base_velocity(1); 
             mpc_motion_parameters.base_angular_velocity_  =  base_velocity(5);
@@ -316,14 +316,6 @@ int main(int argc, char **argv)
                 HUMOTO_LOG("Error", ik_motion_parameters_errors.body_com_position_);
                 HUMOTO_LOG("Reference", ik_motion_parameters.body_com_position_);
                 */
-
-                if (    ik_motion_parameters_errors.base_com_position_.norm()
-                        + ik_motion_parameters_errors.base_orientation_rpy_.norm()
-                        + ik_motion_parameters_errors.body_com_position_.norm()  <  ik_wbc_parameters.motion_parameters_tolerance_)
-                {
-                    break;
-                }
-
 
                 if (ik_solution.x_.lpNorm<Eigen::Infinity>() < ik_wbc_parameters.joint_angle_error_tolerance_)
                 {

@@ -9,9 +9,9 @@ IKMotionParameters:
   body_com_position: [-4.02863432226587e-03, 0.0, 7.50001340031501e-01]
 IKOptimizationProblem:
   task_class_names: [[TaskBaseCoMTracking, TaskBodyCoMTracking, TaskBaseOrientation, TaskJointsBounds], [TaskZeroVariables,
-  TaskTagCompleteVelocity]]
+  TaskTagPose]]
   task_ids: [[TaskBaseCoMTrackingPlanar, TaskBodyCoMTracking, TaskBaseOrientationPlanar, TaskJointsBounds], [TaskZeroVariables,
-  TaskTagCompleteVelocity]]
+  TaskTagPose]]
   TaskBaseOrientationPlanar:
     gain: 1
     k_orientation_gain: 1
@@ -31,13 +31,9 @@ IKOptimizationProblem:
     gain: 1
     k_position_gain: 0.3
     joint_angles_reference: [-0.01, -0.04, 0, 0, -0.2, 1.57, 0.12, -1.2217007, -0.52345699, 0, 1.57, -0.12, 1.2217007, 0.52345699, 0]
-  TaskTagCompleteVelocity:
+  TaskTagPose:
     gain: 1
-    k_complete_velocity_gain: 1
-    tag_string_id: "CameraTop_optical_frame"
-  TaskTagAngularVelocity:
-    gain: 1
-    k_angular_velocity_gain: 1
+    k_pose_gain: 1
     tag_string_id: "CameraTop_optical_frame"
 RobotParameters:
   base_radius: 0.7

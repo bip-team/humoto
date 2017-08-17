@@ -90,10 +90,9 @@ namespace humoto
                     Eigen::VectorXd &b = getB();
 
                     model.getTagCompleteJacobian(A, tag_);
-
-                    wb_controller.getTagVelocityInGlobalFrame(b, model, tag_string_id_, rbdl::SpatialType::COMPLETE);
                     
-                    b.noalias() = k_complete_velocity_gain_ * b;
+                    b.noalias() = k_complete_velocity_gain_ * 
+                            wb_controller.getTagVelocityInGlobal(model, tag_string_id_, rbdl::SpatialType::COMPLETE);
 
                     if(!isApproximatelyEqual(1.0, getGain()))
                     {

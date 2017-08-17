@@ -23,8 +23,8 @@ namespace humoto
             class HUMOTO_LOCAL WholeBodyController : public humoto::ControlProblem
         {
             private:
-                bool solution_is_parsed_;
-
+                bool                             solution_is_parsed_;
+                humoto::pepper_ik::WBCParameters wbc_parameters_;
 
             public:
                 humoto::pepper_ik::MotionParameters    motion_parameters_;
@@ -65,50 +65,104 @@ namespace humoto
                 /**
                  * @brief Get velocity in global frame
                  *
-                 * @param[in, out] velocity_in_global
-                 * @param[in]      model
-                 * @param[in]      tag_name
+                 * @param[in] model
+                 * @param[in] tag_name
+                 * @param[in] spatial_type
+                 * @return    velocity in global frame
                  */
-                void getTagVelocityInGlobalFrame(Eigen::VectorXd&                            velocity_in_global, 
-                                                 const humoto::pepper_ik::Model<t_features>& model, 
-                                                 const std::string&                          tag_name, 
-                                                 const rbdl::SpatialType::Type&              spatial_type) const
+                Eigen::VectorXd getTagVelocityInGlobal(const humoto::pepper_ik::Model<t_features>& model, 
+                                                       const std::string&                          tag_name, 
+                                                       const rbdl::SpatialType::Type&              spatial_type) const
                 {
                     rbdl::TagLinkPtr tag = model.getLinkTag(tag_name);
                     
                     etools::Vector6 tag_ref_velocity;
                     getTagRefVelocity(tag_ref_velocity, tag_name);
-                    
+
+                    Eigen::VectorXd velocity_in_global;
                     velocity_in_global.resize(rbdl::SpatialType::getNumberOfElements(spatial_type));
 
-                    std::size_t velocity_size = 3;
+                    std::size_t part_size = 3;
                     switch(spatial_type)
                     {
                         case rbdl::SpatialType::ROTATION:
-                            velocity_in_global.head(velocity_size) = model.getTagOrientation(tag) *
-                                                    tag_ref_velocity.tail(velocity_size);
+                            velocity_in_global.head(part_size) = model.getTagOrientation(tag) *
+                                                    tag_ref_velocity.tail(part_size);
                             break;
                         
-                        case rbdl::SpatialType::COMPLETE:
-                            velocity_in_global.head(velocity_size) = model.getTagOrientation(tag) *
-                                                    tag_ref_velocity.tail(velocity_size);
-                        
-                            velocity_in_global.tail(velocity_size) = model.getTagPosition(tag).cross(model.getTagOrientation(tag)
-                                                    * tag_ref_velocity.tail(velocity_size))
+                        case rbdl::SpatialType::TRANSLATION:
+                            velocity_in_global.tail(part_size) = model.getTagPosition(tag).cross(model.getTagOrientation(tag)
+                                                    * tag_ref_velocity.tail(part_size))
                                                     + model.getTagOrientation(tag) *
-                                                      tag_ref_velocity.head(velocity_size);
+                                                      tag_ref_velocity.head(part_size);
+                            break;
+
+                        case rbdl::SpatialType::COMPLETE:
+                            velocity_in_global.head(part_size) = model.getTagOrientation(tag) *
+                                                    tag_ref_velocity.tail(part_size);
+                        
+                            velocity_in_global.tail(part_size) = model.getTagPosition(tag).cross(model.getTagOrientation(tag)
+                                                    * tag_ref_velocity.tail(part_size))
+                                                    + model.getTagOrientation(tag) *
+                                                      tag_ref_velocity.head(part_size);
                             break;
                         
                         default:
                             HUMOTO_THROW_MSG("Unsupported velocity type.");
                     }
+
+                    return(velocity_in_global);
                 }
-                
+
+
+                /**
+                 * @brief Get tag pose error in global frame
+                 *
+                 * @param[in] model
+                 * @param[in] tag_name
+                 * @param[in] spatial_type
+                 * @return    error in pose in global frame
+                 */
+                etools::Vector6 getTagPoseErrorInGlobal(const humoto::pepper_ik::Model<t_features>& model,
+                                                        const std::string&                          tag_name, 
+                                                        const rbdl::SpatialType::Type&              spatial_type) const
+                {
+                    rbdl::TagLinkPtr tag = model.getLinkTag(tag_name);
+                    
+                    etools::Vector6 tag_pose_error;
+
+                    Eigen::VectorXd pose_increment =
+                            wbc_parameters_.control_interval_ * getTagVelocityInGlobal(model, tag_name, rbdl::SpatialType::COMPLETE);
+                    
+                    std::size_t part_size = 3;
+                    tag_pose_error.head(part_size) = rigidbody::getRotationErrorAngleAxis(
+                                                        model.getTagOrientation(tag),
+                                                        rigidbody::convertEulerAnglesToMatrix(           
+                                                            rigidbody::convertMatrixToEulerAngles(model.getTagOrientation(tag),
+                                                            rigidbody::EulerAngles::RPY) +
+                                                        pose_increment.head(part_size), rigidbody::EulerAngles::RPY));
+                    
+                    tag_pose_error.tail(part_size) = pose_increment.tail(part_size); 
+
+                    return(tag_pose_error);
+                }
+
 
                 /**
                  * @brief Constructor
                  */
                 WholeBodyController()
+                {
+                    solution_is_parsed_ = false;
+                }
+                
+                
+                /**
+                 * @brief Constructor
+                 *
+                 * @param[in] control_interval
+                 */
+                WholeBodyController(const humoto::pepper_ik::WBCParameters& wbc_parameters) : wbc_parameters_(wbc_parameters)
                 {
                     solution_is_parsed_ = false;
                 }

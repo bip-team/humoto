@@ -67,6 +67,10 @@ namespace humoto
                     {
                         return (humoto::TaskSharedPointer(new humoto::pepper_ik::TaskTagCompleteVelocity<t_features>));
                     }
+                    if (string_id == "TaskTagPose")
+                    {
+                        return (humoto::TaskSharedPointer(new humoto::pepper_ik::TaskTagPose<t_features>));
+                    }
 
                     return(humoto::ConfigurableOptimizationProblem::getTask(string_id));
                 }

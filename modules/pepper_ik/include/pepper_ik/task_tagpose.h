@@ -14,13 +14,13 @@ namespace humoto
     namespace pepper_ik
     {
         /**
-         * @brief Tag angular velocity
+         * @brief Tag pose 
          */
         template <int t_features>
-            class HUMOTO_LOCAL TaskTagAngularVelocity : public humoto::TaskAB
+            class HUMOTO_LOCAL TaskTagPose : public humoto::TaskAB
         {
             protected:
-                double           k_angular_velocity_gain_;
+                double           k_pose_gain_;
                 std::string      tag_string_id_;
 
                 rbdl::TagLinkPtr tag_;
@@ -29,7 +29,7 @@ namespace humoto
             protected:
                 #define HUMOTO_CONFIG_ENTRIES \
                     HUMOTO_CONFIG_PARENT_CLASS(TaskAB); \
-                    HUMOTO_CONFIG_SCALAR_(k_angular_velocity_gain); \
+                    HUMOTO_CONFIG_SCALAR_(k_pose_gain); \
                     HUMOTO_CONFIG_SCALAR_(tag_string_id);
                 #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
@@ -37,7 +37,7 @@ namespace humoto
                 virtual void setDefaults()
                 {
                     TaskAB::setDefaults();
-                    k_angular_velocity_gain_ = 0.0;
+                    k_pose_gain_ = 0.0;
                 }
 
 
@@ -54,26 +54,26 @@ namespace humoto
                 {
                     LogEntryName subname = parent; subname.add(name);
                     TaskAB::logTask(logger, subname, "");
-                    logger.log(LogEntryName(subname).add("k_angular_velocity_gain"), k_angular_velocity_gain_);
-                    logger.log(LogEntryName(subname).add("tag_string_id"),           tag_string_id_);
+                    logger.log(LogEntryName(subname).add("k_pose_gain"),   k_pose_gain_);
+                    logger.log(LogEntryName(subname).add("tag_string_id"), tag_string_id_);
                 }
 
 
             public:
-                TaskTagAngularVelocity(const std::string& tag_string_id = "",
-                                       const double       gain = 1.0,
-                                       const double       k_angular_velocity_gain = 1.0)
-                    : TaskAB(std::string("TaskTagAngularVelocity_") + tag_string_id, gain)
+                TaskTagPose(const std::string& tag_string_id = "",
+                            const double       gain          = 1.0,
+                            const double       k_pose_gain   = 1.0)
+                    : TaskAB(std::string("TaskTagPose_") + tag_string_id, gain)
                 {
-                    k_angular_velocity_gain_ = k_angular_velocity_gain;
-                    tag_string_id_           = tag_string_id;
+                    k_pose_gain_   = k_pose_gain;
+                    tag_string_id_ = tag_string_id;
                 }
 
 
                 /// @copydoc humoto::TaskBase::form
                 void form(const humoto::SolutionStructure &sol_structure,
-                          const humoto::Model &model_base,
-                          const humoto::ControlProblem &control_problem)
+                          const humoto::Model             &model_base,
+                          const humoto::ControlProblem    &control_problem)
                 {
                     const Model<t_features>& model =
                         dynamic_cast <const Model<t_features>& >(model_base);
@@ -89,10 +89,9 @@ namespace humoto
                     Eigen::MatrixXd &A = getA();
                     Eigen::VectorXd &b = getB();
 
-                    model.getTagOrientationJacobian(A, tag_);
+                    model.getTagCompleteJacobian(A, tag_);
                     
-                    b.noalias() = k_angular_velocity_gain_ * 
-                        wb_controller.getTagVelocityInGlobal(model, tag_string_id_, rbdl::SpatialType::ROTATION);
+                    b.noalias() = k_pose_gain_ * wb_controller.getTagPoseErrorInGlobal(model, tag_string_id_, rbdl::SpatialType::COMPLETE);
 
                     if(!isApproximatelyEqual(1.0, getGain()))
                     {
