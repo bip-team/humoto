@@ -77,10 +77,10 @@ int main(int argc, char **argv)
         switch (motion_parameters.motion_mode_)
         {
             case humoto::pepper_mpc::MotionMode::MAINTAIN_POSITION:
-                opt_problem.readConfig<humoto::config::yaml::Reader>(config_path + "hierarchies.yaml", true, "Hierarchy01");
+                opt_problem.readConfig<humoto::config::yaml::Reader>(config_path + "hierarchies.yaml", "Hierarchy01");
                 break;
             case humoto::pepper_mpc::MotionMode::MAINTAIN_VELOCITY:
-                opt_problem.readConfig<humoto::config::yaml::Reader>(config_path + "hierarchies.yaml", true, "Hierarchy00");
+                opt_problem.readConfig<humoto::config::yaml::Reader>(config_path + "hierarchies.yaml", "Hierarchy00");
                 break;
             default:
                 HUMOTO_THROW_MSG("Unsupported motion mode.");

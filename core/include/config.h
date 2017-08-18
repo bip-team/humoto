@@ -53,7 +53,7 @@ namespace humoto
             }
 
     #define HUMOTO_CONFIG_READ_PARENT_CLASS(parent_class)  parent_class::readConfigEntries(reader, crash_on_missing_entry)
-    #define HUMOTO_CONFIG_READ_MEMBER_CLASS(member, name)  member.readNestedConfig(reader, crash_on_missing_entry, name)
+    #define HUMOTO_CONFIG_READ_MEMBER_CLASS(member, name)  member.readNestedConfig(reader, name, crash_on_missing_entry)
 
     #define HUMOTO_CONFIG_READ_COMPOUND_(entry)     reader.readCompound(entry##_, #entry, crash_on_missing_entry)
     #define HUMOTO_CONFIG_READ_COMPOUND(entry)      reader.readCompound(entry, #entry, crash_on_missing_entry)
@@ -161,15 +161,9 @@ namespace humoto
                      */
                     template <class t_Reader>
                         void readNestedConfig(  t_Reader            & reader,
-                                                const bool          crash_on_missing_entry = default_crash_on_missing_entry_,
-                                                const std::string   & node_name = "")
+                                                const std::string   & name,
+                                                const bool          crash_on_missing_entry = default_crash_on_missing_entry_)
                     {
-                        std::string name = node_name;
-                        if (name.size() == 0)
-                        {
-                            name = getConfigSectionID();
-                        }
-
                         try
                         {
                             setDefaults();
@@ -194,24 +188,17 @@ namespace humoto
 
 
                     /**
-                     * @brief Write nested configuration node
+                     * @brief Read configuration (assuming the configuration node
+                     * to be in the root).
                      *
-                     * @param[in,out] writer configuration writer
-                     * @param[in] node_name   node name, the default is used if empty
+                     * @param[in] reader configuration reader
+                     * @param[in] crash_on_missing_entry
                      */
-                    template <class t_Writer>
-                        void writeNestedConfig( t_Writer& writer,
-                                                const std::string &node_name = "") const
+                    template <class t_Reader>
+                        void readConfig(t_Reader            & reader,
+                                        const bool          crash_on_missing_entry = default_crash_on_missing_entry_)
                     {
-                        std::string name = node_name;
-                        if (name.size() == 0)
-                        {
-                            name = getConfigSectionID();
-                        }
-
-                        writer.descend(name);
-                        writeConfigEntries(writer);
-                        writer.ascend();
+                        readNestedConfig(reader, getConfigSectionID(), crash_on_missing_entry);
                     }
 
 
@@ -225,10 +212,125 @@ namespace humoto
                      */
                     template <class t_Reader>
                         void readConfig(t_Reader            & reader,
-                                        const bool          crash_on_missing_entry = default_crash_on_missing_entry_,
-                                        const std::string   & node_name = "")
+                                        const std::string   & node_name,
+                                        const bool          crash_on_missing_entry = default_crash_on_missing_entry_)
                     {
-                        readNestedConfig(reader, crash_on_missing_entry, node_name);
+                        readNestedConfig(reader, node_name, crash_on_missing_entry);
+                    }
+
+
+                    /**
+                     * @brief Read configuration (assuming the configuration node
+                     * to be in the root).
+                     *
+                     * @param[in] reader configuration reader
+                     * @param[in] crash_on_missing_entry
+                     * @param[in] node_name   node name, the default is used if empty
+                     *
+                     * @note Intercept implicit conversion of a pointer to bool.
+                     */
+                    template <class t_Reader>
+                        void readConfig(t_Reader            & reader,
+                                        const char          * node_name,
+                                        const bool          crash_on_missing_entry = default_crash_on_missing_entry_)
+                    {
+                        readNestedConfig(reader, node_name, crash_on_missing_entry);
+                    }
+
+
+                    /**
+                     * @brief Read configuration (assuming the configuration node
+                     * to be in the root).
+                     *
+                     * @param[in] file_name file name
+                     * @param[in] crash_on_missing_entry
+                     */
+                    template <class t_Reader>
+                        void readConfig(const std::string &file_name,
+                                        const bool        crash_on_missing_entry = default_crash_on_missing_entry_)
+                    {
+                        t_Reader reader(file_name);
+                        readNestedConfig(reader, getConfigSectionID(), crash_on_missing_entry);
+                    }
+
+
+                    /**
+                     * @brief Read configuration (assuming the configuration node
+                     * to be in the root).
+                     *
+                     * @param[in] file_name file name
+                     * @param[in] node_name   node name, the default is used if empty
+                     * @param[in] crash_on_missing_entry
+                     */
+                    template <class t_Reader>
+                        void readConfig(const std::string &file_name,
+                                        const std::string &node_name,
+                                        const bool        crash_on_missing_entry = default_crash_on_missing_entry_)
+                    {
+                        t_Reader reader(file_name);
+                        readNestedConfig(reader, node_name, crash_on_missing_entry);
+                    }
+
+
+                    /**
+                     * @brief Read configuration (assuming the configuration node
+                     * to be in the root).
+                     *
+                     * @param[in] file_name file name
+                     * @param[in] crash_on_missing_entry
+                     * @param[in] node_name   node name, the default is used if empty
+                     *
+                     * @note Intercept implicit conversion of a pointer to bool.
+                     */
+                    template <class t_Reader>
+                        void readConfig(const std::string &file_name,
+                                        const char        *node_name,
+                                        const bool        crash_on_missing_entry = default_crash_on_missing_entry_)
+                    {
+                        t_Reader reader(file_name);
+                        readNestedConfig(reader, node_name, crash_on_missing_entry);
+                    }
+
+                    // ------------------------------------------
+
+
+                    /**
+                     * @brief Write nested configuration node
+                     *
+                     * @param[in,out] writer configuration writer
+                     */
+                    template <class t_Writer>
+                        void writeNestedConfig( t_Writer& writer) const
+                    {
+                        writeNestedConfig(writer, getConfigSectionID());
+                    }
+
+
+                    /**
+                     * @brief Write nested configuration node
+                     *
+                     * @param[in,out] writer configuration writer
+                     * @param[in] node_name   node name, the default is used if empty
+                     */
+                    template <class t_Writer>
+                        void writeNestedConfig( t_Writer& writer,
+                                                const std::string &name) const
+                    {
+                        writer.descend(name);
+                        writeConfigEntries(writer);
+                        writer.ascend();
+                    }
+
+
+                    /**
+                     * @brief Write configuration
+                     *
+                     * @param[in,out] writer configuration writer
+                     */
+                    template <class t_Writer>
+                        void writeConfig(t_Writer& writer) const
+                    {
+                        writeConfig(writer, getConfigSectionID());
                     }
 
 
@@ -240,7 +342,7 @@ namespace humoto
                      */
                     template <class t_Writer>
                         void writeConfig(t_Writer& writer,
-                                         const std::string &node_name = "") const
+                                         const std::string &node_name) const
                     {
                         writeNestedConfig(writer, node_name);
                         writer.flush();
@@ -248,20 +350,15 @@ namespace humoto
 
 
                     /**
-                     * @brief Read configuration (assuming the configuration node
-                     * to be in the root).
+                     * @brief Write configuration.
                      *
                      * @param[in] file_name file name
-                     * @param[in] crash_on_missing_entry
-                     * @param[in] node_name   node name, the default is used if empty
                      */
-                    template <class t_Reader>
-                        void readConfig(const std::string &file_name,
-                                        const bool        crash_on_missing_entry = default_crash_on_missing_entry_,
-                                        const std::string &node_name = "")
+                    template <class t_Writer>
+                        void writeConfig(const std::string &file_name) const
                     {
-                        t_Reader reader(file_name);
-                        readNestedConfig(reader, crash_on_missing_entry, node_name);
+                        t_Writer writer(file_name);
+                        writeConfig(writer);
                     }
 
 
@@ -273,7 +370,7 @@ namespace humoto
                      */
                     template <class t_Writer>
                         void writeConfig(const std::string &file_name,
-                                         const std::string &node_name = "") const
+                                         const std::string &node_name) const
                     {
                         t_Writer writer(file_name);
                         writeConfig(writer, node_name);

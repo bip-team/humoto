@@ -88,7 +88,7 @@ int main(int argc, char **argv)
                 {
                     // optimization problem (a stack of tasks / hierarchy)
                     humoto::pepper_ik::ConfigurableOptimizationProblem<MODEL_FEATURES>     opt_problem;
-                    opt_problem.readConfig<humoto::config::yaml::Reader>(config_path + "hierarchies_planar.yaml", true, "Hierarchy01");
+                    opt_problem.readConfig<humoto::config::yaml::Reader>(config_path + "hierarchies_planar.yaml", "Hierarchy01");
 
 
                     // parameters of the solver

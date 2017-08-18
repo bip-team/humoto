@@ -54,7 +54,7 @@ namespace humoto_tests
                     stance_fsm.setParameters(walk_parameters);
                     wpg.setParameters(wpg_parameters);
 
-                    opt_problem.readConfig<humoto::config::yaml::Reader>(g_config_path + "/hierarchies.yaml", true, HUMOTO_TEST_HIERARCHY_ID);
+                    opt_problem.readConfig<humoto::config::yaml::Reader>(g_config_path + "/hierarchies.yaml", HUMOTO_TEST_HIERARCHY_ID);
                 }
 
 

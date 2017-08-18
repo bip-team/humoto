@@ -98,10 +98,17 @@
              */
             template <class t_Reader>
                 explicit HUMOTO_CONFIG_CONSTRUCTOR(t_Reader &reader,
-                                    const bool crash_on_missing_entry = default_crash_on_missing_entry_,
-                                    const std::string &node_name = "")
+                                    const std::string &node_name,
+                                    const bool crash_on_missing_entry = default_crash_on_missing_entry_)
             {
-                readConfig(reader, crash_on_missing_entry, node_name);
+                readConfig(reader, node_name, crash_on_missing_entry);
+            }
+
+            template <class t_Reader>
+                explicit HUMOTO_CONFIG_CONSTRUCTOR(t_Reader &reader,
+                                    const bool crash_on_missing_entry = default_crash_on_missing_entry_)
+            {
+                readConfig(reader, crash_on_missing_entry);
             }
         #endif
 

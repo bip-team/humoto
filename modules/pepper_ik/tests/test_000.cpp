@@ -50,7 +50,7 @@ int main(int argc, char **argv)
     {
         // optimization problem (a stack of tasks / hierarchy)
         humoto::pepper_ik::ConfigurableOptimizationProblem<MODEL_FEATURES>     opt_problem;
-        opt_problem.readConfig<humoto::config::yaml::Reader>(config_path + "hierarchies_torso.yaml", true, "Hierarchy00");
+        opt_problem.readConfig<humoto::config::yaml::Reader>(config_path + "hierarchies_torso.yaml", "Hierarchy00");
 
 
         // parameters of the solver

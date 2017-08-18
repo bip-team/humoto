@@ -154,7 +154,7 @@ namespace humoto
                         if (task)
                         {
                             // configure tasks
-                            task->readConfig(reader, crash_on_missing_entry, task_ids_[i][j]);
+                            task->readConfig(reader, task_ids_[i][j], crash_on_missing_entry);
                             // push tasks into the stack/hierarchy
                             humoto::OptimizationProblem::pushTask(task, i);
                         }

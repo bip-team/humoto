@@ -108,8 +108,8 @@ namespace humoto_tests
             protected:
                 Fixture_FixedFootPositions()
                 {
-                    reference_.solution_.readConfig<humoto::config::yaml::Reader>(g_ref_filename, true, "Solution_FixedFootPositions");
-                    reference_.state_.readConfig<humoto::config::yaml::Reader>(g_ref_filename, true, "ModelState_FixedFootPositions");
+                    reference_.solution_.readConfig<humoto::config::yaml::Reader>(g_ref_filename, "Solution_FixedFootPositions");
+                    reference_.state_.readConfig<humoto::config::yaml::Reader>(g_ref_filename, "ModelState_FixedFootPositions");
 
                     walk_parameters.com_velocity_ << 0.1, 0.;
                     walk_parameters.first_stance_com_velocity_ = walk_parameters.com_velocity_;
@@ -118,7 +118,7 @@ namespace humoto_tests
                     stance_fsm.setParameters(walk_parameters);
                     wpg.setParameters(wpg_parameters);
 
-                    opt_problem.readConfig<humoto::config::yaml::Reader>(g_config_path + "/hierarchies.yaml", true, "Hierarchy01");
+                    opt_problem.readConfig<humoto::config::yaml::Reader>(g_config_path + "/hierarchies.yaml", "Hierarchy01");
                 }
         };
 
@@ -130,8 +130,8 @@ namespace humoto_tests
             protected:
                 Fixture_RotatingFeet()
                 {
-                    reference_.solution_.readConfig<humoto::config::yaml::Reader>(g_ref_filename, true, "Solution_RotatingFeet");
-                    reference_.state_.readConfig<humoto::config::yaml::Reader>(g_ref_filename, true, "ModelState_RotatingFeet");
+                    reference_.solution_.readConfig<humoto::config::yaml::Reader>(g_ref_filename, "Solution_RotatingFeet");
+                    reference_.state_.readConfig<humoto::config::yaml::Reader>(g_ref_filename, "ModelState_RotatingFeet");
 
                     walk_parameters.com_velocity_ << 0.1, 0.;
                     walk_parameters.first_stance_com_velocity_ = walk_parameters.com_velocity_;
@@ -141,7 +141,7 @@ namespace humoto_tests
                     stance_fsm.setParameters(walk_parameters);
                     wpg.setParameters(wpg_parameters);
 
-                    opt_problem.readConfig<humoto::config::yaml::Reader>(g_config_path + "/hierarchies.yaml", true, "Hierarchy00");
+                    opt_problem.readConfig<humoto::config::yaml::Reader>(g_config_path + "/hierarchies.yaml", "Hierarchy00");
                 }
         };
 
@@ -153,8 +153,8 @@ namespace humoto_tests
             protected:
                 Fixture_HRP4Parameters()
                 {
-                    reference_.solution_.readConfig<humoto::config::yaml::Reader>(g_ref_filename, true, "Solution_HRP4Parameters");
-                    reference_.state_.readConfig<humoto::config::yaml::Reader>(g_ref_filename, true, "ModelState_HRP4Parameters");
+                    reference_.solution_.readConfig<humoto::config::yaml::Reader>(g_ref_filename, "Solution_HRP4Parameters");
+                    reference_.state_.readConfig<humoto::config::yaml::Reader>(g_ref_filename, "ModelState_HRP4Parameters");
 
                     walk_parameters.readConfig<humoto::config::yaml::Reader>(g_config_path + "walk_parameters__walk_in_place_7_steps.yaml");
                     robot_parameters.readConfig<humoto::config::yaml::Reader>(g_config_path + "robot_hrp4.yaml");
@@ -164,7 +164,7 @@ namespace humoto_tests
                     stance_fsm.setParameters(walk_parameters);
                     wpg.setParameters       (wpg_parameters);
 
-                    opt_problem.readConfig<humoto::config::yaml::Reader>(g_config_path + "/hierarchies.yaml", true, "Hierarchy00");
+                    opt_problem.readConfig<humoto::config::yaml::Reader>(g_config_path + "/hierarchies.yaml", "Hierarchy00");
 
                     model.setFootParameters(robot_parameters);
                     model.updateState      (model_state);
@@ -179,8 +179,8 @@ namespace humoto_tests
             protected:
                 Fixture_SingleConfigurationFile()
                 {
-                    reference_.solution_.readConfig<humoto::config::yaml::Reader>(g_ref_filename, true, "Solution_SingleConfigurationFile");
-                    reference_.state_.readConfig<humoto::config::yaml::Reader>(g_ref_filename, true, "ModelState_SingleConfigurationFile");
+                    reference_.solution_.readConfig<humoto::config::yaml::Reader>(g_ref_filename, "Solution_SingleConfigurationFile");
+                    reference_.state_.readConfig<humoto::config::yaml::Reader>(g_ref_filename, "ModelState_SingleConfigurationFile");
 
                     humoto::config::yaml::Reader config_reader("regression_test_001.yaml");
 

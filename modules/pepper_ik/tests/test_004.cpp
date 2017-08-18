@@ -82,13 +82,12 @@ int main(int argc, char **argv)
     {
         humoto::Logger       logger(log_file_name);
         humoto::LogEntryName prefix;
-        bool                 crash_on_missing_config_entry = true;
 
         // -----------------ik--------------------------------
 
         // optimization problem (a stack of tasks / hierarchy)
         humoto::pepper_ik::ConfigurableOptimizationProblem<MODEL_FEATURES>  ik_opt_problem;
-        ik_opt_problem.readConfig(config_reader, true, "IKOptimizationProblem");
+        ik_opt_problem.readConfig(config_reader, "IKOptimizationProblem");
 
         // parameters of the solver
         humoto::qpoases::SolverParameters   ik_solver_parameters;
@@ -98,26 +97,26 @@ int main(int argc, char **argv)
         // solution
         humoto::Solution                                       ik_solution;
         // parameters of the control problem
-        humoto::pepper_ik::WBCParameters                       ik_wbc_parameters(config_reader, crash_on_missing_config_entry);
+        humoto::pepper_ik::WBCParameters                       ik_wbc_parameters(config_reader);
         // control problem, which is used to construct an optimization problem
         humoto::pepper_ik::WholeBodyController<MODEL_FEATURES> ik_wbc;
         // model representing the controlled system
         humoto::pepper_ik::Model<MODEL_FEATURES>               ik_model;
         ik_model.loadParameters(config_path + "pepper_fixedwheels_roottibia_planar.urdf");
         // options for walking
-        humoto::pepper_ik::MotionParameters                       ik_motion_parameters(config_reader, crash_on_missing_config_entry, "IKMotionParameters");
+        humoto::pepper_ik::MotionParameters                       ik_motion_parameters(config_reader, "IKMotionParameters");
         //humoto::pepper_ik::GeneralizedCoordinates<MODEL_FEATURES>   ik_generalized_coordinates;
         humoto::pepper_ik::GeneralizedCoordinates<MODEL_FEATURES> ik_generalized_coordinates;
         ik_generalized_coordinates.readConfig<humoto::config::yaml::Reader>(config_path + "initial_state_pepper_ik_planar.yaml", true);
         ik_model.updateState(ik_generalized_coordinates);
 
         // -----------------ik--------------------------------
-        
+
         // -----------------mpc--------------------------------
 
         // optimization problem (a stack of tasks / hierarchy)
         humoto::pepper_mpc::ConfigurableOptimizationProblem mpc_opt_problem;
-        mpc_opt_problem.readConfig(config_reader, true, "MPCOptimizationProblem");
+        mpc_opt_problem.readConfig(config_reader, "MPCOptimizationProblem");
 
         // parameters of the solver
         humoto::qpoases::SolverParameters           mpc_solver_parameters;
@@ -126,17 +125,17 @@ int main(int argc, char **argv)
         humoto::qpoases::Solver                     mpc_solver(mpc_solver_parameters);
         // solution
         humoto::qpoases::Solution                   mpc_solution;
-        humoto::pepper_mpc::RobotParameters         mpc_robot_parameters(config_reader, crash_on_missing_config_entry);
+        humoto::pepper_mpc::RobotParameters         mpc_robot_parameters(config_reader);
         // model representing the controlled system
         humoto::pepper_mpc::Model                   mpc_model(mpc_robot_parameters);
         // parameters of the control problem
-        humoto::pepper_mpc::MPCParameters           mpc_mg_parameters(config_reader, crash_on_missing_config_entry);
+        humoto::pepper_mpc::MPCParameters           mpc_mg_parameters(config_reader);
         // control problem, which is used to construct an optimization problem
         humoto::pepper_mpc::MPCforMG                mpc_mg(mpc_mg_parameters);
 
         humoto::pepper_mpc::ModelState              mpc_model_state;
 
-        humoto::pepper_mpc::MotionParameters        mpc_motion_parameters(config_reader, crash_on_missing_config_entry, "MPCMotionParameters");
+        humoto::pepper_mpc::MotionParameters        mpc_motion_parameters(config_reader, "MPCMotionParameters");
 
         // -----------------mpc--------------------------------
 
@@ -144,12 +143,12 @@ int main(int argc, char **argv)
         humoto::pepper_ik::RobotCommand command;
 
         // -------------------read head motion from file --------------
-        
+
         std::vector<etools::Vector6> head_complete_velocity;
         readCompleteVelocityFromFile(head_complete_velocity, "velocity-log.m");
         etools::Vector6 velocity;
         std::map<std::string, etools::Vector6> tag_velocity;
-        
+
         // -------------------read head motion from file --------------
 
         for(std::size_t i = 0;; ++i)
@@ -166,7 +165,7 @@ int main(int argc, char **argv)
                              mpc_mg_parameters.subsampling_time_ms_);
             }
             // -----------------feedback--------------------------------
-            
+
             // -----------------sync-models--------------------------------
             mpc_model_state.update( ik_model.getBaseMass(),
                                     ik_model.getBodyMass(),
@@ -177,11 +176,11 @@ int main(int argc, char **argv)
 
             mpc_model.updateState(mpc_model_state);
             // -----------------sync-models--------------------------------
-            
+
             prefix = humoto::LogEntryName("humoto").add(i);
 
             timer.start();
-            
+
             // prepare control problem for new iteration
             //if (mpc_mg.update(  mpc_motion_parameters,
             if (mpc_mg.update(  mpc_motion_parameters,
@@ -228,7 +227,7 @@ int main(int argc, char **argv)
             //mpc_model_state.log(logger, prefix, "next_state");
             //logger.log(humoto::LogEntryName(prefix).add("next_cop"), mpc_model.getCoP(mpc_model_state));
 
-            // ---------------- set tag velocity ----------    
+            // ---------------- set tag velocity ----------
 
             //update tag velocity
             if(!(i % 10))
@@ -243,8 +242,8 @@ int main(int argc, char **argv)
             {
                 ik_wbc.setTagRefVelocity(tag_velocity);
             }
-            
-            // ---------------- set tag velocity ----------    
+
+            // ---------------- set tag velocity ----------
 
             //ik_model.log(logger, prefix);
             //HUMOTO_LOG_RAW("===================");

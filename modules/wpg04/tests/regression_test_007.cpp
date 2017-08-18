@@ -53,7 +53,7 @@ namespace humoto_tests
                     stance_fsm.setParameters(walk_parameters);
                     wpg.setParameters(wpg_parameters);
 
-                    opt_problem.readConfig<humoto::config::yaml::Reader>(g_config_path + "/hierarchies.yaml", true, "Hierarchy02");
+                    opt_problem.readConfig<humoto::config::yaml::Reader>(g_config_path + "/hierarchies.yaml", "Hierarchy02");
                 }
 
 
@@ -129,7 +129,7 @@ namespace humoto_tests
                     stance_fsm.setParameters(walk_parameters);
                     wpg.setParameters(wpg_parameters);
 
-                    opt_problem.readConfig<humoto::config::yaml::Reader>(g_config_path + "/hierarchies.yaml", true, "Hierarchy03");
+                    opt_problem.readConfig<humoto::config::yaml::Reader>(g_config_path + "/hierarchies.yaml", "Hierarchy03");
                 }
 
 

@@ -62,7 +62,7 @@ int main(int argc, char **argv)
         // control problem, which is used to construct an optimization problem
         humoto::wpg04::MPCforWPG                  wpg(wpg_parameters);
 
-        opt_problem.readConfig<humoto::config::yaml::Reader>(config_path + "/hierarchies.yaml", true, "Hierarchy00");
+        opt_problem.readConfig<humoto::config::yaml::Reader>(config_path + "/hierarchies.yaml", "Hierarchy00");
 
         humoto::wpg04::ModelState                 model_state;
         model_state.readConfig<humoto::config::yaml::Reader>(config_path + "initial_state_hrp4.yaml");
