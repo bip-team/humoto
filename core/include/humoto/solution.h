@@ -175,11 +175,11 @@ namespace humoto
      */
     class HUMOTO_LOCAL Solution : public SolutionStructure, public humoto::config::ConfigurableBase
     {
-        protected:
-            #define HUMOTO_CONFIG_SECTION_ID "Solution"
-            #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_COMPOUND_(x);
-            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+        #define HUMOTO_CONFIG_SECTION_ID "Solution"
+        #define HUMOTO_CONFIG_CONSTRUCTOR Solution
+        #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_COMPOUND_(x);
+        #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 
         public:
@@ -188,7 +188,6 @@ namespace humoto
 
 
         public:
-            HUMOTO_DEFINE_CONFIG_CONSTRUCTORS(Solution)
             Solution()
             {
                 return_status_ = SolverStatus::UNDEFINED;

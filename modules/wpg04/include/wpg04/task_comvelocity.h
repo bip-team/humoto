@@ -19,12 +19,12 @@ namespace humoto
          */
         class HUMOTO_LOCAL TaskCoMVelocity: public humoto::TaskAB
         {
+            #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_PARENT_CLASS(TaskAB);
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
             protected:
-                #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_PARENT_CLASS(TaskAB);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
-
                 void setDefaults()
                 {
                     TaskAB::setDefaults();

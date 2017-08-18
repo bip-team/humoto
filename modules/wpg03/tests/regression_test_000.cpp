@@ -44,7 +44,7 @@ namespace humoto_tests
             protected:
                 TestFixture()
                 {
-                    ref_solution.readConfig(g_ref_filename);
+                    ref_solution.readConfig<humoto::config::yaml::Reader>(g_ref_filename);
                 }
 
 

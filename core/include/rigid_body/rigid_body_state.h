@@ -15,14 +15,15 @@ namespace humoto
     {
         class HUMOTO_LOCAL RigidBodyPose : public humoto::config::ConfigurableBase
         {
+            #define HUMOTO_CONFIG_SECTION_ID "RigidBodyPose"
+            #define HUMOTO_CONFIG_CONSTRUCTOR RigidBodyPose 
+            #define HUMOTO_CONFIG_ENTRIES \
+                    HUMOTO_CONFIG_COMPOUND_(position); \
+                    HUMOTO_CONFIG_COMPOUND_(rpy);
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
             protected:
-                #define HUMOTO_CONFIG_SECTION_ID "RigidBodyPose"
-                #define HUMOTO_CONFIG_ENTRIES \
-                        HUMOTO_CONFIG_COMPOUND_(position); \
-                        HUMOTO_CONFIG_COMPOUND_(rpy);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
-
                 /**
                  * @brief Set default values
                  */
@@ -39,9 +40,6 @@ namespace humoto
 
 
             public:
-                HUMOTO_DEFINE_CONFIG_CONSTRUCTORS(RigidBodyPose)
-
-
                 /**
                  * @brief  Default constructor
                  */
@@ -102,6 +100,7 @@ namespace humoto
         {
             protected:
                 #define HUMOTO_CONFIG_SECTION_ID "RigidBodyState"
+                #define HUMOTO_CONFIG_CONSTRUCTOR RigidBodyState 
                 #define HUMOTO_CONFIG_ENTRIES \
                         HUMOTO_CONFIG_PARENT_CLASS(PointMassState); \
                         HUMOTO_CONFIG_PARENT_CLASS(RotaryState);
@@ -109,9 +108,6 @@ namespace humoto
 
 
             public:
-                HUMOTO_DEFINE_CONFIG_CONSTRUCTORS(RigidBodyState)
-
-
                 /**
                  * @brief Default constructor.
                  */

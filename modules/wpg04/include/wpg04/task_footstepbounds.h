@@ -19,18 +19,18 @@ namespace humoto
          */
         class HUMOTO_LOCAL TaskFootstepBounds : public humoto::TaskILU
         {
+            #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_PARENT_CLASS(TaskILU); \
+                HUMOTO_CONFIG_SCALAR_(fix_footsteps);
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
             //private:
             public:
                 bool fix_footsteps_;
 
 
             protected:
-                #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_PARENT_CLASS(TaskILU); \
-                    HUMOTO_CONFIG_SCALAR_(fix_footsteps);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
-
                 void setDefaults()
                 {
                     TaskILU::setDefaults();

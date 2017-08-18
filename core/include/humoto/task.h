@@ -19,6 +19,10 @@ namespace humoto
      */
     class HUMOTO_LOCAL TaskBase : public constraints::ConstraintsBase, public config::StrictConfigurableBase
     {
+        #define HUMOTO_CONFIG_ENTRIES
+        #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
         // The functions collected here are supposed to be called by
         // OptimizationProblem class members only.
         friend class HierarchyLevel;
@@ -98,14 +102,10 @@ namespace humoto
 
         protected:
             bool                is_modified_;
+            ActiveSetConstraints    active_set_actual_;
 
 
         protected:
-            #define HUMOTO_CONFIG_ENTRIES
-            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
-            ActiveSetConstraints    active_set_actual_;
-
             /**
              * @brief Protected destructor: prevent destruction of the child
              * classes through a base pointer.

@@ -20,47 +20,59 @@ namespace humoto
          */
         class HUMOTO_LOCAL SolverParameters : public humoto::SolverParametersBase
         {
+            #define HUMOTO_CONFIG_SECTION_ID "SolverParameters"
+            #define HUMOTO_CONFIG_CONSTRUCTOR SolverParameters
+            #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_PARENT_CLASS(humoto::SolverParametersBase); \
+                \
+                HUMOTO_CONFIG_SCALAR_(max_number_of_iterations); \
+                HUMOTO_CONFIG_SCALAR_(max_cpu_time); \
+                \
+                HUMOTO_CONFIG_MEMBER_CLASS(options_, "QPoasesParameters");
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
             private:
                 class HUMOTO_LOCAL QPoasesParameters : public qpOASES::Options, public humoto::config::ConfigurableBase
                 {
-                    protected:
-                        #define HUMOTO_CONFIG_SECTION_ID "QPoasesParameters"
-                        #define HUMOTO_CONFIG_ENTRIES \
-                            HUMOTO_CONFIG_ENUM(enableRamping);\
-                            HUMOTO_CONFIG_ENUM(enableFarBounds);\
-                            HUMOTO_CONFIG_ENUM(enableFlippingBounds);\
-                            HUMOTO_CONFIG_ENUM(enableRegularisation);\
-                            HUMOTO_CONFIG_ENUM(enableFullLITests);\
-                            HUMOTO_CONFIG_ENUM(enableNZCTests);\
-                            HUMOTO_CONFIG_SCALAR(enableDriftCorrection);\
-                            HUMOTO_CONFIG_SCALAR(enableCholeskyRefactorisation);\
-                            HUMOTO_CONFIG_ENUM(enableEqualities);\
-                            HUMOTO_CONFIG_SCALAR(terminationTolerance);\
-                            HUMOTO_CONFIG_SCALAR(boundTolerance);\
-                            HUMOTO_CONFIG_SCALAR(boundRelaxation);\
-                            HUMOTO_CONFIG_SCALAR(epsNum);\
-                            HUMOTO_CONFIG_SCALAR(epsDen);\
-                            HUMOTO_CONFIG_SCALAR(maxPrimalJump);\
-                            HUMOTO_CONFIG_SCALAR(maxDualJump);\
-                            HUMOTO_CONFIG_SCALAR(initialRamping);\
-                            HUMOTO_CONFIG_SCALAR(finalRamping);\
-                            HUMOTO_CONFIG_SCALAR(initialFarBounds);\
-                            HUMOTO_CONFIG_SCALAR(growFarBounds);\
-                            HUMOTO_CONFIG_ENUM(initialStatusBounds);\
-                            HUMOTO_CONFIG_SCALAR(epsFlipping);\
-                            HUMOTO_CONFIG_SCALAR(numRegularisationSteps);\
-                            HUMOTO_CONFIG_SCALAR(epsRegularisation);\
-                            HUMOTO_CONFIG_SCALAR(numRefinementSteps);\
-                            HUMOTO_CONFIG_SCALAR(epsIterRef);\
-                            HUMOTO_CONFIG_SCALAR(epsLITests);\
-                            HUMOTO_CONFIG_SCALAR(epsNZCTests);\
-                            HUMOTO_CONFIG_SCALAR(rcondSMin);\
-                            HUMOTO_CONFIG_ENUM(enableInertiaCorrection);\
-                            HUMOTO_CONFIG_ENUM(enableDropInfeasibles);\
-                            HUMOTO_CONFIG_SCALAR(dropBoundPriority);\
-                            HUMOTO_CONFIG_SCALAR(dropEqConPriority);\
-                            HUMOTO_CONFIG_SCALAR(dropIneqConPriority);
-                        #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+                    #define HUMOTO_CONFIG_SECTION_ID "QPoasesParameters"
+                    #define HUMOTO_CONFIG_CONSTRUCTOR QPoasesParameters 
+                    #define HUMOTO_CONFIG_ENTRIES \
+                        HUMOTO_CONFIG_ENUM(enableRamping);\
+                        HUMOTO_CONFIG_ENUM(enableFarBounds);\
+                        HUMOTO_CONFIG_ENUM(enableFlippingBounds);\
+                        HUMOTO_CONFIG_ENUM(enableRegularisation);\
+                        HUMOTO_CONFIG_ENUM(enableFullLITests);\
+                        HUMOTO_CONFIG_ENUM(enableNZCTests);\
+                        HUMOTO_CONFIG_SCALAR(enableDriftCorrection);\
+                        HUMOTO_CONFIG_SCALAR(enableCholeskyRefactorisation);\
+                        HUMOTO_CONFIG_ENUM(enableEqualities);\
+                        HUMOTO_CONFIG_SCALAR(terminationTolerance);\
+                        HUMOTO_CONFIG_SCALAR(boundTolerance);\
+                        HUMOTO_CONFIG_SCALAR(boundRelaxation);\
+                        HUMOTO_CONFIG_SCALAR(epsNum);\
+                        HUMOTO_CONFIG_SCALAR(epsDen);\
+                        HUMOTO_CONFIG_SCALAR(maxPrimalJump);\
+                        HUMOTO_CONFIG_SCALAR(maxDualJump);\
+                        HUMOTO_CONFIG_SCALAR(initialRamping);\
+                        HUMOTO_CONFIG_SCALAR(finalRamping);\
+                        HUMOTO_CONFIG_SCALAR(initialFarBounds);\
+                        HUMOTO_CONFIG_SCALAR(growFarBounds);\
+                        HUMOTO_CONFIG_ENUM(initialStatusBounds);\
+                        HUMOTO_CONFIG_SCALAR(epsFlipping);\
+                        HUMOTO_CONFIG_SCALAR(numRegularisationSteps);\
+                        HUMOTO_CONFIG_SCALAR(epsRegularisation);\
+                        HUMOTO_CONFIG_SCALAR(numRefinementSteps);\
+                        HUMOTO_CONFIG_SCALAR(epsIterRef);\
+                        HUMOTO_CONFIG_SCALAR(epsLITests);\
+                        HUMOTO_CONFIG_SCALAR(epsNZCTests);\
+                        HUMOTO_CONFIG_SCALAR(rcondSMin);\
+                        HUMOTO_CONFIG_ENUM(enableInertiaCorrection);\
+                        HUMOTO_CONFIG_ENUM(enableDropInfeasibles);\
+                        HUMOTO_CONFIG_SCALAR(dropBoundPriority);\
+                        HUMOTO_CONFIG_SCALAR(dropEqConPriority);\
+                        HUMOTO_CONFIG_SCALAR(dropIneqConPriority);
+                    #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
                     public:
                         QPoasesParameters()
@@ -75,26 +87,10 @@ namespace humoto
                         {
                             setToMPC ();
                         }
-
-                        HUMOTO_DEFINE_CONFIG_CONSTRUCTORS(QPoasesParameters)
                 };
 
 
-            protected:
-                #define HUMOTO_CONFIG_SECTION_ID "SolverParameters"
-                #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_PARENT_CLASS(humoto::SolverParametersBase); \
-                    \
-                    HUMOTO_CONFIG_SCALAR_(max_number_of_iterations); \
-                    HUMOTO_CONFIG_SCALAR_(max_cpu_time); \
-                    \
-                    HUMOTO_CONFIG_MEMBER_CLASS(options_, "QPoasesParameters");
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
-
             public:
-                HUMOTO_DEFINE_CONFIG_CONSTRUCTORS(SolverParameters)
-
                 /// Parameters for qpOASES
                 QPoasesParameters   options_;
 

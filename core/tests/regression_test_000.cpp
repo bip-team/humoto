@@ -39,14 +39,14 @@ class ConfigTest : public ::testing::Test
             {
                 humoto::walking::StanceFSMParameters stance_fsm_parameters;
 
-                humoto::config::Writer writer("stance_fsm_config1.yaml");
+                humoto::config::yaml::Writer writer("stance_fsm_config1.yaml");
                 stance_fsm_parameters.writeConfig(writer);
             }
 
             {
                 humoto::walking::StanceFSMParameters stance_fsm_parameters;
 
-                humoto::config::Reader reader("stance_fsm_config1.yaml");
+                humoto::config::yaml::Reader reader("stance_fsm_config1.yaml");
                 stance_fsm_parameters.readConfig(reader);
             }
 
@@ -54,12 +54,12 @@ class ConfigTest : public ::testing::Test
 
             {
                 humoto::walking::StanceFSMParameters stance_fsm_parameters;
-                stance_fsm_parameters.writeConfig("stance_fsm_config2.yaml");
+                stance_fsm_parameters.writeConfig<humoto::config::yaml::Writer>("stance_fsm_config2.yaml");
             }
 
             {
                 humoto::walking::StanceFSMParameters stance_fsm_parameters;
-                stance_fsm_parameters.readConfig("stance_fsm_config2.yaml");
+                stance_fsm_parameters.readConfig<humoto::config::yaml::Reader>("stance_fsm_config2.yaml");
             }
         }
 };
@@ -84,12 +84,12 @@ TEST_F(ConfigTest, ConfigWriteMatchesRead)
     stance_fsm_parameters_out.num_steps_                = 555;
 
     {
-        humoto::config::Writer writer("stance_fsm_config3.yaml");
+        humoto::config::yaml::Writer writer("stance_fsm_config3.yaml");
         stance_fsm_parameters_out.writeConfig(writer);
     }
 
     humoto::walking::StanceFSMParameters stance_fsm_parameters_in;
-    humoto::config::Reader reader("stance_fsm_config3.yaml");
+    humoto::config::yaml::Reader reader("stance_fsm_config3.yaml");
     stance_fsm_parameters_in.readConfig(reader);
 
     EXPECT_EQ(stance_fsm_parameters_out.first_ss_type_,            stance_fsm_parameters_in.first_ss_type_);

@@ -76,7 +76,7 @@ int main(int argc, char **argv)
     std::string log_file_name = humoto_tests::getLogFileName(argc, argv, 3);
 
     std::string config_file_name = std::string(argv[0]) + ".yaml";
-    humoto::config::Reader config_reader(config_file_name);
+    humoto::config::yaml::Reader config_reader(config_file_name);
 
     try
     {
@@ -107,7 +107,8 @@ int main(int argc, char **argv)
         // options for walking
         humoto::pepper_ik::MotionParameters                       ik_motion_parameters(config_reader, crash_on_missing_config_entry, "IKMotionParameters");
         //humoto::pepper_ik::GeneralizedCoordinates<MODEL_FEATURES>   ik_generalized_coordinates;
-        humoto::pepper_ik::GeneralizedCoordinates<MODEL_FEATURES> ik_generalized_coordinates(config_path + "initial_state_pepper_ik_planar.yaml", true);
+        humoto::pepper_ik::GeneralizedCoordinates<MODEL_FEATURES> ik_generalized_coordinates;
+        ik_generalized_coordinates.readConfig<humoto::config::yaml::Reader>(config_path + "initial_state_pepper_ik_planar.yaml", true);
         ik_model.updateState(ik_generalized_coordinates);
 
         // -----------------ik--------------------------------

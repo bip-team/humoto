@@ -70,7 +70,8 @@ int main(int argc, char **argv)
 #ifdef PERFORMANCE_TEST
         humoto::pepper_ik::WBCParameters           wbc_parameters;
 #else
-        humoto::pepper_ik::WBCParameters           wbc_parameters(config_path + "wbc_parameters.yaml");
+        humoto::pepper_ik::WBCParameters           wbc_parameters;
+        wbc_parameters.readConfig<humoto::config::yaml::Reader>(config_path + "wbc_parameters.yaml");
 #endif // PERFORMANCE_TEST
         // control problem, which is used to construct an optimization problem
         humoto::pepper_ik::WholeBodyController<MODEL_FEATURES>     wbc;

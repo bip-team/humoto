@@ -20,6 +20,10 @@ namespace humoto
         :   public humoto::config::StrictConfigurableBase,
             public humoto::OptimizationProblem
     {
+        #define HUMOTO_CONFIG_SECTION_ID "OptimizationProblem"
+        #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
         public:
             /**
              * @brief Default constructor
@@ -65,10 +69,12 @@ namespace humoto
             }
 
 
+        protected:
+            std::vector<std::vector<std::string> >           task_class_names_;
+            std::vector<std::vector<std::string> >           task_ids_;
+
 
         protected:
-            HUMOTO_DEFINE_CONFIG_SECTION_ID("OptimizationProblem")
-
             using humoto::OptimizationProblem::pushTask;
 
 
@@ -105,14 +111,16 @@ namespace humoto
 
 
 
+        private:
             /**
              * @brief Read config entries
              *
              * @param[in] reader
              * @param[in] crash_on_missing_entry
              */
-            void readConfigEntries( humoto::config::Reader& reader,
-                                    const bool crash_on_missing_entry = true)
+            template <class t_Reader>
+                void readConfigEntriesTemplate( t_Reader& reader,
+                                                const bool crash_on_missing_entry = true)
             {
                 HUMOTO_CONFIG_READ_COMPOUND_(task_class_names);
                 HUMOTO_CONFIG_READ_COMPOUND_(task_ids);
@@ -165,7 +173,8 @@ namespace humoto
              *
              * @param[in] writer
              */
-            void writeConfigEntries(humoto::config::Writer& writer) const
+            template <class t_Writer>
+                void writeConfigEntriesTemplate(t_Writer& writer) const
             {
                 HUMOTO_CONFIG_WRITE_COMPOUND_(task_class_names);
                 HUMOTO_CONFIG_WRITE_COMPOUND_(task_ids);
@@ -186,10 +195,5 @@ namespace humoto
                     }
                 }
             }
-
-
-        protected:
-            std::vector<std::vector<std::string> >           task_class_names_;
-            std::vector<std::vector<std::string> >           task_ids_;
     };
 }

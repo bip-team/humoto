@@ -60,7 +60,7 @@ int main(int argc, char **argv)
     }
 
 
-    humoto::config::Reader    config_reader(config_file_name);
+    humoto::config::yaml::Reader    config_reader(config_file_name);
 
     double sampling_interval_difference = 0.001;
 
@@ -95,7 +95,8 @@ int main(int argc, char **argv)
         // options for walking
         humoto::pepper_ik::MotionParameters     ik_motion_parameters(config_reader, crash_on_missing_config_entry, "IKMotionParameters");
         //humoto::pepper_ik::GeneralizedCoordinates<MODEL_FEATURES>   ik_generalized_coordinates;
-        humoto::pepper_ik::GeneralizedCoordinates<MODEL_FEATURES>   ik_generalized_coordinates(config_path + "initial_state_pepper_ik_planar.yaml", true);
+        humoto::pepper_ik::GeneralizedCoordinates<MODEL_FEATURES>   ik_generalized_coordinates;
+        ik_generalized_coordinates.readConfig<humoto::config::yaml::Reader>(config_path + "initial_state_pepper_ik_planar.yaml", true);
         ik_model.updateState(ik_generalized_coordinates);
 
         // -----------------ik--------------------------------
@@ -127,7 +128,8 @@ int main(int argc, char **argv)
 
 
         // options for walking
-        humoto::pepper_mpc::MotionParameters        mpc_motion_parameters_1(mpc_motion_param_config_file_name,
+        humoto::pepper_mpc::MotionParameters        mpc_motion_parameters_1;
+        mpc_motion_parameters_1.readConfig<humoto::config::yaml::Reader>(mpc_motion_param_config_file_name,
                                                                         crash_on_missing_config_entry,
                                                                         mpc_motion_param_config_entry_id);
 

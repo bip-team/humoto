@@ -46,7 +46,7 @@ int main(int argc, char **argv)
     {
         std::string     config_file_name = std::string(argv[0]) + ".yaml";
 
-        humoto::config::Reader config_reader(config_file_name);
+        humoto::config::yaml::Reader config_reader(config_file_name);
 
 
 

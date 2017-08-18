@@ -30,6 +30,13 @@ namespace humoto
 {
     class CondensingTestTimeInvariant : public ::testing::Test, public humoto::MPC, public humoto::config::ConfigurableBase
     {
+        #define HUMOTO_CONFIG_SECTION_ID "USTimeInvariant"
+        #define HUMOTO_CONFIG_ENTRIES \
+            HUMOTO_CONFIG_COMPOUND_(U);\
+            HUMOTO_CONFIG_COMPOUND_(S);
+        #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
         protected:
             const double      timestep_;
             const std::size_t preview_horizon_length_;
@@ -39,13 +46,6 @@ namespace humoto
 
 
         protected:
-            #define HUMOTO_CONFIG_SECTION_ID "USTimeInvariant"
-            #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_COMPOUND_(U);\
-                HUMOTO_CONFIG_COMPOUND_(S);
-            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
-
             /**
              * @brief Set defaults
              */
@@ -62,7 +62,7 @@ namespace humoto
             CondensingTestTimeInvariant() : timestep_(0.1), preview_horizon_length_(10)
             {
                 setDefaults();
-                readConfig(g_ref_filename);
+                readConfig<humoto::config::yaml::Reader>(g_ref_filename);
             }
 
 
@@ -99,13 +99,14 @@ namespace humoto
 
     class CondensingTestTimeVariant : public ::testing::Test, public humoto::MPC, public humoto::config::ConfigurableBase
     {
-        protected:
-            #define HUMOTO_CONFIG_SECTION_ID "USTimeVariant"
-            #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_COMPOUND_(U);\
-                HUMOTO_CONFIG_COMPOUND_(S);
-            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+        #define HUMOTO_CONFIG_SECTION_ID "USTimeVariant"
+        #define HUMOTO_CONFIG_ENTRIES \
+            HUMOTO_CONFIG_COMPOUND_(U);\
+            HUMOTO_CONFIG_COMPOUND_(S);
+        #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
+
+        protected:
             Eigen::MatrixXd U_;
             Eigen::MatrixXd S_;
 
@@ -130,7 +131,7 @@ namespace humoto
             {
                 setDefaults();
 
-                readConfig(g_ref_filename);
+                readConfig<humoto::config::yaml::Reader>(g_ref_filename);
 
                 // variable timesteps
                 timesteps_.push_back(0.10);

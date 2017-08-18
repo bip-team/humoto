@@ -12,9 +12,8 @@
 
 #pragma once
 
-#ifdef HUMOTO_DEFINE_CONFIG_CONSTRUCTORS
+#ifdef HUMOTO_CONFIG_DISABLED
     #error "This header must be included before humoto.h."
 #else
     #define HUMOTO_USE_CONFIG
-    #define HUMOTO_USE_YAML_CONFIG
 #endif
