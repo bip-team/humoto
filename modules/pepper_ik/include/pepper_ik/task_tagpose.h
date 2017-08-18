@@ -90,8 +90,8 @@ namespace humoto
                     Eigen::VectorXd &b = getB();
 
                     model.getTagCompleteJacobian(A, tag_);
-                    
-                    b.noalias() = k_pose_gain_ * wb_controller.getTagPoseErrorInGlobal(model, tag_string_id_, rbdl::SpatialType::COMPLETE);
+
+                    b.noalias() = k_pose_gain_ * wb_controller.getTagPoseErrorInGlobal(model, tag_string_id_);
 
                     if(!isApproximatelyEqual(1.0, getGain()))
                     {

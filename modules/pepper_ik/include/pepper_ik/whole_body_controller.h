@@ -26,23 +26,25 @@ namespace humoto
                 bool                             solution_is_parsed_;
                 humoto::pepper_ik::WBCParameters wbc_parameters_;
 
+
             public:
                 humoto::pepper_ik::MotionParameters    motion_parameters_;
-                std::map<std::string, etools::Vector6> tag_velocity_;
+                std::map<std::string, etools::Vector6> tags_velocity_;
+                std::map<std::string, etools::Vector6> tags_desired_pose_global_;
 
 
             public:
                 /**
-                 * @brief Get tag velocity
+                 * @brief Get tag velocity in local frame
                  *
                  * @param[in, out] tag_velocity
                  * @param[in]      tag_name
                  */
-                void getTagRefVelocity(etools::Vector6& tag_velocity, const std::string& tag_name) const
+                void getTagVelocityInLocal(etools::Vector6& tag_velocity, const std::string& tag_name) const
                 {
-                    if((tag_velocity_.find(tag_name) != tag_velocity_.end()))
+                    if((tags_velocity_.find(tag_name) != tags_velocity_.end()))
                     {
-                        tag_velocity = tag_velocity_.at(tag_name);
+                        tag_velocity = tags_velocity_.at(tag_name);
                     }
                     else
                     {
@@ -56,9 +58,9 @@ namespace humoto
                  *
                  * @param[in] tag_velocity
                  */
-                void setTagRefVelocity(const std::map<std::string, etools::Vector6>& tag_velocity)
+                void setTagsVelocity(const std::map<std::string, etools::Vector6>& tag_velocity)
                 {
-                    tag_velocity_ = tag_velocity;
+                    tags_velocity_ = tag_velocity;
                 }
 
 
@@ -77,7 +79,7 @@ namespace humoto
                     rbdl::TagLinkPtr tag = model.getLinkTag(tag_name);
                     
                     etools::Vector6 tag_ref_velocity;
-                    getTagRefVelocity(tag_ref_velocity, tag_name);
+                    getTagVelocityInLocal(tag_ref_velocity, tag_name);
 
                     Eigen::VectorXd velocity_in_global;
                     velocity_in_global.resize(rbdl::SpatialType::getNumberOfElements(spatial_type));
@@ -116,33 +118,57 @@ namespace humoto
 
 
                 /**
+                 * @brief Get desired tag(s) pose in global frame
+                 *
+                 * @param[in] model
+                 */
+                void computeTagsDesiredPoseInGlobal(const humoto::pepper_ik::Model<t_features>& model)
+                {
+                    std::map<std::string, etools::Vector6>::iterator i;
+                    for(i = tags_velocity_.begin(); i != tags_velocity_.end(); ++i)
+                    {
+                        rbdl::TagLinkPtr tag = model.getLinkTag(i->first);
+
+                        Eigen::VectorXd pose_increment =
+                                wbc_parameters_.control_interval_ * getTagVelocityInGlobal(model, i->first, rbdl::SpatialType::COMPLETE);
+                        
+                        std::size_t part_size = 3;
+                        etools::Vector6  tag_pose;
+                        tag_pose.head(part_size) = rigidbody::convertMatrixToEulerAngles(model.getTagOrientation(tag),
+                                                        rigidbody::EulerAngles::RPY) + pose_increment.head(part_size);
+                        
+                        tag_pose.tail(part_size) = model.getTagPosition(tag) + pose_increment.tail(part_size); 
+
+                        tags_desired_pose_global_[i->first] = tag_pose;
+                    }
+                }
+                
+                
+                /**
                  * @brief Get tag pose error in global frame
                  *
                  * @param[in] model
                  * @param[in] tag_name
-                 * @param[in] spatial_type
                  * @return    error in pose in global frame
                  */
                 etools::Vector6 getTagPoseErrorInGlobal(const humoto::pepper_ik::Model<t_features>& model,
-                                                        const std::string&                          tag_name, 
-                                                        const rbdl::SpatialType::Type&              spatial_type) const
+                                                        const std::string&                          tag_name) const
                 {
-                    rbdl::TagLinkPtr tag = model.getLinkTag(tag_name);
-                    
                     etools::Vector6 tag_pose_error;
+                    tag_pose_error.setZero();
 
-                    Eigen::VectorXd pose_increment =
-                            wbc_parameters_.control_interval_ * getTagVelocityInGlobal(model, tag_name, rbdl::SpatialType::COMPLETE);
-                    
-                    std::size_t part_size = 3;
-                    tag_pose_error.head(part_size) = rigidbody::getRotationErrorAngleAxis(
-                                                        model.getTagOrientation(tag),
-                                                        rigidbody::convertEulerAnglesToMatrix(           
-                                                            rigidbody::convertMatrixToEulerAngles(model.getTagOrientation(tag),
-                                                            rigidbody::EulerAngles::RPY) +
-                                                        pose_increment.head(part_size), rigidbody::EulerAngles::RPY));
-                    
-                    tag_pose_error.tail(part_size) = pose_increment.tail(part_size); 
+                    if(tags_desired_pose_global_.find(tag_name) != tags_desired_pose_global_.end())
+                    {
+                        rbdl::TagLinkPtr tag = model.getLinkTag(tag_name);
+                        
+                        std::size_t part_size = 3;
+                        tag_pose_error.head(part_size) = rigidbody::getRotationErrorAngleAxis(
+                                                            model.getTagOrientation(tag),
+                                                            rigidbody::convertEulerAnglesToMatrix(
+                                                                tags_desired_pose_global_.at(tag_name).head(part_size), rigidbody::EulerAngles::RPY));
+                        
+                        tag_pose_error.tail(part_size) = tags_desired_pose_global_.at(tag_name).tail(part_size) - model.getTagPosition(tag); 
+                    }
 
                     return(tag_pose_error);
                 }
@@ -160,7 +186,7 @@ namespace humoto
                 /**
                  * @brief Constructor
                  *
-                 * @param[in] control_interval
+                 * @param[in] wbc_parameters
                  */
                 WholeBodyController(const humoto::pepper_ik::WBCParameters& wbc_parameters) : wbc_parameters_(wbc_parameters)
                 {
