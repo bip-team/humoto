@@ -72,11 +72,15 @@ namespace humoto
 
     // If support for configuration files is enabled include appropriate
     // headers.
-    #ifdef HUMOTO_BRIDGE_config_yaml
-        #include "config_yaml/config_handling.h"
-        #define HUMOTO_BRIDGE_config_yaml_NAMESPACE humoto::config::yaml
+    #ifdef HUMOTO_USE_CONFIG_YAML
+        #ifndef HUMOTO_BRIDGE_config_yaml
+            #error "YAML config header is included, but the corresponding bridge is disabled."
+        #endif
+
+        #include HUMOTO_CONFIG_YAML_HEADER
+
         #undef HUMOTO_CONFIG_DISABLED
-    #endif //HUMOTO_BRIDGE_config_yaml
+    #endif
 
 
     #ifdef HUMOTO_CONFIG_DISABLED
@@ -112,15 +116,11 @@ namespace humoto
 
                     ///@{
                     /**
-                     * These functions must be defined in derived classes
-                     *
                      * @attention Implementations of these methods are added
-                     * automatically upon inclusion of define_accessors.h if
-                     * HUMOTO_CONFIG_ENTRIES is defined.
+                     * automatically upon inclusion of define_accessors.h.
                      */
-                    #ifdef HUMOTO_BRIDGE_config_yaml
-                        virtual void writeConfigEntries(HUMOTO_BRIDGE_config_yaml_NAMESPACE::Writer &) const = 0;
-                        virtual void readConfigEntries(HUMOTO_BRIDGE_config_yaml_NAMESPACE::Reader &, const bool) = 0;
+                    #ifdef HUMOTO_USE_CONFIG_YAML
+                        HUMOTO_CONFIG_YAML_METHOD_DECLARATION
                     #endif
                     ///@}
 

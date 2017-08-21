@@ -26,7 +26,7 @@
             #define HUMOTO_CONFIG_PARENT_CLASS(entry)          HUMOTO_CONFIG_WRITE_PARENT_CLASS(entry)
             #define HUMOTO_CONFIG_MEMBER_CLASS(entry, name)    HUMOTO_CONFIG_WRITE_MEMBER_CLASS(entry, name)
 
-            HUMOTO_DEFINE_CONFIG_WRITER(HUMOTO_CONFIG_ENTRIES);
+            HUMOTO_DEFINE_CONFIG_WRITER(HUMOTO_CONFIG_ENTRIES)
 
             #undef HUMOTO_CONFIG_COMPOUND_
             #undef HUMOTO_CONFIG_COMPOUND
@@ -54,7 +54,7 @@
             #define HUMOTO_CONFIG_PARENT_CLASS(entry)          HUMOTO_CONFIG_READ_PARENT_CLASS(entry)
             #define HUMOTO_CONFIG_MEMBER_CLASS(entry, name)    HUMOTO_CONFIG_READ_MEMBER_CLASS(entry, name)
 
-            HUMOTO_DEFINE_CONFIG_READER(HUMOTO_CONFIG_ENTRIES);
+            HUMOTO_DEFINE_CONFIG_READER(HUMOTO_CONFIG_ENTRIES)
 
             #undef HUMOTO_CONFIG_COMPOUND_
             #undef HUMOTO_CONFIG_COMPOUND
@@ -79,15 +79,8 @@
             }
         #endif
 
-        #ifdef HUMOTO_BRIDGE_config_yaml
-            void writeConfigEntries(HUMOTO_BRIDGE_config_yaml_NAMESPACE::Writer & writer) const
-            {
-                writeConfigEntriesTemplate(writer);
-            }
-            void readConfigEntries(HUMOTO_BRIDGE_config_yaml_NAMESPACE::Reader & reader, const bool crash_flag)
-            {
-                readConfigEntriesTemplate(reader, crash_flag);
-            }
+        #ifdef HUMOTO_USE_CONFIG_YAML
+            HUMOTO_CONFIG_YAML_METHOD_DEFINITION
         #endif
 
 
@@ -97,16 +90,18 @@
              * Define constructors for the given class.
              */
             template <class t_Reader>
-                explicit HUMOTO_CONFIG_CONSTRUCTOR(t_Reader &reader,
-                                    const std::string &node_name,
-                                    const bool crash_on_missing_entry = default_crash_on_missing_entry_)
+                explicit HUMOTO_CONFIG_CONSTRUCTOR(
+                        t_Reader &reader,
+                        const std::string &node_name,
+                        const bool crash_on_missing_entry = default_crash_on_missing_entry_)
             {
                 readConfig(reader, node_name, crash_on_missing_entry);
             }
 
             template <class t_Reader>
-                explicit HUMOTO_CONFIG_CONSTRUCTOR(t_Reader &reader,
-                                    const bool crash_on_missing_entry = default_crash_on_missing_entry_)
+                explicit HUMOTO_CONFIG_CONSTRUCTOR(
+                        t_Reader &reader,
+                        const bool crash_on_missing_entry = default_crash_on_missing_entry_)
             {
                 readConfig(reader, crash_on_missing_entry);
             }
