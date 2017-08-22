@@ -18,8 +18,8 @@ namespace humoto
             #define HUMOTO_CONFIG_SECTION_ID "RigidBodyPose"
             #define HUMOTO_CONFIG_CONSTRUCTOR RigidBodyPose 
             #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_COMPOUND_(position); \
-                    HUMOTO_CONFIG_COMPOUND_(rpy);
+                    HUMOTO_CONFIG_COMPOUND_(position) \
+                    HUMOTO_CONFIG_COMPOUND_(rpy)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 
@@ -102,8 +102,8 @@ namespace humoto
                 #define HUMOTO_CONFIG_SECTION_ID "RigidBodyState"
                 #define HUMOTO_CONFIG_CONSTRUCTOR RigidBodyState 
                 #define HUMOTO_CONFIG_ENTRIES \
-                        HUMOTO_CONFIG_PARENT_CLASS(PointMassState); \
-                        HUMOTO_CONFIG_PARENT_CLASS(RotaryState);
+                        HUMOTO_CONFIG_PARENT_CLASS(PointMassState) \
+                        HUMOTO_CONFIG_PARENT_CLASS(RotaryState)
                 #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

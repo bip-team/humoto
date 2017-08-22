@@ -27,13 +27,13 @@ namespace humoto_tests
         {
             #define HUMOTO_CONFIG_SECTION_ID "TestFixture"
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_COMPOUND_(com_reference00); \
-                HUMOTO_CONFIG_COMPOUND_(com_reference01); \
-                HUMOTO_CONFIG_COMPOUND_(com_jacobian_reference00); \
-                HUMOTO_CONFIG_COMPOUND_(base_com_jacobian_reference00); \
-                HUMOTO_CONFIG_COMPOUND_(body_com_jacobian_reference00); \
-                HUMOTO_CONFIG_COMPOUND_(wrist_orientation_reference00); \
-                HUMOTO_CONFIG_COMPOUND_(wrist_rotation_jacobian_reference00);
+                HUMOTO_CONFIG_COMPOUND_(com_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(com_reference01) \
+                HUMOTO_CONFIG_COMPOUND_(com_jacobian_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(base_com_jacobian_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(body_com_jacobian_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(wrist_orientation_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(wrist_rotation_jacobian_reference00)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
             protected:
@@ -385,12 +385,12 @@ namespace humoto_tests
         {
             #define HUMOTO_CONFIG_SECTION_ID "TestFixture"
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_COMPOUND_(com_reference00); \
-                HUMOTO_CONFIG_COMPOUND_(com_reference01); \
-                HUMOTO_CONFIG_COMPOUND_(com_jacobian_reference00); \
-                HUMOTO_CONFIG_COMPOUND_(base_com_jacobian_reference00); \
-                HUMOTO_CONFIG_COMPOUND_(body_com_jacobian_reference00); \
-                HUMOTO_CONFIG_COMPOUND_(wrist_orientation_reference00);
+                HUMOTO_CONFIG_COMPOUND_(com_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(com_reference01) \
+                HUMOTO_CONFIG_COMPOUND_(com_jacobian_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(base_com_jacobian_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(body_com_jacobian_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(wrist_orientation_reference00)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
             protected:
@@ -655,12 +655,12 @@ namespace humoto_tests
         {
             #define HUMOTO_CONFIG_SECTION_ID "TestFixture"
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_COMPOUND_(com_reference00); \
-                HUMOTO_CONFIG_COMPOUND_(com_reference02); \
-                HUMOTO_CONFIG_COMPOUND_(com_jacobian_reference00); \
-                HUMOTO_CONFIG_COMPOUND_(base_com_jacobian_reference00); \
-                HUMOTO_CONFIG_COMPOUND_(body_com_jacobian_reference00); \
-                HUMOTO_CONFIG_COMPOUND_(wrist_orientation_reference00);
+                HUMOTO_CONFIG_COMPOUND_(com_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(com_reference02) \
+                HUMOTO_CONFIG_COMPOUND_(com_jacobian_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(base_com_jacobian_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(body_com_jacobian_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(wrist_orientation_reference00)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
             protected:

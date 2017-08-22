@@ -20,7 +20,7 @@ namespace humoto
             class HUMOTO_LOCAL TaskFixHead : public humoto::TaskIB0
         {
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_PARENT_CLASS(TaskIB0);
+                HUMOTO_CONFIG_PARENT_CLASS(TaskIB0)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

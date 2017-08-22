@@ -43,7 +43,7 @@ namespace humoto
             #define HUMOTO_CONFIG_SECTION_ID "SolverParameters"
             #define HUMOTO_CONFIG_CONSTRUCTOR SolverParameters 
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_PARENT_CLASS(SolverParametersBase);
+                HUMOTO_CONFIG_PARENT_CLASS(SolverParametersBase)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

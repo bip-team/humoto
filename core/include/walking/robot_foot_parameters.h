@@ -44,12 +44,12 @@ namespace humoto
             #define HUMOTO_CONFIG_SECTION_ID "RobotFootParameters"
             #define HUMOTO_CONFIG_CONSTRUCTOR RobotFootParameters 
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_SCALAR_(max_step_len); \
-                HUMOTO_CONFIG_SCALAR_(min_feet_dist); \
-                HUMOTO_CONFIG_SCALAR_(max_feet_dist); \
-                HUMOTO_CONFIG_SCALAR_(feet_dist_default); \
-                HUMOTO_CONFIG_SCALAR_(foot_length); \
-                HUMOTO_CONFIG_SCALAR_(foot_width);
+                HUMOTO_CONFIG_SCALAR_(max_step_len) \
+                HUMOTO_CONFIG_SCALAR_(min_feet_dist) \
+                HUMOTO_CONFIG_SCALAR_(max_feet_dist) \
+                HUMOTO_CONFIG_SCALAR_(feet_dist_default) \
+                HUMOTO_CONFIG_SCALAR_(foot_length) \
+                HUMOTO_CONFIG_SCALAR_(foot_width)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

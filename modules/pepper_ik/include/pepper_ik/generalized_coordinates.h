@@ -24,8 +24,8 @@ namespace humoto
             #define HUMOTO_CONFIG_SECTION_ID "GeneralizedCoordinates"
             #define HUMOTO_CONFIG_CONSTRUCTOR GeneralizedCoordinates
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_COMPOUND_(root_pose);\
-                HUMOTO_CONFIG_COMPOUND_(joint_angles);
+                HUMOTO_CONFIG_COMPOUND_(root_pose)\
+                HUMOTO_CONFIG_COMPOUND_(joint_angles)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

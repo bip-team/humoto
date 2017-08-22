@@ -13,3 +13,6 @@
 [submodule "bridges/qpmad/qpmad"]
 	path = bridges/qpmad/qpmad
 	url = https://github.com/asherikov/qpmad.git
+[submodule "bridges/config_msgpack/msgpack-c"]
+	path = bridges/config_msgpack/msgpack-c
+	url = https://github.com/msgpack/msgpack-c.git

@@ -26,12 +26,12 @@ namespace humoto
             #define HUMOTO_CONFIG_SECTION_ID "RobotParameters"
             #define HUMOTO_CONFIG_CONSTRUCTOR RobotParameters
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_SCALAR_(base_radius); \
-                HUMOTO_CONFIG_SCALAR_(max_nominal_base_velocity); \
-                HUMOTO_CONFIG_SCALAR_(max_nominal_base_acceleration); \
-                HUMOTO_CONFIG_SCALAR_(max_base_velocity); \
-                HUMOTO_CONFIG_SCALAR_(max_base_acceleration); \
-                HUMOTO_CONFIG_COMPOUND_(body_bounds);
+                HUMOTO_CONFIG_SCALAR_(base_radius) \
+                HUMOTO_CONFIG_SCALAR_(max_nominal_base_velocity) \
+                HUMOTO_CONFIG_SCALAR_(max_nominal_base_acceleration) \
+                HUMOTO_CONFIG_SCALAR_(max_base_velocity) \
+                HUMOTO_CONFIG_SCALAR_(max_base_acceleration) \
+                HUMOTO_CONFIG_COMPOUND_(body_bounds)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 
@@ -178,11 +178,11 @@ namespace humoto
             #define HUMOTO_CONFIG_SECTION_ID "MotionParameters"
             #define HUMOTO_CONFIG_CONSTRUCTOR MotionParameters
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_COMPOUND_(base_velocity);\
-                HUMOTO_CONFIG_COMPOUND_(base_position);\
-                HUMOTO_CONFIG_SCALAR_(base_angular_velocity);\
-                HUMOTO_CONFIG_ENUM_(motion_mode); \
-                HUMOTO_CONFIG_SCALAR_(duration_ms);
+                HUMOTO_CONFIG_COMPOUND_(base_velocity)\
+                HUMOTO_CONFIG_COMPOUND_(base_position)\
+                HUMOTO_CONFIG_SCALAR_(base_angular_velocity)\
+                HUMOTO_CONFIG_ENUM_(motion_mode) \
+                HUMOTO_CONFIG_SCALAR_(duration_ms)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 
@@ -281,9 +281,9 @@ namespace humoto
             #define HUMOTO_CONFIG_SECTION_ID "MPCParameters"
             #define HUMOTO_CONFIG_CONSTRUCTOR MPCParameters
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_SCALAR_(preview_horizon_length); \
-                HUMOTO_CONFIG_SCALAR_(sampling_time_ms); \
-                HUMOTO_CONFIG_SCALAR_(subsampling_time_ms);
+                HUMOTO_CONFIG_SCALAR_(preview_horizon_length) \
+                HUMOTO_CONFIG_SCALAR_(sampling_time_ms) \
+                HUMOTO_CONFIG_SCALAR_(subsampling_time_ms)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

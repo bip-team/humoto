@@ -11,21 +11,9 @@
 
 #include "yaml-cpp/yaml.h"
 
+#define HUMOTO_CONFIG_YAML_NAMESPACE     humoto::config::yaml
+
+#define HUMOTO_CONFIG_YAML_PRIVATE_DATA
+
 #include "reader.h"
 #include "writer.h"
-
-
-#define HUMOTO_CONFIG_YAML_METHOD_DECLARATION \
-    virtual void writeConfigEntries(humoto::config::yaml::Writer &) const = 0; \
-    virtual void readConfigEntries(humoto::config::yaml::Reader &, const bool) = 0;
-
-
-#define HUMOTO_CONFIG_YAML_METHOD_DEFINITION \
-    void writeConfigEntries(humoto::config::yaml::Writer & writer) const \
-    { \
-        writeConfigEntriesTemplate(writer); \
-    } \
-    void readConfigEntries(humoto::config::yaml::Reader & reader, const bool crash_flag) \
-    {\
-        readConfigEntriesTemplate(reader, crash_flag); \
-    }

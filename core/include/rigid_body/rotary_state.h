@@ -140,9 +140,9 @@ namespace humoto
             #define HUMOTO_CONFIG_SECTION_ID "RotaryState"
             #define HUMOTO_CONFIG_CONSTRUCTOR RotaryState 
             #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_COMPOUND_(rpy); \
-                    HUMOTO_CONFIG_COMPOUND_(angular_velocity); \
-                    HUMOTO_CONFIG_COMPOUND_(angular_acceleration);
+                    HUMOTO_CONFIG_COMPOUND_(rpy) \
+                    HUMOTO_CONFIG_COMPOUND_(angular_velocity) \
+                    HUMOTO_CONFIG_COMPOUND_(angular_acceleration)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

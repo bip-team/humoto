@@ -22,53 +22,36 @@ namespace humoto
 #define HUMOTO_CONFIG_DEFINE_ACCESSORS  "humoto/config/define_accessors.h"
 
 #ifdef HUMOTO_USE_CONFIG
-    #define HUMOTO_DEFINE_CONFIG_WRITER(entries) \
-            template <class t_Writer> \
-                void writeConfigEntriesTemplate(t_Writer & writer) const \
-            { \
-                entries \
-            }
+    #define HUMOTO_CONFIG_WRITE_PARENT_CLASS(parent_class)  parent_class::writeConfigEntries(writer);
+    #define HUMOTO_CONFIG_WRITE_MEMBER_CLASS(member, name)  member.writeNestedConfig(writer, name);
 
-    #define HUMOTO_CONFIG_WRITE_PARENT_CLASS(parent_class)  parent_class::writeConfigEntries(writer)
-    #define HUMOTO_CONFIG_WRITE_MEMBER_CLASS(member, name)  member.writeNestedConfig(writer, name)
+    #define HUMOTO_CONFIG_WRITE_COMPOUND_(entry)    writer.writeCompound(entry##_, #entry);
+    #define HUMOTO_CONFIG_WRITE_COMPOUND(entry)     writer.writeCompound(entry, #entry);
 
-    #define HUMOTO_CONFIG_WRITE_COMPOUND_(entry)    writer.writeCompound(entry##_, #entry)
-    #define HUMOTO_CONFIG_WRITE_COMPOUND(entry)     writer.writeCompound(entry, #entry)
+    #define HUMOTO_CONFIG_WRITE_SCALAR_(entry)  writer.writeScalar(entry##_, #entry);
+    #define HUMOTO_CONFIG_WRITE_SCALAR(entry)   writer.writeScalar(entry, #entry);
 
-    #define HUMOTO_CONFIG_WRITE_SCALAR_(entry)  writer.writeScalar(entry##_, #entry)
-    #define HUMOTO_CONFIG_WRITE_SCALAR(entry)   writer.writeScalar(entry, #entry)
-
-    #define HUMOTO_CONFIG_WRITE_ENUM_(entry)    writer.writeEnum(entry##_, #entry)
-    #define HUMOTO_CONFIG_WRITE_ENUM(entry)     writer.writeEnum(entry, #entry)
+    #define HUMOTO_CONFIG_WRITE_ENUM_(entry)    writer.writeEnum(entry##_, #entry);
+    #define HUMOTO_CONFIG_WRITE_ENUM(entry)     writer.writeEnum(entry, #entry);
 
 
+    #define HUMOTO_CONFIG_READ_PARENT_CLASS(parent_class)  parent_class::readConfigEntries(reader, crash_on_missing_entry);
+    #define HUMOTO_CONFIG_READ_MEMBER_CLASS(member, name)  member.readNestedConfig(reader, name, crash_on_missing_entry);
 
-    #define HUMOTO_DEFINE_CONFIG_READER(entries) \
-            template <class t_Reader> \
-                void readConfigEntriesTemplate( t_Reader & reader, \
-                                        const bool crash_on_missing_entry = false) \
-            { \
-                entries \
-                finalize(); \
-            }
+    #define HUMOTO_CONFIG_READ_COMPOUND_(entry)     reader.readCompound(entry##_, #entry, crash_on_missing_entry);
+    #define HUMOTO_CONFIG_READ_COMPOUND(entry)      reader.readCompound(entry, #entry, crash_on_missing_entry);
 
-    #define HUMOTO_CONFIG_READ_PARENT_CLASS(parent_class)  parent_class::readConfigEntries(reader, crash_on_missing_entry)
-    #define HUMOTO_CONFIG_READ_MEMBER_CLASS(member, name)  member.readNestedConfig(reader, name, crash_on_missing_entry)
+    #define HUMOTO_CONFIG_READ_SCALAR_(entry)   reader.readScalar(entry##_, #entry, crash_on_missing_entry);
+    #define HUMOTO_CONFIG_READ_SCALAR(entry)    reader.readScalar(entry, #entry, crash_on_missing_entry);
 
-    #define HUMOTO_CONFIG_READ_COMPOUND_(entry)     reader.readCompound(entry##_, #entry, crash_on_missing_entry)
-    #define HUMOTO_CONFIG_READ_COMPOUND(entry)      reader.readCompound(entry, #entry, crash_on_missing_entry)
-
-    #define HUMOTO_CONFIG_READ_SCALAR_(entry)   reader.readScalar(entry##_, #entry, crash_on_missing_entry)
-    #define HUMOTO_CONFIG_READ_SCALAR(entry)    reader.readScalar(entry, #entry, crash_on_missing_entry)
-
-    #define HUMOTO_CONFIG_READ_ENUM_(entry)     reader.readEnum(entry##_, #entry, crash_on_missing_entry)
-    #define HUMOTO_CONFIG_READ_ENUM(entry)      reader.readEnum(entry, #entry, crash_on_missing_entry)
+    #define HUMOTO_CONFIG_READ_ENUM_(entry)     reader.readEnum(entry##_, #entry, crash_on_missing_entry);
+    #define HUMOTO_CONFIG_READ_ENUM(entry)      reader.readEnum(entry, #entry, crash_on_missing_entry);
 
 
     // ----------------------------
 
 
-    #define HUMOTO_CONFIG_DISABLED
+    #define HUMOTO_CONFIG_FLAG
 
     // If support for configuration files is enabled include appropriate
     // headers.
@@ -79,11 +62,20 @@ namespace humoto
 
         #include HUMOTO_CONFIG_YAML_HEADER
 
-        #undef HUMOTO_CONFIG_DISABLED
+        #undef HUMOTO_CONFIG_FLAG
     #endif
 
+    #ifdef HUMOTO_USE_CONFIG_MSGPACK
+        #ifndef HUMOTO_BRIDGE_config_msgpack
+            #error "MSGPACK config header is included, but the corresponding bridge is disabled."
+        #endif
 
-    #ifdef HUMOTO_CONFIG_DISABLED
+        #include HUMOTO_CONFIG_MSGPACK_HEADER
+
+        #undef HUMOTO_CONFIG_FLAG
+    #endif
+
+    #ifdef HUMOTO_CONFIG_FLAG
         #error "Configuration is enabled, but there are no configuration bridges."
     #endif
 
@@ -95,6 +87,8 @@ namespace humoto
     {
         namespace config
         {
+            #define HUMOTO_CONFIG_FLAG
+
             /**
              * @brief Configurable base class.
              */
@@ -120,7 +114,12 @@ namespace humoto
                      * automatically upon inclusion of define_accessors.h.
                      */
                     #ifdef HUMOTO_USE_CONFIG_YAML
-                        HUMOTO_CONFIG_YAML_METHOD_DECLARATION
+                        virtual void writeConfigEntries(HUMOTO_CONFIG_YAML_NAMESPACE::Writer &) const = 0;
+                        virtual void readConfigEntries(HUMOTO_CONFIG_YAML_NAMESPACE::Reader &, const bool) = 0;
+                    #endif
+                    #ifdef HUMOTO_USE_CONFIG_MSGPACK
+                        virtual void writeConfigEntries(HUMOTO_CONFIG_MSGPACK_NAMESPACE::Writer &) const = 0;
+                        virtual void readConfigEntries(HUMOTO_CONFIG_MSGPACK_NAMESPACE::Reader &, const bool) = 0;
                     #endif
                     ///@}
 
@@ -149,6 +148,9 @@ namespace humoto
                      * a configuration file. Does nothing by default.
                      */
                     virtual void finalize() {};
+
+
+                    virtual std::size_t getNumberOfEntries() const = 0;
 
 
                 public:
@@ -316,7 +318,7 @@ namespace humoto
                         void writeNestedConfig( t_Writer& writer,
                                                 const std::string &name) const
                     {
-                        writer.descend(name);
+                        writer.descend(name, getNumberOfEntries());
                         writeConfigEntries(writer);
                         writer.ascend();
                     }
@@ -344,6 +346,7 @@ namespace humoto
                         void writeConfig(t_Writer& writer,
                                          const std::string &node_name) const
                     {
+                        writer.initRoot();
                         writeNestedConfig(writer, node_name);
                         writer.flush();
                     }

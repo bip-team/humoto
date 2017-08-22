@@ -19,8 +19,8 @@ namespace humoto
         class HUMOTO_LOCAL TaskBaseOrientationBase : public humoto::TaskAB
         {
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_PARENT_CLASS(TaskAB); \
-                HUMOTO_CONFIG_SCALAR_(k_orientation_gain);
+                HUMOTO_CONFIG_PARENT_CLASS(TaskAB) \
+                HUMOTO_CONFIG_SCALAR_(k_orientation_gain)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

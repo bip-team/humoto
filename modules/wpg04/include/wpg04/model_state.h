@@ -18,11 +18,11 @@ namespace humoto
             #define HUMOTO_CONFIG_SECTION_ID "ModelState"
             #define HUMOTO_CONFIG_CONSTRUCTOR ModelState
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_ENUM_(stance_type); \
-                HUMOTO_CONFIG_ENUM_(next_stance_type); \
-                HUMOTO_CONFIG_MEMBER_CLASS(com_state_, "com_state"); \
-                HUMOTO_CONFIG_MEMBER_CLASS(feet_.getLeft(), "left_foot_state"); \
-                HUMOTO_CONFIG_MEMBER_CLASS(feet_.getRight(), "right_foot_state");
+                HUMOTO_CONFIG_ENUM_(stance_type) \
+                HUMOTO_CONFIG_ENUM_(next_stance_type) \
+                HUMOTO_CONFIG_MEMBER_CLASS(com_state_, "com_state") \
+                HUMOTO_CONFIG_MEMBER_CLASS(feet_.getLeft(), "left_foot_state") \
+                HUMOTO_CONFIG_MEMBER_CLASS(feet_.getRight(), "right_foot_state")
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

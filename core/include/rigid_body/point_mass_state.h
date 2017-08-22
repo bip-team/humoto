@@ -21,9 +21,9 @@ namespace humoto
             #define HUMOTO_CONFIG_SECTION_ID "PointMassState"
             #define HUMOTO_CONFIG_CONSTRUCTOR PointMassState 
             #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_COMPOUND_(position); \
-                    HUMOTO_CONFIG_COMPOUND_(velocity); \
-                    HUMOTO_CONFIG_COMPOUND_(acceleration);
+                    HUMOTO_CONFIG_COMPOUND_(position) \
+                    HUMOTO_CONFIG_COMPOUND_(velocity) \
+                    HUMOTO_CONFIG_COMPOUND_(acceleration)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

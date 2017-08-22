@@ -20,10 +20,10 @@ namespace humoto
             class HUMOTO_LOCAL TaskTagOrientation : public humoto::TaskAB
         {
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_PARENT_CLASS(TaskAB); \
-                HUMOTO_CONFIG_SCALAR_(k_orientation_gain); \
-                HUMOTO_CONFIG_SCALAR_(tag_string_id); \
-                HUMOTO_CONFIG_COMPOUND_(reference_rpy);
+                HUMOTO_CONFIG_PARENT_CLASS(TaskAB) \
+                HUMOTO_CONFIG_SCALAR_(k_orientation_gain) \
+                HUMOTO_CONFIG_SCALAR_(tag_string_id) \
+                HUMOTO_CONFIG_COMPOUND_(reference_rpy)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

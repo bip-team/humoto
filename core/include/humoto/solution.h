@@ -178,7 +178,7 @@ namespace humoto
         #define HUMOTO_CONFIG_SECTION_ID "Solution"
         #define HUMOTO_CONFIG_CONSTRUCTOR Solution
         #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_COMPOUND_(x);
+                HUMOTO_CONFIG_COMPOUND_(x)
         #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

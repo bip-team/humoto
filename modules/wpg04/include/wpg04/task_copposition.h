@@ -20,7 +20,7 @@ namespace humoto
         class HUMOTO_LOCAL TaskCoPPosition : public humoto::TaskZeroVariables
         {
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_PARENT_CLASS(TaskZeroVariables);
+                HUMOTO_CONFIG_PARENT_CLASS(TaskZeroVariables)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
                 
                 

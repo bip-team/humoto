@@ -20,9 +20,9 @@ namespace humoto
             #define HUMOTO_CONFIG_SECTION_ID "SolverParameters"
             #define HUMOTO_CONFIG_CONSTRUCTOR SolverParameters
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_PARENT_CLASS(SolverParametersBase); \
-                HUMOTO_CONFIG_SCALAR_(regularization_factor); \
-                HUMOTO_CONFIG_MEMBER_CLASS(options_, "QPmadParameters");
+                HUMOTO_CONFIG_PARENT_CLASS(SolverParametersBase) \
+                HUMOTO_CONFIG_SCALAR_(regularization_factor) \
+                HUMOTO_CONFIG_MEMBER_CLASS(options_, "QPmadParameters")
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 
@@ -33,9 +33,9 @@ namespace humoto
                     #define HUMOTO_CONFIG_SECTION_ID "QPmadParameters"
                     #define HUMOTO_CONFIG_CONSTRUCTOR QPmadParameters
                     #define HUMOTO_CONFIG_ENTRIES \
-                        HUMOTO_CONFIG_ENUM_(hessian_type);\
-                        HUMOTO_CONFIG_SCALAR_(tolerance);\
-                        HUMOTO_CONFIG_SCALAR_(max_iter);
+                        HUMOTO_CONFIG_ENUM_(hessian_type)\
+                        HUMOTO_CONFIG_SCALAR_(tolerance)\
+                        HUMOTO_CONFIG_SCALAR_(max_iter)
                     #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
                     protected:

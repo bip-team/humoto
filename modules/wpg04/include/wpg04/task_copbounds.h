@@ -20,7 +20,7 @@ namespace humoto
         class HUMOTO_LOCAL TaskCoPBounds : public humoto::TaskILU
         {
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_PARENT_CLASS(TaskILU);
+                HUMOTO_CONFIG_PARENT_CLASS(TaskILU)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
                 
                 

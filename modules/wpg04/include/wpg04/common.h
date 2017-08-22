@@ -26,14 +26,14 @@ namespace humoto
             #define HUMOTO_CONFIG_SECTION_ID "WalkParameters"
             #define HUMOTO_CONFIG_CONSTRUCTOR WalkParameters
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_COMPOUND_(com_velocity);\
-                HUMOTO_CONFIG_COMPOUND_(first_stance_com_velocity);\
-                HUMOTO_CONFIG_COMPOUND_(last_stance_com_velocity);\
+                HUMOTO_CONFIG_COMPOUND_(com_velocity)\
+                HUMOTO_CONFIG_COMPOUND_(first_stance_com_velocity)\
+                HUMOTO_CONFIG_COMPOUND_(last_stance_com_velocity)\
                 \
-                HUMOTO_CONFIG_SCALAR_(step_height);\
-                HUMOTO_CONFIG_SCALAR_(theta_increment);\
+                HUMOTO_CONFIG_SCALAR_(step_height)\
+                HUMOTO_CONFIG_SCALAR_(theta_increment)\
                 \
-                HUMOTO_CONFIG_PARENT_CLASS(humoto::walking::StanceFSMParameters);
+                HUMOTO_CONFIG_PARENT_CLASS(humoto::walking::StanceFSMParameters)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 
@@ -82,10 +82,10 @@ namespace humoto
             #define HUMOTO_CONFIG_SECTION_ID "MPCParameters"
             #define HUMOTO_CONFIG_CONSTRUCTOR MPCParameters
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_SCALAR_(preview_horizon_length);\
-                HUMOTO_CONFIG_SCALAR_(sampling_time_ms);\
-                HUMOTO_CONFIG_SCALAR_(subsampling_time_ms);\
-                HUMOTO_CONFIG_SCALAR_(tds_sampling_time_ms);
+                HUMOTO_CONFIG_SCALAR_(preview_horizon_length)\
+                HUMOTO_CONFIG_SCALAR_(sampling_time_ms)\
+                HUMOTO_CONFIG_SCALAR_(subsampling_time_ms)\
+                HUMOTO_CONFIG_SCALAR_(tds_sampling_time_ms)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

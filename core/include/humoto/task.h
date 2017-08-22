@@ -303,8 +303,8 @@ namespace humoto
 
         protected:
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_PARENT_CLASS(TaskBase); \
-                HUMOTO_CONFIG_SCALAR_(gain);
+                HUMOTO_CONFIG_PARENT_CLASS(TaskBase) \
+                HUMOTO_CONFIG_SCALAR_(gain)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 
@@ -395,8 +395,8 @@ namespace humoto
 
         protected:
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_PARENT_CLASS(TaskBase); \
-                HUMOTO_CONFIG_SCALAR_(gain);
+                HUMOTO_CONFIG_PARENT_CLASS(TaskBase) \
+                HUMOTO_CONFIG_SCALAR_(gain)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

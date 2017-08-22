@@ -6,7 +6,7 @@ endif()
 
 if (HUMOTO_BUILD_REGRESSION_TESTS)
     # Basic test of reading and writing of configuration files.
-    humoto_define_regression_test(${HUMOTO_MODULE} "000" "config_yaml")
+    humoto_define_regression_test(${HUMOTO_MODULE} "000" "config_yaml;config_msgpack")
 
     # Math tests:
     #   Block Matrix tests: creation, initialization, etc.

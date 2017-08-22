@@ -85,6 +85,9 @@
 #endif
 
 
+#define HUMOTO_MACRO_SUBSTITUTE(arg) arg
+
+
 /**
  * @brief The root namespace of HuMoTo.
  */

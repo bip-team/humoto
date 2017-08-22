@@ -19,8 +19,8 @@ namespace humoto
         #define HUMOTO_CONFIG_SECTION_ID "SolverParametersBase"
         #define HUMOTO_CONFIG_CONSTRUCTOR SolverParametersBase
         #define HUMOTO_CONFIG_ENTRIES \
-            HUMOTO_CONFIG_SCALAR_(crash_on_any_failure); \
-            HUMOTO_CONFIG_SCALAR_(solve_two_levels_as_qp);
+            HUMOTO_CONFIG_SCALAR_(crash_on_any_failure) \
+            HUMOTO_CONFIG_SCALAR_(solve_two_levels_as_qp)
         #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

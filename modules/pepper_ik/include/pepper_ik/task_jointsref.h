@@ -20,9 +20,9 @@ namespace humoto
             class HUMOTO_LOCAL TaskJointsReference : public humoto::TaskGIB
         {
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_PARENT_CLASS(TaskGIB); \
-                HUMOTO_CONFIG_SCALAR_(k_position_gain); \
-                HUMOTO_CONFIG_COMPOUND_(joint_angles_reference);
+                HUMOTO_CONFIG_PARENT_CLASS(TaskGIB) \
+                HUMOTO_CONFIG_SCALAR_(k_position_gain) \
+                HUMOTO_CONFIG_COMPOUND_(joint_angles_reference)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

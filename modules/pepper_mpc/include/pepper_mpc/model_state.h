@@ -21,10 +21,10 @@ namespace humoto
             #define HUMOTO_CONFIG_SECTION_ID "ModelState"
             #define HUMOTO_CONFIG_CONSTRUCTOR ModelState
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_MEMBER_CLASS(base_state_, "base_state"); \
-                HUMOTO_CONFIG_MEMBER_CLASS(body_state_, "body_state"); \
-                HUMOTO_CONFIG_SCALAR_(base_mass); \
-                HUMOTO_CONFIG_SCALAR_(body_mass);
+                HUMOTO_CONFIG_MEMBER_CLASS(base_state_, "base_state") \
+                HUMOTO_CONFIG_MEMBER_CLASS(body_state_, "body_state") \
+                HUMOTO_CONFIG_SCALAR_(base_mass) \
+                HUMOTO_CONFIG_SCALAR_(body_mass)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

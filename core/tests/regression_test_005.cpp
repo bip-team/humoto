@@ -32,8 +32,8 @@ namespace humoto
     {
         #define HUMOTO_CONFIG_SECTION_ID "USTimeInvariant"
         #define HUMOTO_CONFIG_ENTRIES \
-            HUMOTO_CONFIG_COMPOUND_(U);\
-            HUMOTO_CONFIG_COMPOUND_(S);
+            HUMOTO_CONFIG_COMPOUND_(U)\
+            HUMOTO_CONFIG_COMPOUND_(S)
         #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 
@@ -101,8 +101,8 @@ namespace humoto
     {
         #define HUMOTO_CONFIG_SECTION_ID "USTimeVariant"
         #define HUMOTO_CONFIG_ENTRIES \
-            HUMOTO_CONFIG_COMPOUND_(U);\
-            HUMOTO_CONFIG_COMPOUND_(S);
+            HUMOTO_CONFIG_COMPOUND_(U)\
+            HUMOTO_CONFIG_COMPOUND_(S)
         #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

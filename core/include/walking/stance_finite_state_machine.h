@@ -94,14 +94,14 @@ namespace humoto
             #define HUMOTO_CONFIG_SECTION_ID "StanceFSMParameters"
             #define HUMOTO_CONFIG_CONSTRUCTOR StanceFSMParameters
             #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_SCALAR_(ss_duration_ms); \
-                    HUMOTO_CONFIG_SCALAR_(tds_duration_ms); \
-                    HUMOTO_CONFIG_SCALAR_(first_stance_duration_ms); \
-                    HUMOTO_CONFIG_SCALAR_(last_stance_duration_ms); \
-                    HUMOTO_CONFIG_SCALAR_(num_steps); \
-                    HUMOTO_CONFIG_ENUM_(first_stance); \
-                    HUMOTO_CONFIG_ENUM_(first_ss_type); \
-                    HUMOTO_CONFIG_ENUM_(last_stance);
+                    HUMOTO_CONFIG_SCALAR_(ss_duration_ms) \
+                    HUMOTO_CONFIG_SCALAR_(tds_duration_ms) \
+                    HUMOTO_CONFIG_SCALAR_(first_stance_duration_ms) \
+                    HUMOTO_CONFIG_SCALAR_(last_stance_duration_ms) \
+                    HUMOTO_CONFIG_SCALAR_(num_steps) \
+                    HUMOTO_CONFIG_ENUM_(first_stance) \
+                    HUMOTO_CONFIG_ENUM_(first_ss_type) \
+                    HUMOTO_CONFIG_ENUM_(last_stance)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

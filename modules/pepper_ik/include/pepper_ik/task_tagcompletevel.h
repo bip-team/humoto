@@ -20,9 +20,9 @@ namespace humoto
             class HUMOTO_LOCAL TaskTagCompleteVelocity : public humoto::TaskAB
         {
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_PARENT_CLASS(TaskAB); \
-                HUMOTO_CONFIG_SCALAR_(k_complete_velocity_gain); \
-                HUMOTO_CONFIG_SCALAR_(tag_string_id);
+                HUMOTO_CONFIG_PARENT_CLASS(TaskAB) \
+                HUMOTO_CONFIG_SCALAR_(k_complete_velocity_gain) \
+                HUMOTO_CONFIG_SCALAR_(tag_string_id)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

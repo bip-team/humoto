@@ -122,8 +122,8 @@ namespace humoto
                 void readConfigEntriesTemplate( t_Reader& reader,
                                                 const bool crash_on_missing_entry = true)
             {
-                HUMOTO_CONFIG_READ_COMPOUND_(task_class_names);
-                HUMOTO_CONFIG_READ_COMPOUND_(task_ids);
+                HUMOTO_CONFIG_READ_COMPOUND_(task_class_names)
+                HUMOTO_CONFIG_READ_COMPOUND_(task_ids)
 
 
                 if(task_class_names_.empty())
@@ -176,8 +176,8 @@ namespace humoto
             template <class t_Writer>
                 void writeConfigEntriesTemplate(t_Writer& writer) const
             {
-                HUMOTO_CONFIG_WRITE_COMPOUND_(task_class_names);
-                HUMOTO_CONFIG_WRITE_COMPOUND_(task_ids);
+                HUMOTO_CONFIG_WRITE_COMPOUND_(task_class_names)
+                HUMOTO_CONFIG_WRITE_COMPOUND_(task_ids)
 
                 if(task_class_names_.empty())
                 {
@@ -194,6 +194,24 @@ namespace humoto
                         it->ptr_->writeNestedConfig(writer);
                     }
                 }
+            }
+
+
+            /**
+             * @brief Count entries
+             *
+             * @return number of entries
+             */
+            std::size_t getNumberOfEntries() const
+            {
+                std::size_t num_entries = 2; // task_class_names + task_ids
+
+                for(std::size_t i = 0;  i < getNumberOfLevels(); ++i)
+                {
+                    num_entries += hierarchy_[i].tasks_.size();
+                }
+
+                return (num_entries);
             }
     };
 }
