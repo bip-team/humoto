@@ -5,7 +5,7 @@
 #
 function(humoto_list_filenames  DIR     LISTNAME)
     set(options DIRS_WITH_CMAKELISTS)
-    cmake_parse_arguments("HUMOTO" "${options}" "" "" ${ARGN} )
+    cmake_parse_arguments("HUMOTO" "${options}" "" "" ${ARGN})
 
     file(GLOB FILENAMES_TMP "${DIR}/*")
 

@@ -4,6 +4,7 @@ project (humoto CXX)
 
 set (CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
 include(ExternalProject)
+include(CMakeParseArguments)
 include(humoto_copy_dir_if_exists)
 include(humoto_copy_file_if_exists)
 include(humoto_add_external_git_project)
