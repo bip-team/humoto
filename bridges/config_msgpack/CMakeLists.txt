@@ -27,8 +27,6 @@ humoto_add_external_git_project(TARGET_NAME "${TGT_MESSAGEPACK}"
                                 PROJECT_DIR "${MESSAGEPACK_SOURCE_DIR}"
                                 CMAKE_ARGS   ${MESSAGEPACK_ARGS})
 
-add_dependencies(fetch-bridges ${TGT_MESSAGEPACK}-download)
-
 humoto_copy_file_if_exists( TGT_humoto_copy_headers                         "config_msgpack_h"
                             "${MESSAGEPACK_INTERFACE_DIR}/config_msgpack.h" "${HUMOTO_INCLUDE_DIR}")
 humoto_copy_dir_if_exists(  TGT_humoto_copy_headers                         "config_msgpack_dir"
