@@ -150,6 +150,7 @@ namespace humoto
                     for(std::size_t j = 0; j < task_class_names_[i].size(); ++j)
                     {
                         humoto::TaskSharedPointer task = getTask(task_class_names_[i][j]);
+                        task->setDescription(task_ids_[i][j]);
 
                         if (task)
                         {

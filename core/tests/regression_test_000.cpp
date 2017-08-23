@@ -1,5 +1,6 @@
 /**
     @file
+    @author  Alexander Sherikov
     @author  Jan Michalczyk
     @copyright 2014-2017 INRIA. Licensed under the Apache License, Version 2.0.
     (see @ref LICENSE or http://www.apache.org/licenses/LICENSE-2.0)
@@ -162,6 +163,29 @@ class ConfigHierarchyMatchTest : public ::testing::Test
 
             humoto::ConfigurableOptimizationProblem             opt_problem_in;
             opt_problem_in.readConfig<t_Reader>("hierarchy_match.cfg");
+
+            // -------
+
+            EXPECT_EQ(opt_problem_out.getNumberOfLevels(),  opt_problem_in.getNumberOfLevels());
+            if (opt_problem_out.getNumberOfLevels() == opt_problem_in.getNumberOfLevels())
+            {
+                for (std::size_t i = 0; i < opt_problem_in.getNumberOfLevels(); ++i)
+                {
+                    EXPECT_EQ(opt_problem_out[i].getNumberOfConstraints(),  opt_problem_in[i].getNumberOfConstraints());
+                    EXPECT_EQ(opt_problem_out[i].tasks_.size(),             opt_problem_in[i].tasks_.size());
+
+                    if (opt_problem_out[i].tasks_.size() == opt_problem_in[i].tasks_.size())
+                    {
+                        std::list<humoto::HierarchyLevel::TaskInfo>::const_iterator it_out = opt_problem_out[i].tasks_.begin();
+                        std::list<humoto::HierarchyLevel::TaskInfo>::const_iterator it_in = opt_problem_in[i].tasks_.begin();
+
+                        for (; it_out != opt_problem_out[i].tasks_.end(); ++it_out, ++it_in)
+                        {
+                            EXPECT_EQ(it_out->ptr_->getDescription(), it_in->ptr_->getDescription());
+                        }
+                    }
+                }
+            }
         }
 };
 
@@ -198,12 +222,12 @@ TEST_F(ConfigMatchTest, ConfigMatchMultiYAML)
     testMulti<humoto::config::yaml::Reader, humoto::config::yaml::Writer>();
 }
 
-/*
+
 TEST_F(ConfigMatchTest, ConfigMatchMultiMSGPACK)
 {
     testMulti<humoto::config::msgpack::Reader, humoto::config::msgpack::Writer>();
 }
-*/
+
 
 //---------------
 

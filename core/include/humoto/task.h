@@ -230,17 +230,6 @@ namespace humoto
 
 
             /**
-             * @brief Set description of the task.
-             *
-             * @return description
-             */
-            void setDescription(const std::string &description)
-            {
-                string_description_ = description;
-            }
-
-
-            /**
              * @brief Log task.
              *
              * @param[in,out] logger logger
@@ -260,6 +249,17 @@ namespace humoto
             const std::string  getDescription() const
             {
                 return (string_description_.c_str());
+            }
+
+
+            /**
+             * @brief Set description of the task.
+             *
+             * @return description
+             */
+            void setDescription(const std::string &description)
+            {
+                string_description_ = description;
             }
 
 
