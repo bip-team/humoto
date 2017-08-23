@@ -4,10 +4,18 @@
 # consistently with different versions of cmake.
 #
 function(humoto_list_filenames  DIR     LISTNAME)
+    set(options DIRS_WITH_CMAKELISTS)
+    cmake_parse_arguments("HUMOTO" "${options}" "" "" ${ARGN})
+
     file(GLOB FILENAMES_TMP "${DIR}/*")
 
     set (FILENAMES "")
     foreach(FILENAME_TMP ${FILENAMES_TMP})
+        if(HUMOTO_DIRS_WITH_CMAKELISTS)
+            if (NOT EXISTS "${FILENAME_TMP}/CMakeLists.txt")
+                continue()
+            endif()
+        endif()
         get_filename_component(FILENAME_TMP ${FILENAME_TMP} NAME)
         list(APPEND FILENAMES ${FILENAME_TMP})
     endforeach(FILENAME_TMP)

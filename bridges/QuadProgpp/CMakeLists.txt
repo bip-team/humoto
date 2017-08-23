@@ -21,9 +21,6 @@ humoto_add_external_git_project(TARGET_NAME "${TGT_QUADPROGPP}"
                                 PROJECT_DIR "${QUADPROGPP_SOURCE_DIR}"
                                 CMAKE_ARGS   ${QUADPROGPP_ARGS})
 
-add_dependencies(fetch-bridges ${TGT_QUADPROGPP}-download)
-
-
 humoto_copy_file_if_exists( TGT_humoto_copy_headers                     "quadprogpp_h"
                             "${QUADPROGPP_INTERFACE_DIR}/quadprogpp.h"  "${HUMOTO_INCLUDE_DIR}")
 humoto_copy_dir_if_exists(  TGT_humoto_copy_headers                     "quadprogpp_dir"

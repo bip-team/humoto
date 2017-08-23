@@ -68,4 +68,8 @@ function(humoto_add_external_hg_project)
             endif()
         endif(HG_FOUND)
     endif()
+
+
+    add_dependencies(${HUMOTO_TARGET_FETCH_BRIDGES}    ${HUMOTO_TARGET_NAME}-download)
+    set(HUMOTO_TARGET_FETCH_BRIDGES    "${HUMOTO_TARGET_NAME}-download"  CACHE INTERNAL "")
 endfunction(humoto_add_external_hg_project)

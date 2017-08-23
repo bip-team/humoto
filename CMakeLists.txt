@@ -4,6 +4,7 @@ project (humoto CXX)
 
 set (CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
 include(ExternalProject)
+include(CMakeParseArguments)
 include(humoto_copy_dir_if_exists)
 include(humoto_copy_file_if_exists)
 include(humoto_add_external_git_project)
@@ -74,7 +75,7 @@ endif()
 
 set(HUMOTO_BRIDGES "")
 foreach (HUMOTO_BRIDGES_DIR ${HUMOTO_BRIDGES_DIRS})
-    humoto_list_filenames("${HUMOTO_BRIDGES_DIR}"  "HUMOTO_BRIDGES_TMP")
+    humoto_list_filenames("${HUMOTO_BRIDGES_DIR}"  "HUMOTO_BRIDGES_TMP" DIRS_WITH_CMAKELISTS)
     list(APPEND HUMOTO_BRIDGES ${HUMOTO_BRIDGES_TMP})
 
     foreach(HUMOTO_BRIDGE ${HUMOTO_BRIDGES_TMP})
@@ -205,6 +206,7 @@ set (HUMOTO_DEFINES   "")
 #####################################
 
 add_custom_target( fetch-bridges )
+set(HUMOTO_TARGET_FETCH_BRIDGES    fetch-bridges CACHE INTERNAL "")
 add_custom_target( TGT_humoto_copy_headers ALL )
 add_custom_target( TGT_humoto_copy_config ALL )
 
@@ -310,6 +312,7 @@ set(BRIDGES_ARGS
     -DCMAKE_INSTALL_PREFIX=${HUMOTO_BRIDGES_INSTALL_PREFIX}
     -DCMAKE_INSTALL_LIBDIR=${HUMOTO_BRIDGES_LIBDIR}
     -DCMAKE_VERBOSE_MAKEFILE=${CMAKE_VERBOSE_MAKEFILE}
+    -DEIGEN3_INCLUDE_DIR=${EIGEN3_INCLUDE_DIR}
     -DCMAKE_BUILD_TYPE=Release)
 
 
@@ -333,19 +336,28 @@ endif(HUMOTO_BUILD_WITH_QI)
 
 # OpenMP
 if(HUMOTO_ENABLE_OPENMP)
+    IF(POLICY CMP0012)
+        # Some versions of FindOpenMP rely on deprecated behavior.
+        cmake_policy(SET CMP0012 OLD)
+    ENDIF(POLICY CMP0012)
+
     find_package(OpenMP QUIET)
     if(OPENMP_FOUND)
         set (CMAKE_CXX_FLAGS    "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
     else()
         message("OpenMP support was not detected. Proceeding without it.")
     endif(OPENMP_FOUND)
+
+    IF(POLICY CMP0012)
+        cmake_policy(SET CMP0012 NEW)
+    ENDIF(POLICY CMP0012)
 endif(HUMOTO_ENABLE_OPENMP)
 
 
 
 # bridges
 foreach(HUMOTO_BRIDGES_DIR ${HUMOTO_BRIDGES_DIRS})
-    humoto_list_filenames("${HUMOTO_BRIDGES_DIR}"   "HUMOTO_BRIDGES_TMP")
+    humoto_list_filenames("${HUMOTO_BRIDGES_DIR}"   "HUMOTO_BRIDGES_TMP" DIRS_WITH_CMAKELISTS)
 
     foreach(HUMOTO_BRIDGE ${HUMOTO_BRIDGES_TMP})
         if (HUMOTO_BRIDGE_${HUMOTO_BRIDGE})
