@@ -305,40 +305,6 @@ namespace humoto
                     }
 
 
-                    /**
-                     * @brief Read configuration entry (std::vector<std::vector<std::string> >)
-                     *
-                     * @param[out] entry      configuration parameter
-                     * @param[in]  entry_name name of the configuration parameter
-                     * @param[in]  crash_on_missing_entry
-                     */
-                    void readCompound(  std::vector<std::vector<std::string> > & entry,
-                                        const std::string                      & entry_name,
-                                        const bool crash_on_missing_entry = false)
-                    {
-                        if (descend(entry_name))
-                        {
-                            HUMOTO_ASSERT(  (::msgpack::type::ARRAY == getCurrentNode()->type),
-                                            "[Config] Entry is not an array.");
-
-                            entry.resize(getCurrentNode()->via.array.size);
-
-                            for(std::size_t i = 0; i < entry.size(); ++i)
-                            {
-                                getCurrentNode()->via.array.ptr[i] >> entry[i];
-                            }
-
-                            ascend();
-                        }
-                        else
-                        {
-                            if (crash_on_missing_entry)
-                            {
-                                HUMOTO_THROW_MSG(std::string("Configuration file does not contain entry '") + entry_name + "'.");
-                            }
-                        }
-                    }
-
 
                     /**
                      * @brief Read configuration entry (scalar template)
