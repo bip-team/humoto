@@ -98,8 +98,9 @@ int main(int argc, char **argv)
         humoto::Solution                                       ik_solution;
         // parameters of the control problem
         humoto::pepper_ik::WBCParameters                       ik_wbc_parameters(config_reader);
+
         // control problem, which is used to construct an optimization problem
-        humoto::pepper_ik::WholeBodyController<MODEL_FEATURES> ik_wbc;
+        humoto::pepper_ik::WholeBodyController<MODEL_FEATURES> ik_wbc(ik_wbc_parameters);
         // model representing the controlled system
         humoto::pepper_ik::Model<MODEL_FEATURES>               ik_model;
         ik_model.loadParameters(config_path + "pepper_fixedwheels_roottibia_planar.urdf");
@@ -149,14 +150,53 @@ int main(int argc, char **argv)
         etools::Vector6 velocity;
         std::map<std::string, etools::Vector6> tag_velocity;
 
+        // to keep base velocity
+        Eigen::VectorXd base_velocity;
+
         // -------------------read head motion from file --------------
 
         for(std::size_t i = 0;; ++i)
         {
+            prefix = humoto::LogEntryName("humoto").add(i);
+
             if(head_complete_velocity.empty())
             {
                 break;
             }
+
+            // ---------------- set tag velocity ----------
+
+            //update tag velocity
+            if(!(i % 10))
+            {
+                std::cout << i << std::endl;
+                velocity = head_complete_velocity.front();
+                tag_velocity["CameraTop_optical_frame"] = velocity;
+                ik_wbc.setTagsVelocity(tag_velocity);
+                head_complete_velocity.erase(head_complete_velocity.begin());
+            }
+            else
+            {
+                ik_wbc.setTagsVelocity(tag_velocity);
+            }
+
+            // ---------------- set tag velocity ----------
+
+            // -----------------set base velocity in mpc----------------
+
+            base_velocity = ik_wbc.getTagVelocityInGlobal(ik_model, "CameraTop_optical_frame",
+                                                           humoto::rbdl::SpatialType::COMPLETE);
+
+            //mpc_motion_parameters.base_velocity_          << base_velocity(0), base_velocity(1);
+            //mpc_motion_parameters.base_angular_velocity_  =  base_velocity(5);
+
+            // -----------------set base velocity in mpc----------------
+
+            //std::cout << "linear velocity: " << std::endl;
+            //HUMOTO_LOG_RAW(mpc_motion_parameters.base_velocity_);
+            //std::cout << "angular velocity: " << std::endl;
+            //HUMOTO_LOG_RAW(mpc_motion_parameters.base_angular_velocity_);
+            // -----------------set base velocity in mpc----------------
 
             // -----------------feedback--------------------------------
             if (i > 0)
@@ -172,12 +212,11 @@ int main(int argc, char **argv)
                                     ik_model.getBaseCoM(),
                                     ik_model.getBodyCoM(),
                                     ik_model.getBaseYaw());
-            //mpc_model_state.log(logger, prefix, "current_state");
+
+            mpc_model_state.log(logger, prefix, "current_state");
 
             mpc_model.updateState(mpc_model_state);
             // -----------------sync-models--------------------------------
-
-            prefix = humoto::LogEntryName("humoto").add(i);
 
             timer.start();
 
@@ -227,28 +266,11 @@ int main(int argc, char **argv)
             //mpc_model_state.log(logger, prefix, "next_state");
             //logger.log(humoto::LogEntryName(prefix).add("next_cop"), mpc_model.getCoP(mpc_model_state));
 
-            // ---------------- set tag velocity ----------
-
-            //update tag velocity
-            if(!(i % 10))
-            {
-                std::cout << i << std::endl;
-                velocity = head_complete_velocity.front();
-                tag_velocity["CameraTop_optical_frame"] = velocity;
-                ik_wbc.setTagRefVelocity(tag_velocity);
-                head_complete_velocity.erase(head_complete_velocity.begin());
-            }
-            else
-            {
-                ik_wbc.setTagRefVelocity(tag_velocity);
-            }
-
-            // ---------------- set tag velocity ----------
-
             //ik_model.log(logger, prefix);
             //HUMOTO_LOG_RAW("===================");
             //HUMOTO_LOG("iter = ", i);
             ik_model.saveCurrentState();
+            ik_wbc.computeTagsDesiredPoseInGlobal(ik_model);
             for (std::size_t j = 0; ; ++j)
             {
                 if (j == ik_wbc_parameters.maximal_number_of_iterations_)
@@ -298,14 +320,6 @@ int main(int argc, char **argv)
                 HUMOTO_LOG("Error", ik_motion_parameters_errors.body_com_position_);
                 HUMOTO_LOG("Reference", ik_motion_parameters.body_com_position_);
                 */
-
-                if (    ik_motion_parameters_errors.base_com_position_.norm()
-                        + ik_motion_parameters_errors.base_orientation_rpy_.norm()
-                        + ik_motion_parameters_errors.body_com_position_.norm()  <  ik_wbc_parameters.motion_parameters_tolerance_)
-                {
-                    break;
-                }
-
 
                 if (ik_solution.x_.lpNorm<Eigen::Infinity>() < ik_wbc_parameters.joint_angle_error_tolerance_)
                 {

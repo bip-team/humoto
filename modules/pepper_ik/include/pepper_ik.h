@@ -45,6 +45,7 @@ namespace humoto
 #include "pepper_ik/task_tagorient.h"
 #include "pepper_ik/task_tagangularvel.h"
 #include "pepper_ik/task_tagcompletevel.h"
+#include "pepper_ik/task_tagpose.h"
 
 #ifdef HUMOTO_USE_CONFIG
 #include "pepper_ik/configurable_optimization_problem.h"
