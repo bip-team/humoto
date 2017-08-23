@@ -9,9 +9,9 @@ IKMotionParameters:
   body_com_position: [-4.02863432226587e-03, 0.0, 7.50001340031501e-01]
 IKOptimizationProblem:
   task_class_names: [[TaskBaseCoMTracking, TaskBodyCoMTracking, TaskBaseOrientation, TaskJointsBounds], [TaskZeroVariables,
-  TaskTagPose]]
+  TaskTagCompleteVelocity]]
   task_ids: [[TaskBaseCoMTrackingPlanar, TaskBodyCoMTracking, TaskBaseOrientationPlanar, TaskJointsBounds], [TaskZeroVariables,
-  TaskTagPose]]
+  TaskTagCompleteVelocity]]
   TaskBaseOrientationPlanar:
     gain: 1
     k_orientation_gain: 1
@@ -30,10 +30,14 @@ IKOptimizationProblem:
   TaskJointsReference:
     gain: 1
     k_position_gain: 0.3
-    joint_angles_reference: [-0.01, -0.04, 0, 0, -0.2, 1.57, 0.12, -1.2217007, -0.52345699, 0, 1.57, -0.12, 1.2217007, 0.52345699, 0]
-  TaskTagPose:
+    joint_angles_reference: [-0.1975011835036236, 0.4160023626190753, 0.0, 0.0, 0.06850114982656237, 1.639454123287812, 0.12, -1.2217007, -0.52345699, 0.0, 1.639454123287804, -0.12, 1.2217007, 0.52345699, 0.0]
+  TaskTagCompleteVelocity:
     gain: 1
-    k_pose_gain: 1
+    k_complete_velocity_gain: 1
+    tag_string_id: "CameraTop_optical_frame"
+  TaskTagAngularVelocity:
+    gain: 1
+    k_angular_velocity_gain: 1
     tag_string_id: "CameraTop_optical_frame"
 RobotParameters:
   base_radius: 0.7
@@ -53,13 +57,13 @@ MPCMotionParameters:
   base_velocity: [0, 0]
   base_position: [0, 0]
   base_angular_velocity: 0
-  motion_mode: 2
+  motion_mode: 1
   duration_ms: -1
 MPCOptimizationProblem:
   task_class_names: [[TaskBaseVelocityBounds, TaskBodyPositionBounds, TaskCoPPositionBounds,
-  TaskBaseAccelerationBounds], [TaskBaseVelocityReference, TaskBaseJerkMinimization, TaskBodyJerkMinimization, TaskCoPCentering]]
+  TaskBaseAccelerationBounds], [TaskBasePositionReference, TaskBaseJerkMinimization, TaskBodyJerkMinimization, TaskCoPCentering]]
   task_ids: [[TaskBaseVelocityBounds, TaskBodyPositionBounds, TaskCoPPositionBounds, TaskBaseAccelerationBounds],
-  [TaskBaseVelocityReference, TaskBaseJerkMinimization, TaskBodyJerkMinimization, TaskCoPCentering]]
+  [TaskBasePositionReference, TaskBaseJerkMinimization, TaskBodyJerkMinimization, TaskCoPCentering]]
   TaskBaseAccelerationBounds:
     gain: 0
   TaskCoPPositionBounds:
@@ -73,8 +77,6 @@ MPCOptimizationProblem:
   TaskBaseJerkMinimization:
     gain: 0.0223606797749979
   TaskBasePositionReference:
-    gain: 1
-  TaskBaseVelocityReference:
     gain: 1
   TaskBodyJerkMinimization:
     gain: 0.0223606797749979
