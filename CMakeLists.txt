@@ -74,7 +74,7 @@ endif()
 
 set(HUMOTO_BRIDGES "")
 foreach (HUMOTO_BRIDGES_DIR ${HUMOTO_BRIDGES_DIRS})
-    humoto_list_filenames("${HUMOTO_BRIDGES_DIR}"  "HUMOTO_BRIDGES_TMP")
+    humoto_list_filenames("${HUMOTO_BRIDGES_DIR}"  "HUMOTO_BRIDGES_TMP" DIRS_WITH_CMAKELISTS)
     list(APPEND HUMOTO_BRIDGES ${HUMOTO_BRIDGES_TMP})
 
     foreach(HUMOTO_BRIDGE ${HUMOTO_BRIDGES_TMP})
@@ -337,7 +337,7 @@ if(HUMOTO_ENABLE_OPENMP)
         # Some versions of FindOpenMP rely on deprecated behavior.
         cmake_policy(SET CMP0012 OLD)
     ENDIF(POLICY CMP0012)
-    
+
     find_package(OpenMP QUIET)
     if(OPENMP_FOUND)
         set (CMAKE_CXX_FLAGS    "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
@@ -354,7 +354,7 @@ endif(HUMOTO_ENABLE_OPENMP)
 
 # bridges
 foreach(HUMOTO_BRIDGES_DIR ${HUMOTO_BRIDGES_DIRS})
-    humoto_list_filenames("${HUMOTO_BRIDGES_DIR}"   "HUMOTO_BRIDGES_TMP")
+    humoto_list_filenames("${HUMOTO_BRIDGES_DIR}"   "HUMOTO_BRIDGES_TMP" DIRS_WITH_CMAKELISTS)
 
     foreach(HUMOTO_BRIDGE ${HUMOTO_BRIDGES_TMP})
         if (HUMOTO_BRIDGE_${HUMOTO_BRIDGE})
