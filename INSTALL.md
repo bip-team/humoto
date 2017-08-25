@@ -32,16 +32,17 @@ compatibility issues. However, they are installed with humoto -- be careful to
 avoid conflicts.
 
 
-| name          | purpose                   | importance                                | license               |
-|---------------|---------------------------|-------------------------------------------|-----------------------|
-| rbdl          | dynamics and kinematics   | mandatory for [pepper_ik](@ref pepper_ik) | zlib                  |
-| yaml-cpp*     | YAML support              | optional                                  | MIT                   |
-| googletest    | tests                     | optional                                  | 3-clause BSD          |
-| qpOASES       | QP solver                 | optional                                  | LGPL 2.1              |
-| QuadProgpp    | QP solver                 | optional                                  | MIT                   |
-| qpmad         | QP solver                 | optional                                  | Apache 2.0            |
-| LexLS         | hierarchical solver       | not distributed                           | non-public software   |
-| eiQuadProg    | QP solver                 | not distributed                           | GPL                   |
+| name          | purpose                   | importance                                | license                |
+|---------------|---------------------------|-------------------------------------------|------------------------|
+| rbdl          | dynamics and kinematics   | mandatory for [pepper_ik](@ref pepper_ik) | zlib                   |
+| yaml-cpp*     | YAML support              | optional                                  | MIT                    |
+| msgpack-c     | MessagePack support       | optional                                  | Boost Software License |
+| googletest    | tests                     | optional                                  | 3-clause BSD           |
+| qpOASES       | QP solver                 | optional                                  | LGPL 2.1               |
+| QuadProgpp    | QP solver                 | optional                                  | MIT                    |
+| qpmad         | QP solver                 | optional                                  | Apache 2.0             |
+| LexLS         | hierarchical solver       | not distributed                           | non-public software    |
+| eiQuadProg    | QP solver                 | not distributed                           | GPL                    |
 
 
 (*) An old version of yaml-cpp is used in order to avoid dependency on C++11.
