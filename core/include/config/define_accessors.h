@@ -14,6 +14,7 @@
 #ifdef HUMOTO_USE_CONFIG
 // Generic stuff
     private:
+        // Define read and write methods
         #ifdef HUMOTO_CONFIG_ENTRIES
             #define HUMOTO_CONFIG_COMPOUND_(entry)       HUMOTO_CONFIG_WRITE_COMPOUND_(entry)
             #define HUMOTO_CONFIG_COMPOUND(entry)        HUMOTO_CONFIG_WRITE_COMPOUND(entry)
@@ -82,6 +83,7 @@
 
 
     protected:
+        // Define node name
         #ifdef HUMOTO_CONFIG_SECTION_ID
             const std::string & getConfigSectionID() const
             {
@@ -91,6 +93,7 @@
         #endif
 
 
+        // Count number of entries and define a function, which returns it.
         #ifdef HUMOTO_CONFIG_ENTRIES
             #define HUMOTO_CONFIG_COMPOUND_(entry)       +1
             #define HUMOTO_CONFIG_COMPOUND(entry)        +1
@@ -125,6 +128,7 @@
 
 
     public:
+        // Define constructors if requested
         #ifdef HUMOTO_CONFIG_CONSTRUCTOR
             /**
              * Define constructors for the given class.
@@ -149,28 +153,12 @@
 
 
 // Format-specific stuff
-    #ifdef HUMOTO_USE_CONFIG_YAML
-        protected:
-            void writeConfigEntries(HUMOTO_CONFIG_YAML_NAMESPACE::Writer & writer) const
-            {
-                writeConfigEntriesTemplate(writer);
-            }
-            void readConfigEntries(HUMOTO_CONFIG_YAML_NAMESPACE::Reader & reader, const bool crash_flag)
-            {
-                readConfigEntriesTemplate(reader, crash_flag);
-            }
+    #ifdef HUMOTO_BRIDGE_config_yaml_DEFINITIONS
+        HUMOTO_BRIDGE_config_yaml_DEFINITIONS
     #endif
 
-    #ifdef HUMOTO_USE_CONFIG_MSGPACK
-        protected:
-            void writeConfigEntries(HUMOTO_CONFIG_MSGPACK_NAMESPACE::Writer & writer) const
-            {
-                writeConfigEntriesTemplate(writer);
-            }
-            void readConfigEntries(HUMOTO_CONFIG_MSGPACK_NAMESPACE::Reader & reader, const bool crash_flag)
-            {
-                readConfigEntriesTemplate(reader, crash_flag);
-            }
+    #ifdef HUMOTO_BRIDGE_config_msgpack_DEFINITIONS
+        HUMOTO_BRIDGE_config_msgpack_DEFINITIONS
     #endif
 
 #endif //HUMOTO_USE_CONFIG

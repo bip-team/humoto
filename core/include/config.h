@@ -47,53 +47,21 @@ namespace humoto
     #define HUMOTO_CONFIG_READ_ENUM_(entry)     reader.readEnum(entry##_, #entry, crash_on_missing_entry);
     #define HUMOTO_CONFIG_READ_ENUM(entry)      reader.readEnum(entry, #entry, crash_on_missing_entry);
 
-
     // ----------------------------
 
-
-    #define HUMOTO_CONFIG_FLAG
-
-    // If support for configuration files is enabled include appropriate
-    // headers.
-    #ifdef HUMOTO_USE_CONFIG_YAML
-        #ifndef HUMOTO_BRIDGE_config_yaml
-            #error "YAML config header is included, but the corresponding bridge is disabled."
-        #endif
-
-        #include HUMOTO_CONFIG_YAML_HEADER
-
-        #undef HUMOTO_CONFIG_FLAG
+    #ifndef HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT
+        #error "Header inclusion error: configuration is enabled, but no configuration bridges included."
     #endif
-
-    #ifdef HUMOTO_USE_CONFIG_MSGPACK
-        #ifndef HUMOTO_BRIDGE_config_msgpack
-            #error "MSGPACK config header is included, but the corresponding bridge is disabled."
-        #endif
-
-        #include HUMOTO_CONFIG_MSGPACK_HEADER
-
-        #undef HUMOTO_CONFIG_FLAG
-    #endif
-
-    #ifdef HUMOTO_CONFIG_FLAG
-        #error "Configuration is enabled, but there are no configuration bridges."
-    #endif
-
-
-    // ----------------------------
-
 
     namespace humoto
     {
         namespace config
         {
-            #define HUMOTO_CONFIG_FLAG
-
             /**
              * @brief Configurable base class.
              */
             template <bool t_crash_on_missing_entry>
-                class HUMOTO_LOCAL CommonConfigurableBase
+                class HUMOTO_LOCAL CommonConfigurableBase : public HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT
             {
                 protected:
                     static const bool default_crash_on_missing_entry_ = t_crash_on_missing_entry;
@@ -106,22 +74,6 @@ namespace humoto
                      */
                     ~CommonConfigurableBase() {}
                     CommonConfigurableBase() {}
-
-
-                    ///@{
-                    /**
-                     * @attention Implementations of these methods are added
-                     * automatically upon inclusion of define_accessors.h.
-                     */
-                    #ifdef HUMOTO_USE_CONFIG_YAML
-                        virtual void writeConfigEntries(HUMOTO_CONFIG_YAML_NAMESPACE::Writer &) const = 0;
-                        virtual void readConfigEntries(HUMOTO_CONFIG_YAML_NAMESPACE::Reader &, const bool) = 0;
-                    #endif
-                    #ifdef HUMOTO_USE_CONFIG_MSGPACK
-                        virtual void writeConfigEntries(HUMOTO_CONFIG_MSGPACK_NAMESPACE::Writer &) const = 0;
-                        virtual void readConfigEntries(HUMOTO_CONFIG_MSGPACK_NAMESPACE::Reader &, const bool) = 0;
-                    #endif
-                    ///@}
 
 
                     /**
@@ -150,7 +102,22 @@ namespace humoto
                     virtual void finalize() {};
 
 
+                    /**
+                     * @brief Get number of entries in the corresponding
+                     * configuration node.
+                     *
+                     * @return number of entries
+                     */
                     virtual std::size_t getNumberOfEntries() const = 0;
+
+
+                    /// @{
+                    /**
+                     * These functions are always defined automatically.
+                     */
+                    using HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT::writeConfigEntries;
+                    using HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT::readConfigEntries;
+                    /// @}
 
 
                 public:

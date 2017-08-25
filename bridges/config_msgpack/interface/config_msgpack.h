@@ -12,21 +12,68 @@
 #pragma once
 
 #ifdef HUMOTO_CONFIG_DISABLED
-    #error "This header must be included before humoto.h."
+    #error "This header must be included before humoto.h"
 #else
-    #ifdef HUMOTO_USE_CONFIG_MSGPACK
-        #error "MessagePack config is already in use."
-    #else
-        #define HUMOTO_USE_CONFIG_MSGPACK
-    #endif
 
+    #include "humoto_helpers.h"
+
+    #include "msgpack.hpp"
+
+    #include "config_msgpack/reader.h"
+    #include "config_msgpack/writer.h"
+
+
+    namespace humoto
+    {
+        namespace config
+        {
+            /**
+             * @brief MessagePack bridge namespace.
+             */
+            namespace msgpack
+            {
+                class ConfigurableBase
+                #ifdef HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT
+                    : public HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT
+                #endif
+                {
+                    protected:
+                        #ifdef HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT
+                            using HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT::writeConfigEntries;
+                            using HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT::readConfigEntries;
+                        #endif
+
+                        ///@{
+                        /**
+                         * @attention Implementations of these methods are added
+                         * automatically upon inclusion of define_accessors.h.
+                         */
+                        virtual void writeConfigEntries(humoto::config::msgpack::Writer &) const = 0;
+                        virtual void readConfigEntries(humoto::config::msgpack::Reader &, const bool) = 0;
+                        ///@}
+                };
+
+                #ifdef HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT
+                    #undef HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT
+                #endif
+                #define HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT humoto::config::msgpack::ConfigurableBase
+            }
+        }
+    }
+
+    #define HUMOTO_BRIDGE_config_msgpack_DEFINITIONS \
+        protected: \
+            void writeConfigEntries(humoto::config::msgpack::Writer & writer) const \
+            { \
+                writeConfigEntriesTemplate(writer); \
+            }\
+            void readConfigEntries(humoto::config::msgpack::Reader & reader, const bool crash_flag)\
+            {\
+                readConfigEntriesTemplate(reader, crash_flag);\
+            }
 
     #ifndef HUMOTO_USE_CONFIG
         #define HUMOTO_USE_CONFIG
     #endif
 
-
-    // We do not inlude headers here since they depend on humoto stuff, which
-    // is not included yet.
-    #define HUMOTO_CONFIG_MSGPACK_HEADER   "config_msgpack/all.h"
 #endif

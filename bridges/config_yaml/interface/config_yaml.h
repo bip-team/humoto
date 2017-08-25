@@ -13,21 +13,68 @@
 #pragma once
 
 #ifdef HUMOTO_CONFIG_DISABLED
-    #error "This header must be included before humoto.h."
+    #error "This header must be included before humoto.h"
 #else
-    #ifdef HUMOTO_USE_CONFIG_YAML
-        #error "YAML config is already in use."
-    #else
-        #define HUMOTO_USE_CONFIG_YAML
-    #endif
+
+    #include "humoto_helpers.h"
+
+    #include "yaml-cpp/yaml.h"
+
+    #include "config_yaml/reader.h"
+    #include "config_yaml/writer.h"
+
+
+    namespace humoto
+    {
+        namespace config
+        {
+            /**
+             * @brief YAML bridge namespace.
+             */
+            namespace yaml
+            {
+                class ConfigurableBase
+                #ifdef HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT
+                    : public HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT
+                #endif
+                {
+                    protected:
+                        #ifdef HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT
+                            using HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT::writeConfigEntries;
+                            using HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT::readConfigEntries;
+                        #endif
+
+                        ///@{
+                        /**
+                         * @attention Implementations of these methods are added
+                         * automatically upon inclusion of define_accessors.h.
+                         */
+                        virtual void writeConfigEntries(humoto::config::yaml::Writer &) const = 0;
+                        virtual void readConfigEntries(humoto::config::yaml::Reader &, const bool) = 0;
+                        ///@}
+                };
+
+                #ifdef HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT
+                    #undef HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT
+                #endif
+                #define HUMOTO_CONFIG_CONFIGURABLE_BASE_PARENT humoto::config::yaml::ConfigurableBase
+            }
+        }
+    }
+
+    #define HUMOTO_BRIDGE_config_yaml_DEFINITIONS \
+        protected: \
+            void writeConfigEntries(humoto::config::yaml::Writer & writer) const \
+            { \
+                writeConfigEntriesTemplate(writer); \
+            }\
+            void readConfigEntries(humoto::config::yaml::Reader & reader, const bool crash_flag)\
+            {\
+                readConfigEntriesTemplate(reader, crash_flag);\
+            }
 
 
     #ifndef HUMOTO_USE_CONFIG
         #define HUMOTO_USE_CONFIG
     #endif
-
-
-    // We do not inlude headers here since they depend on humoto stuff, which
-    // is not included yet.
-    #define HUMOTO_CONFIG_YAML_HEADER   "config_yaml/all.h"
 #endif
