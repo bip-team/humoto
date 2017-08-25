@@ -129,15 +129,19 @@ namespace humoto
                     {
                         rbdl::TagLinkPtr tag = model.getLinkTag(i->first);
 
-                        Eigen::VectorXd pose_increment =
-                                wbc_parameters_.control_interval_ * getTagVelocityInGlobal(model, i->first, rbdl::SpatialType::COMPLETE);
+                        Eigen::VectorXd vel = getTagVelocityInGlobal(model, i->first, rbdl::SpatialType::COMPLETE);
                         
                         std::size_t part_size = 3;
                         etools::Vector6  tag_pose;
                         tag_pose.head(part_size) = rigidbody::convertMatrixToEulerAngles(model.getTagOrientation(tag),
-                                                        rigidbody::EulerAngles::RPY) + pose_increment.head(part_size);
+                                                        rigidbody::EulerAngles::RPY) + 
+                                                        wbc_parameters_.control_interval_ * (
+                                                            rigidbody::getEulerRatesToAngularVelocityTransform(
+                                                                rigidbody::convertMatrixToEulerAngles(model.getTagOrientation(tag),
+                                                                rigidbody::EulerAngles::RPY),
+                                                            rigidbody::EulerAngles::RPY).inverse() * vel.head(part_size) );
                         
-                        tag_pose.tail(part_size) = model.getTagPosition(tag) + pose_increment.tail(part_size); 
+                        tag_pose.tail(part_size) = model.getTagPosition(tag) + wbc_parameters_.control_interval_ * vel.tail(part_size); 
 
                         tags_desired_pose_global_[i->first] = tag_pose;
                     }

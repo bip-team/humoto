@@ -21,8 +21,6 @@ humoto_add_external_git_project(TARGET_NAME "${TGT_RBDL}"
                                 PROJECT_DIR "${RBDL_SOURCE_DIR}"
                                 CMAKE_ARGS   ${RBDL_ARGS})
 
-add_dependencies(fetch-bridges ${TGT_RBDL}-download)
-
 humoto_copy_file_if_exists( TGT_humoto_copy_headers         "rbdl_h"
                             "${RBDL_INTERFACE_DIR}/rbdl.h"  "${HUMOTO_INCLUDE_DIR}")
 humoto_copy_dir_if_exists(  TGT_humoto_copy_headers         "rbdl_dir"
@@ -30,6 +28,6 @@ humoto_copy_dir_if_exists(  TGT_humoto_copy_headers         "rbdl_dir"
 
 
 set(HUMOTO_BRIDGE_${HUMOTO_BRIDGE}_INCLUDES "" PARENT_SCOPE)
-set(HUMOTO_BRIDGE_${HUMOTO_BRIDGE}_LIBS    
+set(HUMOTO_BRIDGE_${HUMOTO_BRIDGE}_LIBS
     "${HUMOTO_BRIDGES_LIBDIR}/${CMAKE_SHARED_MODULE_PREFIX}rbdl${CMAKE_STATIC_LIBRARY_SUFFIX}"
     "${HUMOTO_BRIDGES_LIBDIR}/${CMAKE_SHARED_MODULE_PREFIX}rbdl_urdfreader${CMAKE_STATIC_LIBRARY_SUFFIX}" PARENT_SCOPE)

@@ -131,6 +131,92 @@ namespace humoto
         }
 
 
+        /**
+         * @brief Returns matrix M such that w = M * de.
+         *
+         * @param[in] euler_angles      current orientation (Euler angles)
+         * @param[in] euler_angles_type euler angles type
+         *
+         * @return 3x3 matrix
+         */
+        inline etools::Matrix3  getEulerRatesToAngularVelocityTransform(
+                const etools::Vector3   &euler_angles,
+                const EulerAngles::Type euler_angles_type)
+        {
+            switch (euler_angles_type)
+            {
+                case EulerAngles::RPY:
+                    return( ( etools::Matrix3()
+                                <<  cos(euler_angles.y()) * cos(euler_angles.z()),  -sin(euler_angles.z()), 0.0,
+                                    cos(euler_angles.y()) * sin(euler_angles.z()),  cos(euler_angles.z()),  0.0,
+                                    -sin(euler_angles.y()),                         0.0,                    1.0 ).finished() );
+                    break;
+
+                default:
+                    std::stringstream error_msg;
+                    error_msg << "Euler angles of type '" << euler_angles_type << "' are not yet supported.";
+                    HUMOTO_THROW_MSG(error_msg.str());
+                    break;
+            }
+        }
+
+
+
+        /**
+         * @brief Integrate angular velocity to obtain orientation matrix.
+         * Simple version.
+         *
+         * @param[in] orientation
+         * @param[in] angular_velocity
+         * @param[in] dt
+         *
+         * @return new orientation matrix
+         */
+        inline etools::Matrix3
+            integrateAngularVelocity(
+                const etools::Matrix3   & orientation,
+                const etools::Vector3   & angular_velocity,
+                const double            dt)
+        {
+            return(orientation + dt * orientation * etools::CrossProductMatrix(angular_velocity));
+        }
+
+
+        /**
+         * @brief Integrate angular velocity to obtain orientation matrix.
+         * Use Rodrigues formula.
+         *
+         * @param[in] orientation
+         * @param[in] angular_velocity
+         * @param[in] dt
+         *
+         * @return new orientation matrix
+         */
+        inline etools::Matrix3
+            integrateAngularVelocityRodrigues(
+                const etools::Matrix3   & orientation,
+                const etools::Vector3   & angular_velocity,
+                const double            dt,
+                const double            tolerance = humoto::g_generic_tolerance)
+        {
+            double vel = angular_velocity.norm();
+
+            if (std::abs(vel) < tolerance)
+            {
+                return(orientation);
+            }
+            else
+            {
+                etools::CrossProductMatrix tilde_axis(angular_velocity/vel);
+
+                //R*(I + sin(v*dt)*tilde(ax) + (1-cos(v*dt))*tilde(ax)*tilde(ax))
+                etools::Matrix3 orient_axis = orientation * tilde_axis;
+                return (    orientation
+                            + sin(vel*dt) * orient_axis
+                            + (1 - cos(vel*dt)) * orient_axis * tilde_axis );
+            }
+        }
+
 
         /**
          * @brief Class that groups together parameters related to a robot foot

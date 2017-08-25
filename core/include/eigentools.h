@@ -22,6 +22,7 @@ namespace etools
 #define EIGENTOOLS_ENABLE_EIGENTYPE_DETECTION
 
 #include "eigentools/eigentools.h"
+#include "eigentools/cross_product.h"
 #include "eigentools/blockmatrix_base.h"
 #include "eigentools/blockmatrix_kronecker.h"
 #include "eigentools/blockmatrix.h"

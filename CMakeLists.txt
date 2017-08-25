@@ -2,6 +2,14 @@
 cmake_minimum_required (VERSION 2.6.3)
 project (humoto CXX)
 
+
+IF(POLICY CMP0012)
+    # Some versions of FindOpenMP produce warnings if the policy is not set
+    # explicitly.
+    cmake_policy(SET CMP0012 NEW)
+ENDIF(POLICY CMP0012)
+
+
 set (CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
 include(ExternalProject)
 include(CMakeParseArguments)
@@ -206,6 +214,7 @@ set (HUMOTO_DEFINES   "")
 #####################################
 
 add_custom_target( fetch-bridges )
+set(HUMOTO_TARGET_FETCH_BRIDGES    fetch-bridges CACHE INTERNAL "")
 add_custom_target( TGT_humoto_copy_headers ALL )
 add_custom_target( TGT_humoto_copy_config ALL )
 
@@ -335,21 +344,12 @@ endif(HUMOTO_BUILD_WITH_QI)
 
 # OpenMP
 if(HUMOTO_ENABLE_OPENMP)
-    IF(POLICY CMP0012)
-        # Some versions of FindOpenMP rely on deprecated behavior.
-        cmake_policy(SET CMP0012 OLD)
-    ENDIF(POLICY CMP0012)
-
     find_package(OpenMP QUIET)
     if(OPENMP_FOUND)
         set (CMAKE_CXX_FLAGS    "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
     else()
         message("OpenMP support was not detected. Proceeding without it.")
     endif(OPENMP_FOUND)
-
-    IF(POLICY CMP0012)
-        cmake_policy(SET CMP0012 NEW)
-    ENDIF(POLICY CMP0012)
 endif(HUMOTO_ENABLE_OPENMP)
 
 

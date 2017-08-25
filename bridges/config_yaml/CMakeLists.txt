@@ -19,8 +19,6 @@ humoto_add_external_git_project(TARGET_NAME "${TGT_YAMLCPP}"
                                 PROJECT_DIR "${YAMLCPP_SOURCE_DIR}"
                                 CMAKE_ARGS   ${YAMLCPP_ARGS})
 
-add_dependencies(fetch-bridges ${TGT_YAMLCPP}-download)
-
 humoto_copy_file_if_exists( TGT_humoto_copy_headers                     "config_yaml_h"
                             "${YAMLCPP_INTERFACE_DIR}/config_yaml.h"    "${HUMOTO_INCLUDE_DIR}")
 humoto_copy_dir_if_exists(  TGT_humoto_copy_headers                     "config_yaml_dir"

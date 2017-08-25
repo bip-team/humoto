@@ -18,8 +18,5 @@ humoto_add_external_git_project(TARGET_NAME "${TGT_GOOGLETEST}"
                                 PROJECT_DIR "${GOOGLETEST_DIR}"
                                 CMAKE_ARGS   ${GOOGLETEST_ARGS})
 
-add_dependencies(fetch-bridges ${TGT_GOOGLETEST}-download)
-
-
 set(HUMOTO_BRIDGE_${HUMOTO_BRIDGE}_LIBS "${HUMOTO_BRIDGES_LIBDIR}/${CMAKE_SHARED_MODULE_PREFIX}gtest${CMAKE_STATIC_LIBRARY_SUFFIX}" PARENT_SCOPE)
 set(HUMOTO_BRIDGE_${HUMOTO_BRIDGE}_INCLUDES "" PARENT_SCOPE)

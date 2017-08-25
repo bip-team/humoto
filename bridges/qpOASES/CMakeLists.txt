@@ -20,8 +20,6 @@ humoto_add_external_svn_project(TARGET_NAME "${TGT_QPOASES}"
                                 CMAKE_ARGS   ${QPOASES_ARGS}
                                 REPOSITORY  "https://projects.coin-or.org/svn/qpOASES/stable/3.2")
 
-add_dependencies(fetch-bridges ${TGT_QPOASES}-download)
-
 humoto_copy_file_if_exists( TGT_humoto_copy_headers                 "qpoases_h"
                             "${QPOASES_INTERFACE_DIR}/qpoases.h"    "${HUMOTO_INCLUDE_DIR}")
 humoto_copy_dir_if_exists(  TGT_humoto_copy_headers                 "qpoases_dir"
