@@ -1,0 +1,16 @@
+INPUT += \
+../coding_policies.md \
+../directory_layout.md \
+../howto_configurable.md \
+../howto_tasks.md \
+../known_issues.md \
+../../AUTHORS.md \
+../../INSTALL.md \
+../../README.md \
+../../bridges/QuadProgpp/interface \
+../../bridges/config_yaml/interface \
+../../bridges/qpOASES/interface \
+../../bridges/rbdl/interface \
+../../bridges/qpmad/interface \
+../../bridges/config_msgpack/interface \
+

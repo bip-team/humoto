@@ -113,12 +113,13 @@ class ConfigMatchTest : public ::testing::Test
         template<class t_Reader, class t_Writer>
             void testMulti()
         {
-            humoto::walking::StanceFSMParameters stance_fsm_parameters_out;
-            initialize(stance_fsm_parameters_out);
+            humoto::walking::StanceFSMParameters stance_fsm_parameters_out1;
+            humoto::walking::StanceFSMParameters stance_fsm_parameters_out2;
+            initialize(stance_fsm_parameters_out2);
             {
                 t_Writer writer("stance_fsm_config_match_multi.cfg");
-                stance_fsm_parameters_out.writeConfig(writer, "node1");
-                stance_fsm_parameters_out.writeConfig(writer, "node2");
+                stance_fsm_parameters_out1.writeConfig(writer, "node1");
+                stance_fsm_parameters_out2.writeConfig(writer, "node2");
             }
 
             // -------
@@ -128,8 +129,8 @@ class ConfigMatchTest : public ::testing::Test
             t_Reader reader("stance_fsm_config_match_multi.cfg");
             stance_fsm_parameters_in1.readConfig(reader, "node1");
             stance_fsm_parameters_in2.readConfig(reader, "node2");
-            compare(stance_fsm_parameters_out, stance_fsm_parameters_in1);
-            compare(stance_fsm_parameters_out, stance_fsm_parameters_in2);
+            compare(stance_fsm_parameters_out1, stance_fsm_parameters_in1);
+            compare(stance_fsm_parameters_out2, stance_fsm_parameters_in2);
         }
 };
 

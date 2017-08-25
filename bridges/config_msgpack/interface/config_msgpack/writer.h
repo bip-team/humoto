@@ -59,6 +59,7 @@ namespace humoto
                      * @brief Starts a nested map in the configuration file
                      *
                      * @param[in] map_name name of the map
+                     * @param[in] num_entries number of child entries
                      */
                     void descend(const std::string &map_name, const std::size_t num_entries)
                     {
@@ -69,8 +70,6 @@ namespace humoto
 
                     /**
                      * @brief Starts a nested map in the configuration file
-                     *
-                     * @param[in] map_name name of the map
                      */
                     void initRoot()
                     {

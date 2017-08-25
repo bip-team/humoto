@@ -163,13 +163,13 @@ namespace humoto
                      */
                     template <class t_Reader>
                         void readNestedConfig(  t_Reader            & reader,
-                                                const std::string   & name,
+                                                const std::string   & node_name,
                                                 const bool          crash_on_missing_entry = default_crash_on_missing_entry_)
                     {
                         try
                         {
                             setDefaults();
-                            if (reader.descend(name))
+                            if (reader.descend(node_name))
                             {
                                 readConfigEntries(reader, crash_on_missing_entry);
                                 reader.ascend();
@@ -178,13 +178,13 @@ namespace humoto
                             {
                                 if (crash_on_missing_entry)
                                 {
-                                    HUMOTO_THROW_MSG(std::string("Configuration file does not contain entry '") + name + "'.");
+                                    HUMOTO_THROW_MSG(std::string("Configuration file does not contain entry '") + node_name + "'.");
                                 }
                             }
                         }
                         catch(const std::exception &e)
                         {
-                            HUMOTO_THROW_MSG(std::string("Failed to parse node <") + name + "> in the configuration file: " + e.what());
+                            HUMOTO_THROW_MSG(std::string("Failed to parse node <") + node_name + "> in the configuration file: " + e.what());
                         }
                     }
 
@@ -316,9 +316,9 @@ namespace humoto
                      */
                     template <class t_Writer>
                         void writeNestedConfig( t_Writer& writer,
-                                                const std::string &name) const
+                                                const std::string &node_name) const
                     {
-                        writer.descend(name, getNumberOfEntries());
+                        writer.descend(node_name, getNumberOfEntries());
                         writeConfigEntries(writer);
                         writer.ascend();
                     }

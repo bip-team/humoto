@@ -13,7 +13,5 @@
 
 #define HUMOTO_CONFIG_YAML_NAMESPACE     humoto::config::yaml
 
-#define HUMOTO_CONFIG_YAML_PRIVATE_DATA
-
 #include "reader.h"
 #include "writer.h"

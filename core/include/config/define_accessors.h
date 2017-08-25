@@ -150,9 +150,6 @@
 
 // Format-specific stuff
     #ifdef HUMOTO_USE_CONFIG_YAML
-        private:
-            HUMOTO_CONFIG_YAML_PRIVATE_DATA
-
         protected:
             void writeConfigEntries(HUMOTO_CONFIG_YAML_NAMESPACE::Writer & writer) const
             {
@@ -165,9 +162,6 @@
     #endif
 
     #ifdef HUMOTO_USE_CONFIG_MSGPACK
-        private:
-            HUMOTO_CONFIG_MSGPACK_PRIVATE_DATA
-
         protected:
             void writeConfigEntries(HUMOTO_CONFIG_MSGPACK_NAMESPACE::Writer & writer) const
             {
