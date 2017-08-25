@@ -198,6 +198,61 @@ namespace humoto
              *
              * @param[out] Ox       matrix Ox
              * @param[out] Ou       matrix Ou
+             * @param[in] D         D matrix
+             * @param[in] E         E matrix
+             * @param[in] Ux        matrix Ux
+             * @param[in] Uu        matrix Uu
+             */
+            template<typename t_DMatrix,
+                     typename t_EMatrix>
+            void condenseOutput(Eigen::MatrixXd &Ox,
+                                Eigen::MatrixXd &Ou,
+                                const t_DMatrix &D,
+                                const t_EMatrix &E,
+                                const Eigen::MatrixXd &Ux,
+                                const Eigen::MatrixXd &Uu)
+            {
+                size_t Nu = E.cols();
+                size_t Nx = D.cols();
+                size_t Ny = D.rows();
+                size_t N = Ux.rows()/Nx;
+                HUMOTO_ASSERT(Ux.cols() == (long)Nx,
+                                "Mismatching sizes between Ux and D matrix.")
+                HUMOTO_ASSERT(Ux.rows() == (long)N*(long)Nx,
+                                "Mismatching sizes between Ux and D matrix.")
+                HUMOTO_ASSERT(Uu.cols() == (long)N*(long)Nu,
+                                "Mismatching sizes between Uu and E matrix.")
+                HUMOTO_ASSERT(Uu.rows() == (long)N*(long)Nx,
+                                "Mismatching sizes between Uu and E matrix.")
+
+                Ox.resize(N*Ny, Nx);
+                Ox.block(0, 0, Ny, Nx) = D;
+
+                Ou.setZero(N*Ny, N*Nu);
+                Ou.block(0, 0, Ny, Nu) = E;
+
+                for (size_t i = 1; i < N; ++i)
+                {
+                    Ox.block(i*Ny, 0, Ny, Nx).noalias() =
+                      D * Ux.block((i-1)*Nx, 0, Nx, Nx);
+
+                    Ou.middleRows(i*Ny, Ny).noalias() = D * Uu.middleRows((i-1)*Nx, Nx);
+                    Ou.block(i*Ny, i*Nu, Ny, Nu) = E;
+                }
+            }
+            /**
+             * @brief Condense output of the system.
+             *
+             * output = Ox*x0 + Ou*(u0,...,uN)
+             *
+             * @tparam t_num_vars               number of state variables
+             * @tparam t_num_controls           number of control variables
+             * @tparam t_num_outputs            number of output variables
+             * @tparam t_DMatrix                D matrix, should be an Eigen matrix or a scalar
+             * @tparam t_EMatrix                E matrix, should be an Eigen matrix or a scalar
+             *
+             * @param[out] Ox       matrix Ox
+             * @param[out] Ou       matrix Ou
              * @param[in] D         vector of D matrices
              * @param[in] E         vector of E matrices
              * @param[in] Ux        matrix Ux
