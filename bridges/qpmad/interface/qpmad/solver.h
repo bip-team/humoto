@@ -81,11 +81,7 @@ namespace humoto
             private:
                 ::qpmad::Solver       solver;
 
-                /// Hessian
-                Eigen::MatrixXd     H_;
-
-                /// Gradient vector
-                Eigen::VectorXd     g_;
+                humoto::QPObjectiveSharedPointer    objective_;
 
 
                 /// Constraints
@@ -98,7 +94,7 @@ namespace humoto
 
             private:
                 /// @copydoc humoto::Solver::initialize
-                void initialize(  const humoto::OptimizationProblem   &hierarchy,
+                void initialize(  humoto::OptimizationProblem   &hierarchy,
                                   const humoto::SolutionStructure     &sol_structure)
                 {
                     reset();
@@ -106,7 +102,7 @@ namespace humoto
                     std::size_t     number_of_levels = hierarchy.getNumberOfLevels();
                     std::size_t     objective_level_ = number_of_levels - 1;
 
-                    hierarchy[objective_level_].getObjective(H_, g_);
+                    objective_ = hierarchy[objective_level_].getObjective();
 
 
                     if (number_of_levels > 1)
@@ -134,16 +130,13 @@ namespace humoto
 
                     if (parameters_.regularization_factor_ > 0)
                     {
-                        for (EigenIndex i = 0; i < H_.rows(); ++i)
-                        {
-                            H_(i,i) += parameters_.regularization_factor_;
-                        }
+                        objective_->regularize(parameters_.regularization_factor_);
                     }
 
                     ::qpmad::Solver::ReturnStatus qp_status =
                         solver.solve(   solution.x_,
-                                        H_,
-                                        g_,
+                                        objective_->getHessian(),
+                                        objective_->getGradient(),
                                         lb_,
                                         ub_,
                                         general_constraints_.getA(),
@@ -220,9 +213,6 @@ namespace humoto
                             const std::string &name = "qpmad") const
                 {
                     LogEntryName subname = parent; subname.add(name);
-
-                    logger.log(LogEntryName(subname).add("H"), H_);
-                    logger.log(LogEntryName(subname).add("g"), g_);
 
                     general_constraints_.log(logger, subname, "general_constraints");
 

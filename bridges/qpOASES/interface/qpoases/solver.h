@@ -139,11 +139,7 @@ namespace humoto
                 bool                active_set_guess_provided_;
 
 
-                /// Hessian
-                Eigen::MatrixXd     H_;
-
-                /// Gradient vector
-                Eigen::VectorXd     g_;
+                humoto::QPObjectiveSharedPointer    objective_;
 
 
                 /// Constraints (lbA <= A x <= ubA)
@@ -181,7 +177,7 @@ namespace humoto
 
             private:
                 /// @copydoc humoto::Solver::initialize
-                void initialize(  const humoto::OptimizationProblem   &hierarchy,
+                void initialize(  humoto::OptimizationProblem   &hierarchy,
                                   const humoto::SolutionStructure     &sol_structure)
                 {
                     reset();
@@ -189,7 +185,7 @@ namespace humoto
                     std::size_t     number_of_levels = hierarchy.getNumberOfLevels();
                     objective_level_ = number_of_levels - 1;
 
-                    hierarchy[objective_level_].getObjective(H_, g_);
+                    objective_ = hierarchy[objective_level_].getObjective();
 
 
                     if (number_of_levels > 1)
@@ -277,8 +273,8 @@ namespace humoto
 
                     qp_->setOptions (parameters_.options_);
                     qpoases_return_value =
-                        qp_->init(  H_.data(),
-                                    g_.data(),
+                        qp_->init(  objective_->getHessian().data(),
+                                    objective_->getGradient().data(),
                                     A_ptr,
                                     lb_ptr,
                                     ub_ptr,
@@ -557,9 +553,6 @@ namespace humoto
                             const std::string &name = "qpoases") const
                 {
                     LogEntryName subname = parent; subname.add(name);
-
-                    logger.log(LogEntryName(subname).add("H"), H_);
-                    logger.log(LogEntryName(subname).add("g"), g_);
 
                     general_constraints_.log(logger, subname, "general_constraints");
 

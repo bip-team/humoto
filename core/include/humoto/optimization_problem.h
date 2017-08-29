@@ -13,6 +13,171 @@
 namespace humoto
 {
     /**
+     * @brief A container for a QP Objective.
+     */
+    class HUMOTO_LOCAL QPObjective
+    {
+        public:
+            enum Status
+            {
+                UNDEFINED = 0,
+                INITIALIZED = 1,
+                MODIFIED = 2
+            };
+
+            enum HessianType
+            {
+                HESSIAN_UNDEFINED = 0,
+                HESSIAN_GENERIC = 1,
+                HESSIAN_DIAGONAL = 2,
+                HESSIAN_LOWER_TRIANGULAR = 3
+            };
+
+
+        protected:
+            /// Hessian
+            Eigen::MatrixXd     H_;
+
+            /// Gradient vector
+            Eigen::VectorXd     g_;
+
+            HessianType         hessian_type_;
+            Status              status_;
+
+
+        public:
+            /**
+             * @brief Const accessor
+             *
+             * @return objective component
+             */
+            const Eigen::MatrixXd   & getHessian() const
+            {
+                return (H_);
+            }
+
+            /**
+             * @brief Const accessor
+             *
+             * @return objective component
+             */
+            const Eigen::VectorXd   & getGradient() const
+            {
+                return (g_);
+            }
+
+
+
+            /**
+             * @brief Non-const accessor
+             *
+             * @return objective component
+             */
+            Eigen::MatrixXd   & getHessian()
+            {
+                hessian_type_ = HESSIAN_GENERIC;
+                status_ = MODIFIED;
+                return (H_);
+            }
+
+            /**
+             * @brief Non-const accessor
+             *
+             * @return objective component
+             */
+            Eigen::VectorXd    & getGradient()
+            {
+                status_ = MODIFIED;
+                return (g_);
+            }
+
+
+
+            /**
+             * @brief Status of the objective.
+             *
+             * @return status
+             */
+            Status getStatus() const
+            {
+                return (status_);
+            }
+
+            /**
+             * @brief Sets status.
+             *
+             * @param[in] status
+             */
+            void setStatus(const Status status)
+            {
+                status_ = status;
+            }
+
+
+
+            /**
+             * @brief Hessian type
+             *
+             * @return Hessian type
+             */
+            HessianType getHessianType() const
+            {
+                return (hessian_type_);
+            }
+
+            /**
+             * @brief Sets Hessian type
+             *
+             * @param[in] hessian_type Hessian type
+             */
+            void setHessianType(const HessianType hessian_type)
+            {
+                hessian_type_ = hessian_type;
+            }
+
+
+            /**
+             * @brief Adds regularization to the Hessian.
+             *
+             * @param[in] regularization_factor
+             */
+            void regularize(const double regularization_factor)
+            {
+                status_ = MODIFIED;
+
+                for (EigenIndex i = 0; i < H_.rows(); ++i)
+                {
+                    H_(i,i) += regularization_factor;
+                }
+            }
+
+
+            /**
+             * @brief Log objective
+             *
+             * @param[in,out] logger logger
+             * @param[in] parent parent
+             * @param[in] name name
+             */
+            void log(   humoto::Logger &logger HUMOTO_GLOBAL_LOGGER_IF_DEFINED,
+                        const LogEntryName &parent = LogEntryName(),
+                        const std::string &name = "qp_objective") const
+            {
+                LogEntryName subname = parent; subname.add(name);
+
+                logger.log(LogEntryName(subname).add("H"), H_);
+                logger.log(LogEntryName(subname).add("g"), g_);
+
+                logger.log(LogEntryName(subname).add("hessian_type"), hessian_type_);
+                logger.log(LogEntryName(subname).add("status"), status_);
+            }
+    };
+
+    typedef boost::shared_ptr<humoto::QPObjective>  QPObjectiveSharedPointer;
+
+
+
+    /**
      * @brief This class represents one level of a hierarchy.
      */
     class HUMOTO_LOCAL HierarchyLevel
@@ -233,6 +398,11 @@ namespace humoto
              * includes general and simple tasks.
              */
             std::list<TaskInfo>     tasks_;
+
+
+            /// Initialized upon request
+            QPObjectiveSharedPointer    qp_objective_;
+
 
 
         public:
@@ -497,13 +667,18 @@ namespace humoto
             /**
              * @brief Form objective of a QP
              *
-             * @param[out] H hessian
-             * @param[out] g gradient
+             * @param[in]   initialize_upper_triangular_part
              */
-            void getObjective(  Eigen::MatrixXd &H,
-                                Eigen::VectorXd &g) const
+            QPObjectiveSharedPointer getObjective(bool initialize_upper_triangular_part = true)
             {
                 HUMOTO_ASSERT(isEquality(), "Objective cannot be formed using inequality tasks.");
+
+
+                if(NULL == qp_objective_)
+                {
+                    qp_objective_.reset(new humoto::QPObjective);
+                }
+
 
                 for (   std::list<TaskInfo>::const_iterator it = tasks_.begin();
                         it != tasks_.end();
@@ -511,17 +686,43 @@ namespace humoto
                 {
                     if (it == tasks_.begin())
                     {
-                        it->ptr_->getATAandATb(H, g);
+                        it->ptr_->getATAandATb(qp_objective_->getHessian(), qp_objective_->getGradient());
                     }
                     else
                     {
-                        it->ptr_->addATAandATb(H, g);
+                        it->ptr_->addATAandATb(qp_objective_->getHessian(), qp_objective_->getGradient());
                     }
                 }
-                etools::convertLLTtoSymmetric(H);
 
-                g = -g;
+
+                if (isSimple())
+                {
+                    if (initialize_upper_triangular_part)
+                    {
+                        etools::convertLLTtoSymmetric(qp_objective_->getHessian());
+                    }
+
+                    qp_objective_->setHessianType(humoto::QPObjective::HESSIAN_DIAGONAL);
+                }
+                else
+                {
+                    if (initialize_upper_triangular_part)
+                    {
+                        etools::convertLLTtoSymmetric(qp_objective_->getHessian());
+                        qp_objective_->setHessianType(humoto::QPObjective::HESSIAN_GENERIC);
+                    }
+                    else
+                    {
+                        qp_objective_->setHessianType(humoto::QPObjective::HESSIAN_LOWER_TRIANGULAR);
+                    }
+                }
+
+                qp_objective_->getGradient() = -qp_objective_->getGradient();
+
+                qp_objective_->setStatus(humoto::QPObjective::INITIALIZED);
+                return (qp_objective_);
             }
+
 
 
             /**
@@ -547,6 +748,11 @@ namespace humoto
                     subname_loop.add(i);
                     it->location_.log(logger, subname_loop);
                     it->ptr_->log(logger, subname_loop, "");
+                }
+
+                if(NULL != qp_objective_)
+                {
+                    qp_objective_->log(logger, subname);
                 }
             }
     };

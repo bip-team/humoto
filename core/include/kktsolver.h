@@ -41,7 +41,7 @@ namespace humoto
         class HUMOTO_LOCAL SolverParameters : public humoto::SolverParametersBase
         {
             #define HUMOTO_CONFIG_SECTION_ID "SolverParameters"
-            #define HUMOTO_CONFIG_CONSTRUCTOR SolverParameters 
+            #define HUMOTO_CONFIG_CONSTRUCTOR SolverParameters
             #define HUMOTO_CONFIG_ENTRIES \
                 HUMOTO_CONFIG_PARENT_CLASS(SolverParametersBase)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
@@ -88,11 +88,7 @@ namespace humoto
         class HUMOTO_LOCAL Solver : public humoto::Solver<SolverParameters>
         {
             private:
-                /// Hessian
-                Eigen::MatrixXd     H_;
-
-                /// Gradient vector
-                Eigen::VectorXd     g_;
+                humoto::QPObjectiveSharedPointer    objective_;
 
 
                 humoto::constraints::ContainerAB     equality_constraints_;
@@ -103,7 +99,7 @@ namespace humoto
 
             private:
                 /// @copydoc humoto::Solver::initialize
-                void initialize(  const humoto::OptimizationProblem   &hierarchy,
+                void initialize(  humoto::OptimizationProblem   &hierarchy,
                                   const humoto::SolutionStructure     &sol_structure)
                 {
                     reset();
@@ -124,7 +120,7 @@ namespace humoto
                                     "Empty objective.");
 
 
-                    hierarchy[objective_level_].getObjective(H_, g_);
+                    objective_ = hierarchy[objective_level_].getObjective();
 
 
                     if (number_of_levels > 1)
@@ -180,10 +176,10 @@ namespace humoto
                     inverted_H.resize(num_var);
                     for (EigenIndex i = 0; i < inverted_H.size(); ++i)
                     {
-                        inverted_H(i) = 1./(H_(i,i) + parameters_.elimination_regularization_factor_);
+                        inverted_H(i) = 1./(objective_->getHessian()(i,i) + parameters_.elimination_regularization_factor_);
                     }
 
-                    Eigen::VectorXd     iH_g = inverted_H.asDiagonal() * g_;
+                    Eigen::VectorXd     iH_g = inverted_H.asDiagonal() * objective_->getGradient();
                     Eigen::MatrixXd     iH_At = inverted_H.asDiagonal() * equality_constraints_.getA().transpose();
 
                     solution.x_.noalias() = iH_At
@@ -216,10 +212,10 @@ namespace humoto
                     kkt_matrix.resize(num_var+num_ctr, num_var+num_ctr);
                     kkt_vector.resize(num_var+num_ctr);
 
-                    kkt_matrix <<   H_, equality_constraints_.getA().transpose(),
+                    kkt_matrix <<   objective_->getHessian(), equality_constraints_.getA().transpose(),
                                     equality_constraints_.getA(), Eigen::MatrixXd::Zero(num_ctr, num_ctr);
 
-                    kkt_vector <<   -g_,
+                    kkt_vector <<   -objective_->getGradient(),
                                     equality_constraints_.getB();
 
 
@@ -291,9 +287,6 @@ namespace humoto
                             const std::string &name = "kktsolver") const
                 {
                     LogEntryName subname = parent; subname.add(name);
-
-                    logger.log(LogEntryName(subname).add("H"), H_);
-                    logger.log(LogEntryName(subname).add("g"), g_);
 
                     equality_constraints_.log(logger, subname, "equality_constraints");
                 }
