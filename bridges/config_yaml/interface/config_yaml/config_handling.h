@@ -270,6 +270,40 @@ namespace humoto
 
 
                 /**
+                 * @brief Read configuration entry (std::vector<std::vector<double> >)
+                 *
+                 * @param[out] entry      configuration parameter
+                 * @param[in]  entry_name name of the configuration parameter
+                 * @param[in]  crash_on_missing_entry
+                 */
+                void readCompound(  std::vector<std::vector<double> >      & entry,
+                                    const std::string                      & entry_name,
+                                    const bool crash_on_missing_entry = false)
+                {
+                    if (descend(entry_name))
+                    {
+                        HUMOTO_ASSERT(  (getCurrentNode()->Type() == YAML::NodeType::Sequence),
+                                        "[Config] Entry is not a sequence.");
+
+                        entry.resize(getCurrentNode()->size());
+
+                        for(std::size_t i = 0; i < getCurrentNode()->size(); ++i)
+                        {
+                            (*getCurrentNode())[i] >> entry[i];
+                        }
+
+                        ascend();
+                    }
+                    else
+                    {
+                        if (crash_on_missing_entry)
+                        {
+                            HUMOTO_THROW_MSG(std::string("Configuration file does not contain entry '") + entry_name + "'.");
+                        }
+                    }
+                }
+
+                /**
                  * @brief Read configuration entry (std::vector<std::vector<std::string> >)
                  *
                  * @param[out] entry      configuration parameter
@@ -522,6 +556,30 @@ namespace humoto
                     ascend();
                 }
 
+
+                /**
+                 * @brief Write configuration entry (std::vector<std::vector<double>>)
+                 *
+                 * @param[in] entry      configuration parameter
+                 * @param[in] entry_name name of the configuration parameter
+                 */
+                void writeCompound( const std::vector<std::vector<double> >      & entry,
+                                    const std::string                            & entry_name) const
+                {
+                    *emitter_ << YAML::Key << entry_name;
+                    *emitter_ << YAML::Value << YAML::Flow;
+                    *emitter_ << YAML::BeginSeq;
+
+                    for(std::size_t i = 0; i < entry.size(); ++i)
+                    {
+                        for(std::size_t j = 0; j < entry[i].size(); ++j)
+                        {
+                            *emitter_ << entry[i][j];
+                        }
+                    }
+
+                    *emitter_ << YAML::EndSeq;
+                }
 
                 /**
                  * @brief Write configuration entry (std::vector<std::vector<std::string>>)
