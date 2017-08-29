@@ -151,11 +151,14 @@ namespace humoto
                     /**
                      * @brief Write configuration entry (std::vector<std::vector<std::string>>)
                      *
+                     * @tparam t_VectorEntryType type of the entry of std::vector
+                     *
                      * @param[in] entry      configuration parameter
                      * @param[in] entry_name name of the configuration parameter
                      */
-                    void writeCompound( const std::vector<std::vector<std::string> > & entry,
-                                        const std::string                            & entry_name) const
+                    template <typename t_VectorEntryType>
+                        void writeCompound( const std::vector< std::vector<t_VectorEntryType> > & entry,
+                                            const std::string                                   & entry_name) const
                     {
                         HUMOTO_ASSERT(entry.size() <= std::numeric_limits<uint32_t>::max(), "Vector is too long.");
 
