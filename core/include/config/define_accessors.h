@@ -109,7 +109,7 @@
 
             std::size_t getNumberOfEntries() const
             {
-                static const std::size_t    num_entries = 0 HUMOTO_MACRO_SUBSTITUTE(HUMOTO_CONFIG_ENTRIES);
+                static const std::size_t    num_entries = (0 HUMOTO_MACRO_SUBSTITUTE(HUMOTO_CONFIG_ENTRIES) );
                 return(num_entries);
             }
 

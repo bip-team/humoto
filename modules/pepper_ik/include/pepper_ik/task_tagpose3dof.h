@@ -14,9 +14,9 @@ namespace humoto
     namespace pepper_ik
     {
         /**
-         * @brief Tag pose with 3dofs (around x axis, around y axis, along z axis) 
+         * @brief Tag pose with 3dofs (around x axis, around y axis, along z axis)
          *        This task is used when moving the base using visual servoing
-         * 
+         *
          */
         template <int t_features>
             class HUMOTO_LOCAL TaskTagPose3Dof : public humoto::TaskAB
@@ -30,9 +30,9 @@ namespace humoto
 
             protected:
                 #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_PARENT_CLASS(TaskAB); \
-                    HUMOTO_CONFIG_SCALAR_(k_pose_gain); \
-                    HUMOTO_CONFIG_SCALAR_(tag_string_id);
+                    HUMOTO_CONFIG_PARENT_CLASS(TaskAB) \
+                    HUMOTO_CONFIG_SCALAR_(k_pose_gain) \
+                    HUMOTO_CONFIG_SCALAR_(tag_string_id)
                 #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 
