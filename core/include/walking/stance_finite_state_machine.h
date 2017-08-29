@@ -91,18 +91,18 @@ namespace humoto
          */
         class HUMOTO_LOCAL StanceFSMParameters : public humoto::config::ConfigurableBase
         {
-            protected:
-                #define HUMOTO_CONFIG_SECTION_ID "StanceFSMParameters"
-                #define HUMOTO_CONFIG_ENTRIES \
-                        HUMOTO_CONFIG_SCALAR_(ss_duration_ms); \
-                        HUMOTO_CONFIG_SCALAR_(tds_duration_ms); \
-                        HUMOTO_CONFIG_SCALAR_(first_stance_duration_ms); \
-                        HUMOTO_CONFIG_SCALAR_(last_stance_duration_ms); \
-                        HUMOTO_CONFIG_SCALAR_(num_steps); \
-                        HUMOTO_CONFIG_ENUM_(first_stance); \
-                        HUMOTO_CONFIG_ENUM_(first_ss_type); \
-                        HUMOTO_CONFIG_ENUM_(last_stance);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+            #define HUMOTO_CONFIG_SECTION_ID "StanceFSMParameters"
+            #define HUMOTO_CONFIG_CONSTRUCTOR StanceFSMParameters
+            #define HUMOTO_CONFIG_ENTRIES \
+                    HUMOTO_CONFIG_SCALAR_(ss_duration_ms) \
+                    HUMOTO_CONFIG_SCALAR_(tds_duration_ms) \
+                    HUMOTO_CONFIG_SCALAR_(first_stance_duration_ms) \
+                    HUMOTO_CONFIG_SCALAR_(last_stance_duration_ms) \
+                    HUMOTO_CONFIG_SCALAR_(num_steps) \
+                    HUMOTO_CONFIG_ENUM_(first_stance) \
+                    HUMOTO_CONFIG_ENUM_(first_ss_type) \
+                    HUMOTO_CONFIG_ENUM_(last_stance)
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 
             public:
@@ -115,9 +115,6 @@ namespace humoto
                 std::size_t first_stance_duration_ms_;
                 std::size_t last_stance_duration_ms_;
                 std::size_t num_steps_;
-
-
-                HUMOTO_DEFINE_CONFIG_CONSTRUCTORS(StanceFSMParameters)
 
 
                 /**

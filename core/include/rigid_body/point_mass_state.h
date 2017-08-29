@@ -18,13 +18,13 @@ namespace humoto
          */
         class HUMOTO_LOCAL PointMassState : public virtual humoto::config::ConfigurableBase
         {
-            protected:
-                #define HUMOTO_CONFIG_SECTION_ID "PointMassState"
-                #define HUMOTO_CONFIG_ENTRIES \
-                        HUMOTO_CONFIG_COMPOUND_(position); \
-                        HUMOTO_CONFIG_COMPOUND_(velocity); \
-                        HUMOTO_CONFIG_COMPOUND_(acceleration);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+            #define HUMOTO_CONFIG_SECTION_ID "PointMassState"
+            #define HUMOTO_CONFIG_CONSTRUCTOR PointMassState 
+            #define HUMOTO_CONFIG_ENTRIES \
+                    HUMOTO_CONFIG_COMPOUND_(position) \
+                    HUMOTO_CONFIG_COMPOUND_(velocity) \
+                    HUMOTO_CONFIG_COMPOUND_(acceleration)
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 
             public:
@@ -34,9 +34,6 @@ namespace humoto
 
 
             public:
-                HUMOTO_DEFINE_CONFIG_CONSTRUCTORS(PointMassState)
-
-
                 /**
                  * @brief Default constructor.
                  */

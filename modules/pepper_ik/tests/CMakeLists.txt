@@ -10,7 +10,7 @@ if (HUMOTO_BUILD_TESTS)
 
     # Feasibility test
     humoto_define_test(${HUMOTO_MODULE} "003" "rbdl;config_yaml;qpOASES")
-    
+
     # Test MPC + IK head control using cartesion angular velocity command
     humoto_define_test(${HUMOTO_MODULE} "004" "rbdl;config_yaml;qpOASES")
 endif()

@@ -19,19 +19,19 @@ namespace humoto
         template <int t_features>
             class HUMOTO_LOCAL TaskJointsReference : public humoto::TaskGIB
         {
+            #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_PARENT_CLASS(TaskGIB) \
+                HUMOTO_CONFIG_SCALAR_(k_position_gain) \
+                HUMOTO_CONFIG_COMPOUND_(joint_angles_reference)
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
             private:
                 double                                                                              k_position_gain_;
                 EIGENTOOLS_CONSTANT_SIZE_VECTOR(ModelDescription<t_features>::JOINTS_DOF_NUMBER)    joint_angles_reference_;
 
 
             protected:
-                #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_PARENT_CLASS(TaskGIB); \
-                    HUMOTO_CONFIG_SCALAR_(k_position_gain); \
-                    HUMOTO_CONFIG_COMPOUND_(joint_angles_reference);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
-
                 virtual void setDefaults()
                 {
                     TaskGIB::setDefaults();

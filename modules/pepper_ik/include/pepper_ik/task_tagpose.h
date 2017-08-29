@@ -19,6 +19,13 @@ namespace humoto
         template <int t_features>
             class HUMOTO_LOCAL TaskTagPose : public humoto::TaskAB
         {
+            #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_PARENT_CLASS(TaskAB) \
+                HUMOTO_CONFIG_SCALAR_(k_pose_gain) \
+                HUMOTO_CONFIG_SCALAR_(tag_string_id)
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
             protected:
                 double           k_pose_gain_;
                 std::string      tag_string_id_;
@@ -27,13 +34,6 @@ namespace humoto
 
 
             protected:
-                #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_PARENT_CLASS(TaskAB); \
-                    HUMOTO_CONFIG_SCALAR_(k_pose_gain); \
-                    HUMOTO_CONFIG_SCALAR_(tag_string_id);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
-
                 virtual void setDefaults()
                 {
                     TaskAB::setDefaults();

@@ -189,6 +189,7 @@ namespace humoto
          * @param[in] orientation
          * @param[in] angular_velocity
          * @param[in] dt
+         * @param[in] tolerance
          *
          * @return new orientation matrix
          */
@@ -223,13 +224,13 @@ namespace humoto
          */
         class HUMOTO_LOCAL RotaryState : public virtual humoto::config::ConfigurableBase
         {
-            protected:
-                #define HUMOTO_CONFIG_SECTION_ID "RotaryState"
-                #define HUMOTO_CONFIG_ENTRIES \
-                        HUMOTO_CONFIG_COMPOUND_(rpy); \
-                        HUMOTO_CONFIG_COMPOUND_(angular_velocity); \
-                        HUMOTO_CONFIG_COMPOUND_(angular_acceleration);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+            #define HUMOTO_CONFIG_SECTION_ID "RotaryState"
+            #define HUMOTO_CONFIG_CONSTRUCTOR RotaryState
+            #define HUMOTO_CONFIG_ENTRIES \
+                    HUMOTO_CONFIG_COMPOUND_(rpy) \
+                    HUMOTO_CONFIG_COMPOUND_(angular_velocity) \
+                    HUMOTO_CONFIG_COMPOUND_(angular_acceleration)
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 
             public:
@@ -239,9 +240,6 @@ namespace humoto
 
 
             public:
-                HUMOTO_DEFINE_CONFIG_CONSTRUCTORS(RotaryState)
-
-
                 /**
                  * @brief Default constructor.
                  */

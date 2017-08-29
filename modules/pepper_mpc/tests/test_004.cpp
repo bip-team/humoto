@@ -59,32 +59,36 @@ int main(int argc, char **argv)
         humoto::qpoases::Solution           solution;
 
 
-        humoto::pepper_mpc::RobotParameters         robot_parameters(config_path + "robot_parameters.yaml");
+        humoto::pepper_mpc::RobotParameters         robot_parameters;
+        robot_parameters.readConfig<humoto::config::yaml::Reader>(config_path + "robot_parameters.yaml");
         // model representing the controlled system
         humoto::pepper_mpc::Model                   model(robot_parameters);
 
         // parameters of the control problem
-        humoto::pepper_mpc::MPCParameters           mg_parameters(config_path + "mpc_parameters_subsampling10.yaml");
+        humoto::pepper_mpc::MPCParameters           mg_parameters;
+        mg_parameters.readConfig<humoto::config::yaml::Reader>(config_path + "mpc_parameters_subsampling10.yaml");
         // control problem, which is used to construct an optimization problem
         humoto::pepper_mpc::MPCforMG                mg(mg_parameters);
 
 
         // options for walking
-        humoto::pepper_mpc::MotionParameters        motion_parameters(config_path + "motion_parameters_circle.yaml");
+        humoto::pepper_mpc::MotionParameters        motion_parameters;
+        motion_parameters.readConfig<humoto::config::yaml::Reader>(config_path + "motion_parameters_circle.yaml");
 
         switch (motion_parameters.motion_mode_)
         {
             case humoto::pepper_mpc::MotionMode::MAINTAIN_POSITION:
-                opt_problem.readConfig(config_path + "hierarchies.yaml", true, "Hierarchy01");
+                opt_problem.readConfig<humoto::config::yaml::Reader>(config_path + "hierarchies.yaml", "Hierarchy01");
                 break;
             case humoto::pepper_mpc::MotionMode::MAINTAIN_VELOCITY:
-                opt_problem.readConfig(config_path + "hierarchies.yaml", true, "Hierarchy00");
+                opt_problem.readConfig<humoto::config::yaml::Reader>(config_path + "hierarchies.yaml", "Hierarchy00");
                 break;
             default:
                 HUMOTO_THROW_MSG("Unsupported motion mode.");
         }
 
-        humoto::pepper_mpc::ModelState   model_state(config_path + "initial_state_pepper.yaml");
+        humoto::pepper_mpc::ModelState   model_state;
+        model_state.readConfig<humoto::config::yaml::Reader>(config_path + "initial_state_pepper.yaml");
         model.updateState(model_state);
 
 

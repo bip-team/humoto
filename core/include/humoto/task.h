@@ -19,6 +19,10 @@ namespace humoto
      */
     class HUMOTO_LOCAL TaskBase : public constraints::ConstraintsBase, public config::StrictConfigurableBase
     {
+        #define HUMOTO_CONFIG_ENTRIES
+        #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
         // The functions collected here are supposed to be called by
         // OptimizationProblem class members only.
         friend class HierarchyLevel;
@@ -98,14 +102,10 @@ namespace humoto
 
         protected:
             bool                is_modified_;
+            ActiveSetConstraints    active_set_actual_;
 
 
         protected:
-            #define HUMOTO_CONFIG_ENTRIES
-            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
-            ActiveSetConstraints    active_set_actual_;
-
             /**
              * @brief Protected destructor: prevent destruction of the child
              * classes through a base pointer.
@@ -230,17 +230,6 @@ namespace humoto
 
 
             /**
-             * @brief Set description of the task.
-             *
-             * @return description
-             */
-            void setDescription(const std::string &description)
-            {
-                string_description_ = description;
-            }
-
-
-            /**
              * @brief Log task.
              *
              * @param[in,out] logger logger
@@ -260,6 +249,17 @@ namespace humoto
             const std::string  getDescription() const
             {
                 return (string_description_.c_str());
+            }
+
+
+            /**
+             * @brief Set description of the task.
+             *
+             * @return description
+             */
+            void setDescription(const std::string &description)
+            {
+                string_description_ = description;
             }
 
 
@@ -303,8 +303,8 @@ namespace humoto
 
         protected:
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_PARENT_CLASS(TaskBase); \
-                HUMOTO_CONFIG_SCALAR_(gain);
+                HUMOTO_CONFIG_PARENT_CLASS(TaskBase) \
+                HUMOTO_CONFIG_SCALAR_(gain)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 
@@ -395,8 +395,8 @@ namespace humoto
 
         protected:
             #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_PARENT_CLASS(TaskBase); \
-                HUMOTO_CONFIG_SCALAR_(gain);
+                HUMOTO_CONFIG_PARENT_CLASS(TaskBase) \
+                HUMOTO_CONFIG_SCALAR_(gain)
             #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 

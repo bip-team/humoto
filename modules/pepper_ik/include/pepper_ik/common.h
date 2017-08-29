@@ -24,16 +24,17 @@ namespace humoto
          */
         class HUMOTO_LOCAL WBCParameters : public humoto::config::ConfigurableBase
         {
+            #define HUMOTO_CONFIG_SECTION_ID "WBCParameters"
+            #define HUMOTO_CONFIG_CONSTRUCTOR WBCParameters
+            #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_SCALAR_(control_interval_ms) \
+                HUMOTO_CONFIG_SCALAR_(joint_angle_error_tolerance) \
+                HUMOTO_CONFIG_SCALAR_(motion_parameters_tolerance) \
+                HUMOTO_CONFIG_SCALAR_(maximal_number_of_iterations)
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
             protected:
-                #define HUMOTO_CONFIG_SECTION_ID "WBCParameters"
-                #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_SCALAR_(control_interval_ms); \
-                    HUMOTO_CONFIG_SCALAR_(joint_angle_error_tolerance); \
-                    HUMOTO_CONFIG_SCALAR_(motion_parameters_tolerance); \
-                    HUMOTO_CONFIG_SCALAR_(maximal_number_of_iterations);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
-
                 /**
                  * @brief Initialize to default values
                  */
@@ -62,8 +63,6 @@ namespace humoto
 
 
             public:
-                HUMOTO_DEFINE_CONFIG_CONSTRUCTORS(WBCParameters)
-
                 WBCParameters()
                 {
                     setDefaults();
@@ -78,13 +77,13 @@ namespace humoto
          */
         class HUMOTO_LOCAL MotionParameters : public humoto::config::ConfigurableBase
         {
-            protected:
-                #define HUMOTO_CONFIG_SECTION_ID "MotionParameters"
-                #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_COMPOUND_(base_orientation_rpy); \
-                    HUMOTO_CONFIG_COMPOUND_(base_com_position); \
-                    HUMOTO_CONFIG_COMPOUND_(body_com_position);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+            #define HUMOTO_CONFIG_SECTION_ID "MotionParameters"
+            #define HUMOTO_CONFIG_CONSTRUCTOR MotionParameters
+            #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_COMPOUND_(base_orientation_rpy) \
+                HUMOTO_CONFIG_COMPOUND_(base_com_position) \
+                HUMOTO_CONFIG_COMPOUND_(body_com_position)
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 
             public:
@@ -95,8 +94,6 @@ namespace humoto
 
 
             public:
-                HUMOTO_DEFINE_CONFIG_CONSTRUCTORS(MotionParameters)
-
                 MotionParameters()
                 {
                     setDefaults();

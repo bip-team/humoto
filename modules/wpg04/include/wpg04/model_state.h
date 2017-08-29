@@ -15,6 +15,17 @@ namespace humoto
     {
         class HUMOTO_LOCAL ModelState : public humoto::ModelState, public humoto::config::ConfigurableBase
         {
+            #define HUMOTO_CONFIG_SECTION_ID "ModelState"
+            #define HUMOTO_CONFIG_CONSTRUCTOR ModelState
+            #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_ENUM_(stance_type) \
+                HUMOTO_CONFIG_ENUM_(next_stance_type) \
+                HUMOTO_CONFIG_MEMBER_CLASS(com_state_, "com_state") \
+                HUMOTO_CONFIG_MEMBER_CLASS(feet_.getLeft(), "left_foot_state") \
+                HUMOTO_CONFIG_MEMBER_CLASS(feet_.getRight(), "right_foot_state")
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
             private:
                 /**
                  * @brief Initialize foot state in an ADS
@@ -46,16 +57,6 @@ namespace humoto
 
 
             protected:
-                #define HUMOTO_CONFIG_SECTION_ID "ModelState"
-                #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_ENUM_(stance_type); \
-                    HUMOTO_CONFIG_ENUM_(next_stance_type); \
-                    HUMOTO_CONFIG_MEMBER_CLASS(com_state_, "com_state"); \
-                    HUMOTO_CONFIG_MEMBER_CLASS(feet_.getLeft(), "left_foot_state"); \
-                    HUMOTO_CONFIG_MEMBER_CLASS(feet_.getRight(), "right_foot_state");
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
-
                 void setDefaults(const humoto::walking::RobotFootParameters  &foot_param,
                                  const double com_height = 0.814)
                 {
@@ -94,9 +95,6 @@ namespace humoto
 
 
             public:
-                HUMOTO_DEFINE_CONFIG_CONSTRUCTORS(ModelState)
-
-
                 /**
                  * @brief Default constructor
                  */

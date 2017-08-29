@@ -21,14 +21,15 @@ namespace humoto
         template <int   t_features>
             class HUMOTO_LOCAL GeneralizedCoordinates : public humoto::ModelState, public humoto::config::ConfigurableBase
         {
+            #define HUMOTO_CONFIG_SECTION_ID "GeneralizedCoordinates"
+            #define HUMOTO_CONFIG_CONSTRUCTOR GeneralizedCoordinates
+            #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_COMPOUND_(root_pose)\
+                HUMOTO_CONFIG_COMPOUND_(joint_angles)
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
             protected:
-                #define HUMOTO_CONFIG_SECTION_ID "GeneralizedCoordinates"
-                #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_COMPOUND_(root_pose);\
-                    HUMOTO_CONFIG_COMPOUND_(joint_angles);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
-
                 /**
                  * @brief Default configuration
                  */
@@ -55,9 +56,6 @@ namespace humoto
 
 
             public:
-                HUMOTO_DEFINE_CONFIG_CONSTRUCTORS(GeneralizedCoordinates)
-
-
                 /**
                  * @brief Default constructor
                  */

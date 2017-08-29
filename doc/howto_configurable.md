@@ -11,21 +11,32 @@ In order to implement a configurable class, it is necessary to take two steps:
   which provides functions to work with configuration files, if they are
   enabled with corresponding cmake option.
 
-* Implement pure virtual methods of
-  [ConfigurableBase](@ref humoto::config::ConfigurableBase) class:
+* Add '`#include HUMOTO_CONFIG_DEFINE_ACCESSORS`' directive inside a class
+  which includes [define_accessors.h](@ref define_accessors.h) file. This
+  automatically generates functions which are specific for each class or cannot
+  be inherited for technical reasons. Three optional defines can precede this
+  inclusion:
 
-    - Some of these functions can be generated automatically using X-macro
-      technique, if directive '`#include HUMOTO_CONFIG_DEFINE_ACCESSORS`' is added
-      (it includes [define_accessors.h](@ref define_accessors.h) header).
+    - `HUMOTO_CONFIG_SECTION_ID` declares default name of the configuration
+      section corresponding to this class. If it is not defined, the user must
+      implement virtual function which provides this functionality.
 
-    - Others must be implemented manually.
+    - `HUMOTO_CONFIG_CONSTRUCTOR` requests generation of additional class
+      constructors for direct initialization from a configuration file.
+
+    - `HUMOTO_CONFIG_ENTRIES` declares configuration file entries for this
+      class. If not specified the user must implement
+      `readConfigEntriesTemplate()` template function manually.
 
 
-Optionally it is possible to
 
-* Define additional constructors to initialize class from a configuration file
-  using `HUMOTO_DEFINE_CONFIG_CONSTRUCTORS` macro.
+* Implement remaining virtual methods of @ref humoto::config::ConfigurableBase
+  class:
 
-* Postprocess class members after reading them from a configuration file -- in
-  this case the programmer should provide appropriate implementation of
-  @ref humoto::config::CommonConfigurableBase::finalize() virtual function.
+    - User must provide definition of @ref humoto::config::CommonConfigurableBase::setDefaults()
+      function.
+
+    - Optionally it is possible to postprocess class members after reading them
+      from a configuration file -- in this case the programmer should provide
+      appropriate implementation of @ref humoto::config::CommonConfigurableBase::finalize()
+      virtual function.

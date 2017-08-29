@@ -19,19 +19,19 @@ namespace humoto
         template <int t_features>
             class HUMOTO_LOCAL TaskBodyCoMTracking: public humoto::TaskAB
         {
+            #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_PARENT_CLASS(TaskAB) \
+                HUMOTO_CONFIG_SCALAR_(k_position_gain) \
+                HUMOTO_CONFIG_SCALAR_(axis_flag)
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
             private:
                 double  k_position_gain_;
                 int     axis_flag_;
 
 
             protected:
-                #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_PARENT_CLASS(TaskAB); \
-                    HUMOTO_CONFIG_SCALAR_(k_position_gain); \
-                    HUMOTO_CONFIG_SCALAR_(axis_flag);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
-
                 virtual void setDefaults()
                 {
                     TaskAB::setDefaults();

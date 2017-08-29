@@ -20,6 +20,10 @@ namespace humoto
         :   public humoto::config::StrictConfigurableBase,
             public humoto::OptimizationProblem
     {
+        #define HUMOTO_CONFIG_SECTION_ID "OptimizationProblem"
+        #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
         public:
             /**
              * @brief Default constructor
@@ -65,10 +69,12 @@ namespace humoto
             }
 
 
+        protected:
+            std::vector<std::vector<std::string> >           task_class_names_;
+            std::vector<std::vector<std::string> >           task_ids_;
+
 
         protected:
-            HUMOTO_DEFINE_CONFIG_SECTION_ID("OptimizationProblem")
-
             using humoto::OptimizationProblem::pushTask;
 
 
@@ -105,17 +111,19 @@ namespace humoto
 
 
 
+        private:
             /**
              * @brief Read config entries
              *
              * @param[in] reader
              * @param[in] crash_on_missing_entry
              */
-            void readConfigEntries( humoto::config::Reader& reader,
-                                    const bool crash_on_missing_entry = true)
+            template <class t_Reader>
+                void readConfigEntriesTemplate( t_Reader& reader,
+                                                const bool crash_on_missing_entry = true)
             {
-                HUMOTO_CONFIG_READ_COMPOUND_(task_class_names);
-                HUMOTO_CONFIG_READ_COMPOUND_(task_ids);
+                HUMOTO_CONFIG_READ_COMPOUND_(task_class_names)
+                HUMOTO_CONFIG_READ_COMPOUND_(task_ids)
 
 
                 if(task_class_names_.empty())
@@ -142,11 +150,12 @@ namespace humoto
                     for(std::size_t j = 0; j < task_class_names_[i].size(); ++j)
                     {
                         humoto::TaskSharedPointer task = getTask(task_class_names_[i][j]);
+                        task->setDescription(task_ids_[i][j]);
 
                         if (task)
                         {
                             // configure tasks
-                            task->readConfig(reader, crash_on_missing_entry, task_ids_[i][j]);
+                            task->readConfig(reader, task_ids_[i][j], crash_on_missing_entry);
                             // push tasks into the stack/hierarchy
                             humoto::OptimizationProblem::pushTask(task, i);
                         }
@@ -165,10 +174,11 @@ namespace humoto
              *
              * @param[in] writer
              */
-            void writeConfigEntries(humoto::config::Writer& writer) const
+            template <class t_Writer>
+                void writeConfigEntriesTemplate(t_Writer& writer) const
             {
-                HUMOTO_CONFIG_WRITE_COMPOUND_(task_class_names);
-                HUMOTO_CONFIG_WRITE_COMPOUND_(task_ids);
+                HUMOTO_CONFIG_WRITE_COMPOUND_(task_class_names)
+                HUMOTO_CONFIG_WRITE_COMPOUND_(task_ids)
 
                 if(task_class_names_.empty())
                 {
@@ -188,8 +198,21 @@ namespace humoto
             }
 
 
-        protected:
-            std::vector<std::vector<std::string> >           task_class_names_;
-            std::vector<std::vector<std::string> >           task_ids_;
+            /**
+             * @brief Count entries
+             *
+             * @return number of entries
+             */
+            std::size_t getNumberOfEntries() const
+            {
+                std::size_t num_entries = 2; // task_class_names + task_ids
+
+                for(std::size_t i = 0;  i < getNumberOfLevels(); ++i)
+                {
+                    num_entries += hierarchy_[i].tasks_.size();
+                }
+
+                return (num_entries);
+            }
     };
 }

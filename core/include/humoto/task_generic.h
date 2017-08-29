@@ -25,17 +25,16 @@ namespace humoto
      */
     class HUMOTO_LOCAL TaskZeroVariables : public humoto::TaskGIB0
     {
+        #define HUMOTO_CONFIG_ENTRIES \
+            HUMOTO_CONFIG_PARENT_CLASS(TaskGIB0) \
+            HUMOTO_CONFIG_SCALAR_(variables_id)
+        #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
         private:
             Location        location_of_variables_;
 
             std::string     variables_id_;
-
-
-        protected:
-            #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_PARENT_CLASS(TaskGIB0); \
-                HUMOTO_CONFIG_SCALAR_(variables_id);
-            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 
         public:
@@ -127,15 +126,14 @@ namespace humoto
      */
     class HUMOTO_LOCAL TaskZeroSelectedVariables : public humoto::TaskGIB0
     {
+        #define HUMOTO_CONFIG_ENTRIES \
+            HUMOTO_CONFIG_PARENT_CLASS(TaskGIB0) \
+            HUMOTO_CONFIG_COMPOUND_(variables_indices)
+        #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
         private:
             humoto::IndexVector variables_indices_;
-
-
-        protected:
-            #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_PARENT_CLASS(TaskGIB0); \
-                HUMOTO_CONFIG_COMPOUND_(variables_indices);
-            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 
         public:

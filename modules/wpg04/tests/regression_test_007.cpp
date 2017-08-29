@@ -43,8 +43,8 @@ namespace humoto_tests
             protected:
                 TestFixture_2levels()
                 {
-                    reference_.solution_.readConfig(g_ref_filename);
-                    reference_.state_.readConfig(g_ref_filename);
+                    reference_.solution_.readConfig<humoto::config::yaml::Reader>(g_ref_filename);
+                    reference_.state_.readConfig<humoto::config::yaml::Reader>(g_ref_filename);
 
                     walk_parameters.com_velocity_ << 0.1, 0.;
                     walk_parameters.first_stance_com_velocity_ = walk_parameters.com_velocity_;
@@ -53,7 +53,7 @@ namespace humoto_tests
                     stance_fsm.setParameters(walk_parameters);
                     wpg.setParameters(wpg_parameters);
 
-                    opt_problem.readConfig(g_config_path + "/hierarchies.yaml", true, "Hierarchy02");
+                    opt_problem.readConfig<humoto::config::yaml::Reader>(g_config_path + "/hierarchies.yaml", "Hierarchy02");
                 }
 
 
@@ -119,8 +119,8 @@ namespace humoto_tests
             protected:
                 TestFixture_3levels()
                 {
-                    reference_.solution_.readConfig(g_ref_filename);
-                    reference_.state_.readConfig(g_ref_filename);
+                    reference_.solution_.readConfig<humoto::config::yaml::Reader>(g_ref_filename);
+                    reference_.state_.readConfig<humoto::config::yaml::Reader>(g_ref_filename);
 
                     walk_parameters.com_velocity_ << 0.1, 0.;
                     walk_parameters.first_stance_com_velocity_ = walk_parameters.com_velocity_;
@@ -129,7 +129,7 @@ namespace humoto_tests
                     stance_fsm.setParameters(walk_parameters);
                     wpg.setParameters(wpg_parameters);
 
-                    opt_problem.readConfig(g_config_path + "/hierarchies.yaml", true, "Hierarchy03");
+                    opt_problem.readConfig<humoto::config::yaml::Reader>(g_config_path + "/hierarchies.yaml", "Hierarchy03");
                 }
 
 

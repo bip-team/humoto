@@ -18,17 +18,17 @@ namespace humoto
          */
         class HUMOTO_LOCAL TaskBaseCoMTrackingBase : public humoto::TaskAB
         {
+            #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_PARENT_CLASS(TaskAB) \
+                HUMOTO_CONFIG_SCALAR_(k_position_gain)
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
             protected:
                 double  k_position_gain_;
 
 
             protected:
-                #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_PARENT_CLASS(TaskAB); \
-                    HUMOTO_CONFIG_SCALAR_(k_position_gain);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
-
                 TaskBaseCoMTrackingBase(const std::string & id,
                                         const double        gain,
                                         const double        k_position_gain) : TaskAB(id, gain)

@@ -19,10 +19,9 @@ namespace humoto
         template <int t_features>
             class HUMOTO_LOCAL TaskFixHead : public humoto::TaskIB0
         {
-            protected:
-                #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_PARENT_CLASS(TaskIB0);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+            #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_PARENT_CLASS(TaskIB0)
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 
             public:

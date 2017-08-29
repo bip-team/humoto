@@ -16,14 +16,15 @@ namespace humoto
      */
     class HUMOTO_LOCAL SolverParametersBase : public humoto::config::ConfigurableBase
     {
+        #define HUMOTO_CONFIG_SECTION_ID "SolverParametersBase"
+        #define HUMOTO_CONFIG_CONSTRUCTOR SolverParametersBase
+        #define HUMOTO_CONFIG_ENTRIES \
+            HUMOTO_CONFIG_SCALAR_(crash_on_any_failure) \
+            HUMOTO_CONFIG_SCALAR_(solve_two_levels_as_qp)
+        #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
         protected:
-            #define HUMOTO_CONFIG_SECTION_ID "SolverParametersBase"
-            #define HUMOTO_CONFIG_ENTRIES \
-                HUMOTO_CONFIG_SCALAR_(crash_on_any_failure); \
-                HUMOTO_CONFIG_SCALAR_(solve_two_levels_as_qp);
-            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
-
             void setDefaults()
             {
                 crash_on_any_failure_ = true;
@@ -49,10 +50,6 @@ namespace humoto
 
             /// Enable conversion of an optimization problem with two priority levels to a QP.
             bool solve_two_levels_as_qp_;
-
-
-        public:
-            HUMOTO_DEFINE_CONFIG_CONSTRUCTORS(SolverParametersBase)
     };
 
 

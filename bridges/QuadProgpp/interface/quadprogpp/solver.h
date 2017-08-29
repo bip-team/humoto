@@ -17,12 +17,12 @@ namespace humoto
          */
         class HUMOTO_LOCAL SolverParameters : public humoto::SolverParametersBase
         {
-            protected:
-                #define HUMOTO_CONFIG_SECTION_ID "SolverParameters"
-                #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_PARENT_CLASS(SolverParametersBase); \
-                    HUMOTO_CONFIG_SCALAR_(regularization_factor);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+            #define HUMOTO_CONFIG_SECTION_ID "SolverParameters"
+            #define HUMOTO_CONFIG_CONSTRUCTOR SolverParameters
+            #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_PARENT_CLASS(SolverParametersBase) \
+                HUMOTO_CONFIG_SCALAR_(regularization_factor)
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
 
 
             public:
@@ -31,9 +31,6 @@ namespace humoto
 
 
             public:
-                HUMOTO_DEFINE_CONFIG_CONSTRUCTORS(SolverParameters)
-
-
                 void setDefaults()
                 {
                     regularization_factor_ = 0;

@@ -60,7 +60,7 @@ int main(int argc, char **argv)
     }
 
 
-    humoto::config::Reader    config_reader(config_file_name);
+    humoto::config::yaml::Reader    config_reader(config_file_name);
 
     double sampling_interval_difference = 0.001;
 
@@ -69,13 +69,12 @@ int main(int argc, char **argv)
     {
         humoto::Logger       logger(log_file_name);
         humoto::LogEntryName prefix;
-        bool                 crash_on_missing_config_entry = true;
 
         // -----------------ik--------------------------------
 
         // optimization problem (a stack of tasks / hierarchy)
         humoto::pepper_ik::ConfigurableOptimizationProblem<MODEL_FEATURES>  ik_opt_problem;
-        ik_opt_problem.readConfig(config_reader, true, "IKOptimizationProblem");
+        ik_opt_problem.readConfig(config_reader, "IKOptimizationProblem");
 
         // parameters of the solver
         humoto::kktsolver::SolverParameters   ik_solver_parameters;
@@ -86,16 +85,17 @@ int main(int argc, char **argv)
         // solution
         humoto::Solution           ik_solution;
         // parameters of the control problem
-        humoto::pepper_ik::WBCParameters           ik_wbc_parameters(config_reader, crash_on_missing_config_entry);
+        humoto::pepper_ik::WBCParameters           ik_wbc_parameters(config_reader);
         // control problem, which is used to construct an optimization problem
         humoto::pepper_ik::WholeBodyController<MODEL_FEATURES>     ik_wbc;
         // model representing the controlled system
         humoto::pepper_ik::Model<MODEL_FEATURES>                   ik_model;
         ik_model.loadParameters(config_path + "pepper_fixedwheels_roottibia_planar.urdf");
         // options for walking
-        humoto::pepper_ik::MotionParameters     ik_motion_parameters(config_reader, crash_on_missing_config_entry, "IKMotionParameters");
+        humoto::pepper_ik::MotionParameters     ik_motion_parameters(config_reader, "IKMotionParameters");
         //humoto::pepper_ik::GeneralizedCoordinates<MODEL_FEATURES>   ik_generalized_coordinates;
-        humoto::pepper_ik::GeneralizedCoordinates<MODEL_FEATURES>   ik_generalized_coordinates(config_path + "initial_state_pepper_ik_planar.yaml", true);
+        humoto::pepper_ik::GeneralizedCoordinates<MODEL_FEATURES>   ik_generalized_coordinates;
+        ik_generalized_coordinates.readConfig<humoto::config::yaml::Reader>(config_path + "initial_state_pepper_ik_planar.yaml", true);
         ik_model.updateState(ik_generalized_coordinates);
 
         // -----------------ik--------------------------------
@@ -105,7 +105,7 @@ int main(int argc, char **argv)
 
         // optimization problem (a stack of tasks / hierarchy)
         humoto::pepper_mpc::ConfigurableOptimizationProblem     mpc_opt_problem;
-        mpc_opt_problem.readConfig(config_reader, true, "MPCOptimizationProblem");
+        mpc_opt_problem.readConfig(config_reader, "MPCOptimizationProblem");
 
 
         // parameters of the solver
@@ -115,11 +115,11 @@ int main(int argc, char **argv)
         humoto::qpoases::Solver             mpc_solver(mpc_solver_parameters);
         // solution
         humoto::qpoases::Solution           mpc_solution;
-        humoto::pepper_mpc::RobotParameters         mpc_robot_parameters(config_reader, crash_on_missing_config_entry);
+        humoto::pepper_mpc::RobotParameters         mpc_robot_parameters(config_reader);
         // model representing the controlled system
         humoto::pepper_mpc::Model                   mpc_model(mpc_robot_parameters);
         // parameters of the control problem
-        humoto::pepper_mpc::MPCParameters           mpc_mg_parameters(config_reader, crash_on_missing_config_entry);
+        humoto::pepper_mpc::MPCParameters           mpc_mg_parameters(config_reader);
         // control problem, which is used to construct an optimization problem
         humoto::pepper_mpc::MPCforMG                mpc_mg(mpc_mg_parameters);
 
@@ -127,8 +127,8 @@ int main(int argc, char **argv)
 
 
         // options for walking
-        humoto::pepper_mpc::MotionParameters        mpc_motion_parameters_1(mpc_motion_param_config_file_name,
-                                                                        crash_on_missing_config_entry,
+        humoto::pepper_mpc::MotionParameters        mpc_motion_parameters_1;
+        mpc_motion_parameters_1.readConfig<humoto::config::yaml::Reader>(mpc_motion_param_config_file_name,
                                                                         mpc_motion_param_config_entry_id);
 
         humoto::pepper_mpc::MotionParameters        mpc_motion_parameters_2;

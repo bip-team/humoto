@@ -41,6 +41,18 @@ namespace humoto
          */
         class HUMOTO_LOCAL RobotFootParameters : public humoto::config::ConfigurableBase
         {
+            #define HUMOTO_CONFIG_SECTION_ID "RobotFootParameters"
+            #define HUMOTO_CONFIG_CONSTRUCTOR RobotFootParameters 
+            #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_SCALAR_(max_step_len) \
+                HUMOTO_CONFIG_SCALAR_(min_feet_dist) \
+                HUMOTO_CONFIG_SCALAR_(max_feet_dist) \
+                HUMOTO_CONFIG_SCALAR_(feet_dist_default) \
+                HUMOTO_CONFIG_SCALAR_(foot_length) \
+                HUMOTO_CONFIG_SCALAR_(foot_width)
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
+
             private:
                 /**
                  * @brief These parameters are defined for left and right foot/side.
@@ -158,17 +170,6 @@ namespace humoto
 
 
             protected:
-                #define HUMOTO_CONFIG_SECTION_ID "RobotFootParameters"
-                #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_SCALAR_(max_step_len); \
-                    HUMOTO_CONFIG_SCALAR_(min_feet_dist); \
-                    HUMOTO_CONFIG_SCALAR_(max_feet_dist); \
-                    HUMOTO_CONFIG_SCALAR_(feet_dist_default); \
-                    HUMOTO_CONFIG_SCALAR_(foot_length); \
-                    HUMOTO_CONFIG_SCALAR_(foot_width);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
-
                 /**
                  * @brief Create some useful parameters derived from the primal robot parameters
                  */
@@ -222,9 +223,6 @@ namespace humoto
                 }
 
             public:
-                HUMOTO_DEFINE_CONFIG_CONSTRUCTORS(RobotFootParameters)
-
-
                 /**
                  * @brief Default constructor
                  */

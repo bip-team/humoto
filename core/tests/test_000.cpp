@@ -131,8 +131,8 @@ int main()
     HUMOTO_LOG_RAW("============================================");
     humoto::rigidbody::RigidBodyState body_state;
     body_state.log();
-    body_state.writeConfig("rigid_body_state.yaml", "SomeRigidBodyName");
-    body_state.readConfig("rigid_body_state.yaml", false, "SomeRigidBodyName");
+    body_state.writeConfig<humoto::config::yaml::Writer>("rigid_body_state.yaml", "SomeRigidBodyName");
+    body_state.readConfig<humoto::config::yaml::Reader>("rigid_body_state.yaml", "SomeRigidBodyName", false);
     HUMOTO_LOG_RAW("============================================\n\n");
 
 

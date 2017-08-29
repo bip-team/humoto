@@ -23,22 +23,22 @@ namespace humoto_tests
             protected:
                 HUMOTO_TEST_FIXTURE_NAME()
                 {
-                    ref_solution.readConfig(g_ref_filename);
+                    ref_solution.readConfig<humoto::config::yaml::Reader>(g_ref_filename);
 
-                    robot_parameters.readConfig(g_config_path + "robot_parameters.yaml");
-                    mg_parameters.readConfig(g_config_path + "mpc_parameters.yaml");
-                    motion_parameters.readConfig(g_config_path + "motion_parameters_circle.yaml");
-                    model_state.readConfig(g_config_path + "initial_state_pepper.yaml");
+                    robot_parameters.readConfig<humoto::config::yaml::Reader>(g_config_path + "robot_parameters.yaml");
+                    mg_parameters.readConfig<humoto::config::yaml::Reader>(g_config_path + "mpc_parameters.yaml");
+                    motion_parameters.readConfig<humoto::config::yaml::Reader>(g_config_path + "motion_parameters_circle.yaml");
+                    model_state.readConfig<humoto::config::yaml::Reader>(g_config_path + "initial_state_pepper.yaml");
                     model.updateState(model_state);
 
 
                     switch (motion_parameters.motion_mode_)
                     {
                         case humoto::pepper_mpc::MotionMode::MAINTAIN_POSITION:
-                            opt_problem.readConfig(g_config_path + "hierarchies.yaml", true, "Hierarchy01");
+                            opt_problem.readConfig<humoto::config::yaml::Reader>(g_config_path + "hierarchies.yaml", "Hierarchy01");
                             break;
                         case humoto::pepper_mpc::MotionMode::MAINTAIN_VELOCITY:
-                            opt_problem.readConfig(g_config_path + "hierarchies.yaml", true, "Hierarchy00");
+                            opt_problem.readConfig<humoto::config::yaml::Reader>(g_config_path + "hierarchies.yaml", "Hierarchy00");
                             break;
                         default:
                             HUMOTO_THROW_MSG("Unsupported motion mode.");

@@ -49,20 +49,23 @@ int main(int argc, char **argv)
         // solution
         humoto::qpoases::Solution                 solution;
         // options for walking
-        humoto::wpg04::WalkParameters             walk_parameters(config_path + "walk_parameters__stand_still.yaml");
+        humoto::wpg04::WalkParameters             walk_parameters;
+        walk_parameters.readConfig<humoto::config::yaml::Reader>(config_path + "walk_parameters__stand_still.yaml");
         //FSM for walking
         humoto::walking::StanceFiniteStateMachine stance_fsm(walk_parameters);
         // model representing the controlled system
-        humoto::walking::RobotFootParameters      robot_parameters(config_path + "robot_hrp4.yaml");
+        humoto::walking::RobotFootParameters      robot_parameters;
+        robot_parameters.readConfig<humoto::config::yaml::Reader>(config_path + "robot_hrp4.yaml");
         humoto::wpg04::Model                      model;
         // parameters of the control problem
         humoto::wpg04::MPCParameters              wpg_parameters;
         // control problem, which is used to construct an optimization problem
         humoto::wpg04::MPCforWPG                  wpg(wpg_parameters);
 
-        opt_problem.readConfig(config_path + "/hierarchies.yaml", true, "Hierarchy00");
+        opt_problem.readConfig<humoto::config::yaml::Reader>(config_path + "/hierarchies.yaml", "Hierarchy00");
 
-        humoto::wpg04::ModelState                 model_state(config_path + "initial_state_hrp4.yaml");
+        humoto::wpg04::ModelState                 model_state;
+        model_state.readConfig<humoto::config::yaml::Reader>(config_path + "initial_state_hrp4.yaml");
 
         model.setFootParameters(robot_parameters);
         model.updateState(model_state);

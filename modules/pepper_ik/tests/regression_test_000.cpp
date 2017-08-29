@@ -25,6 +25,17 @@ namespace humoto_tests
 #define MODEL_FEATURES humoto::pepper_ik::ModelFeatures::FIXED_WHEELS | humoto::pepper_ik::ModelFeatures::ROOT_DEFAULT
         class Fixture_FixedWheelsRoot : public ::testing::Test, public humoto::config::ConfigurableBase
         {
+            #define HUMOTO_CONFIG_SECTION_ID "TestFixture"
+            #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_COMPOUND_(com_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(com_reference01) \
+                HUMOTO_CONFIG_COMPOUND_(com_jacobian_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(base_com_jacobian_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(body_com_jacobian_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(wrist_orientation_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(wrist_rotation_jacobian_reference00)
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
             protected:
                 etools::Vector3     com_reference00_;
                 etools::Vector3     com_reference01_;
@@ -41,17 +52,6 @@ namespace humoto_tests
 
 
             protected:
-                #define HUMOTO_CONFIG_SECTION_ID "TestFixture"
-                #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_COMPOUND_(com_reference00); \
-                    HUMOTO_CONFIG_COMPOUND_(com_reference01); \
-                    HUMOTO_CONFIG_COMPOUND_(com_jacobian_reference00); \
-                    HUMOTO_CONFIG_COMPOUND_(base_com_jacobian_reference00); \
-                    HUMOTO_CONFIG_COMPOUND_(body_com_jacobian_reference00); \
-                    HUMOTO_CONFIG_COMPOUND_(wrist_orientation_reference00); \
-                    HUMOTO_CONFIG_COMPOUND_(wrist_rotation_jacobian_reference00);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
                 void setDefaults() {}
 
 
@@ -59,8 +59,8 @@ namespace humoto_tests
                 {
                     model_.loadParameters(g_config_path + "pepper_fixedwheels.urdf");
                     bool crash_on_missing_entries = true;
-                    readConfig(g_ref_filename, crash_on_missing_entries);
-                    generalized_coordinates_.readConfig(g_config_path + "initial_state_pepper_ik_torso_default.yaml");
+                    readConfig<humoto::config::yaml::Reader>(g_ref_filename, crash_on_missing_entries);
+                    generalized_coordinates_.readConfig<humoto::config::yaml::Reader>(g_config_path + "initial_state_pepper_ik_torso_default.yaml");
                     model_.updateState(generalized_coordinates_);
 
                     /*
@@ -383,6 +383,16 @@ namespace humoto_tests
 
         class Fixture_FixedWheelsRootTibiaModel : public ::testing::Test, public humoto::config::ConfigurableBase
         {
+            #define HUMOTO_CONFIG_SECTION_ID "TestFixture"
+            #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_COMPOUND_(com_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(com_reference01) \
+                HUMOTO_CONFIG_COMPOUND_(com_jacobian_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(base_com_jacobian_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(body_com_jacobian_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(wrist_orientation_reference00)
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
             protected:
                 etools::Vector3     com_reference00_;
                 etools::Vector3     com_reference01_;
@@ -398,16 +408,6 @@ namespace humoto_tests
 
 
             protected:
-                #define HUMOTO_CONFIG_SECTION_ID "TestFixture"
-                #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_COMPOUND_(com_reference00); \
-                    HUMOTO_CONFIG_COMPOUND_(com_reference01); \
-                    HUMOTO_CONFIG_COMPOUND_(com_jacobian_reference00); \
-                    HUMOTO_CONFIG_COMPOUND_(base_com_jacobian_reference00); \
-                    HUMOTO_CONFIG_COMPOUND_(body_com_jacobian_reference00); \
-                    HUMOTO_CONFIG_COMPOUND_(wrist_orientation_reference00);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
                 void setDefaults() {}
 
 
@@ -415,8 +415,8 @@ namespace humoto_tests
                 {
                     model_.loadParameters(g_config_path + "pepper_fixedwheels_roottibia.urdf");
                     bool crash_on_missing_entries = true;
-                    readConfig(g_ref_filename, crash_on_missing_entries);
-                    generalized_coordinates_.readConfig(g_config_path + "initial_state_pepper_ik_tibia_default.yaml");
+                    readConfig<humoto::config::yaml::Reader>(g_ref_filename, crash_on_missing_entries);
+                    generalized_coordinates_.readConfig<humoto::config::yaml::Reader>(g_config_path + "initial_state_pepper_ik_tibia_default.yaml");
                     model_.updateState(generalized_coordinates_);
 
                     reorderJacobian(com_jacobian_reference00_);
@@ -653,6 +653,16 @@ namespace humoto_tests
 
         class Fixture_FixedWheelsRootTibiaPlanarModel : public ::testing::Test, public humoto::config::ConfigurableBase
         {
+            #define HUMOTO_CONFIG_SECTION_ID "TestFixture"
+            #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_COMPOUND_(com_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(com_reference02) \
+                HUMOTO_CONFIG_COMPOUND_(com_jacobian_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(base_com_jacobian_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(body_com_jacobian_reference00) \
+                HUMOTO_CONFIG_COMPOUND_(wrist_orientation_reference00)
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
             protected:
                 etools::Vector3     com_reference00_;
                 etools::Vector3     com_reference02_;
@@ -668,16 +678,6 @@ namespace humoto_tests
 
 
             protected:
-                #define HUMOTO_CONFIG_SECTION_ID "TestFixture"
-                #define HUMOTO_CONFIG_ENTRIES \
-                    HUMOTO_CONFIG_COMPOUND_(com_reference00); \
-                    HUMOTO_CONFIG_COMPOUND_(com_reference02); \
-                    HUMOTO_CONFIG_COMPOUND_(com_jacobian_reference00); \
-                    HUMOTO_CONFIG_COMPOUND_(base_com_jacobian_reference00); \
-                    HUMOTO_CONFIG_COMPOUND_(body_com_jacobian_reference00); \
-                    HUMOTO_CONFIG_COMPOUND_(wrist_orientation_reference00);
-                #include HUMOTO_CONFIG_DEFINE_ACCESSORS
-
                 void setDefaults() {}
 
 
@@ -685,8 +685,8 @@ namespace humoto_tests
                 {
                     model_.loadParameters(g_config_path + "pepper_fixedwheels_roottibia_planar.urdf");
                     bool crash_on_missing_entries = true;
-                    readConfig(g_ref_filename, crash_on_missing_entries);
-                    generalized_coordinates_.readConfig(g_config_path + "initial_state_pepper_ik_planar_default.yaml");
+                    readConfig<humoto::config::yaml::Reader>(g_ref_filename, crash_on_missing_entries);
+                    generalized_coordinates_.readConfig<humoto::config::yaml::Reader>(g_config_path + "initial_state_pepper_ik_planar_default.yaml");
                     model_.updateState(generalized_coordinates_);
 
                     reorderJacobian(com_jacobian_reference00_);

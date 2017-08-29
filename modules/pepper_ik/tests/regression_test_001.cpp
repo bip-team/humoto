@@ -73,11 +73,11 @@ namespace humoto_tests
 
                     model.loadParameters(g_config_path + "pepper_fixedwheels_roottibia_" + config_name_features_part + ".urdf");
 
-                    wbc_parameters.readConfig(g_config_path + "wbc_parameters.yaml");
-                    motion_parameters.readConfig(g_config_path + "motion_parameters_default.yaml");
-                    generalized_coordinates_.readConfig(g_config_path + "initial_state_pepper_ik_" + config_name_features_part + "_default.yaml");
+                    wbc_parameters.readConfig<humoto::config::yaml::Reader>(g_config_path + "wbc_parameters.yaml");
+                    motion_parameters.readConfig<humoto::config::yaml::Reader>(g_config_path + "motion_parameters_default.yaml");
+                    generalized_coordinates_.readConfig<humoto::config::yaml::Reader>(g_config_path + "initial_state_pepper_ik_" + config_name_features_part + "_default.yaml");
 
-                    opt_problem.readConfig(g_config_path + "hierarchies_" + config_name_features_part + ".yaml", true, "Hierarchy00");
+                    opt_problem.readConfig<humoto::config::yaml::Reader>(g_config_path + "hierarchies_" + config_name_features_part + ".yaml", "Hierarchy00");
                     model.updateState(generalized_coordinates_);
 
                     ref_generalized_coordinates_ = generalized_coordinates_;
