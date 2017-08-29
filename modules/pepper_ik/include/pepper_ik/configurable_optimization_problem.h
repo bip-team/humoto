@@ -71,6 +71,10 @@ namespace humoto
                     {
                         return (humoto::TaskSharedPointer(new humoto::pepper_ik::TaskTagPose<t_features>));
                     }
+                    if (string_id == "TaskTagPose3Dof")
+                    {
+                        return (humoto::TaskSharedPointer(new humoto::pepper_ik::TaskTagPose3Dof<t_features>));
+                    }
 
                     return(humoto::ConfigurableOptimizationProblem::getTask(string_id));
                 }
