@@ -92,7 +92,9 @@ namespace humoto
                     model.getTagOrientationJacobian(A, tag_);
                     
                     b.noalias() = k_angular_velocity_gain_ * 
-                        wb_controller.getTagVelocityInGlobal(model, tag_string_id_, rbdl::SpatialType::ROTATION);
+                        wb_controller.getTagVelocityInGlobal(model, tag_string_id_,
+                                    wb_controller.getTagVelocityInLocal(tag_string_id_, rbdl::SpatialType::COMPLETE),
+                                                              rbdl::SpatialType::ROTATION);
 
                     if(!isApproximatelyEqual(1.0, getGain()))
                     {

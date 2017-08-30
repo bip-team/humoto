@@ -92,7 +92,9 @@ namespace humoto
                     model.getTagCompleteJacobian(A, tag_);
                     
                     b.noalias() = k_complete_velocity_gain_ * 
-                            wb_controller.getTagVelocityInGlobal(model, tag_string_id_, rbdl::SpatialType::COMPLETE);
+                            wb_controller.getTagVelocityInGlobal(model, tag_string_id_,
+                                      wb_controller.getTagVelocityInLocal(tag_string_id_, rbdl::SpatialType::COMPLETE),
+                                        rbdl::SpatialType::COMPLETE);
 
                     if(!isApproximatelyEqual(1.0, getGain()))
                     {
