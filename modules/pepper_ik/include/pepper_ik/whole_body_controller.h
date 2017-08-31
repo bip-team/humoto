@@ -57,7 +57,7 @@ namespace humoto
                         velocity_in_local.setZero();
                     }
                     
-                    std::size_t part_size = 3;
+                    const std::size_t part_size = 3;
                     switch(spatial_type)
                     {
                         case rbdl::SpatialType::ROTATION:
@@ -86,7 +86,8 @@ namespace humoto
                 /**
                  * @brief Get base velocity in global frame
                  *
-                 * @return base_velocity
+                 * @param[in] model
+                 * @return    base_velocity
                  */
                 etools::Vector6 getBaseVelocityInGlobal(const humoto::pepper_ik::Model<t_features>& model)
                 {
@@ -102,8 +103,8 @@ namespace humoto
                  *
                  * @param[in] model
                  * @param[in] tag_name
-                 * @param[in] spatial_type
                  * @param[in] tag_velocity_local
+                 * @param[in] spatial_type
                  * @return    velocity in global frame
                  */
                 Eigen::VectorXd getTagVelocityInGlobal(const humoto::pepper_ik::Model<t_features>& model, 
@@ -111,17 +112,15 @@ namespace humoto
                                                        const etools::Vector6&                      tag_velocity_local,
                                                        const rbdl::SpatialType::Type&              spatial_type) const
                 {
-                    if(tag_velocity_local.size() != rbdl::SpatialType::getNumberOfElements(rbdl::SpatialType::COMPLETE))
-                    {
-                        HUMOTO_THROW_MSG("Computing global tag velocity requires full local tag velocity vector.");
-                    }
+                    HUMOTO_ASSERT(tag_velocity_local.size() == rbdl::SpatialType::getNumberOfElements(rbdl::SpatialType::COMPLETE),
+                                                           "Computing global tag velocity requires full local tag velocity vector.")
 
                     rbdl::TagLinkPtr tag = model.getLinkTag(tag_name);
 
                     Eigen::VectorXd velocity_in_global;
                     velocity_in_global.resize(rbdl::SpatialType::getNumberOfElements(spatial_type));
 
-                    std::size_t part_size = 3;
+                    const std::size_t part_size = 3;
                     switch(spatial_type)
                     {
                         case rbdl::SpatialType::ROTATION:
