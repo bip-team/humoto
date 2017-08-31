@@ -105,7 +105,7 @@ int main(int argc, char **argv)
         humoto::pepper_ik::Model<MODEL_FEATURES>               ik_model;
         ik_model.loadParameters(config_path + "pepper_fixedwheels_roottibia_planar.urdf");
         // options for walking
-        humoto::pepper_ik::MotionParameters                       ik_motion_parameters(config_reader, "IKMotionParameters");
+        humoto::pepper_ik::MotionParameters                       ik_motion_parameters(config_reader, "IKMotionParameters", true);
         //humoto::pepper_ik::GeneralizedCoordinates<MODEL_FEATURES>   ik_generalized_coordinates;
         humoto::pepper_ik::GeneralizedCoordinates<MODEL_FEATURES> ik_generalized_coordinates;
         ik_generalized_coordinates.readConfig<humoto::config::yaml::Reader>(config_path + "initial_state_pepper_ik_planar.yaml", true);
@@ -136,7 +136,7 @@ int main(int argc, char **argv)
 
         humoto::pepper_mpc::ModelState              mpc_model_state;
 
-        humoto::pepper_mpc::MotionParameters        mpc_motion_parameters(config_reader, "MPCMotionParameters");
+        humoto::pepper_mpc::MotionParameters        mpc_motion_parameters(config_reader, "MPCMotionParameters", true);
 
         // -----------------mpc--------------------------------
 
