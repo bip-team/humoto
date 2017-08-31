@@ -151,7 +151,7 @@ int main(int argc, char **argv)
         std::map<std::string, etools::Vector6> tag_velocity;
 
         // to keep base velocity
-        Eigen::VectorXd base_velocity;
+        etools::Vector6 base_velocity;
 
         // -------------------read head motion from file --------------
 
@@ -184,11 +184,10 @@ int main(int argc, char **argv)
 
             // -----------------set base velocity in mpc----------------
 
-            base_velocity = ik_wbc.getTagVelocityInGlobal(ik_model, "CameraTop_optical_frame",
-                                                           humoto::rbdl::SpatialType::COMPLETE);
+            base_velocity = ik_wbc.getBaseVelocityInGlobal(ik_model);
 
-            //mpc_motion_parameters.base_velocity_          << base_velocity(0), base_velocity(1);
-            //mpc_motion_parameters.base_angular_velocity_  =  base_velocity(5);
+            //mpc_motion_parameters.base_velocity_          << base_velocity(3), base_velocity(4);
+            //mpc_motion_parameters.base_angular_velocity_  =  base_velocity(2);
 
             // -----------------set base velocity in mpc----------------
 
