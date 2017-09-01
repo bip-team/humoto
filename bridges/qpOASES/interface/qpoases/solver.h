@@ -139,19 +139,8 @@ namespace humoto
                 bool                active_set_guess_provided_;
 
 
-                humoto::QPObjectiveSharedPointer    objective_;
+                humoto::QPProblem_ILU_ALU       qp_problem_;
 
-
-                /// Constraints (lbA <= A x <= ubA)
-                humoto::constraints::ContainerALU     general_constraints_;
-                humoto::constraints::ContainerILU     bounds_;
-
-
-                //@{
-                /// Simple bounds on variables
-                Eigen::VectorXd     lb_;
-                Eigen::VectorXd     ub_;
-                //@}
 
                 /// Guess of the solution
                 const double * solution_guess_;
@@ -170,8 +159,6 @@ namespace humoto
                 /// Nonzero if constraints are specified
                 std::size_t    number_of_constraints_;
 
-                std::size_t    objective_level_;
-
                 qpOASES::QProblem *  qp_;
 
 
@@ -182,26 +169,9 @@ namespace humoto
                 {
                     reset();
 
-                    std::size_t     number_of_levels = hierarchy.getNumberOfLevels();
-                    objective_level_ = number_of_levels - 1;
+                    hierarchy.getQPProblem(qp_problem_, sol_structure);
 
-                    objective_ = hierarchy[objective_level_].getObjective();
-
-
-                    if (number_of_levels > 1)
-                    {
-                        if (hierarchy[0].getNumberOfSimpleConstraints() > 0)
-                        {
-                            hierarchy[0].getSimpleConstraints(bounds_, lb_, ub_, sol_structure);
-                        }
-
-
-                        number_of_constraints_  = hierarchy[0].getNumberOfGeneralConstraints();
-                        if (number_of_constraints_ > 0)
-                        {
-                            hierarchy[0].getGeneralConstraints(general_constraints_, sol_structure);
-                        }
-                    }
+                    number_of_constraints_ = qp_problem_.getGeneralConstraints().getNumberOfConstraints();
 
                     qp_ = new qpOASES::QProblem(sol_structure.getNumberOfVariables(),
                                                 number_of_constraints_,
@@ -217,13 +187,13 @@ namespace humoto
 
                     qpOASES::real_t     *max_time_ptr = NULL;
 
-                    qpOASES::real_t     *lb_ptr = NULL;
-                    qpOASES::real_t     *ub_ptr = NULL;
+                    const qpOASES::real_t     * lb_ptr = NULL;
+                    const qpOASES::real_t     * ub_ptr = NULL;
 
                     Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> A_rm;
-                    qpOASES::real_t     *A_ptr = NULL;
-                    qpOASES::real_t     *lbA_ptr = NULL;
-                    qpOASES::real_t     *ubA_ptr = NULL;
+                    const qpOASES::real_t     *A_ptr = NULL;
+                    const qpOASES::real_t     *lbA_ptr = NULL;
+                    const qpOASES::real_t     *ubA_ptr = NULL;
 
                     const qpOASES::real_t     *solution_guess_ptr = NULL;
 
@@ -238,10 +208,10 @@ namespace humoto
                         max_time_ptr = &max_time;
                     }
 
-                    if (bounds_.getNumberOfConstraints() > 0)
+                    if (qp_problem_.getSimpleBounds().getNumberOfConstraints() > 0)
                     {
-                        lb_ptr = lb_.data();
-                        ub_ptr = ub_.data();
+                        lb_ptr = qp_problem_.getSolutionLowerBounds().data();
+                        ub_ptr = qp_problem_.getSolutionUpperBounds().data();
                     }
 
                     if (number_of_constraints_ > 0)
@@ -249,11 +219,11 @@ namespace humoto
                         // Note: qpOASES expects rowMajor data, Eigen is colMajor by default
                         //       only A needs to be handled since H is symmetric and the rest
                         //       are vectors
-                        A_rm = general_constraints_.getA();
+                        A_rm = qp_problem_.getGeneralConstraints().getA();
                         A_ptr = A_rm.data();
 
-                        lbA_ptr = general_constraints_.getLowerBounds().data();
-                        ubA_ptr = general_constraints_.getUpperBounds().data();
+                        lbA_ptr = qp_problem_.getGeneralConstraints().getLowerBounds().data();
+                        ubA_ptr = qp_problem_.getGeneralConstraints().getUpperBounds().data();
                     }
 
                     if (solution_guess_provided_)
@@ -273,8 +243,8 @@ namespace humoto
 
                     qp_->setOptions (parameters_.options_);
                     qpoases_return_value =
-                        qp_->init(  objective_->getHessian().data(),
-                                    objective_->getGradient().data(),
+                        qp_->init(  qp_problem_.getHessian().data(),
+                                    qp_problem_.getGradient().data(),
                                     A_ptr,
                                     lb_ptr,
                                     ub_ptr,
@@ -324,9 +294,9 @@ namespace humoto
                 void getActiveSet(  humoto::ActiveSet                   &active_set,
                                     const humoto::OptimizationProblem   &hierarchy)
                 {
-                    if (bounds_.getNumberOfConstraints() > 0)
+                    if (qp_problem_.getSimpleBounds().getNumberOfConstraints() > 0)
                     {
-                        qpoases_active_set_bounds_.resize(bounds_.getNumberOfVariables());
+                        qpoases_active_set_bounds_.resize(qp_problem_.getSimpleBounds().getNumberOfVariables());
                         qp_->getWorkingSetBounds(qpoases_active_set_bounds_.data());
                     }
 
@@ -340,7 +310,15 @@ namespace humoto
                     hierarchy.initializeActiveSet(active_set);
 
                     // Objective level includes only equalities by design.
-                    active_set.set(objective_level_, ConstraintActivationType::EQUALITY);
+                    if (0 == number_of_constraints_ + qp_problem_.getSimpleBounds().getNumberOfConstraints())
+                    {
+                        // no constraints -- objective on the first level
+                        active_set.set(0, ConstraintActivationType::EQUALITY);
+                    }
+                    else
+                    {
+                        active_set.set(1, ConstraintActivationType::EQUALITY);
+                    }
 
 
                     for (std::size_t i = 0; i < number_of_constraints_; ++i)
@@ -370,13 +348,13 @@ namespace humoto
                     }
 
 
-                    for (std::size_t i = 0; i < bounds_.getNumberOfConstraints(); ++i)
+                    for (std::size_t i = 0; i < qp_problem_.getSimpleBounds().getNumberOfConstraints(); ++i)
                     {
-                        std::size_t var_index = bounds_.getIndices()[i];
+                        std::size_t var_index = qp_problem_.getSimpleBounds().getIndices()[i];
 
                         if (qpoases_active_set_bounds_[var_index] == -1.0)
                         {
-                            if (bounds_.getLowerBounds()[i] < lb_[var_index])
+                            if (qp_problem_.getSimpleBounds().getLowerBounds()[i] < qp_problem_.getSolutionLowerBounds()[var_index])
                             {
                                 active_set[0][number_of_constraints_ + i] = ConstraintActivationType::INACTIVE;
                             }
@@ -395,7 +373,7 @@ namespace humoto
                             {
                                 if (qpoases_active_set_bounds_[var_index] == 1.0)
                                 {
-                                    if (bounds_.getUpperBounds()[i] > ub_[var_index])
+                                    if (qp_problem_.getSimpleBounds().getUpperBounds()[i] > qp_problem_.getSolutionUpperBounds()[var_index])
                                     {
                                         active_set[0][number_of_constraints_ + i] = ConstraintActivationType::INACTIVE;
                                     }
@@ -453,11 +431,11 @@ namespace humoto
                     }
 
 
-                    qpoases_active_set_guess_bounds_.init(bounds_.getNumberOfVariables());
+                    qpoases_active_set_guess_bounds_.init(qp_problem_.getSimpleBounds().getNumberOfVariables());
                     qpoases_active_set_guess_bounds_.setupAllFree();
-                    for (std::size_t i = 0; i < bounds_.getNumberOfConstraints() ; ++i)
+                    for (std::size_t i = 0; i < qp_problem_.getSimpleBounds().getNumberOfConstraints() ; ++i)
                     {
-                        std::size_t var_index = bounds_.getIndices()[i];
+                        std::size_t var_index = qp_problem_.getSimpleBounds().getIndices()[i];
                         ConstraintActivationType::Type type = active_set[0][number_of_constraints_+i];
 
                         switch (type)
@@ -495,7 +473,6 @@ namespace humoto
                 void reset()
                 {
                     number_of_constraints_ = 0;
-                    objective_level_ = 0;
 
                     solution_guess_provided_ = false;
                     active_set_guess_provided_ = false;
@@ -540,7 +517,6 @@ namespace humoto
                 }
 
 
-
                 /**
                  * @brief Log a QP problem
                  *
@@ -553,11 +529,7 @@ namespace humoto
                             const std::string &name = "qpoases") const
                 {
                     LogEntryName subname = parent; subname.add(name);
-
-                    general_constraints_.log(logger, subname, "general_constraints");
-
-                    logger.log(LogEntryName(subname).add("lb"), lb_);
-                    logger.log(LogEntryName(subname).add("ub"), ub_);
+                    qp_problem_.log(logger, subname);
                 }
         };
     }

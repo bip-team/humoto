@@ -313,6 +313,55 @@ namespace humoto
         {
             public:
                 using  ContainerBase::reset;
+
+
+                /**
+                 * @brief Generates LB and UB, such that 'LB <= X <= UB'
+                 *
+                 * @param[out] lb
+                 * @param[out] ub
+                 */
+                void initializeSolutionBounds(Eigen::VectorXd &lb, Eigen::VectorXd &ub) const
+                {
+                    if (getNumberOfConstraints() == 0)
+                    {
+                        lb.resize(0);
+                        ub.resize(0);
+                    }
+                    else
+                    {
+                        lb.setConstant(number_of_variables_, -humoto::g_infinity);
+                        ub.setConstant(number_of_variables_,  humoto::g_infinity);
+
+                        for (std::size_t i = 0; i < getNumberOfConstraints(); ++i)
+                        {
+                            unsigned int    variable_index = getIndices()[i];
+
+                            if (lb[variable_index] < getLowerBounds()[i])
+                            {
+                                lb[variable_index] = getLowerBounds()[i];
+                            }
+
+                            if (ub[variable_index] > getUpperBounds()[i])
+                            {
+                                ub[variable_index] = getUpperBounds()[i];
+                            }
+
+#ifndef DNDEBUG
+                            if (lb[variable_index] > ub[variable_index])
+                            {
+                                std::stringstream err_msg;
+                                err_msg << std::setprecision(std::numeric_limits<double>::digits10);
+                                err_msg << "Inconsistent bounds (lb > ub): variable index = '" << variable_index
+                                        << "', lb = '" << lb[variable_index]
+                                        << "', ub = '" << ub[variable_index]
+                                        << "'.";
+                                HUMOTO_THROW_MSG(err_msg.str());
+                            }
+#endif
+                        }
+                    }
+                }
         };
 
 

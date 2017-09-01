@@ -56,13 +56,7 @@ namespace humoto
             private:
                 QuadProgpp::Solver solver;
 
-
-                humoto::QPObjectiveSharedPointer    objective_;
-
-
-                /// Constraints (lbA <= A x)
-                humoto::constraints::ContainerAL     inequality_constraints_;
-                humoto::constraints::ContainerAB     equality_constraints_;
+                humoto::QPProblem_AB_AL     qp_problem_;
 
 
             private:
@@ -70,20 +64,7 @@ namespace humoto
                 void initialize(  humoto::OptimizationProblem   &hierarchy,
                                   const humoto::SolutionStructure     &sol_structure)
                 {
-                    reset();
-
-                    std::size_t     number_of_levels = hierarchy.getNumberOfLevels();
-                    std::size_t     objective_level_ = number_of_levels - 1;
-
-                    objective_ = hierarchy[objective_level_].getObjective();
-
-
-                    if (number_of_levels > 1)
-                    {
-                        hierarchy[0].getInEqualityConstraints(  inequality_constraints_,
-                                                                equality_constraints_,
-                                                                sol_structure);
-                    }
+                    hierarchy.getQPProblem(qp_problem_, sol_structure);
                 }
 
 
@@ -97,15 +78,15 @@ namespace humoto
 
                     if (parameters_.regularization_factor_ > 0)
                     {
-                        objective_->regularize(parameters_.regularization_factor_);
+                        qp_problem_.regularize(parameters_.regularization_factor_);
                     }
 
-                    double qp_status = solver.solve(objective_->getHessian(),
-                                                    objective_->getGradient(),
-                                                    equality_constraints_.getA().transpose(),
-                                                    -equality_constraints_.getB(),
-                                                    inequality_constraints_.getA().transpose(),
-                                                    -inequality_constraints_.getLowerBounds(),
+                    double qp_status = solver.solve(qp_problem_.getHessian(),
+                                                    qp_problem_.getGradient(),
+                                                    qp_problem_.getEqualities().getA().transpose(),
+                                                    -qp_problem_.getEqualities().getB(),
+                                                    qp_problem_.getInequalities().getA().transpose(),
+                                                    -qp_problem_.getInequalities().getLowerBounds(),
                                                     solution.x_);
 
 
@@ -138,7 +119,6 @@ namespace humoto
                  */
                 Solver()
                 {
-                    reset();
                 }
 
 
@@ -147,7 +127,6 @@ namespace humoto
                  */
                 ~Solver()
                 {
-                    reset();
                 }
 
 
@@ -174,9 +153,7 @@ namespace humoto
                             const std::string &name = "quadprogpp") const
                 {
                     LogEntryName subname = parent; subname.add(name);
-
-                    equality_constraints_.log(logger, subname, "equality_constraints");
-                    inequality_constraints_.log(logger, subname, "inequality_constraints");
+                    qp_problem_.log(logger, subname);
                 }
         };
     }

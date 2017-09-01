@@ -81,15 +81,7 @@ namespace humoto
             private:
                 ::qpmad::Solver       solver;
 
-                humoto::QPObjectiveSharedPointer    objective_;
-
-
-                /// Constraints
-                humoto::constraints::ContainerALU     general_constraints_;
-
-                humoto::constraints::ContainerILU     bounds_;
-                Eigen::VectorXd     lb_;
-                Eigen::VectorXd     ub_;
+                humoto::QPProblem_ILU_ALU       qp_problem_;
 
 
             private:
@@ -97,26 +89,7 @@ namespace humoto
                 void initialize(  humoto::OptimizationProblem   &hierarchy,
                                   const humoto::SolutionStructure     &sol_structure)
                 {
-                    reset();
-
-                    std::size_t     number_of_levels = hierarchy.getNumberOfLevels();
-                    std::size_t     objective_level_ = number_of_levels - 1;
-
-                    objective_ = hierarchy[objective_level_].getObjective();
-
-
-                    if (number_of_levels > 1)
-                    {
-                        if (hierarchy[0].getNumberOfSimpleConstraints() > 0)
-                        {
-                            hierarchy[0].getSimpleConstraints(bounds_, lb_, ub_, sol_structure);
-                        }
-
-                        if (hierarchy[0].getNumberOfGeneralConstraints() > 0)
-                        {
-                            hierarchy[0].getGeneralConstraints(general_constraints_, sol_structure);
-                        }
-                    }
+                    hierarchy.getQPProblem(qp_problem_, sol_structure, false);
                 }
 
 
@@ -130,18 +103,18 @@ namespace humoto
 
                     if (parameters_.regularization_factor_ > 0)
                     {
-                        objective_->regularize(parameters_.regularization_factor_);
+                        qp_problem_.regularize(parameters_.regularization_factor_);
                     }
 
                     ::qpmad::Solver::ReturnStatus qp_status =
                         solver.solve(   solution.x_,
-                                        objective_->getHessian(),
-                                        objective_->getGradient(),
-                                        lb_,
-                                        ub_,
-                                        general_constraints_.getA(),
-                                        general_constraints_.getLowerBounds(),
-                                        general_constraints_.getUpperBounds());
+                                        qp_problem_.getHessian(),
+                                        qp_problem_.getGradient(),
+                                        qp_problem_.getSolutionLowerBounds(),
+                                        qp_problem_.getSolutionUpperBounds(),
+                                        qp_problem_.getGeneralConstraints().getA(),
+                                        qp_problem_.getGeneralConstraints().getLowerBounds(),
+                                        qp_problem_.getGeneralConstraints().getUpperBounds());
 
 
                     switch (qp_status)
@@ -177,7 +150,6 @@ namespace humoto
                  */
                 Solver()
                 {
-                    reset();
                 }
 
 
@@ -186,7 +158,6 @@ namespace humoto
                  */
                 ~Solver()
                 {
-                    reset();
                 }
 
 
@@ -213,11 +184,7 @@ namespace humoto
                             const std::string &name = "qpmad") const
                 {
                     LogEntryName subname = parent; subname.add(name);
-
-                    general_constraints_.log(logger, subname, "general_constraints");
-
-                    logger.log(LogEntryName(subname).add("lb"), lb_);
-                    logger.log(LogEntryName(subname).add("ub"), ub_);
+                    qp_problem_.log(logger, subname);
                 }
         };
     }
