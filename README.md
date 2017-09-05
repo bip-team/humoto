@@ -139,6 +139,21 @@ What is the difference between humoto and ...   {#md_readme_faq_comparison}
 
 
 
+Related repositories    {#md_readme_relatedrepos}
+====================
+
+* https://github.com/bip-team/humoto-module-template
+  > Template of an external module, i.e., a module which is not included in the
+  > main Humoto repository.
+
+* https://github.com/bip-team/humoto-controller-template
+  > Template of a controller based on Humoto.
+
+* https://github.com/bip-team/humoto-controller-pepper
+  > Controller for Pepper robot.
+
+
+
 More information    {#md_readme_faq_more}
 ================
 * Todo: see [doxygen todo page](@ref todo) and [doc/known_issues.md](@ref md_known_issues)
