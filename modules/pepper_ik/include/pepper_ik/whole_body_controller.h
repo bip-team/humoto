@@ -112,8 +112,8 @@ namespace humoto
                                                        const etools::Vector6&                      tag_velocity_local,
                                                        const rbdl::SpatialType::Type&              spatial_type) const
                 {
-                    HUMOTO_ASSERT(tag_velocity_local.size() == rbdl::SpatialType::getNumberOfElements(rbdl::SpatialType::COMPLETE),
-                                                           "Computing global tag velocity requires full local tag velocity vector.")
+                    HUMOTO_ASSERT(tag_velocity_local.size() == 6,
+                                 "Computing global tag velocity requires full local tag velocity vector.")
 
                     rbdl::TagLinkPtr tag = model.getLinkTag(tag_name);
 
