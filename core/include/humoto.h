@@ -24,7 +24,9 @@
 #include "humoto/constraints.h"
 #include "humoto/task.h"
 #include "humoto/task_generic.h"
-#include "humoto/optimization_problem.h"
+#include "humoto/hierarchy_level.h"
+#include "humoto/qp_problem.h"
+#include "humoto/hierarchy.h"
 
 #include "humoto/solver.h"
 
