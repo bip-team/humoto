@@ -107,7 +107,7 @@ What are the existing applications of this framework?   {#md_readme_faq_applicat
 
 * Early versions of Humoto were used for walking control of HRP-4 humanoid
   robot. See module [wpg03](@ref wpg03), its LaTeX documentation and references
-  therein, and a [video](https://www.youtube.com/watch?v=VYwZU4_7sMA) of the
+  therein, and a [video](https://www.youtube.com/watch?v=lHG4AbAvt_4) of the
   robot during the trials.
 
 * More recently, Humoto has been used for motion control of a humanoid robot on
