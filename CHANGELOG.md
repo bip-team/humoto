@@ -1,6 +1,11 @@
-# [Current]
+ChangeLog   {#md_changelog}
+=========
 
-## Added
+
+[Current]
+---------
+
+### Added
 
 - qpmad solver bridge.
 
@@ -10,12 +15,14 @@
 
 - Added a family of QPProblem* classes.
 
-## Changed
+### Changed
 
 - Reworked infrastructure for handling of configurable (serializable) classes.
   **This change breaks API compatibility.**
 
 
-# [1.0.0] -- [2017-06-19]
+
+[1.0.0] -- [2017-06-19]
+-----------------------
 
 - Initial release.

@@ -156,4 +156,7 @@ Related repositories    {#md_readme_relatedrepos}
 
 More information    {#md_readme_faq_more}
 ================
+
 * Todo: see [doxygen todo page](@ref todo) and [doc/known_issues.md](@ref md_known_issues)
+
+* Changelog: see [CHANGELOG.md](@ref md_changelog)

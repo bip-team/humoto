@@ -5,6 +5,7 @@ INPUT += \
 ../howto_tasks.md \
 ../known_issues.md \
 ../../AUTHORS.md \
+../../CHANGELOG.md \
 ../../INSTALL.md \
 ../../README.md \
 ../../bridges/QuadProgpp/interface \
