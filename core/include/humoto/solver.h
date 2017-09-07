@@ -118,7 +118,7 @@ namespace humoto
              * @param[in] hierarchy hierarchy
              * @param[in] sol_structure solution structure
              */
-            virtual void initialize(  humoto::OptimizationProblem   &hierarchy,
+            virtual void initialize(  const humoto::OptimizationProblem   &hierarchy,
                                       const humoto::SolutionStructure     &sol_structure) = 0;
 
             /**
@@ -153,7 +153,7 @@ namespace humoto
              * @param[in] hierarchy
              */
             void solve( humoto::Solution                    &solution,
-                        humoto::OptimizationProblem   &hierarchy)
+                        const humoto::OptimizationProblem   &hierarchy)
             {
                 checkInputs(hierarchy);
                 initialize(hierarchy, solution);
@@ -171,7 +171,7 @@ namespace humoto
              * @param[in] parameters parameters
              */
             void solve( humoto::Solution                    &solution,
-                        humoto::OptimizationProblem   &hierarchy,
+                        const humoto::OptimizationProblem   &hierarchy,
                         const t_SolverParameters            &parameters)
             {
                 parameters_ = parameters;
@@ -228,7 +228,7 @@ namespace humoto
              * @param[in] solution_guess
              */
             void solve( humoto::Solution                    &solution,
-                        humoto::OptimizationProblem   &hierarchy,
+                        const humoto::OptimizationProblem   &hierarchy,
                         const humoto::Solution              &solution_guess)
             {
                 checkInputs(hierarchy);
@@ -296,7 +296,7 @@ namespace humoto
              */
             void solve( Solution                            &solution,
                         ActiveSet                           &active_set,
-                        humoto::OptimizationProblem   &hierarchy,
+                        const humoto::OptimizationProblem   &hierarchy,
                         const ActiveSet                     &active_set_guess)
             {
                 checkInputs(hierarchy);
@@ -317,7 +317,7 @@ namespace humoto
              * @param[in] active_set_guess
              */
             void solve( Solution                            &solution,
-                        humoto::OptimizationProblem   &hierarchy,
+                        const humoto::OptimizationProblem   &hierarchy,
                         const ActiveSet                     &active_set_guess)
             {
                 checkInputs(hierarchy);
@@ -338,7 +338,7 @@ namespace humoto
              */
             void solve( humoto::Solution                    &solution,
                         humoto::ActiveSet                   &active_set,
-                        humoto::OptimizationProblem   &hierarchy)
+                        const humoto::OptimizationProblem   &hierarchy)
             {
                 checkInputs(hierarchy);
                 initialize(hierarchy, solution);
@@ -392,7 +392,7 @@ namespace humoto
              */
             void solve( Solution                            &solution,
                         ActiveSet                           &active_set,
-                        humoto::OptimizationProblem   &hierarchy,
+                        const humoto::OptimizationProblem   &hierarchy,
                         const humoto::Solution              &solution_guess,
                         const ActiveSet                     &active_set_guess)
             {
@@ -416,7 +416,7 @@ namespace humoto
              * @param[in] active_set_guess
              */
             void solve( Solution                            &solution,
-                        humoto::OptimizationProblem   &hierarchy,
+                        const humoto::OptimizationProblem   &hierarchy,
                         const humoto::Solution              &solution_guess,
                         const ActiveSet                     &active_set_guess)
             {
@@ -440,7 +440,7 @@ namespace humoto
              */
             void solve( humoto::Solution                    &solution,
                         humoto::ActiveSet                   &active_set,
-                        humoto::OptimizationProblem   &hierarchy,
+                        const humoto::OptimizationProblem   &hierarchy,
                         const humoto::Solution              &solution_guess)
             {
                 checkInputs(hierarchy);

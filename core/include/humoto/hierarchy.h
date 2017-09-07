@@ -328,7 +328,7 @@ namespace humoto
             template<class t_QPConstraints>
                 void getQPProblem(  QPProblemBase<t_QPConstraints> & qp_problem,
                                     const humoto::SolutionStructure & sol_structure,
-                                    const bool initialize_upper_triangular_part = true)
+                                    const bool initialize_upper_triangular_part = true) const
             {
                 std::size_t    number_of_levels = getNumberOfLevels();
 

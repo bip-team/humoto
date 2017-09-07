@@ -164,7 +164,7 @@ namespace humoto
 
             private:
                 /// @copydoc humoto::Solver::initialize
-                void initialize(  humoto::OptimizationProblem   &hierarchy,
+                void initialize(  const humoto::OptimizationProblem   &hierarchy,
                                   const humoto::SolutionStructure     &sol_structure)
                 {
                     reset();
