@@ -390,6 +390,31 @@ namespace humoto
 
 
             /**
+             * @brief Generates objective containing all constraints on this level
+             *
+             * @param[in] sol_structure     structure of the solution
+             * @param[out] constraints      constraints
+             */
+            void getAllConstraints( constraints::ContainerALU & constraints,
+                                    const humoto::SolutionStructure & sol_structure) const
+            {
+                constraints.reset(getNumberOfConstraints(),
+                                  sol_structure.getNumberOfVariables());
+
+                if (getNumberOfConstraints() > 0)
+                {
+                    std::size_t offset = 0;
+                    for (   std::list<TaskInfo>::const_iterator it = tasks_.begin();
+                            (it != tasks_.end());
+                            ++it)
+                    {
+                        offset = it->ptr_->copyTo(constraints, offset);
+                    }
+                }
+            }
+
+
+            /**
              * @brief Generates objective containing all general constraints on this level
              *
              * @param[in] sol_structure     structure of the solution
