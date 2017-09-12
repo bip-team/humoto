@@ -109,10 +109,19 @@ Functions</h2></td></tr>
 <tr class="memitem:abe1cf4b0abb9e43fb9e69eb5d7b87066"><td class="memItemLeft" align="right" valign="top">etools::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehumoto_1_1rigidbody.html#abe1cf4b0abb9e43fb9e69eb5d7b87066">convertMatrixToEulerAngles</a> (const <a class="el" href="namespaceetools.html#a71cb923138a364cb0660e1ea2e18b006">etools::Matrix3</a> &amp;rotation_matrix, const <a class="el" href="classhumoto_1_1rigidbody_1_1EulerAngles.html#a83c5a614a8818547d3b470a2f7d7181d">EulerAngles::Type</a> euler_angles_type)</td></tr>
 <tr class="memdesc:abe1cf4b0abb9e43fb9e69eb5d7b87066"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert rotation matrix to Euler angles.  <a href="#abe1cf4b0abb9e43fb9e69eb5d7b87066">More...</a><br /></td></tr>
 <tr class="separator:abe1cf4b0abb9e43fb9e69eb5d7b87066"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f8a51190c342645b1474a4dfc9c4b2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceetools.html#a71cb923138a364cb0660e1ea2e18b006">etools::Matrix3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehumoto_1_1rigidbody.html#a9f8a51190c342645b1474a4dfc9c4b2f">getEulerRatesToAngularVelocityTransform</a> (const etools::Vector3 &amp;euler_angles, const <a class="el" href="classhumoto_1_1rigidbody_1_1EulerAngles.html#a83c5a614a8818547d3b470a2f7d7181d">EulerAngles::Type</a> euler_angles_type)</td></tr>
+<tr class="memdesc:a9f8a51190c342645b1474a4dfc9c4b2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns matrix M such that w = M * de.  <a href="#a9f8a51190c342645b1474a4dfc9c4b2f">More...</a><br /></td></tr>
+<tr class="separator:a9f8a51190c342645b1474a4dfc9c4b2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3cd0485b36f6d6ca1c4eede446d7ba9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceetools.html#a71cb923138a364cb0660e1ea2e18b006">etools::Matrix3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehumoto_1_1rigidbody.html#ab3cd0485b36f6d6ca1c4eede446d7ba9">getRotationError</a> (const <a class="el" href="namespaceetools.html#a71cb923138a364cb0660e1ea2e18b006">etools::Matrix3</a> &amp;current, const <a class="el" href="namespaceetools.html#a71cb923138a364cb0660e1ea2e18b006">etools::Matrix3</a> &amp;reference)</td></tr>
 <tr class="separator:ab3cd0485b36f6d6ca1c4eede446d7ba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf7917677962c299af66bdb90c46d38d"><td class="memItemLeft" align="right" valign="top">etools::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehumoto_1_1rigidbody.html#adf7917677962c299af66bdb90c46d38d">getRotationErrorAngleAxis</a> (const <a class="el" href="namespaceetools.html#a71cb923138a364cb0660e1ea2e18b006">etools::Matrix3</a> &amp;current, const <a class="el" href="namespaceetools.html#a71cb923138a364cb0660e1ea2e18b006">etools::Matrix3</a> &amp;reference)</td></tr>
 <tr class="separator:adf7917677962c299af66bdb90c46d38d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b6331114a4131f3f67c82ea8262656d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceetools.html#a71cb923138a364cb0660e1ea2e18b006">etools::Matrix3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehumoto_1_1rigidbody.html#a6b6331114a4131f3f67c82ea8262656d">integrateAngularVelocity</a> (const <a class="el" href="namespaceetools.html#a71cb923138a364cb0660e1ea2e18b006">etools::Matrix3</a> &amp;orientation, const etools::Vector3 &amp;angular_velocity, const <a class="el" href="classdouble.html">double</a> dt)</td></tr>
+<tr class="memdesc:a6b6331114a4131f3f67c82ea8262656d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate angular velocity to obtain orientation matrix. Simple version.  <a href="#a6b6331114a4131f3f67c82ea8262656d">More...</a><br /></td></tr>
+<tr class="separator:a6b6331114a4131f3f67c82ea8262656d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cc825dc8c7ca84b13976e12c0fa2b5d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceetools.html#a71cb923138a364cb0660e1ea2e18b006">etools::Matrix3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehumoto_1_1rigidbody.html#a4cc825dc8c7ca84b13976e12c0fa2b5d">integrateAngularVelocityRodrigues</a> (const <a class="el" href="namespaceetools.html#a71cb923138a364cb0660e1ea2e18b006">etools::Matrix3</a> &amp;orientation, const etools::Vector3 &amp;angular_velocity, const <a class="el" href="classdouble.html">double</a> dt, const <a class="el" href="classdouble.html">double</a> tolerance=<a class="el" href="namespacehumoto.html#aaf8bf417e33b80b33510e3e0fdf0a3ce">humoto::g_generic_tolerance</a>)</td></tr>
+<tr class="memdesc:a4cc825dc8c7ca84b13976e12c0fa2b5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate angular velocity to obtain orientation matrix. Use Rodrigues formula.  <a href="#a4cc825dc8c7ca84b13976e12c0fa2b5d">More...</a><br /></td></tr>
+<tr class="separator:a4cc825dc8c7ca84b13976e12c0fa2b5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a867e0581241e2f310608619ae0081277"></a>
@@ -266,6 +275,54 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a9f8a51190c342645b1474a4dfc9c4b2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f8a51190c342645b1474a4dfc9c4b2f">&#9670;&nbsp;</a></span>getEulerRatesToAngularVelocityTransform()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceetools.html#a71cb923138a364cb0660e1ea2e18b006">etools::Matrix3</a> humoto::rigidbody::getEulerRatesToAngularVelocityTransform </td>
+          <td>(</td>
+          <td class="paramtype">const etools::Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>euler_angles</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classhumoto_1_1rigidbody_1_1EulerAngles.html#a83c5a614a8818547d3b470a2f7d7181d">EulerAngles::Type</a>&#160;</td>
+          <td class="paramname"><em>euler_angles_type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns matrix M such that w = M * de. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">euler_angles</td><td>current orientation (Euler angles) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">euler_angles_type</td><td>euler angles type</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>3x3 matrix </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="rotary__state_8h_source.html#l00142">142</a> of file <a class="el" href="rotary__state_8h_source.html">rotary_state.h</a>.</p>
+
+</div>
+</div>
 <a id="ab3cd0485b36f6d6ca1c4eede446d7ba9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab3cd0485b36f6d6ca1c4eede446d7ba9">&#9670;&nbsp;</a></span>getRotationError()</h2>
 
@@ -342,10 +399,127 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a6b6331114a4131f3f67c82ea8262656d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b6331114a4131f3f67c82ea8262656d">&#9670;&nbsp;</a></span>integrateAngularVelocity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceetools.html#a71cb923138a364cb0660e1ea2e18b006">etools::Matrix3</a> humoto::rigidbody::integrateAngularVelocity </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespaceetools.html#a71cb923138a364cb0660e1ea2e18b006">etools::Matrix3</a> &amp;&#160;</td>
+          <td class="paramname"><em>orientation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const etools::Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>angular_velocity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classdouble.html">double</a>&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Integrate angular velocity to obtain orientation matrix. Simple version. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">orientation</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">angular_velocity</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>new orientation matrix </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="rotary__state_8h_source.html#l00176">176</a> of file <a class="el" href="rotary__state_8h_source.html">rotary_state.h</a>.</p>
+
+</div>
+</div>
+<a id="a4cc825dc8c7ca84b13976e12c0fa2b5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cc825dc8c7ca84b13976e12c0fa2b5d">&#9670;&nbsp;</a></span>integrateAngularVelocityRodrigues()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceetools.html#a71cb923138a364cb0660e1ea2e18b006">etools::Matrix3</a> humoto::rigidbody::integrateAngularVelocityRodrigues </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespaceetools.html#a71cb923138a364cb0660e1ea2e18b006">etools::Matrix3</a> &amp;&#160;</td>
+          <td class="paramname"><em>orientation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const etools::Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>angular_velocity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classdouble.html">double</a>&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classdouble.html">double</a>&#160;</td>
+          <td class="paramname"><em>tolerance</em> = <code><a class="el" href="namespacehumoto.html#aaf8bf417e33b80b33510e3e0fdf0a3ce">humoto::g_generic_tolerance</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Integrate angular velocity to obtain orientation matrix. Use Rodrigues formula. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">orientation</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">angular_velocity</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tolerance</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>new orientation matrix </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="rotary__state_8h_source.html#l00197">197</a> of file <a class="el" href="rotary__state_8h_source.html">rotary_state.h</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 10 2017 18:11:42 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 12 2017 12:39:04 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

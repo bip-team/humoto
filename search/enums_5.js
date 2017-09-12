@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['status',['Status',['../classhumoto_1_1ControlProblemStatus.html#aced9d1566269fc8fa611c0197207151a',1,'humoto::ControlProblemStatus::Status()'],['../classhumoto_1_1SolverStatus.html#a0438ebd424646fc030b57303f6a40e3b',1,'humoto::SolverStatus::Status()']]]
+  ['rootdofids',['RootDoFIds',['../classhumoto_1_1pepper__ik_1_1ModelDescription_3_01ModelFeatures_1_1FIXED__WHEELS_7ModelFeatures_1_1ROOT__TORSO_01_4.html#a7eb2ba6546c1d82fa0f2551f353a6ed7',1,'humoto::pepper_ik::ModelDescription&lt; ModelFeatures::FIXED_WHEELS|ModelFeatures::ROOT_TORSO &gt;::RootDoFIds()'],['../classhumoto_1_1pepper__ik_1_1ModelDescription_3_01ModelFeatures_1_1FIXED__WHEELS_7ModelFeatures_1_1ROOT__TIBIA_01_4.html#a0ebe211ba6c4063f292025866841b908',1,'humoto::pepper_ik::ModelDescription&lt; ModelFeatures::FIXED_WHEELS|ModelFeatures::ROOT_TIBIA &gt;::RootDoFIds()'],['../classhumoto_1_1pepper__ik_1_1ModelDescription_3_01ModelFeatures_1_1FIXED__WHEELS_7ModelFeatures_1_1ROOT__PLANAR_01_4.html#a2fd835e2681afe787229094bee8f234d',1,'humoto::pepper_ik::ModelDescription&lt; ModelFeatures::FIXED_WHEELS|ModelFeatures::ROOT_PLANAR &gt;::RootDoFIds()']]]
 ];

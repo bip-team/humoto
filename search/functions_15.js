@@ -17,6 +17,7 @@ var searchData=
   ['_7eboundslumixin',['~BoundsLUMixin',['../classhumoto_1_1constraints_1_1BoundsLUMixin.html#a25c15ab198cc218dadc13b0931751b59',1,'humoto::constraints::BoundsLUMixin']]],
   ['_7eboundsumixin',['~BoundsUMixin',['../classhumoto_1_1constraints_1_1BoundsUMixin.html#ab0f333ea4ff7615c13fada5bc6945fec',1,'humoto::constraints::BoundsUMixin']]],
   ['_7ecommonconfigurablebase',['~CommonConfigurableBase',['../classhumoto_1_1config_1_1CommonConfigurableBase.html#a29a49ad6c2a3c638caef99a9b1347cd9',1,'humoto::config::CommonConfigurableBase']]],
+  ['_7econfigurablebase',['~ConfigurableBase',['../classhumoto_1_1config_1_1ConfigurableBase.html#a4e1bf80ccd11ca08e03b27f0f521f583',1,'humoto::config::ConfigurableBase']]],
   ['_7econstraintsab',['~ConstraintsAB',['../classhumoto_1_1constraints_1_1ConstraintsAB.html#a831c126c885dc656771a008c35bbb1f9',1,'humoto::constraints::ConstraintsAB']]],
   ['_7econstraintsab0',['~ConstraintsAB0',['../classhumoto_1_1constraints_1_1ConstraintsAB0.html#a7683059a602a401d827753d9ea80b933',1,'humoto::constraints::ConstraintsAB0']]],
   ['_7econstraintsal',['~ConstraintsAL',['../classhumoto_1_1constraints_1_1ConstraintsAL.html#a66776055cc742674c8d0ef31ee3fd8c9',1,'humoto::constraints::ConstraintsAL']]],
@@ -60,7 +61,7 @@ var searchData=
   ['_7esimpletaskbasemixin',['~SimpleTaskBaseMixin',['../classhumoto_1_1SimpleTaskBaseMixin.html#a89e465eb7e9d0dd6a052870063034966',1,'humoto::SimpleTaskBaseMixin']]],
   ['_7esolution',['~Solution',['../classhumoto_1_1Solution.html#aa20125cb04988a2cadc117645220cbec',1,'humoto::Solution']]],
   ['_7esolutionstructure',['~SolutionStructure',['../classhumoto_1_1SolutionStructure.html#a8ce4b0e194f6a219ffb84b32b6331011',1,'humoto::SolutionStructure']]],
-  ['_7esolver',['~Solver',['../classhumoto_1_1Solver.html#ab6971d67635e68bcf79ffce06b787dd4',1,'humoto::Solver::~Solver()'],['../classhumoto_1_1kktsolver_1_1Solver.html#a5373703ea12a573011d6ffdc24bff3b8',1,'humoto::kktsolver::Solver::~Solver()'],['../classhumoto_1_1quadprogpp_1_1Solver.html#a69d3df4afed08188811a82eae5683cab',1,'humoto::quadprogpp::Solver::~Solver()'],['../classhumoto_1_1qpoases_1_1Solver.html#aa3c43ff3426e0bb09e770cb608b27eed',1,'humoto::qpoases::Solver::~Solver()']]],
+  ['_7esolver',['~Solver',['../classhumoto_1_1Solver.html#ab6971d67635e68bcf79ffce06b787dd4',1,'humoto::Solver::~Solver()'],['../classhumoto_1_1kktsolver_1_1Solver.html#a5373703ea12a573011d6ffdc24bff3b8',1,'humoto::kktsolver::Solver::~Solver()'],['../classhumoto_1_1quadprogpp_1_1Solver.html#a69d3df4afed08188811a82eae5683cab',1,'humoto::quadprogpp::Solver::~Solver()'],['../classhumoto_1_1qpoases_1_1Solver.html#aa3c43ff3426e0bb09e770cb608b27eed',1,'humoto::qpoases::Solver::~Solver()'],['../classhumoto_1_1qpmad_1_1Solver.html#a730c7347ea6b7d37506155f38c8d8707',1,'humoto::qpmad::Solver::~Solver()']]],
   ['_7esolverguessactiveset',['~SolverGuessActiveSet',['../classhumoto_1_1SolverGuessActiveSet.html#a08d1bc4977692eac56afa377f5aac6be',1,'humoto::SolverGuessActiveSet']]],
   ['_7esolverguessactivesetmixin',['~SolverGuessActiveSetMixin',['../classhumoto_1_1SolverGuessActiveSetMixin.html#a8072009cb95cfd900fe256bff23fcd5c',1,'humoto::SolverGuessActiveSetMixin']]],
   ['_7esolverguesssolution',['~SolverGuessSolution',['../classhumoto_1_1SolverGuessSolution.html#a3a97baa71cb8785b7c8327be1ea0c64b',1,'humoto::SolverGuessSolution']]],
@@ -77,5 +78,5 @@ var searchData=
   ['_7eviolationscomputationlumixin',['~ViolationsComputationLUMixin',['../classhumoto_1_1constraints_1_1ViolationsComputationLUMixin.html#a6552d36dab6a9d3b63a170096ed6a653',1,'humoto::constraints::ViolationsComputationLUMixin']]],
   ['_7eviolationscomputationumixin',['~ViolationsComputationUMixin',['../classhumoto_1_1constraints_1_1ViolationsComputationUMixin.html#ae95ca19662bb954b62d1ee6e4b9b47ca',1,'humoto::constraints::ViolationsComputationUMixin']]],
   ['_7eweightedsimpletaskbasemixin',['~WeightedSimpleTaskBaseMixin',['../classhumoto_1_1WeightedSimpleTaskBaseMixin.html#a640caa3b61e8615c24ed7743c80a2194',1,'humoto::WeightedSimpleTaskBaseMixin']]],
-  ['_7ewriter',['~Writer',['../classhumoto_1_1config_1_1Writer.html#a1e4111e8f3b7ebd87701aea1eae8e1e0',1,'humoto::config::Writer']]]
+  ['_7ewriter',['~Writer',['../classhumoto_1_1config_1_1yaml_1_1Writer.html#ac1edd208c28c6488d1bc9f170354247f',1,'humoto::config::yaml::Writer::~Writer()'],['../classhumoto_1_1config_1_1msgpack_1_1Writer.html#aa30900439bc390a38b7a13c7a82570e7',1,'humoto::config::msgpack::Writer::~Writer()']]]
 ];

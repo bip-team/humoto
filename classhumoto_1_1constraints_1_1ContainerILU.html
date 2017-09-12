@@ -131,6 +131,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a421f1748630948bed0665bfa5237eb92"><td class="memItemLeft" align="right" valign="top">const Eigen::VectorXd &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1constraints_1_1BoundsUMixin.html#a421f1748630948bed0665bfa5237eb92">getUpperBounds</a> () const</td></tr>
 <tr class="memdesc:a421f1748630948bed0665bfa5237eb92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get upper bounds (ub vectors from 'A*x &lt;= ub').  <a href="#a421f1748630948bed0665bfa5237eb92">More...</a><br /></td></tr>
 <tr class="separator:a421f1748630948bed0665bfa5237eb92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0ed8d092dde4faa38652886578ceac3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1constraints_1_1ContainerILU.html#ac0ed8d092dde4faa38652886578ceac3">initializeSolutionBounds</a> (Eigen::VectorXd &amp;lb, Eigen::VectorXd &amp;ub) const</td></tr>
+<tr class="memdesc:ac0ed8d092dde4faa38652886578ceac3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates LB and UB, such that 'LB &lt;= X &lt;= UB'.  <a href="#ac0ed8d092dde4faa38652886578ceac3">More...</a><br /></td></tr>
+<tr class="separator:ac0ed8d092dde4faa38652886578ceac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1f18056fa5f4e166b030fcd4633ef3b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1constraints_1_1ContainerBase.html#ad1f18056fa5f4e166b030fcd4633ef3b">log</a> (<a class="el" href="classhumoto_1_1Logger.html">humoto::Logger</a> &amp;logger, const <a class="el" href="classhumoto_1_1LogEntryName.html">LogEntryName</a> &amp;parent=<a class="el" href="classhumoto_1_1LogEntryName.html">LogEntryName</a>(), const std::string &amp;name=&quot;constraints&quot;) const</td></tr>
 <tr class="memdesc:ad1f18056fa5f4e166b030fcd4633ef3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log data.  <a href="#ad1f18056fa5f4e166b030fcd4633ef3b">More...</a><br /></td></tr>
 <tr class="separator:ad1f18056fa5f4e166b030fcd4633ef3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -741,6 +744,53 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ac0ed8d092dde4faa38652886578ceac3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0ed8d092dde4faa38652886578ceac3">&#9670;&nbsp;</a></span>initializeSolutionBounds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void humoto::constraints::ContainerILU::initializeSolutionBounds </td>
+          <td>(</td>
+          <td class="paramtype">Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>lb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>ub</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generates LB and UB, such that 'LB &lt;= X &lt;= UB'. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">lb</td><td></td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ub</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="constraints__base_8h_source.html#l00324">324</a> of file <a class="el" href="constraints__base_8h_source.html">constraints_base.h</a>.</p>
+
+</div>
+</div>
 <a id="ad1f18056fa5f4e166b030fcd4633ef3b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad1f18056fa5f4e166b030fcd4633ef3b">&#9670;&nbsp;</a></span>log()</h2>
 
@@ -1199,7 +1249,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 10 2017 18:11:41 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 12 2017 12:39:03 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

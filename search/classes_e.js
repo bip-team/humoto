@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['reader',['Reader',['../classhumoto_1_1config_1_1Reader.html',1,'humoto::config']]],
+  ['reader',['Reader',['../classhumoto_1_1config_1_1yaml_1_1Reader.html',1,'humoto::config::yaml::Reader'],['../classhumoto_1_1config_1_1msgpack_1_1Reader.html',1,'humoto::config::msgpack::Reader']]],
   ['relaxedconfigurablebase',['RelaxedConfigurableBase',['../classhumoto_1_1config_1_1RelaxedConfigurableBase.html',1,'humoto::config']]],
   ['rigidbodypose',['RigidBodyPose',['../classhumoto_1_1rigidbody_1_1RigidBodyPose.html',1,'humoto::rigidbody']]],
   ['rigidbodystate',['RigidBodyState',['../classhumoto_1_1rigidbody_1_1RigidBodyState.html',1,'humoto::rigidbody']]],

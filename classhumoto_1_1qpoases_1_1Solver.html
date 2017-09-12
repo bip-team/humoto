@@ -77,7 +77,7 @@ $(function() {
 <div class="textblock"><p>QP solver. </p>
 <p>Solves hierarchy as an optimization problem of the following form: minimize 1/2* x' H x + x' g subject to lb &lt;= x &lt;= ub lbA &lt;= A x &lt;= ubA where 'x' is solution, 'H' &ndash; Hessian matrix, 'g' &ndash; gradient vector, 'lb' and 'ub' vectors of simple lower and upper bounds, 'Ax' &ndash; matrix of general constraints with bounds 'lbA' and 'ubA'. </p>
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00138">138</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00134">134</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 </div>
 <p><code>#include &lt;<a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>&gt;</code></p>
 <div class="dynheader">
@@ -177,24 +177,13 @@ Private Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:abb41e2b68aebf1122d7d418a8cc95876"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1qpoases_1_1Solver.html#abb41e2b68aebf1122d7d418a8cc95876">active_set_guess_provided_</a></td></tr>
 <tr class="separator:abb41e2b68aebf1122d7d418a8cc95876"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d440ae66c632dab7fdd54cd887d4e1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhumoto_1_1constraints_1_1ContainerILU.html">humoto::constraints::ContainerILU</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1qpoases_1_1Solver.html#a2d440ae66c632dab7fdd54cd887d4e1a">bounds_</a></td></tr>
-<tr class="separator:a2d440ae66c632dab7fdd54cd887d4e1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f97609d586b8fbe9c62858c0dddc6f0"><td class="memItemLeft" align="right" valign="top">Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1qpoases_1_1Solver.html#a5f97609d586b8fbe9c62858c0dddc6f0">g_</a></td></tr>
-<tr class="memdesc:a5f97609d586b8fbe9c62858c0dddc6f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gradient vector.  <a href="#a5f97609d586b8fbe9c62858c0dddc6f0">More...</a><br /></td></tr>
-<tr class="separator:a5f97609d586b8fbe9c62858c0dddc6f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdf85cfdbc773dd6f1dd7b3ceab664a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhumoto_1_1constraints_1_1ContainerALU.html">humoto::constraints::ContainerALU</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1qpoases_1_1Solver.html#acdf85cfdbc773dd6f1dd7b3ceab664a4">general_constraints_</a></td></tr>
-<tr class="memdesc:acdf85cfdbc773dd6f1dd7b3ceab664a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constraints (lbA &lt;= A x &lt;= ubA)  <a href="#acdf85cfdbc773dd6f1dd7b3ceab664a4">More...</a><br /></td></tr>
-<tr class="separator:acdf85cfdbc773dd6f1dd7b3ceab664a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95a6c5f09865b94bfb538a047521c792"><td class="memItemLeft" align="right" valign="top">Eigen::MatrixXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1qpoases_1_1Solver.html#a95a6c5f09865b94bfb538a047521c792">H_</a></td></tr>
-<tr class="memdesc:a95a6c5f09865b94bfb538a047521c792"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hessian.  <a href="#a95a6c5f09865b94bfb538a047521c792">More...</a><br /></td></tr>
-<tr class="separator:a95a6c5f09865b94bfb538a047521c792"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a451098e0b8dd1aea34d04fa3cb2b3dda"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1qpoases_1_1Solver.html#a451098e0b8dd1aea34d04fa3cb2b3dda">number_of_constraints_</a></td></tr>
 <tr class="memdesc:a451098e0b8dd1aea34d04fa3cb2b3dda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nonzero if constraints are specified.  <a href="#a451098e0b8dd1aea34d04fa3cb2b3dda">More...</a><br /></td></tr>
 <tr class="separator:a451098e0b8dd1aea34d04fa3cb2b3dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54c5f104a232100840c67ab004e9c541"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1qpoases_1_1Solver.html#a54c5f104a232100840c67ab004e9c541">objective_level_</a></td></tr>
-<tr class="separator:a54c5f104a232100840c67ab004e9c541"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3783f55eed3ed38b761c819c98a3c4c"><td class="memItemLeft" align="right" valign="top">qpOASES::QProblem *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1qpoases_1_1Solver.html#ad3783f55eed3ed38b761c819c98a3c4c">qp_</a></td></tr>
 <tr class="separator:ad3783f55eed3ed38b761c819c98a3c4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee48a8c8e6342fcb01fd2a246ec1357a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhumoto_1_1QPProblem__ILU__ALU.html">humoto::QPProblem_ILU_ALU</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1qpoases_1_1Solver.html#aee48a8c8e6342fcb01fd2a246ec1357a">qp_problem_</a></td></tr>
+<tr class="separator:aee48a8c8e6342fcb01fd2a246ec1357a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59a4218c908eea13e3bd1d3ddbeafc6d"><td class="memItemLeft" align="right" valign="top">Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1qpoases_1_1Solver.html#a59a4218c908eea13e3bd1d3ddbeafc6d">qpoases_active_set_bounds_</a></td></tr>
 <tr class="separator:a59a4218c908eea13e3bd1d3ddbeafc6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a340ffdb5fe737dc783a792f1294e6b75"><td class="memItemLeft" align="right" valign="top">Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1qpoases_1_1Solver.html#a340ffdb5fe737dc783a792f1294e6b75">qpoases_active_set_constraints_</a></td></tr>
@@ -205,12 +194,6 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:af9419186076f6121c57f20842e462f6e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1qpoases_1_1Solver.html#af9419186076f6121c57f20842e462f6e">solution_guess_provided_</a></td></tr>
 <tr class="memdesc:af9419186076f6121c57f20842e462f6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">If set the active set is returned.  <a href="#af9419186076f6121c57f20842e462f6e">More...</a><br /></td></tr>
 <tr class="separator:af9419186076f6121c57f20842e462f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:a87d625ad64685d97e7a2bf53e5c03872"><td class="memItemLeft" align="right" valign="top">Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1qpoases_1_1Solver.html#a87d625ad64685d97e7a2bf53e5c03872">lb_</a></td></tr>
-<tr class="memdesc:a87d625ad64685d97e7a2bf53e5c03872"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple bounds on variables.  <a href="#a87d625ad64685d97e7a2bf53e5c03872">More...</a><br /></td></tr>
-<tr class="separator:a87d625ad64685d97e7a2bf53e5c03872"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac757741bfcddb7f8bde8c2986ad8f5e"><td class="memItemLeft" align="right" valign="top">Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1qpoases_1_1Solver.html#aac757741bfcddb7f8bde8c2986ad8f5e">ub_</a></td></tr>
-<tr class="separator:aac757741bfcddb7f8bde8c2986ad8f5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:ab91c2b24c19251d81a01b463df315784"><td class="memItemLeft" align="right" valign="top">qpOASES::Bounds&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1qpoases_1_1Solver.html#ab91c2b24c19251d81a01b463df315784">qpoases_active_set_guess_bounds_</a></td></tr>
 <tr class="memdesc:ab91c2b24c19251d81a01b463df315784"><td class="mdescLeft">&#160;</td><td class="mdescRight">The active set guess for qpOASES.  <a href="#ab91c2b24c19251d81a01b463df315784">More...</a><br /></td></tr>
@@ -244,7 +227,7 @@ Private Attributes</h2></td></tr>
 
 <p>Default constructor (with default parameters) </p>
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00523">523</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00492">492</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -273,7 +256,7 @@ Private Attributes</h2></td></tr>
 
 <p>Destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00533">533</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00502">502</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -309,7 +292,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00544">544</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00513">513</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -340,7 +323,7 @@ Private Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhumoto_1_1Solver.html#ada30ec1a71247eac199f76f56d85bef1">humoto::Solver&lt; SolverParameters &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00472">472</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00469">469</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -376,7 +359,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00088">88</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00085">85</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -425,7 +408,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classhumoto_1_1SolverGuessActiveSetMixin.html#ad4d2f7063fba095f627be2737eec9023">humoto::SolverGuessActiveSetMixin&lt; Solver&lt; SolverParameters &gt; &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00332">332</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00294">294</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -474,7 +457,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classhumoto_1_1Solver.html#ae9f21602faf8fed3cd53f99cb62cacf2">humoto::Solver&lt; SolverParameters &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00188">188</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00167">167</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -528,7 +511,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00559">559</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00527">527</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -559,7 +542,7 @@ Private Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhumoto_1_1Solver.html#a617836c74d3b839a7e6a56d8e39c04bc">humoto::Solver&lt; SolverParameters &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00503">503</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00473">473</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -609,7 +592,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classhumoto_1_1SolverGuessActiveSetMixin.html#a045c1a598f668e198c98776e62142541">humoto::SolverGuessActiveSetMixin&lt; Solver&lt; SolverParameters &gt; &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00432">432</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00402">402</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -645,7 +628,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00144">144</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00141">141</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -683,7 +666,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classhumoto_1_1SolverGuessSolutionMixin.html#a38c278158e9e9299d6c96c0596356d22">humoto::SolverGuessSolutionMixin&lt; SolverGuessActiveSetMixin&lt; Solver&lt; SolverParameters &gt; &gt; &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00495">495</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00465">465</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -730,7 +713,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00158">158</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00155">155</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -784,7 +767,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00176">176</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00173">173</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -838,7 +821,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00233">233</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00230">230</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -899,7 +882,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00300">300</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00297">297</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -953,7 +936,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00322">322</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00319">319</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -1007,7 +990,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00342">342</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00339">339</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -1075,7 +1058,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00396">396</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00393">393</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -1136,7 +1119,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00421">421</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00418">418</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -1197,7 +1180,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00444">444</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00441">441</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -1246,7 +1229,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classhumoto_1_1Solver.html#acc331ece69093b83067e15332da7c57d">humoto::Solver&lt; SolverParameters &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00221">221</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00183">183</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -1271,135 +1254,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00143">143</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
-
-</div>
-</div>
-<a id="a2d440ae66c632dab7fdd54cd887d4e1a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d440ae66c632dab7fdd54cd887d4e1a">&#9670;&nbsp;</a></span>bounds_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classhumoto_1_1constraints_1_1ContainerILU.html">humoto::constraints::ContainerILU</a> humoto::qpoases::Solver::bounds_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00155">155</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
-
-</div>
-</div>
-<a id="a5f97609d586b8fbe9c62858c0dddc6f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f97609d586b8fbe9c62858c0dddc6f0">&#9670;&nbsp;</a></span>g_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Eigen::VectorXd humoto::qpoases::Solver::g_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Gradient vector. </p>
-
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00150">150</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
-
-</div>
-</div>
-<a id="acdf85cfdbc773dd6f1dd7b3ceab664a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acdf85cfdbc773dd6f1dd7b3ceab664a4">&#9670;&nbsp;</a></span>general_constraints_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classhumoto_1_1constraints_1_1ContainerALU.html">humoto::constraints::ContainerALU</a> humoto::qpoases::Solver::general_constraints_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constraints (lbA &lt;= A x &lt;= ubA) </p>
-
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00154">154</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
-
-</div>
-</div>
-<a id="a95a6c5f09865b94bfb538a047521c792"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95a6c5f09865b94bfb538a047521c792">&#9670;&nbsp;</a></span>H_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Eigen::MatrixXd humoto::qpoases::Solver::H_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Hessian. </p>
-
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00147">147</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
-
-</div>
-</div>
-<a id="a87d625ad64685d97e7a2bf53e5c03872"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87d625ad64685d97e7a2bf53e5c03872">&#9670;&nbsp;</a></span>lb_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Eigen::VectorXd humoto::qpoases::Solver::lb_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Simple bounds on variables. </p>
-
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00160">160</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00139">139</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -1425,31 +1280,7 @@ Private Attributes</h2></td></tr>
 
 <p>Nonzero if constraints are specified. </p>
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00179">179</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
-
-</div>
-</div>
-<a id="a54c5f104a232100840c67ab004e9c541"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54c5f104a232100840c67ab004e9c541">&#9670;&nbsp;</a></span>objective_level_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::size_t humoto::qpoases::Solver::objective_level_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00181">181</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00160">160</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -1473,7 +1304,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00070">70</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00067">67</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -1497,7 +1328,31 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00183">183</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00162">162</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+
+</div>
+</div>
+<a id="aee48a8c8e6342fcb01fd2a246ec1357a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee48a8c8e6342fcb01fd2a246ec1357a">&#9670;&nbsp;</a></span>qp_problem_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhumoto_1_1QPProblem__ILU__ALU.html">humoto::QPProblem_ILU_ALU</a> humoto::qpoases::Solver::qp_problem_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00142">142</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -1521,7 +1376,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00174">174</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00155">155</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -1545,7 +1400,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00175">175</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00156">156</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -1571,7 +1426,7 @@ Private Attributes</h2></td></tr>
 
 <p>The active set guess for qpOASES. </p>
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00170">170</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00151">151</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -1595,7 +1450,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00171">171</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00152">152</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -1621,7 +1476,7 @@ Private Attributes</h2></td></tr>
 
 <p>Guess of the solution. </p>
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00165">165</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00146">146</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -1647,31 +1502,7 @@ Private Attributes</h2></td></tr>
 
 <p>If set the active set is returned. </p>
 
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00142">142</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
-
-</div>
-</div>
-<a id="aac757741bfcddb7f8bde8c2986ad8f5e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac757741bfcddb7f8bde8c2986ad8f5e">&#9670;&nbsp;</a></span>ub_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Eigen::VectorXd humoto::qpoases::Solver::ub_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00161">161</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html#l00138">138</a> of file <a class="el" href="bridges_2qpOASES_2interface_2qpoases_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -1681,7 +1512,7 @@ Private Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 10 2017 18:11:42 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 12 2017 12:39:04 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

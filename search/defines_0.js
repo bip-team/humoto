@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['eigen_5finitialize_5fmatrices_5fby_5fnan',['EIGEN_INITIALIZE_MATRICES_BY_NAN',['../humoto_8h.html#a08fe8ac8d421e1dff257cbbba1927521',1,'humoto.h']]],
+  ['eigen_5finitialize_5fmatrices_5fby_5fnan',['EIGEN_INITIALIZE_MATRICES_BY_NAN',['../humoto__helpers_8h.html#a08fe8ac8d421e1dff257cbbba1927521',1,'humoto_helpers.h']]],
   ['eigentools_5fassert',['EIGENTOOLS_ASSERT',['../eigentools_8h.html#aa3873e40cfc0af028fd42448468c2974',1,'eigentools.h']]],
   ['eigentools_5fblockmatrix_5fblock_5fcols_5fnum',['EIGENTOOLS_BLOCKMATRIX_BLOCK_COLS_NUM',['../blockmatrix__base_8h.html#a0544b659c1dfefc7e32f9c8838a22930',1,'blockmatrix_base.h']]],
   ['eigentools_5fblockmatrix_5fblock_5frows_5fnum',['EIGENTOOLS_BLOCKMATRIX_BLOCK_ROWS_NUM',['../blockmatrix__base_8h.html#a759610dacc8c15dc131f71a9418d5a92',1,'blockmatrix_base.h']]],

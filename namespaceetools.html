@@ -125,6 +125,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classetools_1_1ConstBlockMatrixInterface.html">ConstBlockMatrixInterface</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides block interface for arbitrary Matrix without copying it.  <a href="classetools_1_1ConstBlockMatrixInterface.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classetools_1_1CrossProductMatrix.html">CrossProductMatrix</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skew-symmetric cross product matrix.  <a href="classetools_1_1CrossProductMatrix.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classetools_1_1DiagonalBlockKroneckerProduct.html">DiagonalBlockKroneckerProduct</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A shorthand class for a specific sparsity type.  <a href="classetools_1_1DiagonalBlockKroneckerProduct.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -419,6 +422,14 @@ Functions</h2></td></tr>
 <tr class="memitem:a76be5eaa7c464442814a8d9f57869398"><td class="memTemplItemLeft" align="right" valign="top">Eigen::Matrix&lt; typename Eigen::DenseBase&lt; t_Derived &gt;::Scalar, Eigen::Dynamic, Eigen::Dynamic &gt; <a class="el" href="eigentools_8h.html#a2db04efe41498fdec66f25717205100e">EIGENTOOLS_VISIBILITY_ATTRIBUTE</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceetools.html#a76be5eaa7c464442814a8d9f57869398">multiplyBlockKroneckerIdentity</a> (const Eigen::DenseBase&lt; t_Derived &gt; &amp;input, const std::size_t input_block_rows, const std::size_t input_block_cols, const std::size_t identity_size)</td></tr>
 <tr class="memdesc:a76be5eaa7c464442814a8d9f57869398"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom Kronecker product: blocks of the input matrix are treated as single elements.  <a href="#a76be5eaa7c464442814a8d9f57869398">More...</a><br /></td></tr>
 <tr class="separator:a76be5eaa7c464442814a8d9f57869398"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0db71cfdc91485099ce9df711528103e"><td class="memTemplParams" colspan="2">template&lt;class t_Derived &gt; </td></tr>
+<tr class="memitem:a0db71cfdc91485099ce9df711528103e"><td class="memTemplItemLeft" align="right" valign="top">Eigen::Matrix&lt; <a class="el" href="namespaceetools.html#adbb32d006ecc874fd28c1da11cae00a4">etools::DefaultScalar</a>, Eigen::DenseBase&lt; t_Derived &gt;::RowsAtCompileTime, 3 &gt; <a class="el" href="eigentools_8h.html#a2db04efe41498fdec66f25717205100e">EIGENTOOLS_VISIBILITY_ATTRIBUTE</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceetools.html#a0db71cfdc91485099ce9df711528103e">operator*</a> (const Eigen::MatrixBase&lt; t_Derived &gt; &amp;left, const <a class="el" href="classetools_1_1CrossProductMatrix.html">CrossProductMatrix</a> &amp;right)</td></tr>
+<tr class="memdesc:a0db71cfdc91485099ce9df711528103e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplication operator.  <a href="#a0db71cfdc91485099ce9df711528103e">More...</a><br /></td></tr>
+<tr class="separator:a0db71cfdc91485099ce9df711528103e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6185d4c2d7895563e539d3b535dc2f57"><td class="memTemplParams" colspan="2">template&lt;class t_Derived &gt; </td></tr>
+<tr class="memitem:a6185d4c2d7895563e539d3b535dc2f57"><td class="memTemplItemLeft" align="right" valign="top">Eigen::Matrix&lt; <a class="el" href="namespaceetools.html#adbb32d006ecc874fd28c1da11cae00a4">etools::DefaultScalar</a>, 3, Eigen::DenseBase&lt; t_Derived &gt;::ColsAtCompileTime &gt; <a class="el" href="eigentools_8h.html#a2db04efe41498fdec66f25717205100e">EIGENTOOLS_VISIBILITY_ATTRIBUTE</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceetools.html#a6185d4c2d7895563e539d3b535dc2f57">operator*</a> (const <a class="el" href="classetools_1_1CrossProductMatrix.html">CrossProductMatrix</a> &amp;left, const Eigen::MatrixBase&lt; t_Derived &gt; &amp;right)</td></tr>
+<tr class="memdesc:a6185d4c2d7895563e539d3b535dc2f57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplication operator.  <a href="#a6185d4c2d7895563e539d3b535dc2f57">More...</a><br /></td></tr>
+<tr class="separator:a6185d4c2d7895563e539d3b535dc2f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fe4f9f7c538afaa1fcf9fbe7417ee7f"><td class="memTemplParams" colspan="2">template&lt;class t_Derived &gt; </td></tr>
 <tr class="memitem:a0fe4f9f7c538afaa1fcf9fbe7417ee7f"><td class="memTemplItemLeft" align="right" valign="top">Eigen::Map&lt; const Eigen::Matrix&lt; typename Eigen::PlainObjectBase&lt; t_Derived &gt;::Scalar, Eigen::Dynamic, Eigen::Dynamic &gt;, Eigen::Unaligned, Eigen::Stride&lt; Eigen::Dynamic, Eigen::Dynamic &gt; &gt; <a class="el" href="eigentools_8h.html#a2db04efe41498fdec66f25717205100e">EIGENTOOLS_VISIBILITY_ATTRIBUTE</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceetools.html#a0fe4f9f7c538afaa1fcf9fbe7417ee7f">operator*</a> (const <a class="el" href="classetools_1_1SelectionMatrix.html">SelectionMatrix</a> &amp;selector, const Eigen::PlainObjectBase&lt; t_Derived &gt; &amp;matrix)</td></tr>
 <tr class="memdesc:a0fe4f9f7c538afaa1fcf9fbe7417ee7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply selection matrix by a generic Eigen matrix (select rows)  <a href="#a0fe4f9f7c538afaa1fcf9fbe7417ee7f">More...</a><br /></td></tr>
@@ -2682,8 +2693,104 @@ template&lt;class t_Derived &gt; </div>
 
 </div>
 </div>
+<a id="a0db71cfdc91485099ce9df711528103e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0db71cfdc91485099ce9df711528103e">&#9670;&nbsp;</a></span>operator*() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class t_Derived &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::Matrix&lt; <a class="el" href="namespaceetools.html#adbb32d006ecc874fd28c1da11cae00a4">etools::DefaultScalar</a>, Eigen::DenseBase&lt;t_Derived&gt;::RowsAtCompileTime, 3&gt; <a class="el" href="eigentools_8h.html#a2db04efe41498fdec66f25717205100e">EIGENTOOLS_VISIBILITY_ATTRIBUTE</a> etools::operator* </td>
+          <td>(</td>
+          <td class="paramtype">const Eigen::MatrixBase&lt; t_Derived &gt; &amp;&#160;</td>
+          <td class="paramname"><em>left</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classetools_1_1CrossProductMatrix.html">CrossProductMatrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>right</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Multiplication operator. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">t_Derived</td><td>Eigen parameter</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">left</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">right</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>result of multiplication </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="cross__product_8h_source.html#l00114">114</a> of file <a class="el" href="cross__product_8h_source.html">cross_product.h</a>.</p>
+
+</div>
+</div>
+<a id="a6185d4c2d7895563e539d3b535dc2f57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6185d4c2d7895563e539d3b535dc2f57">&#9670;&nbsp;</a></span>operator*() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class t_Derived &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::Matrix&lt; <a class="el" href="namespaceetools.html#adbb32d006ecc874fd28c1da11cae00a4">etools::DefaultScalar</a>, 3, Eigen::DenseBase&lt;t_Derived&gt;::ColsAtCompileTime&gt; <a class="el" href="eigentools_8h.html#a2db04efe41498fdec66f25717205100e">EIGENTOOLS_VISIBILITY_ATTRIBUTE</a> etools::operator* </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classetools_1_1CrossProductMatrix.html">CrossProductMatrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>left</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Eigen::MatrixBase&lt; t_Derived &gt; &amp;&#160;</td>
+          <td class="paramname"><em>right</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Multiplication operator. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">t_Derived</td><td>Eigen parameter</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">left</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">right</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>result of multiplication </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="cross__product_8h_source.html#l00141">141</a> of file <a class="el" href="cross__product_8h_source.html">cross_product.h</a>.</p>
+
+</div>
+</div>
 <a id="a0fe4f9f7c538afaa1fcf9fbe7417ee7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0fe4f9f7c538afaa1fcf9fbe7417ee7f">&#9670;&nbsp;</a></span>operator*()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fe4f9f7c538afaa1fcf9fbe7417ee7f">&#9670;&nbsp;</a></span>operator*() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3001,7 +3108,7 @@ template&lt;typename t_Derived &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 10 2017 18:11:40 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 12 2017 12:39:02 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

@@ -69,6 +69,7 @@ $(function() {
 <li class="level2"><a href="#md_readme_faq_comparison">What is the difference between humoto and ...   </a></li>
 </ul>
 </li>
+<li class="level1"><a href="#md_readme_relatedrepos">Related repositories    </a></li>
 <li class="level1"><a href="#md_readme_faq_more">More information    </a></li>
 </ul>
 </div>
@@ -128,7 +129,7 @@ FAQ     </h1>
 <h2><a class="anchor" id="md_readme_faq_applications"></a>
 What are the existing applications of this framework?   </h2>
 <ul>
-<li>Early versions of Humoto were used for walking control of HRP-4 humanoid robot. See module <a class="el" href="group__wpg03.html">wpg03</a>, its LaTeX documentation and references therein, and a <a href="https://www.youtube.com/watch?v=VYwZU4_7sMA">video</a> of the robot during the trials.</li>
+<li>Early versions of Humoto were used for walking control of HRP-4 humanoid robot. See module <a class="el" href="group__wpg03.html">wpg03</a>, its LaTeX documentation and references therein, and a <a href="https://www.youtube.com/watch?v=lHG4AbAvt_4">video</a> of the robot during the trials.</li>
 <li>More recently, Humoto has been used for motion control of a humanoid robot on a wheeled base (Pepper). See modules <a class="el" href="group__pepper__mpc.html">pepper_mpc</a> and <a class="el" href="group__pepper__ik.html">pepper_ik</a> and their LaTeX documentation.</li>
 </ul>
 <h2><a class="anchor" id="md_readme_faq_comparison"></a>
@@ -137,15 +138,32 @@ What is the difference between humoto and ...   </h2>
 <li><a href="http://roboptim.net/"><b>RobOptim</b></a>? Humoto and RobOptim were developed with one similar goal in mind: interfacing various optimization solvers in robot control applications. There are, however, many differences. Humoto cannot deal with general nonlinear problems as RobOptim does, but, unlike RobOptim, Humoto supports hierarchical (lexicographic) optimization problems. Moreover, our framework standardizes and automates formulation of optimization problems using the concept of '<a class="el" href="md_howto_tasks.html">task</a>'. Finally, we pay more attention to performance, e.g., Humoto supports more hot-starting options and provides <a class="el" href="namespaceetools.html">functionality</a> for blockwise matrix operations with sparsity support.</li>
 <li><a href="https://github.com/stack-of-tasks/soth"><b>SOTH</b></a> (SOT Hierarchical solver )? Humoto is a framework which is designed to provide common interface to various solvers, including hierarchical (lexicographic) solvers, while SOTH is a particular hierarchical solver.</li>
 </ul>
+<h1><a class="anchor" id="md_readme_relatedrepos"></a>
+Related repositories    </h1>
+<ul>
+<li><a href="https://github.com/bip-team/humoto-module-template">https://github.com/bip-team/humoto-module-template</a> <blockquote class="doxtable">
+<p>Template of an external module, i.e., a module which is not included in the main Humoto repository. </p>
+</blockquote>
+</li>
+<li><a href="https://github.com/bip-team/humoto-controller-template">https://github.com/bip-team/humoto-controller-template</a> <blockquote class="doxtable">
+<p>Template of a controller based on Humoto. </p>
+</blockquote>
+</li>
+<li><a href="https://github.com/bip-team/humoto-controller-pepper">https://github.com/bip-team/humoto-controller-pepper</a> <blockquote class="doxtable">
+<p>Controller for Pepper robot. </p>
+</blockquote>
+</li>
+</ul>
 <h1><a class="anchor" id="md_readme_faq_more"></a>
 More information    </h1>
 <ul>
-<li>Todo: see <a class="el" href="todo.html">doxygen todo page</a> and <a class="el" href="md_known_issues.html">doc/known_issues.md</a> </li>
+<li>Todo: see <a class="el" href="todo.html">doxygen todo page</a> and <a class="el" href="md_known_issues.html">doc/known_issues.md</a></li>
+<li>Changelog: see <a class="el" href="md_changelog.html">CHANGELOG.md</a> </li>
 </ul>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 10 2017 18:11:42 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 12 2017 12:39:04 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

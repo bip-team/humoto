@@ -84,7 +84,7 @@ $(function() {
 , <a class="el" href="classhumoto_1_1HierarchyLevel.html#ad749676cedf03f1f6c428d6eceaf0f17">humoto::HierarchyLevel</a>
 , <a class="el" href="classhumoto_1_1kktsolver_1_1Solver.html#a7969dd6659b44ed6109d481a5154da7f">humoto::kktsolver::Solver</a>
 , <a class="el" href="classhumoto_1_1Location.html#a7521c4ca829db8134a0b7300946c3489">humoto::Location</a>
-, <a class="el" href="classhumoto_1_1Logger.html#a9b2e923822942ea65fb66793aa653867">humoto::Logger</a>
+, <a class="el" href="classhumoto_1_1Logger.html#a2a9db1b2aae6be98b397819f4ab6d0e0">humoto::Logger</a>
 , <a class="el" href="classhumoto_1_1Model.html#a78304d9a06714088c498980881e65192">humoto::Model</a>
 , <a class="el" href="classhumoto_1_1ModelState.html#acd0392b2b8c173f34487fbdaf4f3754f">humoto::ModelState</a>
 , <a class="el" href="classhumoto_1_1OptimizationProblem.html#a6577f444678ba68bb06a46fa5fa97f91">humoto::OptimizationProblem</a>
@@ -97,8 +97,15 @@ $(function() {
 , <a class="el" href="classhumoto_1_1pepper__mpc_1_1MPCforMG.html#a64e2513a17f6eba9143d49ccbe7e43c2">humoto::pepper_mpc::MPCforMG</a>
 , <a class="el" href="classhumoto_1_1pepper__mpc_1_1PreviewHorizon.html#ab911ca63e3dc10b9c3cffcb67605996f">humoto::pepper_mpc::PreviewHorizon</a>
 , <a class="el" href="classhumoto_1_1pepper__mpc_1_1PreviewHorizonInterval.html#a2674d6659e582efa55843b23097f61dc">humoto::pepper_mpc::PreviewHorizonInterval</a>
+, <a class="el" href="classhumoto_1_1QPConstraints__AB.html#a33e3a90a54395c66cc8dd6368587fd84">humoto::QPConstraints_AB</a>
+, <a class="el" href="classhumoto_1_1QPConstraints__AB__AL.html#a0a03d9f7a713994425e396bf128bb4de">humoto::QPConstraints_AB_AL</a>
+, <a class="el" href="classhumoto_1_1QPConstraints__ILU__ALU.html#a5c3db6ced0598622a16fec18e98cfe4b">humoto::QPConstraints_ILU_ALU</a>
+, <a class="el" href="classhumoto_1_1qpmad_1_1Solution.html#a9895f7e10368471fcc51032ce27df4a1">humoto::qpmad::Solution</a>
+, <a class="el" href="classhumoto_1_1qpmad_1_1Solver.html#aee62aabf7204c8e0d98f98a66a6e967b">humoto::qpmad::Solver</a>
 , <a class="el" href="classhumoto_1_1qpoases_1_1Solution.html#a2cc9e2466f847db5d06e638c927704e8">humoto::qpoases::Solution</a>
 , <a class="el" href="classhumoto_1_1qpoases_1_1Solver.html#a7ed8055e796db44d2da3b2cc4e88e755">humoto::qpoases::Solver</a>
+, <a class="el" href="classhumoto_1_1QPObjective.html#a48c8613a501f34fe27ac9f0d3b7be9e4">humoto::QPObjective</a>
+, <a class="el" href="classhumoto_1_1QPProblemBase.html#a644a232358600e843b696308b6dad2a3">humoto::QPProblemBase&lt; t_Constraints &gt;</a>
 , <a class="el" href="classhumoto_1_1quadprogpp_1_1Solution.html#ad64d0f6a87f15228b405ae95b7802520">humoto::quadprogpp::Solution</a>
 , <a class="el" href="classhumoto_1_1quadprogpp_1_1Solver.html#a41f449437ecdc73c3a9cecca96ac47b6">humoto::quadprogpp::Solver</a>
 , <a class="el" href="classhumoto_1_1rigidbody_1_1PointMassState.html#a5794c474791623f91ad886379c9b0be4">humoto::rigidbody::PointMassState</a>
@@ -145,10 +152,10 @@ $(function() {
 : <a class="el" href="classhumoto_1_1LogEntryName.html#ac8615e73f6e14d231f3f6c3dcd18a70a">humoto::LogEntryName</a>
 </li>
 <li>Logger()
-: <a class="el" href="classhumoto_1_1Logger.html#a9b0a3ba7845ce9bda21919c119eeead0">humoto::Logger</a>
+: <a class="el" href="classhumoto_1_1Logger.html#aaf53bbcba19fa3c766d6d078669d0013">humoto::Logger</a>
 </li>
 <li>LoggerBase()
-: <a class="el" href="classhumoto_1_1LoggerBase.html#a3a2096888af1afe2df411ce3b16dcab0">humoto::LoggerBase</a>
+: <a class="el" href="classhumoto_1_1LoggerBase.html#a91cb881456136a415815213ce8a111a2">humoto::LoggerBase</a>
 </li>
 <li>LogMessage()
 : <a class="el" href="classhumoto_1_1LogMessage.html#ada7458c739a7bb3ef0cfac1739b55f28">humoto::LogMessage&lt; t_Data &gt;</a>
@@ -165,6 +172,8 @@ $(function() {
 , <a class="el" href="classhumoto_1_1pepper__ik_1_1TaskTagAngularVelocity.html#a9bde0719419f03ff625ac1ee45c36386">humoto::pepper_ik::TaskTagAngularVelocity&lt; t_features &gt;</a>
 , <a class="el" href="classhumoto_1_1pepper__ik_1_1TaskTagCompleteVelocity.html#a3299544518ce36dd215adaebb475c29e">humoto::pepper_ik::TaskTagCompleteVelocity&lt; t_features &gt;</a>
 , <a class="el" href="classhumoto_1_1pepper__ik_1_1TaskTagOrientation.html#a0ce73898688e736a7e17a62714ffb9bf">humoto::pepper_ik::TaskTagOrientation&lt; t_features &gt;</a>
+, <a class="el" href="classhumoto_1_1pepper__ik_1_1TaskTagPose3Dof.html#a2b8d4e1bde8795a3bd11e94af1de80b7">humoto::pepper_ik::TaskTagPose3Dof&lt; t_features &gt;</a>
+, <a class="el" href="classhumoto_1_1pepper__ik_1_1TaskTagPose.html#af260f1929ea304f5edb9e516b7c0c6e6">humoto::pepper_ik::TaskTagPose&lt; t_features &gt;</a>
 , <a class="el" href="classhumoto_1_1SimpleTaskBaseMixin.html#aa528760960fdc92fb15b0d4ab7b1a1ba">humoto::SimpleTaskBaseMixin&lt; t_Constraints &gt;</a>
 , <a class="el" href="classhumoto_1_1TaskBase.html#a7c91a1c5bf31ac5d61fcd65526a93a95">humoto::TaskBase</a>
 , <a class="el" href="classhumoto_1_1WeightedSimpleTaskBaseMixin.html#adfcf049a4a773bc4ea00bfb9437eef91">humoto::WeightedSimpleTaskBaseMixin&lt; t_Constraints &gt;</a>
@@ -173,7 +182,7 @@ $(function() {
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 10 2017 18:11:42 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 12 2017 12:39:05 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

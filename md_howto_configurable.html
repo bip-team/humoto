@@ -65,22 +65,23 @@ $(function() {
 <div class="textblock"><p>The framework provides functionality for serialization/deserialization of classes to/from configuration files.</p>
 <p>In order to implement a configurable class, it is necessary to take two steps:</p>
 <ul>
-<li>Inherit from <a class="el" href="namespacehumoto_1_1config.html#adc5eaa9e93595391b69233dca66a9c1f">ConfigurableBase</a> class, which provides functions to work with configuration files, if they are enabled with corresponding cmake option.</li>
-<li>Implement pure virtual methods of <a class="el" href="namespacehumoto_1_1config.html#adc5eaa9e93595391b69233dca66a9c1f">ConfigurableBase</a> class:<ul>
-<li>Some of these functions can be generated automatically using X-macro technique, if directive '<code>include HUMOTO_CONFIG_DEFINE_ACCESSORS</code>' is added (it includes <a class="el" href="define__accessors_8h.html">define_accessors.h</a> header).</li>
-<li>Others must be implemented manually.</li>
+<li>Inherit from <a class="el" href="classhumoto_1_1config_1_1ConfigurableBase.html">ConfigurableBase</a> class, which provides functions to work with configuration files, if they are enabled with corresponding cmake option.</li>
+<li>Add '<code>include HUMOTO_CONFIG_DEFINE_ACCESSORS</code>' directive inside a class which includes <a class="el" href="define__accessors_8h.html">define_accessors.h</a> file. This automatically generates functions which are specific for each class or cannot be inherited for technical reasons. Three optional defines can precede this inclusion:<ul>
+<li><code>HUMOTO_CONFIG_SECTION_ID</code> declares default name of the configuration section corresponding to this class. If it is not defined, the user must implement virtual function which provides this functionality.</li>
+<li><code>HUMOTO_CONFIG_CONSTRUCTOR</code> requests generation of additional class constructors for direct initialization from a configuration file.</li>
+<li><code>HUMOTO_CONFIG_ENTRIES</code> declares configuration file entries for this class. If not specified the user must implement <code>readConfigEntriesTemplate()</code> template function manually.</li>
 </ul>
 </li>
+<li>Implement remaining virtual methods of <a class="el" href="classhumoto_1_1config_1_1ConfigurableBase.html">humoto::config::ConfigurableBase</a> class:<ul>
+<li>User must provide definition of <a class="el" href="classhumoto_1_1config_1_1CommonConfigurableBase.html#af7c541f45f947e53175c8c535314199c">humoto::config::CommonConfigurableBase::setDefaults()</a> function.</li>
+<li>Optionally it is possible to postprocess class members after reading them from a configuration file &ndash; in this case the programmer should provide appropriate implementation of <a class="el" href="classhumoto_1_1config_1_1CommonConfigurableBase.html#aa879e3aeec636746ee64464162424329">humoto::config::CommonConfigurableBase::finalize()</a> virtual function. </li>
 </ul>
-<p>Optionally it is possible to</p>
-<ul>
-<li>Define additional constructors to initialize class from a configuration file using <code>HUMOTO_DEFINE_CONFIG_CONSTRUCTORS</code> macro.</li>
-<li>Postprocess class members after reading them from a configuration file &ndash; in this case the programmer should provide appropriate implementation of <a class="el" href="classhumoto_1_1config_1_1CommonConfigurableBase.html#aa879e3aeec636746ee64464162424329">humoto::config::CommonConfigurableBase::finalize()</a> virtual function. </li>
+</li>
 </ul>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 10 2017 18:11:40 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 12 2017 12:39:02 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

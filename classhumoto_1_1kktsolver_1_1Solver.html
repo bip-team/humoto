@@ -76,7 +76,7 @@ $(function() {
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>QP solver. </p>
 
-<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00091">91</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00088">88</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
 </div>
 <p><code>#include &lt;<a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>&gt;</code></p>
 <div class="dynheader">
@@ -120,6 +120,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:ad7c84a4af1627d164a684c8c5c5dc70d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1Solver.html#ad7c84a4af1627d164a684c8c5c5dc70d">checkResults</a> (const <a class="el" href="classhumoto_1_1Solution.html">humoto::Solution</a> &amp;solution) const</td></tr>
 <tr class="memdesc:ad7c84a4af1627d164a684c8c5c5dc70d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check return status and crash if it indicates a failure and crashing is enabled.  <a href="#ad7c84a4af1627d164a684c8c5c5dc70d">More...</a><br /></td></tr>
 <tr class="separator:ad7c84a4af1627d164a684c8c5c5dc70d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a617836c74d3b839a7e6a56d8e39c04bc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1Solver.html#a617836c74d3b839a7e6a56d8e39c04bc">reset</a> ()</td></tr>
+<tr class="memdesc:a617836c74d3b839a7e6a56d8e39c04bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset solver.  <a href="#a617836c74d3b839a7e6a56d8e39c04bc">More...</a><br /></td></tr>
+<tr class="separator:a617836c74d3b839a7e6a56d8e39c04bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -131,9 +134,6 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a46c71a5c7098fa7d196ec61b8f3fe34d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1kktsolver_1_1Solver.html#a46c71a5c7098fa7d196ec61b8f3fe34d">initialize</a> (const <a class="el" href="classhumoto_1_1OptimizationProblem.html">humoto::OptimizationProblem</a> &amp;hierarchy, const <a class="el" href="classhumoto_1_1SolutionStructure.html">humoto::SolutionStructure</a> &amp;sol_structure)</td></tr>
 <tr class="memdesc:a46c71a5c7098fa7d196ec61b8f3fe34d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize solver.  <a href="#a46c71a5c7098fa7d196ec61b8f3fe34d">More...</a><br /></td></tr>
 <tr class="separator:a46c71a5c7098fa7d196ec61b8f3fe34d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46d96ccc8a0431507693fb97ce3ece00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1kktsolver_1_1Solver.html#a46d96ccc8a0431507693fb97ce3ece00">reset</a> ()</td></tr>
-<tr class="memdesc:a46d96ccc8a0431507693fb97ce3ece00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset solver.  <a href="#a46d96ccc8a0431507693fb97ce3ece00">More...</a><br /></td></tr>
-<tr class="separator:a46d96ccc8a0431507693fb97ce3ece00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8f237715bdf6876ba08894f56f810ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1kktsolver_1_1Solver.html#ae8f237715bdf6876ba08894f56f810ea">solveDirect</a> (<a class="el" href="classhumoto_1_1Solution.html">humoto::Solution</a> &amp;solution, const <a class="el" href="classhumoto_1_1OptimizationProblem.html">humoto::OptimizationProblem</a> &amp;hierarchy)</td></tr>
 <tr class="memdesc:ae8f237715bdf6876ba08894f56f810ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve KKT system directly.  <a href="#ae8f237715bdf6876ba08894f56f810ea">More...</a><br /></td></tr>
 <tr class="separator:ae8f237715bdf6876ba08894f56f810ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,16 +146,8 @@ Private Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:aa6c5b76fde293287d37f7232ff95744a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhumoto_1_1constraints_1_1ContainerAB.html">humoto::constraints::ContainerAB</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1kktsolver_1_1Solver.html#aa6c5b76fde293287d37f7232ff95744a">equality_constraints_</a></td></tr>
-<tr class="separator:aa6c5b76fde293287d37f7232ff95744a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac280e44a6340d95df692344e1d94074a"><td class="memItemLeft" align="right" valign="top">Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1kktsolver_1_1Solver.html#ac280e44a6340d95df692344e1d94074a">g_</a></td></tr>
-<tr class="memdesc:ac280e44a6340d95df692344e1d94074a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gradient vector.  <a href="#ac280e44a6340d95df692344e1d94074a">More...</a><br /></td></tr>
-<tr class="separator:ac280e44a6340d95df692344e1d94074a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e0c6cb0f2fb1b5f7985e58d5513f055"><td class="memItemLeft" align="right" valign="top">Eigen::MatrixXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1kktsolver_1_1Solver.html#a7e0c6cb0f2fb1b5f7985e58d5513f055">H_</a></td></tr>
-<tr class="memdesc:a7e0c6cb0f2fb1b5f7985e58d5513f055"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hessian.  <a href="#a7e0c6cb0f2fb1b5f7985e58d5513f055">More...</a><br /></td></tr>
-<tr class="separator:a7e0c6cb0f2fb1b5f7985e58d5513f055"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73df32093896b2ff6ed45dbe27dff9e2"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1kktsolver_1_1Solver.html#a73df32093896b2ff6ed45dbe27dff9e2">objective_level_</a></td></tr>
-<tr class="separator:a73df32093896b2ff6ed45dbe27dff9e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03f4ae59e28948b0970815109ed5fcb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhumoto_1_1QPProblem__AB.html">humoto::QPProblem_AB</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1kktsolver_1_1Solver.html#a03f4ae59e28948b0970815109ed5fcb6">qp_problem_</a></td></tr>
+<tr class="separator:a03f4ae59e28948b0970815109ed5fcb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac653acdbf644679a24334eedd0b51bea"></a>
@@ -183,7 +175,7 @@ Private Attributes</h2></td></tr>
 
 <p>Default constructor (with default parameters) </p>
 
-<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00259">259</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00212">212</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
 
 </div>
 </div>
@@ -212,7 +204,7 @@ Private Attributes</h2></td></tr>
 
 <p>Destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00268">268</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00220">220</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
 
 </div>
 </div>
@@ -248,7 +240,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00279">279</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00230">230</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
 
 </div>
 </div>
@@ -287,7 +279,7 @@ Private Attributes</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classhumoto_1_1QPSolverMixin.html#ac84bd276527dc334265fd2e19ca40d29">humoto::QPSolverMixin&lt; humoto::Solver&lt; SolverParameters &gt; &gt;</a>, and <a class="el" href="classhumoto_1_1QPSolverMixin.html#ac84bd276527dc334265fd2e19ca40d29">humoto::QPSolverMixin&lt; humoto::SolverGuessSolutionActiveSet&lt; SolverParameters &gt; &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00105">105</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00102">102</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -323,7 +315,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00088">88</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00085">85</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -372,7 +364,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classhumoto_1_1Solver.html#ae9f21602faf8fed3cd53f99cb62cacf2">humoto::Solver&lt; SolverParameters &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00109">109</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00097">97</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
 
 </div>
 </div>
@@ -426,12 +418,12 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00292">292</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00243">243</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
 
 </div>
 </div>
-<a id="a46d96ccc8a0431507693fb97ce3ece00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a46d96ccc8a0431507693fb97ce3ece00">&#9670;&nbsp;</a></span>reset()</h2>
+<a id="a617836c74d3b839a7e6a56d8e39c04bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a617836c74d3b839a7e6a56d8e39c04bc">&#9670;&nbsp;</a></span>reset()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -440,7 +432,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void humoto::kktsolver::Solver::reset </td>
+          <td class="memname">virtual void <a class="el" href="classhumoto_1_1Solver.html">humoto::Solver</a>&lt; <a class="el" href="classhumoto_1_1kktsolver_1_1SolverParameters.html">SolverParameters</a>  &gt;::reset </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -448,16 +440,16 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Reset solver. </p>
 
-<p>Reimplemented from <a class="el" href="classhumoto_1_1Solver.html#a617836c74d3b839a7e6a56d8e39c04bc">humoto::Solver&lt; SolverParameters &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="classhumoto_1_1qpoases_1_1Solver.html#a8053f4d9f2e7a6d24b3b5890918f7f8f">humoto::qpoases::Solver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00249">249</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00110">110</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -493,7 +485,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00144">144</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00141">141</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -540,7 +532,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00158">158</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00155">155</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -594,7 +586,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00176">176</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00173">173</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
 
 </div>
 </div>
@@ -641,7 +633,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00210">210</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00170">170</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
 
 </div>
 </div>
@@ -690,7 +682,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classhumoto_1_1Solver.html#acc331ece69093b83067e15332da7c57d">humoto::Solver&lt; SolverParameters &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00146">146</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00106">106</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
 
 </div>
 </div>
@@ -737,111 +729,11 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00177">177</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00137">137</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="aa6c5b76fde293287d37f7232ff95744a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6c5b76fde293287d37f7232ff95744a">&#9670;&nbsp;</a></span>equality_constraints_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classhumoto_1_1constraints_1_1ContainerAB.html">humoto::constraints::ContainerAB</a> humoto::kktsolver::Solver::equality_constraints_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00101">101</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
-
-</div>
-</div>
-<a id="ac280e44a6340d95df692344e1d94074a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac280e44a6340d95df692344e1d94074a">&#9670;&nbsp;</a></span>g_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Eigen::VectorXd humoto::kktsolver::Solver::g_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Gradient vector. </p>
-
-<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00098">98</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
-
-</div>
-</div>
-<a id="a7e0c6cb0f2fb1b5f7985e58d5513f055"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e0c6cb0f2fb1b5f7985e58d5513f055">&#9670;&nbsp;</a></span>H_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Eigen::MatrixXd humoto::kktsolver::Solver::H_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Hessian. </p>
-
-<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00095">95</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
-
-</div>
-</div>
-<a id="a73df32093896b2ff6ed45dbe27dff9e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73df32093896b2ff6ed45dbe27dff9e2">&#9670;&nbsp;</a></span>objective_level_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::size_t humoto::kktsolver::Solver::objective_level_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00103">103</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
-
-</div>
-</div>
 <a id="a42fa298d35e6850afe1679cfdeb5d588"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a42fa298d35e6850afe1679cfdeb5d588">&#9670;&nbsp;</a></span>parameters_</h2>
 
@@ -862,7 +754,31 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00070">70</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2include_2humoto_2solver_8h_source.html#l00067">67</a> of file <a class="el" href="core_2include_2humoto_2solver_8h_source.html">solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a03f4ae59e28948b0970815109ed5fcb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03f4ae59e28948b0970815109ed5fcb6">&#9670;&nbsp;</a></span>qp_problem_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhumoto_1_1QPProblem__AB.html">humoto::QPProblem_AB</a> humoto::kktsolver::Solver::qp_problem_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="kktsolver_8h_source.html#l00091">91</a> of file <a class="el" href="kktsolver_8h_source.html">kktsolver.h</a>.</p>
 
 </div>
 </div>
@@ -872,7 +788,7 @@ Private Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 10 2017 18:11:41 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 12 2017 12:39:03 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

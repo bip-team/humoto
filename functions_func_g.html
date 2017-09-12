@@ -132,7 +132,7 @@ $(function() {
 : <a class="el" href="classhumoto_1_1rigidbody_1_1TripleIntegrator.html#a529c2b11c9a2300e2b2c38163ba034ea">humoto::rigidbody::TripleIntegrator</a>
 </li>
 <li>getAllConstraints()
-: <a class="el" href="classhumoto_1_1HierarchyLevel.html#a5dd30c0ca86c0e4cb20561a4981409e0">humoto::HierarchyLevel</a>
+: <a class="el" href="classhumoto_1_1HierarchyLevel.html#aee49b14daa51c02b4abd504897f878c5">humoto::HierarchyLevel</a>
 </li>
 <li>getAPos()
 : <a class="el" href="classhumoto_1_1rigidbody_1_1TripleIntegrator.html#a55bbfb9c91db08ecbc4860b6832fcdf4">humoto::rigidbody::TripleIntegrator</a>
@@ -235,6 +235,9 @@ $(function() {
 </li>
 <li>getBaseVelocity()
 : <a class="el" href="classhumoto_1_1pepper__mpc_1_1MotionParameters.html#a1cea762f9d69bc6c8988cce3b5f4a9d6">humoto::pepper_mpc::MotionParameters</a>
+</li>
+<li>getBaseVelocityInGlobal()
+: <a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html#aa9a3a6c0551ace143a1085da08f41985">humoto::pepper_ik::WholeBodyController&lt; t_features &gt;</a>
 </li>
 <li>getBaseYaw()
 : <a class="el" href="classhumoto_1_1pepper__ik_1_1Model.html#a339e395730d6d7a22e2c7970c01cc016">humoto::pepper_ik::Model&lt; t_features &gt;</a>
@@ -340,7 +343,8 @@ $(function() {
 : <a class="el" href="classhumoto_1_1wpg04_1_1Model.html#a9722a28dd3457926c87b60bd0f397f81">humoto::wpg04::Model</a>
 </li>
 <li>getCurrentNode()
-: <a class="el" href="classhumoto_1_1config_1_1Reader.html#ad4ef805d10601739d29b6f1f295dd908">humoto::config::Reader</a>
+: <a class="el" href="classhumoto_1_1config_1_1msgpack_1_1Reader.html#af1d6bbb0cf94d5e10daaf608d96663cb">humoto::config::msgpack::Reader</a>
+, <a class="el" href="classhumoto_1_1config_1_1yaml_1_1Reader.html#a0d1212d1fadbcabb3cf2b21294872a0d">humoto::config::yaml::Reader</a>
 </li>
 <li>getD3()
 : <a class="el" href="classhumoto_1_1walking_1_1PointMassModel6z.html#a138a5d9ec5aec688a08e287ab7c84202">humoto::walking::PointMassModel6z</a>
@@ -353,7 +357,7 @@ $(function() {
 : <a class="el" href="classhumoto_1_1rigidbody_1_1TripleIntegrator.html#aa4d784aedd53396d3f9009a7b204e67e">humoto::rigidbody::TripleIntegrator</a>
 </li>
 <li>getData()
-: <a class="el" href="classhumoto_1_1Solution.html#ace5a527c2f851d6df6e327321f482b11">humoto::Solution</a>
+: <a class="el" href="classhumoto_1_1Solution.html#aa2a1812760dfe86baff1fa3ca8736f8c">humoto::Solution</a>
 </li>
 <li>getDcpv6()
 : <a class="el" href="classhumoto_1_1walking_1_1PointMassModel6z.html#a9dd2d899976d5152ea647bc927340971">humoto::walking::PointMassModel6z</a>
@@ -421,6 +425,10 @@ $(function() {
 <li>getEPos()
 : <a class="el" href="classhumoto_1_1rigidbody_1_1TripleIntegrator.html#a3fa1276d1503cad11dcefd0612453939">humoto::rigidbody::TripleIntegrator</a>
 </li>
+<li>getEqualities()
+: <a class="el" href="classhumoto_1_1QPConstraints__AB.html#aecc0f5adf5cdfdbc7f56e167e914d981">humoto::QPConstraints_AB</a>
+, <a class="el" href="classhumoto_1_1QPConstraints__AB__AL.html#a2989e53a52d5ad4661dc2afc1563d9f6">humoto::QPConstraints_AB_AL</a>
+</li>
 <li>getEqualityConstraints()
 : <a class="el" href="classhumoto_1_1HierarchyLevel.html#ac91b7cd3fa232787cb6f9814c1482714">humoto::HierarchyLevel</a>
 </li>
@@ -453,6 +461,16 @@ $(function() {
 </li>
 <li>getGeneralConstraints()
 : <a class="el" href="classhumoto_1_1HierarchyLevel.html#a39d62612c3bd3e68bb970a8b1cae8da5">humoto::HierarchyLevel</a>
+, <a class="el" href="classhumoto_1_1QPConstraints__ILU__ALU.html#a82bc8867c4206aaa7eda8483bdb717d9">humoto::QPConstraints_ILU_ALU</a>
+</li>
+<li>getGradient()
+: <a class="el" href="classhumoto_1_1QPObjective.html#a6341e1444101576c1aea7180d93c74f9">humoto::QPObjective</a>
+</li>
+<li>getHessian()
+: <a class="el" href="classhumoto_1_1QPObjective.html#abdfc966e7f4a7ece6de5edc3e512c91a">humoto::QPObjective</a>
+</li>
+<li>getHessianType()
+: <a class="el" href="classhumoto_1_1QPObjective.html#af920c124b84f559bb9877d4f9f88feef">humoto::QPObjective</a>
 </li>
 <li>getIGains()
 : <a class="el" href="classhumoto_1_1constraints_1_1BodyGIMixin.html#a22688961e510835b889855c15c3b58bc">humoto::constraints::BodyGIMixin&lt; t_Base &gt;</a>
@@ -460,8 +478,11 @@ $(function() {
 <li>getIndices()
 : <a class="el" href="classhumoto_1_1constraints_1_1BodyIMixin.html#a1366518f014fcc352187151522f9bc9c">humoto::constraints::BodyIMixin&lt; t_Base &gt;</a>
 </li>
-<li>getInEqualityConstraints()
-: <a class="el" href="classhumoto_1_1HierarchyLevel.html#a2e73346ab1acae2049e957957004de36">humoto::HierarchyLevel</a>
+<li>getInequalities()
+: <a class="el" href="classhumoto_1_1QPConstraints__AB__AL.html#aac209551d2b0394013a4aa15b3c41b19">humoto::QPConstraints_AB_AL</a>
+</li>
+<li>getInequalityConstraints()
+: <a class="el" href="classhumoto_1_1HierarchyLevel.html#ab945dbd5e6f18588e65c469720843df5">humoto::HierarchyLevel</a>
 </li>
 <li>getIntervalIndexByTimeOffset()
 : <a class="el" href="classhumoto_1_1pepper__mpc_1_1PreviewHorizon.html#ac99f22c7f2a07e37553eaaf9dc0c819e">humoto::pepper_mpc::PreviewHorizon</a>
@@ -517,13 +538,13 @@ $(function() {
 : <a class="el" href="classhumoto_1_1pepper__mpc_1_1MPCforMG.html#acee8e977e9648f867246aefdc70aed04">humoto::pepper_mpc::MPCforMG</a>
 </li>
 <li>getMPCBaseState()
-: <a class="el" href="classhumoto_1_1pepper__mpc_1_1Model.html#aa180667b95f3677e5870a8da696225b6">humoto::pepper_mpc::Model</a>
+: <a class="el" href="classhumoto_1_1pepper__mpc_1_1Model.html#a71dbd116065ca2676a9a8eb1ecfc2109">humoto::pepper_mpc::Model</a>
 </li>
 <li>getMPCBodyState()
 : <a class="el" href="classhumoto_1_1pepper__mpc_1_1Model.html#aa01fe46cf10726437fcd08d8dee78823">humoto::pepper_mpc::Model</a>
 </li>
 <li>getNextGeneralizedCoordinates()
-: <a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html#a135aed4b0093fbbc9d11b3ec72188700">humoto::pepper_ik::WholeBodyController&lt; t_features &gt;</a>
+: <a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html#a67dce8645334de9e0e18f810b81b1deb">humoto::pepper_ik::WholeBodyController&lt; t_features &gt;</a>
 </li>
 <li>getNextModelState()
 : <a class="el" href="classhumoto_1_1pepper__mpc_1_1MPCforMG.html#a5e274e502a1a8cb13fbac7d49d215874">humoto::pepper_mpc::MPCforMG</a>
@@ -563,6 +584,10 @@ $(function() {
 <li>getNumberOfElements()
 : <a class="el" href="classhumoto_1_1rbdl_1_1SpatialType.html#a4711422891bbbc3e2df83c523e8b890f">humoto::rbdl::SpatialType</a>
 </li>
+<li>getNumberOfEntries()
+: <a class="el" href="classhumoto_1_1config_1_1CommonConfigurableBase.html#a8aae1f661ede9e152131ac79d94e6804">humoto::config::CommonConfigurableBase&lt; t_crash_on_missing_entry &gt;</a>
+, <a class="el" href="classhumoto_1_1ConfigurableOptimizationProblem.html#a89dd8f238602a4f697ad448af7fe87a4">humoto::ConfigurableOptimizationProblem</a>
+</li>
 <li>getNumberOfEqualityConstraints()
 : <a class="el" href="classhumoto_1_1HierarchyLevel.html#ac87ccf4fd44e04a6a8d6c44cf576a588">humoto::HierarchyLevel</a>
 </li>
@@ -571,6 +596,9 @@ $(function() {
 </li>
 <li>getNumberOfInequalityConstraints()
 : <a class="el" href="classhumoto_1_1HierarchyLevel.html#a09f0855aa54dfd4bdf541781b831ded4">humoto::HierarchyLevel</a>
+</li>
+<li>getNumberOfInequalityConstraintsOneSided()
+: <a class="el" href="classhumoto_1_1HierarchyLevel.html#adb1ba2579b1d2d94c7845c57de7e9f2a">humoto::HierarchyLevel</a>
 </li>
 <li>getNumberOfLevels()
 : <a class="el" href="classhumoto_1_1OptimizationProblem.html#ab1f0bfce1c2a08bf3f58dbe263ca3237">humoto::OptimizationProblem</a>
@@ -621,6 +649,9 @@ $(function() {
 , <a class="el" href="classhumoto_1_1constraints_1_1BodyGIMixin.html#a9abba79b0a70931a06b225619edac408">humoto::constraints::BodyGIMixin&lt; t_Base &gt;</a>
 , <a class="el" href="classhumoto_1_1constraints_1_1BodyIMixin.html#a4a2be8fbb28b93d88024603311c759d2">humoto::constraints::BodyIMixin&lt; t_Base &gt;</a>
 </li>
+<li>getQPProblem()
+: <a class="el" href="classhumoto_1_1OptimizationProblem.html#a1207dea4d74bfbf1e76b668908ebc146">humoto::OptimizationProblem</a>
+</li>
 <li>getRaw()
 : <a class="el" href="classetools_1_1BlockMatrixAccessBase.html#a2f0a36c218610f295681972ad290bcce">etools::BlockMatrixAccessBase&lt; t_MatrixType, t_block_rows_num, t_block_cols_num &gt;</a>
 </li>
@@ -653,14 +684,23 @@ $(function() {
 : <a class="el" href="classhumoto_1_1pepper__mpc_1_1MPCParameters.html#a430b0f6ae901bbb61bb8326cc21229ee">humoto::pepper_mpc::MPCParameters</a>
 , <a class="el" href="classhumoto_1_1wpg03_1_1MPCParameters.html#a5c50770b7208cf7f941d748d2c69a9d7">humoto::wpg03::MPCParameters</a>
 </li>
+<li>getSimpleBounds()
+: <a class="el" href="classhumoto_1_1QPConstraints__ILU__ALU.html#a8b4fa797a3dbc66ba13caefcab088b12">humoto::QPConstraints_ILU_ALU</a>
+</li>
 <li>getSimpleConstraints()
-: <a class="el" href="classhumoto_1_1HierarchyLevel.html#ae53f51b28165c62bc2bc291192389829">humoto::HierarchyLevel</a>
+: <a class="el" href="classhumoto_1_1HierarchyLevel.html#af969cc0df3512b2b7b1a4f68407cb500">humoto::HierarchyLevel</a>
+</li>
+<li>getSolutionLowerBounds()
+: <a class="el" href="classhumoto_1_1QPConstraints__ILU__ALU.html#a23f08066da64a593857007de3088397d">humoto::QPConstraints_ILU_ALU</a>
 </li>
 <li>getSolutionPart()
 : <a class="el" href="classhumoto_1_1Solution.html#a63976ccfaf8f36fb8ae6a334ed538119">humoto::Solution</a>
 </li>
 <li>getSolutionPartLocation()
 : <a class="el" href="classhumoto_1_1SolutionStructure.html#a890eb4a6f2868e86bdca0f71f3187c83">humoto::SolutionStructure</a>
+</li>
+<li>getSolutionUpperBounds()
+: <a class="el" href="classhumoto_1_1QPConstraints__ILU__ALU.html#a3e0620350b9bce3324e56e02bf72dc16">humoto::QPConstraints_ILU_ALU</a>
 </li>
 <li>getSSCoPBounds()
 : <a class="el" href="classhumoto_1_1walking_1_1RobotFootParameters.html#aba6b1db1e0c93922e910cbae40fabcf5">humoto::walking::RobotFootParameters</a>
@@ -671,8 +711,12 @@ $(function() {
 <li>getStateError()
 : <a class="el" href="classhumoto_1_1pepper__ik_1_1Model.html#a2717ce22192436d4d6b9f79159888e07">humoto::pepper_ik::Model&lt; t_features &gt;</a>
 </li>
+<li>getStatus()
+: <a class="el" href="classhumoto_1_1QPObjective.html#ad55ee8bf6cb4f66fa20f9e9df02c212b">humoto::QPObjective</a>
+</li>
 <li>getStatusDescription()
-: <a class="el" href="classhumoto_1_1qpoases_1_1Solution.html#a9c94c29a63d46664f9a5c918473710c4">humoto::qpoases::Solution</a>
+: <a class="el" href="classhumoto_1_1qpmad_1_1Solution.html#aa177177a3f2e61d23773810b23d30ce1">humoto::qpmad::Solution</a>
+, <a class="el" href="classhumoto_1_1qpoases_1_1Solution.html#a9c94c29a63d46664f9a5c918473710c4">humoto::qpoases::Solution</a>
 , <a class="el" href="classhumoto_1_1quadprogpp_1_1Solution.html#a325cbbe5add1ab303f1112e7864bcf7e">humoto::quadprogpp::Solution</a>
 , <a class="el" href="classhumoto_1_1Solution.html#a062cad7aa732424013e7303cebf4c48b">humoto::Solution</a>
 </li>
@@ -691,7 +735,7 @@ $(function() {
 : <a class="el" href="classhumoto_1_1rbdl_1_1Model.html#aeaf50f6eef56f044834b005bd643446d">humoto::rbdl::Model</a>
 </li>
 <li>getTagMass()
-: <a class="el" href="classhumoto_1_1rbdl_1_1Model.html#a8ffce2e58379924681ca8d88c0e927f1">humoto::rbdl::Model</a>
+: <a class="el" href="classhumoto_1_1rbdl_1_1Model.html#aa3e0f72db538c283be3ab5e18f0e3656">humoto::rbdl::Model</a>
 </li>
 <li>getTagOrientation()
 : <a class="el" href="classhumoto_1_1pepper__ik_1_1Model.html#a8a3fb5fe177b79120fcfc75b6f0fe08f">humoto::pepper_ik::Model&lt; t_features &gt;</a>
@@ -703,12 +747,18 @@ $(function() {
 <li>getTagPose()
 : <a class="el" href="classhumoto_1_1rbdl_1_1Model.html#af20864fc0e349528de87ab4fa4d28ba5">humoto::rbdl::Model</a>
 </li>
+<li>getTagPoseErrorInGlobal()
+: <a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html#a626cab8548cf3d5a521d766fbb5ee58c">humoto::pepper_ik::WholeBodyController&lt; t_features &gt;</a>
+</li>
 <li>getTagPosition()
 : <a class="el" href="classhumoto_1_1pepper__ik_1_1Model.html#a4be739deb6f310c48b9b3c2320fc77bb">humoto::pepper_ik::Model&lt; t_features &gt;</a>
-, <a class="el" href="classhumoto_1_1rbdl_1_1Model.html#a95e1a7624cc825b222d374488ad2f6f8">humoto::rbdl::Model</a>
+, <a class="el" href="classhumoto_1_1rbdl_1_1Model.html#a4ee85ac8117fc13241624a23ab2f806c">humoto::rbdl::Model</a>
 </li>
-<li>getTagRefVelocity()
-: <a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html#ac5371a2572224112a1d1b0aa034283ab">humoto::pepper_ik::WholeBodyController&lt; t_features &gt;</a>
+<li>getTagVelocityInGlobal()
+: <a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html#a542bcd82f650c25c5e6a648fbcdb5716">humoto::pepper_ik::WholeBodyController&lt; t_features &gt;</a>
+</li>
+<li>getTagVelocityInLocal()
+: <a class="el" href="classhumoto_1_1pepper__ik_1_1WholeBodyController.html#a72eee2e81e88fb865472d0aa8bfdbcc2">humoto::pepper_ik::WholeBodyController&lt; t_features &gt;</a>
 </li>
 <li>getTask()
 : <a class="el" href="classhumoto_1_1ConfigurableOptimizationProblem.html#a221a79fe3f0817c2d4fe9c6920bd5fc0">humoto::ConfigurableOptimizationProblem</a>
@@ -720,7 +770,7 @@ $(function() {
 : <a class="el" href="classhumoto_1_1wpg03_1_1MPCParameters.html#a3456ecaa0ca222565f6444c470b65e13">humoto::wpg03::MPCParameters</a>
 </li>
 <li>getTheta()
-: <a class="el" href="classhumoto_1_1pepper__mpc_1_1Model.html#a261c76bc043639eee64cb1a4c96ee6e3">humoto::pepper_mpc::Model</a>
+: <a class="el" href="classhumoto_1_1pepper__mpc_1_1Model.html#a997cc421fae50197d8e9f138568aaa4d">humoto::pepper_mpc::Model</a>
 </li>
 <li>getTorsoRootLocation()
 : <a class="el" href="classhumoto_1_1pepper__ik_1_1ModelDescription_3_01ModelFeatures_1_1FIXED__WHEELS_7ModelFeatures_1_1ROOT__PLANAR_01_4.html#a4762fbb122d664f95551af15f38f6bb8">humoto::pepper_ik::ModelDescription&lt; ModelFeatures::FIXED_WHEELS|ModelFeatures::ROOT_PLANAR &gt;</a>
@@ -785,7 +835,7 @@ $(function() {
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 10 2017 18:11:42 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 12 2017 12:39:05 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

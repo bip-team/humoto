@@ -85,7 +85,7 @@ Inheritance diagram for humoto::wpg04::MPCforWPG:</div>
 <div class="dyncontent">
 <div class="center"><img src="classhumoto_1_1wpg04_1_1MPCforWPG__inherit__graph.png" border="0" usemap="#humoto_1_1wpg04_1_1MPCforWPG_inherit__map" alt="Inheritance graph"/></div>
 <map name="humoto_1_1wpg04_1_1MPCforWPG_inherit__map" id="humoto_1_1wpg04_1_1MPCforWPG_inherit__map">
-<area shape="rect" id="node2" href="classhumoto_1_1MPC.html" title="Abstract base class for Model Predictive Control problems. " alt="" coords="13,189,205,355"/>
+<area shape="rect" id="node2" href="classhumoto_1_1MPC.html" title="Abstract base class for Model Predictive Control problems. " alt="" coords="13,189,205,369"/>
 <area shape="rect" id="node3" href="classhumoto_1_1ControlProblem.html" title="Abstract base class (for control problems) " alt="" coords="24,5,195,141"/>
 </map>
 </div>
@@ -183,6 +183,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a84ad88163a9afa26e03ec32b350ce9db"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhumoto_1_1MPC.html#a84ad88163a9afa26e03ec32b350ce9db">condenseOutput</a> (<a class="el" href="classetools_1_1GenericBlockMatrix.html">etools::GenericBlockMatrix</a>&lt; t_num_outputs, t_num_vars &gt; &amp;Ox, std::vector&lt; <a class="el" href="classetools_1_1LeftLowerTriangularBlockMatrix.html">etools::LeftLowerTriangularBlockMatrix</a>&lt; t_num_outputs, <a class="el" href="classetools_1_1MatrixBlockSizeType.html#acb351eec27278425817d97b43e73fb33a611a2b305084af855ddb45e91c127924">etools::MatrixBlockSizeType::DYNAMIC</a> &gt; &gt; &amp;Ou, const std::vector&lt; t_DMatrix &gt; &amp;D, const std::vector&lt; t_EMatrix &gt; &amp;E, const <a class="el" href="classetools_1_1GenericBlockMatrix.html">etools::GenericBlockMatrix</a>&lt; t_num_vars, t_num_vars &gt; &amp;Ux, const std::vector&lt; <a class="el" href="classetools_1_1LeftLowerTriangularBlockMatrix.html">etools::LeftLowerTriangularBlockMatrix</a>&lt; t_num_vars, <a class="el" href="classetools_1_1MatrixBlockSizeType.html#acb351eec27278425817d97b43e73fb33a611a2b305084af855ddb45e91c127924">etools::MatrixBlockSizeType::DYNAMIC</a> &gt; &gt; &amp;Uu)</td></tr>
 <tr class="memdesc:a84ad88163a9afa26e03ec32b350ce9db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Condense output of the system.  <a href="#a84ad88163a9afa26e03ec32b350ce9db">More...</a><br /></td></tr>
 <tr class="separator:a84ad88163a9afa26e03ec32b350ce9db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42dc23321f2bf542e125244ea52077fd"><td class="memTemplParams" colspan="2">template&lt;typename t_DMatrix , typename t_EMatrix &gt; </td></tr>
+<tr class="memitem:a42dc23321f2bf542e125244ea52077fd"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhumoto_1_1MPC.html#a42dc23321f2bf542e125244ea52077fd">condenseOutput</a> (Eigen::MatrixXd &amp;Ox, Eigen::MatrixXd &amp;Ou, const t_DMatrix &amp;D, const t_EMatrix &amp;E, const Eigen::MatrixXd &amp;Ux, const Eigen::MatrixXd &amp;Uu)</td></tr>
+<tr class="memdesc:a42dc23321f2bf542e125244ea52077fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Condense output of the system.  <a href="#a42dc23321f2bf542e125244ea52077fd">More...</a><br /></td></tr>
+<tr class="separator:a42dc23321f2bf542e125244ea52077fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b29dc21b873d425a1783d4d09c522da"><td class="memTemplParams" colspan="2">template&lt;int t_num_vars, int t_num_controls, int t_num_outputs, typename t_DMatrix , typename t_EMatrix &gt; </td></tr>
 <tr class="memitem:a7b29dc21b873d425a1783d4d09c522da"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhumoto_1_1MPC.html#a7b29dc21b873d425a1783d4d09c522da">condenseOutput</a> (<a class="el" href="classetools_1_1GenericBlockMatrix.html">etools::GenericBlockMatrix</a>&lt; t_num_outputs, t_num_vars &gt; &amp;Ox, <a class="el" href="classetools_1_1LeftLowerTriangularBlockMatrix.html">etools::LeftLowerTriangularBlockMatrix</a>&lt; t_num_outputs, t_num_controls &gt; &amp;Ou, const std::vector&lt; t_DMatrix &gt; &amp;D, const std::vector&lt; t_EMatrix &gt; &amp;E, const <a class="el" href="classetools_1_1GenericBlockMatrix.html">etools::GenericBlockMatrix</a>&lt; t_num_vars, t_num_vars &gt; &amp;Ux, const <a class="el" href="classetools_1_1LeftLowerTriangularBlockMatrix.html">etools::LeftLowerTriangularBlockMatrix</a>&lt; t_num_vars, t_num_controls &gt; &amp;Uu)</td></tr>
 <tr class="memdesc:a7b29dc21b873d425a1783d4d09c522da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Condense output of the system.  <a href="#a7b29dc21b873d425a1783d4d09c522da">More...</a><br /></td></tr>
@@ -353,7 +357,7 @@ template&lt;int t_num_vars, int t_num_controls, typename t_AMatrix , typename t_
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="control__problem_8h_source.html#l00263">263</a> of file <a class="el" href="control__problem_8h_source.html">control_problem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="control__problem_8h_source.html#l00318">318</a> of file <a class="el" href="control__problem_8h_source.html">control_problem.h</a>.</p>
 
 </div>
 </div>
@@ -423,12 +427,12 @@ template&lt;typename t_AMatrix , typename t_BMatrix &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="control__problem_8h_source.html#l00319">319</a> of file <a class="el" href="control__problem_8h_source.html">control_problem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="control__problem_8h_source.html#l00374">374</a> of file <a class="el" href="control__problem_8h_source.html">control_problem.h</a>.</p>
 
 </div>
 </div>
 <a id="a84ad88163a9afa26e03ec32b350ce9db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84ad88163a9afa26e03ec32b350ce9db">&#9670;&nbsp;</a></span>condenseOutput() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a84ad88163a9afa26e03ec32b350ce9db">&#9670;&nbsp;</a></span>condenseOutput() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -514,8 +518,96 @@ template&lt;int t_num_vars, int t_num_outputs, typename t_DMatrix , typename t_E
 
 </div>
 </div>
+<a id="a42dc23321f2bf542e125244ea52077fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42dc23321f2bf542e125244ea52077fd">&#9670;&nbsp;</a></span>condenseOutput() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename t_DMatrix , typename t_EMatrix &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void humoto::MPC::condenseOutput </td>
+          <td>(</td>
+          <td class="paramtype">Eigen::MatrixXd &amp;&#160;</td>
+          <td class="paramname"><em>Ox</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::MatrixXd &amp;&#160;</td>
+          <td class="paramname"><em>Ou</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const t_DMatrix &amp;&#160;</td>
+          <td class="paramname"><em>D</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const t_EMatrix &amp;&#160;</td>
+          <td class="paramname"><em>E</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Eigen::MatrixXd &amp;&#160;</td>
+          <td class="paramname"><em>Ux</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Eigen::MatrixXd &amp;&#160;</td>
+          <td class="paramname"><em>Uu</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Condense output of the system. </p>
+<p>output = Ox*x0 + Ou*(u0,...,uN)</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">t_num_vars</td><td>number of state variables </td></tr>
+    <tr><td class="paramname">t_num_controls</td><td>number of control variables </td></tr>
+    <tr><td class="paramname">t_num_outputs</td><td>number of output variables </td></tr>
+    <tr><td class="paramname">t_DMatrix</td><td>D matrix, should be an Eigen matrix or a scalar </td></tr>
+    <tr><td class="paramname">t_EMatrix</td><td>E matrix, should be an Eigen matrix or a scalar</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">Ox</td><td>matrix Ox </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">Ou</td><td>matrix Ou </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">D</td><td>D matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">E</td><td>E matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Ux</td><td>matrix Ux </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Uu</td><td>matrix Uu </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="control__problem_8h_source.html#l00208">208</a> of file <a class="el" href="control__problem_8h_source.html">control_problem.h</a>.</p>
+
+</div>
+</div>
 <a id="a7b29dc21b873d425a1783d4d09c522da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b29dc21b873d425a1783d4d09c522da">&#9670;&nbsp;</a></span>condenseOutput() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b29dc21b873d425a1783d4d09c522da">&#9670;&nbsp;</a></span>condenseOutput() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -598,7 +690,7 @@ template&lt;int t_num_vars, int t_num_controls, int t_num_outputs, typename t_DM
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="control__problem_8h_source.html#l00211">211</a> of file <a class="el" href="control__problem_8h_source.html">control_problem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="control__problem_8h_source.html#l00266">266</a> of file <a class="el" href="control__problem_8h_source.html">control_problem.h</a>.</p>
 
 </div>
 </div>
@@ -666,7 +758,7 @@ template&lt;int t_num_vars, int t_num_controls, int t_num_outputs, typename t_DM
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="control__problem_8h_source.html#l00368">368</a> of file <a class="el" href="control__problem_8h_source.html">control_problem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="control__problem_8h_source.html#l00423">423</a> of file <a class="el" href="control__problem_8h_source.html">control_problem.h</a>.</p>
 
 </div>
 </div>
@@ -1675,7 +1767,7 @@ template&lt;int t_num_vars, int t_num_controls, int t_num_outputs, typename t_DM
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 10 2017 18:11:42 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 12 2017 12:39:04 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

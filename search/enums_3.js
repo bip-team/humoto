@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['method',['Method',['../classhumoto_1_1kktsolver_1_1SolverParameters.html#a8d99ed8cdcb8e21cc7b9d17fe0c8b0c7',1,'humoto::kktsolver::SolverParameters']]],
-  ['mode',['Mode',['../classhumoto_1_1pepper__mpc_1_1MotionMode.html#af6f1c3af66c668d716c67167eb1641e0',1,'humoto::pepper_mpc::MotionMode']]],
-  ['modelstatetype',['ModelStateType',['../namespacehumoto_1_1wpg03.html#a0e2a1362544040acd08b8bedfce889eb',1,'humoto::wpg03']]],
-  ['modelwrenchprediction',['ModelWrenchPrediction',['../namespacehumoto_1_1wpg03.html#acfe47f766dba93a633a8ce5643d0bd6b',1,'humoto::wpg03']]],
-  ['mpcinteractiontype',['MPCInteractionType',['../namespacehumoto_1_1wpg03.html#ab86ffa4e9f123aa6acdc18c0f53caa1b',1,'humoto::wpg03']]]
+  ['jointsdofids',['JointsDoFIds',['../classhumoto_1_1pepper__ik_1_1ModelDescription_3_01ModelFeatures_1_1FIXED__WHEELS_7ModelFeatures_1_1ROOT__TORSO_01_4.html#a41d767323627497ea657355299cdea03',1,'humoto::pepper_ik::ModelDescription&lt; ModelFeatures::FIXED_WHEELS|ModelFeatures::ROOT_TORSO &gt;::JointsDoFIds()'],['../classhumoto_1_1pepper__ik_1_1ModelDescription_3_01ModelFeatures_1_1FIXED__WHEELS_7ModelFeatures_1_1ROOT__TIBIA_01_4.html#aac2a6d1a40a0b1d74d595e92585586ed',1,'humoto::pepper_ik::ModelDescription&lt; ModelFeatures::FIXED_WHEELS|ModelFeatures::ROOT_TIBIA &gt;::JointsDoFIds()'],['../classhumoto_1_1pepper__ik_1_1ModelDescription_3_01ModelFeatures_1_1FIXED__WHEELS_7ModelFeatures_1_1ROOT__PLANAR_01_4.html#aeb03b28498c5677dd6fc5f3d34e7bb5f',1,'humoto::pepper_ik::ModelDescription&lt; ModelFeatures::FIXED_WHEELS|ModelFeatures::ROOT_PLANAR &gt;::JointsDoFIds()']]]
 ];

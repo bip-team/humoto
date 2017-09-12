@@ -62,9 +62,6 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
 <div class="title">humoto.h File Reference</div>  </div>
 </div><!--header-->
@@ -78,35 +75,7 @@ Jan Michalczyk </dd></dl>
 <p class="definition">Definition in file <a class="el" href="humoto_8h_source.html">humoto.h</a>.</p>
 </div>
 <p><a href="humoto_8h_source.html">Go to the source code of this file.</a></p>
-<div class="textblock"><code>#include &quot;build_config.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="export__import_8h_source.html">export_import.h</a>&quot;</code><br />
-<code>#include &lt;algorithm&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;map&gt;</code><br />
-<code>#include &lt;stack&gt;</code><br />
-<code>#include &lt;queue&gt;</code><br />
-<code>#include &lt;list&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
-<code>#include &lt;cmath&gt;</code><br />
-<code>#include &lt;utility&gt;</code><br />
-<code>#include &lt;limits&gt;</code><br />
-<code>#include &lt;fstream&gt;</code><br />
-<code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;iomanip&gt;</code><br />
-<code>#include &lt;sys/time.h&gt;</code><br />
-<code>#include &lt;stdexcept&gt;</code><br />
-<code>#include &lt;boost/shared_ptr.hpp&gt;</code><br />
-<code>#include &lt;boost/lexical_cast.hpp&gt;</code><br />
-<code>#include &lt;boost/math/special_functions/fpclassify.hpp&gt;</code><br />
-<code>#include &lt;boost/thread.hpp&gt;</code><br />
-<code>#include &lt;Eigen/Core&gt;</code><br />
-<code>#include &lt;Eigen/Geometry&gt;</code><br />
-<code>#include &quot;<a class="el" href="eigentools_8h_source.html">eigentools.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="logger_8h_source.html">humoto/logger.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="constants_8h_source.html">humoto/constants.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="utility_8h_source.html">humoto/utility.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="leftright_8h_source.html">humoto/leftright.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="time_8h_source.html">humoto/time.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="humoto__helpers_8h_source.html">humoto_helpers.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="config_8h_source.html">config.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="core_2include_2humoto_2solution_8h_source.html">humoto/solution.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="core_2include_2humoto_2model_8h_source.html">humoto/model.h</a>&quot;</code><br />
@@ -118,121 +87,16 @@ Jan Michalczyk </dd></dl>
 <code>#include &quot;<a class="el" href="constraints_8h_source.html">humoto/constraints.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="task_8h_source.html">humoto/task.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="task__generic_8h_source.html">humoto/task_generic.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="optimization__problem_8h_source.html">humoto/optimization_problem.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="hierarchy__level_8h_source.html">humoto/hierarchy_level.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="qp__problem_8h_source.html">humoto/qp_problem.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="hierarchy_8h_source.html">humoto/hierarchy.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="core_2include_2humoto_2solver_8h_source.html">humoto/solver.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="core_2include_2humoto_2configurable__optimization__problem_8h_source.html">humoto/configurable_optimization_problem.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="rigid__body_8h_source.html">rigid_body.h</a>&quot;</code><br />
-</div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:namespacehumoto"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehumoto.html">humoto</a></td></tr>
-<tr class="memdesc:namespacehumoto"><td class="mdescLeft">&#160;</td><td class="mdescRight">The root namespace of HuMoTo. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a08fe8ac8d421e1dff257cbbba1927521"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="humoto_8h.html#a08fe8ac8d421e1dff257cbbba1927521">EIGEN_INITIALIZE_MATRICES_BY_NAN</a></td></tr>
-<tr class="separator:a08fe8ac8d421e1dff257cbbba1927521"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a704c1e9c41d8c2d4b9e73c26e8cfce1b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="humoto_8h.html#a704c1e9c41d8c2d4b9e73c26e8cfce1b">HUMOTO_ASSERT</a>(condition,  message)&#160;&#160;&#160;if (!(condition)) {<a class="el" href="humoto_8h.html#a76b0da33df9fd7b4bff7bfe6b6ad27e5">HUMOTO_THROW_MSG</a>(message);};</td></tr>
-<tr class="separator:a704c1e9c41d8c2d4b9e73c26e8cfce1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83d8a96871030d8c9ebfb8462751dc91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="humoto_8h.html#a83d8a96871030d8c9ebfb8462751dc91">HUMOTO_GLOBAL_LOGGER_ENABLED</a></td></tr>
-<tr class="memdesc:a83d8a96871030d8c9ebfb8462751dc91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define this to enable logging.  <a href="#a83d8a96871030d8c9ebfb8462751dc91">More...</a><br /></td></tr>
-<tr class="separator:a83d8a96871030d8c9ebfb8462751dc91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76b0da33df9fd7b4bff7bfe6b6ad27e5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="humoto_8h.html#a76b0da33df9fd7b4bff7bfe6b6ad27e5">HUMOTO_THROW_MSG</a>(s)&#160;&#160;&#160;throw std::runtime_error(s)</td></tr>
-<tr class="memdesc:a76b0da33df9fd7b4bff7bfe6b6ad27e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">HUMOTO_THROW_MSG throws an error message concatenated with the name of the function (if supported).  <a href="#a76b0da33df9fd7b4bff7bfe6b6ad27e5">More...</a><br /></td></tr>
-<tr class="separator:a76b0da33df9fd7b4bff7bfe6b6ad27e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a08fe8ac8d421e1dff257cbbba1927521"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08fe8ac8d421e1dff257cbbba1927521">&#9670;&nbsp;</a></span>EIGEN_INITIALIZE_MATRICES_BY_NAN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define EIGEN_INITIALIZE_MATRICES_BY_NAN</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="humoto_8h_source.html#l00043">43</a> of file <a class="el" href="humoto_8h_source.html">humoto.h</a>.</p>
-
-</div>
-</div>
-<a id="a704c1e9c41d8c2d4b9e73c26e8cfce1b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a704c1e9c41d8c2d4b9e73c26e8cfce1b">&#9670;&nbsp;</a></span>HUMOTO_ASSERT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define HUMOTO_ASSERT</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">condition, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">message&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;if (!(condition)) {<a class="el" href="humoto_8h.html#a76b0da33df9fd7b4bff7bfe6b6ad27e5">HUMOTO_THROW_MSG</a>(message);};</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="humoto_8h_source.html#l00084">84</a> of file <a class="el" href="humoto_8h_source.html">humoto.h</a>.</p>
-
-</div>
-</div>
-<a id="a83d8a96871030d8c9ebfb8462751dc91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83d8a96871030d8c9ebfb8462751dc91">&#9670;&nbsp;</a></span>HUMOTO_GLOBAL_LOGGER_ENABLED</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define HUMOTO_GLOBAL_LOGGER_ENABLED</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Define this to enable logging. </p>
-
-<p class="definition">Definition at line <a class="el" href="humoto_8h_source.html#l00058">58</a> of file <a class="el" href="humoto_8h_source.html">humoto.h</a>.</p>
-
-</div>
-</div>
-<a id="a76b0da33df9fd7b4bff7bfe6b6ad27e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76b0da33df9fd7b4bff7bfe6b6ad27e5">&#9670;&nbsp;</a></span>HUMOTO_THROW_MSG</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define HUMOTO_THROW_MSG</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">s</td><td>)</td>
-          <td>&#160;&#160;&#160;throw std::runtime_error(s)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>HUMOTO_THROW_MSG throws an error message concatenated with the name of the function (if supported). </p>
-
-<p class="definition">Definition at line <a class="el" href="humoto_8h_source.html#l00075">75</a> of file <a class="el" href="humoto_8h_source.html">humoto.h</a>.</p>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 10 2017 18:11:40 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 12 2017 12:39:01 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

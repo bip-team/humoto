@@ -63,6 +63,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
@@ -77,6 +78,19 @@ $(function() {
 </div>
 <p><a href="config_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1config_1_1CommonConfigurableBase.html">humoto::config::CommonConfigurableBase&lt; t_crash_on_missing_entry &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configurable base class.  <a href="classhumoto_1_1config_1_1CommonConfigurableBase.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1config_1_1ConfigurableBase.html">humoto::config::ConfigurableBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default configurable base is strict.  <a href="classhumoto_1_1config_1_1ConfigurableBase.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1config_1_1RelaxedConfigurableBase.html">humoto::config::RelaxedConfigurableBase</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1config_1_1StrictConfigurableBase.html">humoto::config::StrictConfigurableBase</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacehumoto"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehumoto.html">humoto</a></td></tr>
@@ -90,6 +104,38 @@ Namespaces</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:aa719b5bdf4410223031b402804cbb7dd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#aa719b5bdf4410223031b402804cbb7dd">HUMOTO_CONFIG_DEFINE_ACCESSORS</a>&#160;&#160;&#160;&quot;humoto/config/define_accessors.h&quot;</td></tr>
 <tr class="separator:aa719b5bdf4410223031b402804cbb7dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a892111b6223d43786bc86917d6fd0ef2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a892111b6223d43786bc86917d6fd0ef2">HUMOTO_CONFIG_READ_COMPOUND</a>(entry)&#160;&#160;&#160;reader.readCompound(entry, #entry, crash_on_missing_entry);</td></tr>
+<tr class="separator:a892111b6223d43786bc86917d6fd0ef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77767d01a9da0cfa2bbf3f8f792c3f83"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a77767d01a9da0cfa2bbf3f8f792c3f83">HUMOTO_CONFIG_READ_COMPOUND_</a>(entry)&#160;&#160;&#160;reader.readCompound(entry##_, #entry, crash_on_missing_entry);</td></tr>
+<tr class="separator:a77767d01a9da0cfa2bbf3f8f792c3f83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a404fafa3ab2cfd345648865109ddf38c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a404fafa3ab2cfd345648865109ddf38c">HUMOTO_CONFIG_READ_ENUM</a>(entry)&#160;&#160;&#160;reader.readEnum(entry, #entry, crash_on_missing_entry);</td></tr>
+<tr class="separator:a404fafa3ab2cfd345648865109ddf38c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8086ee6520dbdfe18a52bb591a1dbd0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#ad8086ee6520dbdfe18a52bb591a1dbd0">HUMOTO_CONFIG_READ_ENUM_</a>(entry)&#160;&#160;&#160;reader.readEnum(entry##_, #entry, crash_on_missing_entry);</td></tr>
+<tr class="separator:ad8086ee6520dbdfe18a52bb591a1dbd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58381393cdc75808114444e5ceeb7c2c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a58381393cdc75808114444e5ceeb7c2c">HUMOTO_CONFIG_READ_MEMBER_CLASS</a>(member,  name)&#160;&#160;&#160;member.readNestedConfig(reader, name, crash_on_missing_entry);</td></tr>
+<tr class="separator:a58381393cdc75808114444e5ceeb7c2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75aff116b86c7ab0ffdb6ba29c749485"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a75aff116b86c7ab0ffdb6ba29c749485">HUMOTO_CONFIG_READ_PARENT_CLASS</a>(parent_class)&#160;&#160;&#160;parent_class::readConfigEntries(reader, crash_on_missing_entry);</td></tr>
+<tr class="separator:a75aff116b86c7ab0ffdb6ba29c749485"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0417abc569bfc3a63d2695f2896648a6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a0417abc569bfc3a63d2695f2896648a6">HUMOTO_CONFIG_READ_SCALAR</a>(entry)&#160;&#160;&#160;reader.readScalar(entry, #entry, crash_on_missing_entry);</td></tr>
+<tr class="separator:a0417abc569bfc3a63d2695f2896648a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75fa8fcfb45b046343be021e3b7f1328"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a75fa8fcfb45b046343be021e3b7f1328">HUMOTO_CONFIG_READ_SCALAR_</a>(entry)&#160;&#160;&#160;reader.readScalar(entry##_, #entry, crash_on_missing_entry);</td></tr>
+<tr class="separator:a75fa8fcfb45b046343be021e3b7f1328"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b092e8951f7201b55dee4b5b4861fbe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a2b092e8951f7201b55dee4b5b4861fbe">HUMOTO_CONFIG_WRITE_COMPOUND</a>(entry)&#160;&#160;&#160;writer.writeCompound(entry, #entry);</td></tr>
+<tr class="separator:a2b092e8951f7201b55dee4b5b4861fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa80e05156b3c15fa44164bceea26970c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#aa80e05156b3c15fa44164bceea26970c">HUMOTO_CONFIG_WRITE_COMPOUND_</a>(entry)&#160;&#160;&#160;writer.writeCompound(entry##_, #entry);</td></tr>
+<tr class="separator:aa80e05156b3c15fa44164bceea26970c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80e69f068b1eff1d98efdfe3e4f3162e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a80e69f068b1eff1d98efdfe3e4f3162e">HUMOTO_CONFIG_WRITE_ENUM</a>(entry)&#160;&#160;&#160;writer.writeEnum(entry, #entry);</td></tr>
+<tr class="separator:a80e69f068b1eff1d98efdfe3e4f3162e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cb2688d54da614befe6c489aec0ecd1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a1cb2688d54da614befe6c489aec0ecd1">HUMOTO_CONFIG_WRITE_ENUM_</a>(entry)&#160;&#160;&#160;writer.writeEnum(entry##_, #entry);</td></tr>
+<tr class="separator:a1cb2688d54da614befe6c489aec0ecd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3a1288d064c36ab6a205856feae445d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#af3a1288d064c36ab6a205856feae445d">HUMOTO_CONFIG_WRITE_MEMBER_CLASS</a>(member,  name)&#160;&#160;&#160;member.writeNestedConfig(writer, name);</td></tr>
+<tr class="separator:af3a1288d064c36ab6a205856feae445d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4616b05bda38f9758079286982536d83"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a4616b05bda38f9758079286982536d83">HUMOTO_CONFIG_WRITE_PARENT_CLASS</a>(parent_class)&#160;&#160;&#160;parent_class::writeConfigEntries(writer);</td></tr>
+<tr class="separator:a4616b05bda38f9758079286982536d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dc571206d93e96cc71fa325ef79b688"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a1dc571206d93e96cc71fa325ef79b688">HUMOTO_CONFIG_WRITE_SCALAR</a>(entry)&#160;&#160;&#160;writer.writeScalar(entry, #entry);</td></tr>
+<tr class="separator:a1dc571206d93e96cc71fa325ef79b688"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dcad88c64502d146ef4b3ffb1be176c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a2dcad88c64502d146ef4b3ffb1be176c">HUMOTO_CONFIG_WRITE_SCALAR_</a>(entry)&#160;&#160;&#160;writer.writeScalar(entry##_, #entry);</td></tr>
+<tr class="separator:a2dcad88c64502d146ef4b3ffb1be176c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="aa719b5bdf4410223031b402804cbb7dd"></a>
@@ -108,10 +154,350 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a id="a892111b6223d43786bc86917d6fd0ef2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a892111b6223d43786bc86917d6fd0ef2">&#9670;&nbsp;</a></span>HUMOTO_CONFIG_READ_COMPOUND</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HUMOTO_CONFIG_READ_COMPOUND</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">entry</td><td>)</td>
+          <td>&#160;&#160;&#160;reader.readCompound(entry, #entry, crash_on_missing_entry);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00042">42</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a77767d01a9da0cfa2bbf3f8f792c3f83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77767d01a9da0cfa2bbf3f8f792c3f83">&#9670;&nbsp;</a></span>HUMOTO_CONFIG_READ_COMPOUND_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HUMOTO_CONFIG_READ_COMPOUND_</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">entry</td><td>)</td>
+          <td>&#160;&#160;&#160;reader.readCompound(entry##_, #entry, crash_on_missing_entry);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00041">41</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a404fafa3ab2cfd345648865109ddf38c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a404fafa3ab2cfd345648865109ddf38c">&#9670;&nbsp;</a></span>HUMOTO_CONFIG_READ_ENUM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HUMOTO_CONFIG_READ_ENUM</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">entry</td><td>)</td>
+          <td>&#160;&#160;&#160;reader.readEnum(entry, #entry, crash_on_missing_entry);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00048">48</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="ad8086ee6520dbdfe18a52bb591a1dbd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8086ee6520dbdfe18a52bb591a1dbd0">&#9670;&nbsp;</a></span>HUMOTO_CONFIG_READ_ENUM_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HUMOTO_CONFIG_READ_ENUM_</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">entry</td><td>)</td>
+          <td>&#160;&#160;&#160;reader.readEnum(entry##_, #entry, crash_on_missing_entry);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00047">47</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a58381393cdc75808114444e5ceeb7c2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58381393cdc75808114444e5ceeb7c2c">&#9670;&nbsp;</a></span>HUMOTO_CONFIG_READ_MEMBER_CLASS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HUMOTO_CONFIG_READ_MEMBER_CLASS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">member, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;member.readNestedConfig(reader, name, crash_on_missing_entry);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00039">39</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a75aff116b86c7ab0ffdb6ba29c749485"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75aff116b86c7ab0ffdb6ba29c749485">&#9670;&nbsp;</a></span>HUMOTO_CONFIG_READ_PARENT_CLASS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HUMOTO_CONFIG_READ_PARENT_CLASS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">parent_class</td><td>)</td>
+          <td>&#160;&#160;&#160;parent_class::readConfigEntries(reader, crash_on_missing_entry);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00038">38</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a0417abc569bfc3a63d2695f2896648a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0417abc569bfc3a63d2695f2896648a6">&#9670;&nbsp;</a></span>HUMOTO_CONFIG_READ_SCALAR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HUMOTO_CONFIG_READ_SCALAR</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">entry</td><td>)</td>
+          <td>&#160;&#160;&#160;reader.readScalar(entry, #entry, crash_on_missing_entry);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00045">45</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a75fa8fcfb45b046343be021e3b7f1328"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75fa8fcfb45b046343be021e3b7f1328">&#9670;&nbsp;</a></span>HUMOTO_CONFIG_READ_SCALAR_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HUMOTO_CONFIG_READ_SCALAR_</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">entry</td><td>)</td>
+          <td>&#160;&#160;&#160;reader.readScalar(entry##_, #entry, crash_on_missing_entry);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00044">44</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a2b092e8951f7201b55dee4b5b4861fbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b092e8951f7201b55dee4b5b4861fbe">&#9670;&nbsp;</a></span>HUMOTO_CONFIG_WRITE_COMPOUND</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HUMOTO_CONFIG_WRITE_COMPOUND</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">entry</td><td>)</td>
+          <td>&#160;&#160;&#160;writer.writeCompound(entry, #entry);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00029">29</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="aa80e05156b3c15fa44164bceea26970c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa80e05156b3c15fa44164bceea26970c">&#9670;&nbsp;</a></span>HUMOTO_CONFIG_WRITE_COMPOUND_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HUMOTO_CONFIG_WRITE_COMPOUND_</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">entry</td><td>)</td>
+          <td>&#160;&#160;&#160;writer.writeCompound(entry##_, #entry);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00028">28</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a80e69f068b1eff1d98efdfe3e4f3162e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80e69f068b1eff1d98efdfe3e4f3162e">&#9670;&nbsp;</a></span>HUMOTO_CONFIG_WRITE_ENUM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HUMOTO_CONFIG_WRITE_ENUM</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">entry</td><td>)</td>
+          <td>&#160;&#160;&#160;writer.writeEnum(entry, #entry);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00035">35</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a1cb2688d54da614befe6c489aec0ecd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cb2688d54da614befe6c489aec0ecd1">&#9670;&nbsp;</a></span>HUMOTO_CONFIG_WRITE_ENUM_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HUMOTO_CONFIG_WRITE_ENUM_</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">entry</td><td>)</td>
+          <td>&#160;&#160;&#160;writer.writeEnum(entry##_, #entry);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00034">34</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="af3a1288d064c36ab6a205856feae445d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3a1288d064c36ab6a205856feae445d">&#9670;&nbsp;</a></span>HUMOTO_CONFIG_WRITE_MEMBER_CLASS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HUMOTO_CONFIG_WRITE_MEMBER_CLASS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">member, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;member.writeNestedConfig(writer, name);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00026">26</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a4616b05bda38f9758079286982536d83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4616b05bda38f9758079286982536d83">&#9670;&nbsp;</a></span>HUMOTO_CONFIG_WRITE_PARENT_CLASS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HUMOTO_CONFIG_WRITE_PARENT_CLASS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">parent_class</td><td>)</td>
+          <td>&#160;&#160;&#160;parent_class::writeConfigEntries(writer);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00025">25</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a1dc571206d93e96cc71fa325ef79b688"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dc571206d93e96cc71fa325ef79b688">&#9670;&nbsp;</a></span>HUMOTO_CONFIG_WRITE_SCALAR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HUMOTO_CONFIG_WRITE_SCALAR</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">entry</td><td>)</td>
+          <td>&#160;&#160;&#160;writer.writeScalar(entry, #entry);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00032">32</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a2dcad88c64502d146ef4b3ffb1be176c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dcad88c64502d146ef4b3ffb1be176c">&#9670;&nbsp;</a></span>HUMOTO_CONFIG_WRITE_SCALAR_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HUMOTO_CONFIG_WRITE_SCALAR_</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">entry</td><td>)</td>
+          <td>&#160;&#160;&#160;writer.writeScalar(entry##_, #entry);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00031">31</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 10 2017 18:11:40 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 12 2017 12:39:01 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>
