@@ -112,7 +112,6 @@ release: release-all
 check-doc:
 	cd doc/doxygen/; ${MAKE}
 	cd doc/latex/; ${MAKE}
-	cd modules/wpg03/doc; ${MAKE}
 	cd modules/wpg04/doc; ${MAKE}
 	cd modules/pepper_mpc/doc; ${MAKE}
 	cd modules/pepper_ik/doc; ${MAKE}

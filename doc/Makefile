@@ -20,6 +20,7 @@ export: all
 
 
 clean: clean-latex clean-doxygen
+	rm -Rf doc_export
 
 clean-latex:
 	cd latex; ${MAKE} clean;

@@ -106,9 +106,10 @@ What are the existing applications of this framework?   {#md_readme_faq_applicat
 -----------------------------------------------------
 
 * Early versions of Humoto were used for walking control of HRP-4 humanoid
-  robot. See module [wpg03](@ref wpg03), its LaTeX documentation and references
-  therein, and a [video](https://www.youtube.com/watch?v=lHG4AbAvt_4) of the
-  robot during the trials.
+  robot. See module [wpg03](https://github.com/bip-team/humoto-module-wpg03-collaboration),
+  its LaTeX documentation and references therein, and a
+  [video](https://www.youtube.com/watch?v=lHG4AbAvt_4) of the robot during the
+  trials.
 
 * More recently, Humoto has been used for motion control of a humanoid robot on
   a wheeled base (Pepper). See modules [pepper_mpc](@ref pepper_mpc) and
@@ -152,6 +153,9 @@ Related repositories    {#md_readme_relatedrepos}
 * https://github.com/bip-team/humoto-controller-pepper
   > Controller for Pepper robot.
 
+* https://github.com/bip-team/humoto-module-wpg03-collaboration
+  > Walking module for collaborative carrying tasks. Developed by Joven
+  > Agravante.
 
 
 More information    {#md_readme_faq_more}

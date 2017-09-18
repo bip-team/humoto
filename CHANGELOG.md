@@ -15,6 +15,10 @@ ChangeLog   {#md_changelog}
 
 - Added a family of QPProblem* classes.
 
+### Deleted
+
+- wpg03 module extracted to a separate repository.
+
 ### Changed
 
 - Reworked infrastructure for handling of configurable (serializable) classes.
