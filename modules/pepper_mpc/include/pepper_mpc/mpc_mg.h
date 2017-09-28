@@ -388,7 +388,7 @@ namespace humoto
                  *
                  * @param[in] mpc_parameters parameters of the MPC
                  */
-                MPCforMG(const humoto::pepper_mpc::MPCParameters &mpc_parameters)
+                explicit MPCforMG(const humoto::pepper_mpc::MPCParameters &mpc_parameters)
                 {
                     solution_is_parsed_ = false;
                     setParameters(mpc_parameters);

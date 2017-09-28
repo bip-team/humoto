@@ -132,6 +132,7 @@ update:
 	git submodule update
 
 cppcheck:
-	cppcheck -q --inconclusive --enable=all `find ./core/ ./modules/ ./bridges/*/interface/ -iname "*.cpp" -or -iname "*.h"`
+	cppcheck -q --language=c++ --inconclusive --enable=all --suppress=unusedFunction \
+		`find ./core/ ./modules/ ./bridges/*/interface/ -iname "*.cpp" -or -iname "*.h"`
 
 .PHONY: clean cmake build

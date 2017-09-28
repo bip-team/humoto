@@ -52,6 +52,16 @@ namespace humoto
                  */
                 PreviewHorizonInterval()
                 {
+                    base_height_ = 0.0;
+                    body_height_ = 0.0;
+
+                    base_mass_ = 0.0;
+                    body_mass_ = 0.0;
+
+                    T_ms_ = 0;
+                    T_ = 0.0;
+                    theta_ = 0.0;
+
                     etools::unsetMatrix(cop_bounds_);
                     etools::unsetMatrix(nominal_base_velocity_bounds_);
                     etools::unsetMatrix(nominal_base_acceleration_bounds_);

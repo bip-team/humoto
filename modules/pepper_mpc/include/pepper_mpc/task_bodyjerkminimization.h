@@ -19,7 +19,7 @@ namespace humoto
         class HUMOTO_LOCAL TaskBodyJerkMinimization: public humoto::TaskZeroVariables
         {
             public:
-                TaskBodyJerkMinimization(const double gain = 0.707106781186548) 
+                explicit TaskBodyJerkMinimization(const double gain = 0.707106781186548) 
                     : TaskZeroVariables(gain, "TaskBodyJerkMinimization", BODY_JERK_VARIABLES_ID)
                 {
                     // nothing to do

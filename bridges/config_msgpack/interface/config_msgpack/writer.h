@@ -33,7 +33,7 @@ namespace humoto
                      *
                      * @param[in] file_name
                      */
-                    Writer(const std::string& file_name)
+                    explicit Writer(const std::string& file_name) 
                     {
                         config_ofs_.open(file_name.c_str());
 

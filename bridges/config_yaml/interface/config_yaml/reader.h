@@ -77,7 +77,7 @@ namespace humoto
                      *
                      * @param[in] file_name
                      */
-                    Reader(const std::string& file_name)
+                    explicit Reader(const std::string& file_name)
                     {
                         openFile(file_name);
                     }

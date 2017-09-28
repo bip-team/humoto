@@ -20,7 +20,8 @@ namespace humoto
         class HUMOTO_LOCAL TaskBaseVelocityReference: public humoto::TaskGIB
         {
             public:
-                TaskBaseVelocityReference(const double gain = 1.0) : TaskGIB("TaskBaseVelocityReference", gain)
+                explicit TaskBaseVelocityReference(const double gain = 1.0) 
+                    : TaskGIB("TaskBaseVelocityReference", gain)
                 {
                 }
 

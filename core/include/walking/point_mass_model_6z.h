@@ -36,7 +36,7 @@ namespace humoto
                 /**
                  * @brief Create A matrix of unrefined model
                  */
-                etools::Matrix3 getAdz3(const double T, const double omega) const
+                static etools::Matrix3 getAdz3(const double T, const double omega)
                 {
                     double Tw = T*omega;
 
@@ -56,7 +56,7 @@ namespace humoto
                 /**
                  * @brief Create B matrix of unrefined model
                  */
-                etools::Vector3 getBdz3(const double T, const double omega) const
+                static etools::Vector3 getBdz3(const double T, const double omega)
                 {
                     double Tw = T*omega;
 
@@ -76,7 +76,7 @@ namespace humoto
                 /**
                  * @brief Create D matrix of unrefined model
                  */
-                etools::Matrix1x3 getDdz3(const double omega) const
+                static etools::Matrix1x3 getDdz3(const double omega)
                 {
                     etools::Matrix1x3 D3;
 
@@ -103,7 +103,7 @@ namespace humoto
                 }
 
 
-                double getOmega(const double com_height) const
+                static double getOmega(const double com_height)
                 {
                     return(std::sqrt(humoto::g_gravitational_acceleration / com_height));
                 }
@@ -114,8 +114,9 @@ namespace humoto
                  *
                  * @return CoM state
                  */
-                humoto::rigidbody::PointMassState   convertCoMState(const etools::Vector6 &cstate,
-                                                                const double com_height) const
+                static humoto::rigidbody::PointMassState   convertCoMState(
+                        const etools::Vector6 &cstate,
+                        const double com_height)
                 {
                     humoto::rigidbody::PointMassState com_state;
 
@@ -126,10 +127,11 @@ namespace humoto
                     return (com_state);
                 }
 
+
                 /**
                  * @brief Get cstate
                  */
-                etools::Vector6 convertCoMState(const humoto::rigidbody::PointMassState &com_state) const
+                static etools::Vector6 convertCoMState(const humoto::rigidbody::PointMassState &com_state)
                 {
                     etools::Vector6 cstate;
                     cstate <<  com_state.position_.x(),
@@ -142,11 +144,12 @@ namespace humoto
                 }
 
 
-                humoto::rigidbody::PointMassState   evaluate(const double Ts,
-                                                             const double T,
-                                                             const double com_height,
-                                                             const etools::Vector6 & cstate,
-                                                             const etools::Vector2 & control) const
+                static humoto::rigidbody::PointMassState   evaluate(
+                        const double Ts,
+                        const double T,
+                        const double com_height,
+                        const etools::Vector6 & cstate,
+                        const etools::Vector2 & control)
                 {
                     humoto::rigidbody::PointMassState com_state;
 
@@ -163,7 +166,7 @@ namespace humoto
                 /**
                  * @brief Create A matrix of final model
                  */
-                etools::Matrix3 getA3(const double T, const double omega, const double Tsample) const
+                static etools::Matrix3 getA3(const double T, const double omega, const double Tsample)
                 {
                     etools::Matrix3 A3 = getAdz3(T, omega);
                     etools::Vector3 B3 = getBdz3(T, omega);
@@ -177,7 +180,7 @@ namespace humoto
                 /**
                  * @brief Create A matrix of final model
                  */
-                etools::Matrix3 getA3(const double T, const double omega) const
+                static etools::Matrix3 getA3(const double T, const double omega)
                 {
                     return getA3(T, omega, T);
                 }
@@ -186,7 +189,7 @@ namespace humoto
                 /**
                  * @brief Create A matrix of final model
                  */
-                etools::Matrix6 getA6(const double T, const double omega, const double Tsample) const
+                static etools::Matrix6 getA6(const double T, const double omega, const double Tsample)
                 {
                     etools::Matrix3 A3 = getA3(T, omega, Tsample);
 
@@ -200,7 +203,7 @@ namespace humoto
                 /**
                  * @brief Create A matrix of final model
                  */
-                etools::Matrix6 getA6(const double T, const double omega) const
+                static etools::Matrix6 getA6(const double T, const double omega)
                 {
                     return ( getA6(T, omega, T) );
                 }
@@ -209,7 +212,7 @@ namespace humoto
                 /**
                  * @brief Create B matrix of final model
                  */
-                etools::Vector3 getB3(const double T, const double omega, const double Tsample) const
+                static etools::Vector3 getB3(const double T, const double omega, const double Tsample)
                 {
                     etools::Vector3 B3 = getBdz3(T, omega);
                     B3 = B3/Tsample;
@@ -221,7 +224,7 @@ namespace humoto
                 /**
                  * @brief Create A matrix of final model
                  */
-                etools::Vector3 getB3(const double T, const double omega) const
+                static etools::Vector3 getB3(const double T, const double omega)
                 {
                     return getB3(T, omega, T);
                 }
@@ -230,7 +233,7 @@ namespace humoto
                 /**
                  * @brief Create B matrix of final model
                  */
-                etools::Matrix6x2 getB6(const double T, const double omega, const double Tsample) const
+                static etools::Matrix6x2 getB6(const double T, const double omega, const double Tsample)
                 {
                     etools::Vector3 B3 = getB3(T, omega, Tsample);
 
@@ -245,7 +248,7 @@ namespace humoto
                 /**
                  * @brief Create B matrix of final model
                  */
-                etools::Matrix6x2 getB6(const double T, const double omega) const
+                static etools::Matrix6x2 getB6(const double T, const double omega)
                 {
                     return ( getB6(T, omega, T) );
                 }
@@ -254,7 +257,7 @@ namespace humoto
                 /**
                  * @brief Create D matrix of final model
                  */
-                etools::Matrix1x3 getD3(const double T, const double omega) const
+                static etools::Matrix1x3 getD3(const double T, const double omega)
                 {
                     etools::Matrix1x3 D3 = getDdz3(omega);
 
@@ -266,7 +269,7 @@ namespace humoto
                 /**
                  * @brief Create D matrix of final model
                  */
-                etools::Matrix2x6 getD6(const double T, const double omega) const
+                static etools::Matrix2x6 getD6(const double T, const double omega)
                 {
                     etools::Matrix1x3 D3 = getD3(T, omega);
 
@@ -280,7 +283,7 @@ namespace humoto
                 /**
                  * @brief Create E matrix of final model
                  */
-                double getE3(const double T) const
+                static double getE3(const double T)
                 {
                     return (1./T);
                 }
@@ -289,7 +292,7 @@ namespace humoto
                 /**
                  * @brief Create E matrix of final model
                  */
-                etools::Matrix2 getE6(const double T, const double omega) const
+                static etools::Matrix2 getE6(const double T, const double omega)
                 {
                     return (getE3(T) * Eigen::Matrix2d::Identity());
                 }
@@ -298,7 +301,7 @@ namespace humoto
                 /**
                  * @brief Create Ddz6 matrix
                  */
-                etools::Matrix2x6   getDdz6(const double com_height) const
+                static etools::Matrix2x6   getDdz6(const double com_height)
                 {
                     etools::Matrix2x6 out;
                     double hg = com_height / humoto::g_gravitational_acceleration;
@@ -313,7 +316,7 @@ namespace humoto
                  *
                  * @note  Used to generate matrix for terminal constraint
                  */
-                etools::Matrix2x6   getDcpv6(const double omega) const
+                static etools::Matrix2x6   getDcpv6(const double omega)
                 {
                     etools::Matrix2x6 out;
                     out <<  0., 1., 1./omega, 0., 0., 0.,

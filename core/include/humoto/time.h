@@ -93,7 +93,7 @@ namespace humoto
              *
              * @return time interval (second).
              */
-            double get()
+            double get() const
             {
                 return(timediff);
             }

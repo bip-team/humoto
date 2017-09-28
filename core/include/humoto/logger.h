@@ -5,9 +5,6 @@
     (see @ref LICENSE or http://www.apache.org/licenses/LICENSE-2.0)
 
     @brief
-
-    @todo The hardcoded output format is parsable by Matlab/Octave. Consider
-    alternative formats, e.g., python.
 */
 
 #pragma once
@@ -366,6 +363,7 @@ namespace humoto
              */
             LoggerBase()
             {
+                file_stream_is_open_ = false;
                 output_stream_ = NULL;
             }
 
@@ -375,7 +373,7 @@ namespace humoto
              *
              * @param[in,out] output_stream output stream
              */
-            LoggerBase(std::ostream & output_stream)
+            explicit LoggerBase(std::ostream & output_stream)
             {
                 initialize(output_stream);
             }
@@ -386,7 +384,7 @@ namespace humoto
              *
              * @param[in] output_filename name of the log file
              */
-            LoggerBase(const std::string &output_filename)
+            explicit LoggerBase(const std::string &output_filename)
             {
                 initialize(output_filename);
             }
@@ -520,7 +518,7 @@ namespace humoto
              *
              * @param[in] data
              */
-            LogMessageRaw(const t_Data &data) : data_(data)
+            explicit LogMessageRaw(const t_Data &data) : data_(data)
             {
             }
 
@@ -669,7 +667,7 @@ namespace humoto
              * @param[in] thread_sleep_ms   how long the queue processing
              *                              thread should sleep if there is no data
              */
-            Logger(const std::size_t thread_sleep_ms = default_thread_sleep_ms_)
+            explicit Logger(const std::size_t thread_sleep_ms = default_thread_sleep_ms_)
             {
                 interrupted_ = true;
                 thread_sleep_ms_ = thread_sleep_ms;
@@ -896,7 +894,7 @@ namespace humoto
              *
              * @param[in,out] output_stream output stream
              */
-            Logger( std::ostream & output_stream) : LoggerBase(output_stream)
+            explicit Logger( std::ostream & output_stream) : LoggerBase(output_stream)
             {
             }
 
@@ -906,7 +904,7 @@ namespace humoto
              *
              * @param[in] output_filename name of the log file
              */
-            Logger( const std::string &output_filename) : LoggerBase(output_filename)
+            explicit Logger( const std::string &output_filename) : LoggerBase(output_filename)
             {
             }
 

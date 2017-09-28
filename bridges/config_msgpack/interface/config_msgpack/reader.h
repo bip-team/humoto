@@ -56,11 +56,11 @@ namespace humoto
                         buffer_ = str_stream.str();
 
 
-                        std::size_t     buffer_offset = 0;
-
                         handles_.clear();
                         try
                         {
+                            std::size_t     buffer_offset = 0;
+
                             while (buffer_offset != buffer_.size())
                             {
                                 handles_.push_back(boost::shared_ptr< ::msgpack::object_handle >(new ::msgpack::object_handle));
@@ -92,7 +92,7 @@ namespace humoto
                      *
                      * @param[in] file_name
                      */
-                    Reader(const std::string& file_name)
+                    explicit Reader(const std::string& file_name) 
                     {
                         openFile(file_name);
                     }

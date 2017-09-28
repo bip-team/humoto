@@ -20,7 +20,8 @@ namespace humoto
         class HUMOTO_LOCAL TaskBasePositionReference: public humoto::TaskASB
         {
             public:
-                TaskBasePositionReference(const double gain = 0.707106781186548) : TaskASB("TaskBasePositionReference", gain)
+                explicit TaskBasePositionReference(const double gain = 0.707106781186548) 
+                    : TaskASB("TaskBasePositionReference", gain)
                 {
                 }
 

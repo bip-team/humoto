@@ -39,7 +39,7 @@ namespace humoto
             
             
             public:
-                TaskCoPVelocity (const double gain = 0.223606797749979) 
+                explicit TaskCoPVelocity (const double gain = 0.223606797749979) 
                     : TaskAB("TaskCoPVelocity", gain)
                 {
                 }

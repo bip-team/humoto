@@ -183,7 +183,7 @@ namespace humoto
                                             const humoto::LeftOrRight::Type landing_foot) const
                 {
                     std::size_t interval_index = preview_horizon_.variable_steps_indices_[0];
-                    const WalkState walk_state = preview_horizon_.getWalkState(interval_index);
+                    const WalkState & walk_state = preview_horizon_.getWalkState(interval_index);
 
 
                     foot_state.setDefaults();
@@ -269,7 +269,8 @@ namespace humoto
                  *
                  * @param[in] mpc_parameters parameters of the MPC
                  */
-                MPCforWPG(const humoto::wpg04::MPCParameters &mpc_parameters) : velocity_selector_(3,1)
+                explicit MPCforWPG(const humoto::wpg04::MPCParameters &mpc_parameters)
+                    : velocity_selector_(3,1)
                 {
                     solution_is_parsed_ = false;
                     setParameters(mpc_parameters);

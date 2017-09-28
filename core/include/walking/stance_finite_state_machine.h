@@ -294,7 +294,7 @@ namespace humoto
                     finalize();
                 }
 
-                StanceFiniteStateMachine(const StanceFSMParameters &sfsm_params);
+                explicit StanceFiniteStateMachine(const StanceFSMParameters &sfsm_params);
 
                 void setParameters(const StanceFSMParameters &sfsm_params)
                 {

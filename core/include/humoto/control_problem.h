@@ -126,14 +126,15 @@ namespace humoto
                      int t_num_outputs,
                      typename t_DMatrix,
                      typename t_EMatrix>
-            void condenseOutput(etools::GenericBlockMatrix<t_num_outputs, t_num_vars>                               &Ox,
-                                std::vector< etools::LeftLowerTriangularBlockMatrix<t_num_outputs,
-                                                                            etools::MatrixBlockSizeType::DYNAMIC > >    &Ou,
-                                const std::vector<t_DMatrix>    &D,
-                                const std::vector<t_EMatrix>    &E,
-                                const etools::GenericBlockMatrix<t_num_vars, t_num_vars>                                &Ux,
-                                const std::vector< etools::LeftLowerTriangularBlockMatrix< t_num_vars,
-                                                                                   etools::MatrixBlockSizeType::DYNAMIC > > &Uu)
+                static void condenseOutput(
+                        etools::GenericBlockMatrix<t_num_outputs, t_num_vars>                               &Ox,
+                        std::vector< etools::LeftLowerTriangularBlockMatrix<t_num_outputs,
+                                     etools::MatrixBlockSizeType::DYNAMIC > >    &Ou,
+                        const std::vector<t_DMatrix>    &D,
+                        const std::vector<t_EMatrix>    &E,
+                        const etools::GenericBlockMatrix<t_num_vars, t_num_vars>                                &Ux,
+                        const std::vector< etools::LeftLowerTriangularBlockMatrix<  t_num_vars,
+                                                                                    etools::MatrixBlockSizeType::DYNAMIC > > &Uu)
             {
                 std::ptrdiff_t N = Ux.getNumberOfBlocksVertical();
 
@@ -205,12 +206,13 @@ namespace humoto
              */
             template<typename t_DMatrix,
                      typename t_EMatrix>
-            void condenseOutput(Eigen::MatrixXd &Ox,
-                                Eigen::MatrixXd &Ou,
-                                const t_DMatrix &D,
-                                const t_EMatrix &E,
-                                const Eigen::MatrixXd &Ux,
-                                const Eigen::MatrixXd &Uu)
+                static void condenseOutput(
+                        Eigen::MatrixXd &Ox,
+                        Eigen::MatrixXd &Ou,
+                        const t_DMatrix &D,
+                        const t_EMatrix &E,
+                        const Eigen::MatrixXd &Ux,
+                        const Eigen::MatrixXd &Uu)
             {
                 size_t Nu = E.cols();
                 size_t Nx = D.cols();
@@ -263,12 +265,13 @@ namespace humoto
                      int t_num_outputs,
                      typename t_DMatrix,
                      typename t_EMatrix>
-            void condenseOutput(etools::GenericBlockMatrix<t_num_outputs, t_num_vars>                       &Ox,
-                                etools::LeftLowerTriangularBlockMatrix<t_num_outputs, t_num_controls>       &Ou,
-                                const std::vector<t_DMatrix>    &D,
-                                const std::vector<t_EMatrix>    &E,
-                                const etools::GenericBlockMatrix<t_num_vars, t_num_vars>                    &Ux,
-                                const etools::LeftLowerTriangularBlockMatrix<t_num_vars, t_num_controls>    &Uu)
+                static void condenseOutput(
+                        etools::GenericBlockMatrix<t_num_outputs, t_num_vars>                       &Ox,
+                        etools::LeftLowerTriangularBlockMatrix<t_num_outputs, t_num_controls>       &Ou,
+                        const std::vector<t_DMatrix>                                                &D,
+                        const std::vector<t_EMatrix>                                                &E,
+                        const etools::GenericBlockMatrix<t_num_vars, t_num_vars>                    &Ux,
+                        const etools::LeftLowerTriangularBlockMatrix<t_num_vars, t_num_controls>    &Uu)
             {
                 std::ptrdiff_t N = Ux.getNumberOfBlocksVertical();
 
@@ -315,10 +318,11 @@ namespace humoto
                      typename t_AMatrix,
                      typename t_BMatrix,
                      etools::MatrixSparsityType::Type t_bmatrix_sparsity_type>
-            void condense(  etools::GenericBlockMatrix<t_num_vars, t_num_vars>                       &S,
-                            etools::BlockMatrix<t_num_vars, t_num_controls, t_bmatrix_sparsity_type> &U,
-                            const std::vector<t_AMatrix> &A,
-                            const std::vector<t_BMatrix> &B)
+                static void condense(
+                        etools::GenericBlockMatrix<t_num_vars, t_num_vars>                       &S,
+                        etools::BlockMatrix<t_num_vars, t_num_controls, t_bmatrix_sparsity_type> &U,
+                        const std::vector<t_AMatrix> &A,
+                        const std::vector<t_BMatrix> &B)
             {
                 HUMOTO_ASSERT(A.size() == B.size(), "Mismatching number of A and B matrices.")
                 HUMOTO_ASSERT(A.size() > 0, "Wrong number of matrices.")
@@ -371,10 +375,11 @@ namespace humoto
              * @param[in] B
              */
             template<typename t_AMatrix, typename t_BMatrix>
-            void condense(  Eigen::MatrixXd &S,
-                            Eigen::MatrixXd &U,
-                            const std::vector<t_AMatrix> &A,
-                            const std::vector<t_BMatrix> &B)
+                static void condense(
+                        Eigen::MatrixXd &S,
+                        Eigen::MatrixXd &U,
+                        const std::vector<t_AMatrix> &A,
+                        const std::vector<t_BMatrix> &B)
             {
                 HUMOTO_ASSERT(A.size() == B.size(), "Mismatching number of A and B matrices.")
                 HUMOTO_ASSERT(A.size() > 0, "Wrong number of matrices.")
@@ -420,11 +425,12 @@ namespace humoto
              * @param[in] A
              * @param[in] B
              */
-            void condenseTimeInvariant( Eigen::MatrixXd &S,
-                                        Eigen::MatrixXd &U,
-                                        const std::size_t preview_horizon_len,
-                                        const Eigen::MatrixXd &A,
-                                        const Eigen::MatrixXd &B)
+            static void condenseTimeInvariant(
+                    Eigen::MatrixXd &S,
+                    Eigen::MatrixXd &U,
+                    const std::size_t preview_horizon_len,
+                    const Eigen::MatrixXd &A,
+                    const Eigen::MatrixXd &B)
             {
                 // form S
                 Eigen::MatrixXd M = A;

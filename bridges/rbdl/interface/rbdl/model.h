@@ -58,7 +58,7 @@ namespace humoto
                  *
                  * @param[in] urdf_filename
                  */
-                Model(const std::string & urdf_filename)
+                explicit Model(const std::string & urdf_filename)
                 {
                     load(urdf_filename);
                 }

@@ -229,7 +229,8 @@ namespace humoto
                  *
                  * @param[in] wbc_parameters
                  */
-                WholeBodyController(const humoto::pepper_ik::WBCParameters& wbc_parameters) : wbc_parameters_(wbc_parameters)
+                explicit WholeBodyController(const humoto::pepper_ik::WBCParameters& wbc_parameters) 
+                    : wbc_parameters_(wbc_parameters)
                 {
                     solution_is_parsed_ = false;
                 }

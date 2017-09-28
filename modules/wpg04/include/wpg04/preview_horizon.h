@@ -39,6 +39,9 @@ namespace humoto
                  */
                 WalkState()
                 {
+                    theta_ = 0.0;
+                    step_height_ = 0.0;
+
                     etools::unsetMatrix(cvel_ref_);
                     etools::unsetMatrix(rotation_);
                     etools::unsetMatrix(R_cvel_ref_);

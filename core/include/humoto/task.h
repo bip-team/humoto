@@ -54,7 +54,7 @@ namespace humoto
              *
              * @attention This function is called automatically.
              */
-            void postForm()
+            void postForm() const
             {
                 // ckecks
                 try
@@ -248,7 +248,7 @@ namespace humoto
              */
             const std::string  getDescription() const
             {
-                return (string_description_.c_str());
+                return (string_description_);
             }
 
 
@@ -495,7 +495,7 @@ namespace humoto
              *
              * @param[in] description   description of the task
              */
-            SimpleTaskBaseMixin(const std::string &description)
+            explicit SimpleTaskBaseMixin(const std::string &description)
             {
                 t_Constraints::setDescription(description);
             }

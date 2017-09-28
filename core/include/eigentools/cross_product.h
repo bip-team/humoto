@@ -27,7 +27,7 @@ namespace etools
              *
              * @param[in] vector 3d vector
              */
-            CrossProductMatrix(const etools::Vector3 &vector) : vector_(vector)
+            explicit CrossProductMatrix(const etools::Vector3 &vector) : vector_(vector)
             {
             }
 

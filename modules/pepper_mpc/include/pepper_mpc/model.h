@@ -54,7 +54,7 @@ namespace humoto
                 /**
                  * @brief Construct and initialize robot parameters
                  */
-                Model(const humoto::pepper_mpc::RobotParameters &robot_parameters)
+                explicit Model(const humoto::pepper_mpc::RobotParameters &robot_parameters)
                 {
                     setParameters(robot_parameters);
                 }

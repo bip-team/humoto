@@ -261,7 +261,7 @@ namespace humoto
                  */
                 Location    getCopyLocation(const std::size_t number_of_constraints,
                                             const std::size_t constraints_offset,
-                                            const std::size_t number_of_variables)
+                                            const std::size_t number_of_variables) const
                 {
                     Location ctr_location(constraints_offset, number_of_constraints);
 
@@ -520,19 +520,19 @@ namespace humoto
                  *
                  * @return true/false
                  */
-                bool    isEquality()
+                bool    isEquality() const
                 {
                     return (ConstraintType::isEquality(getType()));
                 }
 
                 /// @copydoc isEquality
-                bool    isSimple()
+                bool    isSimple() const
                 {
                     return (ConstraintType::isSimple(getType()));
                 }
 
                 /// @copydoc isEquality
-                bool    isTwoSidedInequality()
+                bool    isTwoSidedInequality() const
                 {
                     return (ConstraintType::isTwoSidedInequality(getType()));
                 }

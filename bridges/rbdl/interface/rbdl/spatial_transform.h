@@ -72,7 +72,8 @@ namespace humoto
                  *
                  * @param[in] translation translation vector
                  */
-                SpatialTransformWithoutRotation(const etools::Vector3 & translation) : translation_(translation)
+                explicit SpatialTransformWithoutRotation(const etools::Vector3 & translation)
+                    : translation_(translation)
                 {
                 }
 
@@ -135,8 +136,8 @@ namespace humoto
                  * @param[in] matrix        6xN matrix to transform
                  */
                 template<class t_Derived>
-                    void applyGetRotationPart(   Eigen::MatrixBase< t_Derived > const & result_block,
-                                                const Eigen::MatrixXd & matrix) const
+                    static void applyGetRotationPart(   Eigen::MatrixBase< t_Derived > const & result_block,
+                                                        const Eigen::MatrixXd & matrix)
                 {
                     const_cast< Eigen::MatrixBase<t_Derived>& >(result_block) = matrix.topRows(3);
                 }

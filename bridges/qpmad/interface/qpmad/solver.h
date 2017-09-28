@@ -166,7 +166,7 @@ namespace humoto
                  *
                  * @param[in] parameters parameters
                  */
-                Solver(const SolverParameters &parameters)
+                explicit Solver(const SolverParameters &parameters)
                 {
                     setParameters(parameters);
                 }

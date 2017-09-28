@@ -20,7 +20,7 @@ namespace humoto
         class HUMOTO_LOCAL TaskCoPCentering: public humoto::TaskAB
         {
             public:
-                TaskCoPCentering(const double gain = 0.707106781186548) 
+                explicit TaskCoPCentering(const double gain = 0.707106781186548) 
                     : TaskAB("TaskCoPCentering", gain)
                 {
                 }

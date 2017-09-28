@@ -17,7 +17,7 @@ namespace humoto
         class HUMOTO_LOCAL TaskBodyPositionReference : public humoto::TaskAB
         {
             public:
-                TaskBodyPositionReference(const double gain = 0.707106781186548)
+                explicit TaskBodyPositionReference(const double gain = 0.707106781186548)
                     : TaskAB("TaskBodyPositionReference", gain)
                 {
                 }

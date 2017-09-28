@@ -39,7 +39,8 @@ namespace humoto
 
 
             public:
-                TaskFootstepBounds(const bool fix_footsteps = false) : TaskILU("TaskFootstepBounds")
+                explicit TaskFootstepBounds(const bool fix_footsteps = false) 
+                    : TaskILU("TaskFootstepBounds")
                 {
                     fix_footsteps_ = fix_footsteps;
                 }

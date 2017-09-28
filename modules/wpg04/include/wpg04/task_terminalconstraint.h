@@ -38,7 +38,7 @@ namespace humoto
 
 
             public:
-                TaskTerminalConstraint(const double gain = 1.0)
+                explicit TaskTerminalConstraint(const double gain = 1.0)
                     : TaskAB("TaskTerminalConstraint", gain)
                 {
                 }

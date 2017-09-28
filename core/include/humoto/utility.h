@@ -178,7 +178,7 @@ namespace humoto
              *
              * @return true/false
              */
-            bool operator== (const Location &another_location)
+            bool operator== (const Location &another_location) const
             {
                 return ( (offset_ == another_location.offset_) &&
                         (length_ == another_location.length_) );
@@ -192,7 +192,7 @@ namespace humoto
              *
              * @return true/false
              */
-            bool operator!= (const Location &another_location)
+            bool operator!= (const Location &another_location) const
             {
                 return ( !(*this == another_location) );
             }

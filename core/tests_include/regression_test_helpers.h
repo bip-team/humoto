@@ -26,8 +26,8 @@ namespace humoto_tests
         class TestEnvironment : public testing::Environment
         {
             public:
-                explicit TestEnvironment(   const std::string & config_path,
-                                            const std::string & ref_filename)
+                TestEnvironment(const std::string & config_path,
+                                const std::string & ref_filename)
                 {
                     g_ref_filename = ref_filename;
                     g_config_path = config_path;

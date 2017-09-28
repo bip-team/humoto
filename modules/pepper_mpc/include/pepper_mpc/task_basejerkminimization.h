@@ -20,7 +20,8 @@ namespace humoto
         class HUMOTO_LOCAL TaskBaseJerkMinimization: public humoto::TaskASB
         {
             public:
-                TaskBaseJerkMinimization(const double gain = 0.707106781186548) : TaskASB("TaskBaseJerkMinimization", gain)
+                explicit TaskBaseJerkMinimization(const double gain = 0.707106781186548) 
+                    : TaskASB("TaskBaseJerkMinimization", gain)
                 {
                 }
 

@@ -36,7 +36,7 @@ namespace humoto
 
 
             public:
-                TagLink(const LinkId      & link_id)
+                explicit TagLink(const LinkId      & link_id)
                 {
                     link_id_ = link_id;
                 }

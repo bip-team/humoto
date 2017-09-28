@@ -135,7 +135,6 @@ namespace humoto
         {
             private:
                 /// If set the active set is returned
-                bool                solution_guess_provided_;
                 bool                active_set_guess_provided_;
 
 
@@ -226,7 +225,7 @@ namespace humoto
                         ubA_ptr = qp_problem_.getGeneralConstraints().getUpperBounds().data();
                     }
 
-                    if (solution_guess_provided_)
+                    if (NULL != solution_guess_)
                     {
                         solution_guess_ptr = solution_guess_;
                     }
@@ -286,6 +285,9 @@ namespace humoto
                     {
                         // not critical
                     }
+
+                    solution_guess_ = NULL;
+                    active_set_guess_provided_ = false;
                 }
 
 
@@ -464,7 +466,6 @@ namespace humoto
                 /// @copydoc humoto::SolverGuessSolutionMixin::setSolutionGuess
                 void setSolutionGuess(const humoto::Solution & solution_guess)
                 {
-                    solution_guess_provided_ = true;
                     solution_guess_ = solution_guess.x_.data();
                 }
 
@@ -474,8 +475,9 @@ namespace humoto
                 {
                     number_of_constraints_ = 0;
 
-                    solution_guess_provided_ = false;
                     active_set_guess_provided_ = false;
+
+                    solution_guess_ = NULL;
 
                     if (qp_ != NULL)
                     {
@@ -510,9 +512,10 @@ namespace humoto
                  *
                  * @param[in] parameters parameters
                  */
-                Solver(const SolverParameters &parameters)
+                explicit Solver(const SolverParameters &parameters)
                 {
                     qp_ = NULL;
+                    reset();
                     setParameters(parameters);
                 }
 
