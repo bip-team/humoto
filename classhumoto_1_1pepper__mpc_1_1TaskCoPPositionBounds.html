@@ -153,9 +153,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a60d6f88de08ec3103b92861bd6eb34da"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1constraints_1_1ConstraintsBase.html#a60d6f88de08ec3103b92861bd6eb34da">getATAandATb</a> (Eigen::MatrixXd &amp;H, Eigen::VectorXd &amp;g) const</td></tr>
 <tr class="memdesc:a60d6f88de08ec3103b92861bd6eb34da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute 'A^T * A' for general equality constaints and save or add the result to H. Compute 'A^T * b' for general equality constaints and save or add the result to g.  <a href="#a60d6f88de08ec3103b92861bd6eb34da">More...</a><br /></td></tr>
 <tr class="separator:a60d6f88de08ec3103b92861bd6eb34da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6f942c581f3942d36aee7bdbdf22717"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhumoto_1_1Location.html">Location</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1constraints_1_1ContainerBase.html#aa6f942c581f3942d36aee7bdbdf22717">getCopyLocation</a> (const std::size_t number_of_constraints, const std::size_t constraints_offset, const std::size_t number_of_variables)</td></tr>
-<tr class="memdesc:aa6f942c581f3942d36aee7bdbdf22717"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes location of the copied constraints in a container and verifies their consistency.  <a href="#aa6f942c581f3942d36aee7bdbdf22717">More...</a><br /></td></tr>
-<tr class="separator:aa6f942c581f3942d36aee7bdbdf22717"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbc83f26b5ccc890b97def3280d1b594"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhumoto_1_1Location.html">Location</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1constraints_1_1ContainerBase.html#afbc83f26b5ccc890b97def3280d1b594">getCopyLocation</a> (const std::size_t number_of_constraints, const std::size_t constraints_offset, const std::size_t number_of_variables) const</td></tr>
+<tr class="memdesc:afbc83f26b5ccc890b97def3280d1b594"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes location of the copied constraints in a container and verifies their consistency.  <a href="#afbc83f26b5ccc890b97def3280d1b594">More...</a><br /></td></tr>
+<tr class="separator:afbc83f26b5ccc890b97def3280d1b594"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9811b8a80c6b851c9aa8687d5fd9819"><td class="memItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1TaskBase.html#ac9811b8a80c6b851c9aa8687d5fd9819">getDescription</a> () const</td></tr>
 <tr class="memdesc:ac9811b8a80c6b851c9aa8687d5fd9819"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get description of the task.  <a href="#ac9811b8a80c6b851c9aa8687d5fd9819">More...</a><br /></td></tr>
 <tr class="separator:ac9811b8a80c6b851c9aa8687d5fd9819"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -189,15 +189,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8e950f6007f6525a2b68cf8e6e050110"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1pepper__mpc_1_1TaskCoPPositionBounds.html#a8e950f6007f6525a2b68cf8e6e050110">guessActiveSet</a> (const <a class="el" href="classhumoto_1_1SolutionStructure.html">humoto::SolutionStructure</a> &amp;sol_structure, const <a class="el" href="classhumoto_1_1Model.html">humoto::Model</a> &amp;model_base, const <a class="el" href="classhumoto_1_1ControlProblem.html">humoto::ControlProblem</a> &amp;control_problem)</td></tr>
 <tr class="memdesc:a8e950f6007f6525a2b68cf8e6e050110"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize active set guess with defaults.  <a href="#a8e950f6007f6525a2b68cf8e6e050110">More...</a><br /></td></tr>
 <tr class="separator:a8e950f6007f6525a2b68cf8e6e050110"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adac86bf5589ae0d95212168778ff2cb9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1constraints_1_1ConstraintsBase.html#adac86bf5589ae0d95212168778ff2cb9">isEquality</a> ()</td></tr>
-<tr class="memdesc:adac86bf5589ae0d95212168778ff2cb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check properties of the constriaints.  <a href="#adac86bf5589ae0d95212168778ff2cb9">More...</a><br /></td></tr>
-<tr class="separator:adac86bf5589ae0d95212168778ff2cb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa510783c06009e709211f6b90f4016bd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1constraints_1_1ConstraintsBase.html#aa510783c06009e709211f6b90f4016bd">isSimple</a> ()</td></tr>
-<tr class="memdesc:aa510783c06009e709211f6b90f4016bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check properties of the constriaints.  <a href="#aa510783c06009e709211f6b90f4016bd">More...</a><br /></td></tr>
-<tr class="separator:aa510783c06009e709211f6b90f4016bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2dff8ebc6d335263f3d110b504dd7716"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1constraints_1_1ConstraintsBase.html#a2dff8ebc6d335263f3d110b504dd7716">isTwoSidedInequality</a> ()</td></tr>
-<tr class="memdesc:a2dff8ebc6d335263f3d110b504dd7716"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check properties of the constriaints.  <a href="#a2dff8ebc6d335263f3d110b504dd7716">More...</a><br /></td></tr>
-<tr class="separator:a2dff8ebc6d335263f3d110b504dd7716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa398af6a534db77146506abc423d8751"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1constraints_1_1ConstraintsBase.html#aa398af6a534db77146506abc423d8751">isEquality</a> () const</td></tr>
+<tr class="memdesc:aa398af6a534db77146506abc423d8751"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check properties of the constriaints.  <a href="#aa398af6a534db77146506abc423d8751">More...</a><br /></td></tr>
+<tr class="separator:aa398af6a534db77146506abc423d8751"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af97913ec535fb72da03ef9067c6f53a3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1constraints_1_1ConstraintsBase.html#af97913ec535fb72da03ef9067c6f53a3">isSimple</a> () const</td></tr>
+<tr class="memdesc:af97913ec535fb72da03ef9067c6f53a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check properties of the constriaints.  <a href="#af97913ec535fb72da03ef9067c6f53a3">More...</a><br /></td></tr>
+<tr class="separator:af97913ec535fb72da03ef9067c6f53a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe2ac2eb910c36ce05bda4af8442227c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1constraints_1_1ConstraintsBase.html#afe2ac2eb910c36ce05bda4af8442227c">isTwoSidedInequality</a> () const</td></tr>
+<tr class="memdesc:afe2ac2eb910c36ce05bda4af8442227c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check properties of the constriaints.  <a href="#afe2ac2eb910c36ce05bda4af8442227c">More...</a><br /></td></tr>
+<tr class="separator:afe2ac2eb910c36ce05bda4af8442227c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7b2a59e9f5505b618b408df58f8447a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhumoto_1_1TaskBase.html#ad7b2a59e9f5505b618b408df58f8447a">log</a> (<a class="el" href="classhumoto_1_1Logger.html">humoto::Logger</a> &amp;logger, const <a class="el" href="classhumoto_1_1LogEntryName.html">LogEntryName</a> &amp;parent=<a class="el" href="classhumoto_1_1LogEntryName.html">LogEntryName</a>(), const std::string &amp;name=&quot;task&quot;) const</td></tr>
 <tr class="memdesc:ad7b2a59e9f5505b618b408df58f8447a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log task.  <a href="#ad7b2a59e9f5505b618b408df58f8447a">More...</a><br /></td></tr>
 <tr class="separator:ad7b2a59e9f5505b618b408df58f8447a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1257,8 +1257,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aa6f942c581f3942d36aee7bdbdf22717"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6f942c581f3942d36aee7bdbdf22717">&#9670;&nbsp;</a></span>getCopyLocation()</h2>
+<a id="afbc83f26b5ccc890b97def3280d1b594"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbc83f26b5ccc890b97def3280d1b594">&#9670;&nbsp;</a></span>getCopyLocation()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1287,7 +1287,7 @@ Static Protected Attributes</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
@@ -1721,8 +1721,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="adac86bf5589ae0d95212168778ff2cb9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adac86bf5589ae0d95212168778ff2cb9">&#9670;&nbsp;</a></span>isEquality()</h2>
+<a id="aa398af6a534db77146506abc423d8751"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa398af6a534db77146506abc423d8751">&#9670;&nbsp;</a></span>isEquality()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1734,7 +1734,7 @@ Static Protected Attributes</h2></td></tr>
           <td class="memname">bool humoto::constraints::ConstraintsBase::isEquality </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -1751,8 +1751,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aa510783c06009e709211f6b90f4016bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa510783c06009e709211f6b90f4016bd">&#9670;&nbsp;</a></span>isSimple()</h2>
+<a id="af97913ec535fb72da03ef9067c6f53a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af97913ec535fb72da03ef9067c6f53a3">&#9670;&nbsp;</a></span>isSimple()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1764,7 +1764,7 @@ Static Protected Attributes</h2></td></tr>
           <td class="memname">bool humoto::constraints::ConstraintsBase::isSimple </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -1781,8 +1781,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a2dff8ebc6d335263f3d110b504dd7716"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2dff8ebc6d335263f3d110b504dd7716">&#9670;&nbsp;</a></span>isTwoSidedInequality()</h2>
+<a id="afe2ac2eb910c36ce05bda4af8442227c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe2ac2eb910c36ce05bda4af8442227c">&#9670;&nbsp;</a></span>isTwoSidedInequality()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1794,7 +1794,7 @@ Static Protected Attributes</h2></td></tr>
           <td class="memname">bool humoto::constraints::ConstraintsBase::isTwoSidedInequality </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -3167,7 +3167,7 @@ If this function is called on a modified task, the result is undefined. </dd></d
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 12 2017 12:39:04 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Sep 29 2017 16:40:20 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

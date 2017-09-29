@@ -13,7 +13,6 @@ var searchData=
   ['rbdl',['rbdl',['../namespacehumoto_1_1rbdl.html',1,'humoto']]],
   ['rigidbody',['rigidbody',['../namespacehumoto_1_1rigidbody.html',1,'humoto']]],
   ['walking',['walking',['../namespacehumoto_1_1walking.html',1,'humoto']]],
-  ['wpg03',['wpg03',['../namespacehumoto_1_1wpg03.html',1,'humoto']]],
   ['wpg04',['wpg04',['../namespacehumoto_1_1wpg04.html',1,'humoto']]],
   ['yaml',['yaml',['../namespacehumoto_1_1config_1_1yaml.html',1,'humoto::config']]]
 ];

@@ -64,6 +64,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classhumoto_1_1rbdl_1_1SpatialTransformWithoutRotation-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -86,10 +87,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1eb05d72a595a7b3be41e63de773c781"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhumoto_1_1rbdl_1_1SpatialTransformWithoutRotation.html#a1eb05d72a595a7b3be41e63de773c781">apply</a> (Eigen::MatrixBase&lt; t_Derived &gt; const &amp;result_block, const Eigen::MatrixXd &amp;matrix) const</td></tr>
 <tr class="memdesc:a1eb05d72a595a7b3be41e63de773c781"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply complete transformation.  <a href="#a1eb05d72a595a7b3be41e63de773c781">More...</a><br /></td></tr>
 <tr class="separator:a1eb05d72a595a7b3be41e63de773c781"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd1530fa6edda563bb753062ab376724"><td class="memTemplParams" colspan="2">template&lt;class t_Derived &gt; </td></tr>
-<tr class="memitem:abd1530fa6edda563bb753062ab376724"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhumoto_1_1rbdl_1_1SpatialTransformWithoutRotation.html#abd1530fa6edda563bb753062ab376724">applyGetRotationPart</a> (Eigen::MatrixBase&lt; t_Derived &gt; const &amp;result_block, const Eigen::MatrixXd &amp;matrix) const</td></tr>
-<tr class="memdesc:abd1530fa6edda563bb753062ab376724"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply transformation and obtain only rotational part of the result.  <a href="#abd1530fa6edda563bb753062ab376724">More...</a><br /></td></tr>
-<tr class="separator:abd1530fa6edda563bb753062ab376724"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4793944b12ee23b0adc0d5423f5e3af8"><td class="memTemplParams" colspan="2">template&lt;class t_Derived &gt; </td></tr>
 <tr class="memitem:a4793944b12ee23b0adc0d5423f5e3af8"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhumoto_1_1rbdl_1_1SpatialTransformWithoutRotation.html#a4793944b12ee23b0adc0d5423f5e3af8">applyGetTranslationPart</a> (Eigen::MatrixBase&lt; t_Derived &gt; const &amp;result_block, const Eigen::MatrixXd &amp;matrix) const</td></tr>
 <tr class="memdesc:a4793944b12ee23b0adc0d5423f5e3af8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply transformation and obtain only translational part of the result.  <a href="#a4793944b12ee23b0adc0d5423f5e3af8">More...</a><br /></td></tr>
@@ -97,6 +94,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a187350ec028b1e45e6d33f192adc6fce"><td class="memTemplParams" colspan="2">template&lt;SpatialType::Type t_type, class t_Derived &gt; </td></tr>
 <tr class="memitem:a187350ec028b1e45e6d33f192adc6fce"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhumoto_1_1rbdl_1_1SpatialTransformWithoutRotation.html#a187350ec028b1e45e6d33f192adc6fce">applySelective</a> (Eigen::MatrixBase&lt; t_Derived &gt; const &amp;result_block, const Eigen::MatrixXd &amp;matrix) const</td></tr>
 <tr class="separator:a187350ec028b1e45e6d33f192adc6fce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a810788013e21d8a27d6eecd297510edb"><td class="memTemplParams" colspan="2">template&lt;class t_Derived &gt; </td></tr>
+<tr class="memitem:a810788013e21d8a27d6eecd297510edb"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhumoto_1_1rbdl_1_1SpatialTransformWithoutRotation.html#a810788013e21d8a27d6eecd297510edb">applyGetRotationPart</a> (Eigen::MatrixBase&lt; t_Derived &gt; const &amp;result_block, const Eigen::MatrixXd &amp;matrix)</td></tr>
+<tr class="memdesc:a810788013e21d8a27d6eecd297510edb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply transformation and obtain only rotational part of the result.  <a href="#a810788013e21d8a27d6eecd297510edb">More...</a><br /></td></tr>
+<tr class="separator:a810788013e21d8a27d6eecd297510edb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -123,7 +127,7 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -192,12 +196,12 @@ template&lt;class t_Derived &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="spatial__transform_8h_source.html#l00089">89</a> of file <a class="el" href="spatial__transform_8h_source.html">spatial_transform.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spatial__transform_8h_source.html#l00090">90</a> of file <a class="el" href="spatial__transform_8h_source.html">spatial_transform.h</a>.</p>
 
 </div>
 </div>
-<a id="abd1530fa6edda563bb753062ab376724"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd1530fa6edda563bb753062ab376724">&#9670;&nbsp;</a></span>applyGetRotationPart()</h2>
+<a id="a810788013e21d8a27d6eecd297510edb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a810788013e21d8a27d6eecd297510edb">&#9670;&nbsp;</a></span>applyGetRotationPart()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -208,7 +212,7 @@ template&lt;class t_Derived &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void humoto::rbdl::SpatialTransformWithoutRotation::applyGetRotationPart </td>
+          <td class="memname">static void humoto::rbdl::SpatialTransformWithoutRotation::applyGetRotationPart </td>
           <td>(</td>
           <td class="paramtype">Eigen::MatrixBase&lt; t_Derived &gt; const &amp;&#160;</td>
           <td class="paramname"><em>result_block</em>, </td>
@@ -222,12 +226,12 @@ template&lt;class t_Derived &gt; </div>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> const</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -247,7 +251,7 @@ template&lt;class t_Derived &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="spatial__transform_8h_source.html#l00138">138</a> of file <a class="el" href="spatial__transform_8h_source.html">spatial_transform.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spatial__transform_8h_source.html#l00139">139</a> of file <a class="el" href="spatial__transform_8h_source.html">spatial_transform.h</a>.</p>
 
 </div>
 </div>
@@ -302,7 +306,7 @@ template&lt;class t_Derived &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="spatial__transform_8h_source.html#l00115">115</a> of file <a class="el" href="spatial__transform_8h_source.html">spatial_transform.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spatial__transform_8h_source.html#l00116">116</a> of file <a class="el" href="spatial__transform_8h_source.html">spatial_transform.h</a>.</p>
 
 </div>
 </div>
@@ -342,7 +346,7 @@ template&lt;SpatialType::Type t_type, class t_Derived &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="spatial__transform_8h_source.html#l00146">146</a> of file <a class="el" href="spatial__transform_8h_source.html">spatial_transform.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spatial__transform_8h_source.html#l00147">147</a> of file <a class="el" href="spatial__transform_8h_source.html">spatial_transform.h</a>.</p>
 
 </div>
 </div>
@@ -377,7 +381,7 @@ template&lt;SpatialType::Type t_type, class t_Derived &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 12 2017 12:39:04 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Sep 29 2017 16:40:21 for humoto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['walkfinitestatemachine',['WalkFiniteStateMachine',['../classhumoto_1_1wpg03_1_1WalkFiniteStateMachine.html#aa1ce8553c86fff19a1f8b6f358679b4e',1,'humoto::wpg03::WalkFiniteStateMachine::WalkFiniteStateMachine(const Model &amp;model, const MPCParameters &amp;mpc_param, const WalkOptions &amp;walk_options)'],['../classhumoto_1_1wpg03_1_1WalkFiniteStateMachine.html#ad3fec2bd1f5f5015f683ae186bf64826',1,'humoto::wpg03::WalkFiniteStateMachine::WalkFiniteStateMachine(const Model &amp;model, const MPCParameters &amp;mpc_param)']]],
-  ['walkoptions',['WalkOptions',['../classhumoto_1_1wpg03_1_1WalkOptions.html#a7a4f994de413904d5767be3e0007d6c1',1,'humoto::wpg03::WalkOptions']]],
   ['walkparameters',['WalkParameters',['../classhumoto_1_1wpg04_1_1WalkParameters.html#a59788a628a386ce3d73d70e73b824d2c',1,'humoto::wpg04::WalkParameters']]],
-  ['walkstate',['WalkState',['../classhumoto_1_1wpg03_1_1WalkState.html#afd7424b7bee60968baa20e1fcf2b3475',1,'humoto::wpg03::WalkState::WalkState()'],['../classhumoto_1_1wpg04_1_1WalkState.html#acad2dacd00c009fa5e06714b90c9c9cf',1,'humoto::wpg04::WalkState::WalkState()']]],
+  ['walkstate',['WalkState',['../classhumoto_1_1wpg04_1_1WalkState.html#acad2dacd00c009fa5e06714b90c9c9cf',1,'humoto::wpg04::WalkState']]],
   ['wbcparameters',['WBCParameters',['../classhumoto_1_1pepper__ik_1_1WBCParameters.html#a40b95e7425ce4d4420c609d1df2e0cf3',1,'humoto::pepper_ik::WBCParameters']]],
   ['weightedsimpletaskbasemixin',['WeightedSimpleTaskBaseMixin',['../classhumoto_1_1WeightedSimpleTaskBaseMixin.html#af3f7fb1cdce9929ead7a3aa15512fc4a',1,'humoto::WeightedSimpleTaskBaseMixin']]],
   ['wholebodycontroller',['WholeBodyController',['../classhumoto_1_1pepper__ik_1_1WholeBodyController.html#add2d454e1348e91a17ecc64833ee5d2f',1,'humoto::pepper_ik::WholeBodyController::WholeBodyController()'],['../classhumoto_1_1pepper__ik_1_1WholeBodyController.html#a38ffdb9eb42195a15d213a03bbf233a9',1,'humoto::pepper_ik::WholeBodyController::WholeBodyController(const humoto::pepper_ik::WBCParameters &amp;wbc_parameters)']]],

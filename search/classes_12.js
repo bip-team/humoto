@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['walkfinitestatemachine',['WalkFiniteStateMachine',['../classhumoto_1_1wpg03_1_1WalkFiniteStateMachine.html',1,'humoto::wpg03']]],
-  ['walkoptions',['WalkOptions',['../classhumoto_1_1wpg03_1_1WalkOptions.html',1,'humoto::wpg03']]],
   ['walkparameters',['WalkParameters',['../classhumoto_1_1wpg04_1_1WalkParameters.html',1,'humoto::wpg04']]],
-  ['walkstate',['WalkState',['../classhumoto_1_1wpg04_1_1WalkState.html',1,'humoto::wpg04::WalkState'],['../classhumoto_1_1wpg03_1_1WalkState.html',1,'humoto::wpg03::WalkState']]],
+  ['walkstate',['WalkState',['../classhumoto_1_1wpg04_1_1WalkState.html',1,'humoto::wpg04']]],
   ['wbcparameters',['WBCParameters',['../classhumoto_1_1pepper__ik_1_1WBCParameters.html',1,'humoto::pepper_ik']]],
   ['weightedsimpletaskbasemixin',['WeightedSimpleTaskBaseMixin',['../classhumoto_1_1WeightedSimpleTaskBaseMixin.html',1,'humoto']]],
   ['weightedsimpletaskbasemixin_3c_20constraints_3a_3aconstraintsgib0_3c_20taskbase_20_3e_20_3e',['WeightedSimpleTaskBaseMixin&lt; constraints::ConstraintsGIB0&lt; TaskBase &gt; &gt;',['../classhumoto_1_1WeightedSimpleTaskBaseMixin.html',1,'humoto']]],

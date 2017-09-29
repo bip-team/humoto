@@ -7,6 +7,5 @@ var searchData=
   ['default_5fpreview_5fhorizon_5fshift',['DEFAULT_PREVIEW_HORIZON_SHIFT',['../classhumoto_1_1pepper__mpc_1_1MPCforMG.html#a3bd4a024a09dcd97f30049369a51a240',1,'humoto::pepper_mpc::MPCforMG']]],
   ['default_5fthread_5fsleep_5fms_5f',['default_thread_sleep_ms_',['../classhumoto_1_1Logger.html#a7c94f1b429a73800e453d35a8cf82b24',1,'humoto::Logger']]],
   ['dof_5fnumber_5f',['dof_number_',['../classhumoto_1_1rbdl_1_1Model_1_1JointData.html#a30fc19155d0ace3315e93162e82a062b',1,'humoto::rbdl::Model::JointData']]],
-  ['ds_5fr_5f',['ds_R_',['../classhumoto_1_1wpg03_1_1Robot.html#a44a503a5fee22bdc71ac7acf68506d68',1,'humoto::wpg03::Robot']]],
-  ['duration_5fms_5f',['duration_ms_',['../classhumoto_1_1walking_1_1Stance.html#af7e642967521ebb9fea012832b62e249',1,'humoto::walking::Stance::duration_ms_()'],['../classhumoto_1_1pepper__mpc_1_1MotionParameters.html#a4e596e7331efbb587e9536a57cd36845',1,'humoto::pepper_mpc::MotionParameters::duration_ms_()'],['../classhumoto_1_1wpg03_1_1WalkState.html#abef2e7e2a3da25a419eb3d534636f060',1,'humoto::wpg03::WalkState::duration_ms_()']]]
+  ['duration_5fms_5f',['duration_ms_',['../classhumoto_1_1walking_1_1Stance.html#af7e642967521ebb9fea012832b62e249',1,'humoto::walking::Stance::duration_ms_()'],['../classhumoto_1_1pepper__mpc_1_1MotionParameters.html#a4e596e7331efbb587e9536a57cd36845',1,'humoto::pepper_mpc::MotionParameters::duration_ms_()']]]
 ];
