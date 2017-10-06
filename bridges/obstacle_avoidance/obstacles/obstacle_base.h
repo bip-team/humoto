@@ -112,9 +112,7 @@ namespace humoto
                  *
                  * @param[in] control_problem
                  */
-                virtual void initializeConstraints(const humoto::ControlProblem& control_problem)
-                {
-                }
+                virtual void resetConstraints(const humoto::ControlProblem& control_problem) = 0;
                 
                 
                 /**
