@@ -79,13 +79,19 @@ namespace humoto
                  * @param[in] b           final point mass state
                  * @param[in] step_height height of the step
                  */
-                void initialize(const humoto::rigidbody::PointMassState& a,
-                                const humoto::rigidbody::PointMassState& b,
+                void initialize(const humoto::rigidbody::RigidBodyState& a,
+                                const humoto::rigidbody::RigidBodyState& b,
                                 const double step_height)
                 {
                     HUMOTO_ASSERT(b.position_(2) <= (a.position_(2) + step_height), "final z position greater than step height.")
                     x_.initialize( a.position_(0),               a.velocity_(0), b.position_(0),               b.velocity_(0));
                     y_.initialize( a.position_(1),               a.velocity_(1), b.position_(1),               b.velocity_(1));
+
+                    theta_.initialize( a.rpy_(humoto::AngleIndex::YAW),
+                                       a.angular_velocity_(humoto::AngleIndex::YAW), 
+                                       b.rpy_(humoto::AngleIndex::YAW),
+                                       b.angular_velocity_(humoto::AngleIndex::YAW));
+                    
                     z1_.initialize(a.position_(2),               a.velocity_(2), a.position_(2) + step_height, 0.0);
                     z2_.initialize(step_height + a.position_(2), 0.0,            b.position_(2),               b.velocity_(2));
                 }
@@ -130,6 +136,16 @@ namespace humoto
                         return (z2_.eval((t-0.5)*2, trajectory_type));
                     }
                 }
+                
+                
+                /**
+                 * @copydoc Simple3DFootTrajectory::evalx
+                 */
+                double evalTheta(const double t,
+                                 const rigidbody::TrajectoryEvaluationType::Type trajectory_type) const
+                {
+                    return (theta_.eval(t, trajectory_type));
+                }
 
 
                 /**
@@ -141,13 +157,13 @@ namespace humoto
                  * @return    Eigen matrix with evaluated trajectory samples
                  */
                 etools::Vector3 eval(   const double t,
-                                                const rigidbody::TrajectoryEvaluationType::Type trajectory_type) const
+                                        const rigidbody::TrajectoryEvaluationType::Type trajectory_type) const
                 {
                     etools::Vector3 result;
 
-                    result(0) = evalx(t, trajectory_type);
-                    result(1) = evaly(t, trajectory_type);
-                    result(2) = evalz(t, trajectory_type);
+                    result(0) = evalx(t,     trajectory_type);
+                    result(1) = evaly(t,     trajectory_type);
+                    result(2) = evalz(t,     trajectory_type);
 
                     return (result);
                 }
@@ -165,6 +181,10 @@ namespace humoto
                     foot_state.position_      = eval(t, rigidbody::TrajectoryEvaluationType::POSITION);
                     foot_state.velocity_      = eval(t, rigidbody::TrajectoryEvaluationType::VELOCITY);
                     foot_state.acceleration_  = eval(t, rigidbody::TrajectoryEvaluationType::ACCELERATION);
+                    
+                    foot_state.rpy_(humoto::AngleIndex::YAW)                  = evalTheta(t, rigidbody::TrajectoryEvaluationType::POSITION);
+                    foot_state.angular_velocity_(humoto::AngleIndex::YAW)     = evalTheta(t, rigidbody::TrajectoryEvaluationType::VELOCITY);
+                    foot_state.angular_acceleration_(humoto::AngleIndex::YAW) = evalTheta(t, rigidbody::TrajectoryEvaluationType::ACCELERATION);
                 }
 
 
@@ -173,6 +193,7 @@ namespace humoto
                 humoto::rigidbody::CubicPolynomial1D y_;
                 humoto::rigidbody::CubicPolynomial1D z1_;
                 humoto::rigidbody::CubicPolynomial1D z2_;
+                humoto::rigidbody::CubicPolynomial1D theta_;
         };
     }
 }
