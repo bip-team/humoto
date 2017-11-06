@@ -493,8 +493,12 @@ if (HUMOTO_LIBRARIES)
     endif ()
 endif (HUMOTO_LIBRARIES)
 
-set (HUMOTO_SHARED_GNU_LINKER_FLAGS
-    "${HUMOTO_SHARED_GNU_LINKER_FLAGS} -Wl,--version-script=${CMAKE_INSTALL_PREFIX}/share/humoto/gnu_ld_version_script.map")
+if (NOT APPLE)
+	set (HUMOTO_SHARED_GNU_LINKER_FLAGS
+    		"${HUMOTO_SHARED_GNU_LINKER_FLAGS} -Wl,--version-script=${CMAKE_INSTALL_PREFIX}/share/humoto/gnu_ld_version_script.map")
+else()
+	set (HUMOTO_SHARED_GNU_LINKER_FLAGS "")
+endif()
 
 humoto_identify_git_commit()
 
