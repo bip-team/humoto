@@ -85,6 +85,10 @@ namespace humoto
                 solution_guess.initialize(sol_structure_, old_solution);
             }
 
+            const SolutionStructure &getSolutionStructure() const
+            {
+              return sol_structure_;
+            }
 
             virtual void log(   humoto::Logger &, const LogEntryName &, const std::string &) const = 0;
     };
