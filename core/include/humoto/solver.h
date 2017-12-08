@@ -468,6 +468,8 @@ namespace humoto
         protected:
             virtual void checkInputs(const humoto::OptimizationProblem   &hierarchy) const
             {
+                std::cout << "Check Inputs" << std::endl;
+                std::cout << "parameters_.solve_two_levels_as_qp_: " << parameters_.solve_two_levels_as_qp_ << std::endl;
                 HUMOTO_ASSERT(  true == parameters_.solve_two_levels_as_qp_,
                                 "Interpretation of hierarchies as QPs is disabled.");
 
