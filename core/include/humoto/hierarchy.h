@@ -79,6 +79,15 @@ namespace humoto
                 reset(0);
             }
 
+            /// @brief Getter for number_of_levels
+            const size_t &number_of_levels() const { return number_of_levels_; }
+            /// @brief Getter for number_of_constraints
+            const std::vector<size_t> &number_of_constraints() const
+            {
+                return number_of_constraints_;
+            }
+            /// @brief Getter for hierarchy
+            const std::vector<humoto::HierarchyLevel> &hierarchy() const { return hierarchy_; }
 
             /**
              * @brief Add task to the optimization problem.
