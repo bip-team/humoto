@@ -81,6 +81,15 @@ namespace humoto
                     acceleration_ = acceleration;
                 }
 
+                                /**
+                 * @brief Translate state
+                 *
+                 * @param[in] translation 3D translation vector
+                 */
+                void translate(const etools::Vector3 translation)
+                {
+                	position_ += translation;
+                }
 
                 /**
                  * @brief Log
