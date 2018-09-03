@@ -281,6 +281,22 @@ namespace humoto
                     return ( convertEulerAnglesToMatrix(rpy_, EulerAngles::RPY));
                 }
 
+                /**
+                 * @brief Set state
+                 *
+                 * @param[in] orientation
+                 * @param[in] angular velocity
+                 * @param[in] angular acceleration
+                 */
+                void set(   const etools::Vector3 rpy,
+                            const etools::Vector3 angular_velocity = etools::Vector3::Zero(),
+                            const etools::Vector3 angular_acceleration = etools::Vector3::Zero())
+                {
+                    rpy_=rpy;
+                    angular_velocity_=angular_velocity;
+                    angular_acceleration_=angular_acceleration;
+                }
+
 
                 /**
                  * @brief Log

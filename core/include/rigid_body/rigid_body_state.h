@@ -136,6 +136,17 @@ namespace humoto
                     RotaryState::unset();
                 }
 
+                void set(   const etools::Vector3 position,
+                			const etools::Vector3 rpy,
+                            const etools::Vector3 velocity = etools::Vector3::Zero(),
+                            const etools::Vector3 angular_velocity = etools::Vector3::Zero(),
+                            const etools::Vector3 acceleration = etools::Vector3::Zero(),
+                            const etools::Vector3 angular_acceleration = etools::Vector3::Zero())
+                {
+                	PointMassState::set(position, velocity, acceleration);
+                	RotaryState::set(rpy, angular_velocity, angular_acceleration);
+                }
+
 
                 /**
                  * @brief Log
