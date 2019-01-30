@@ -411,7 +411,7 @@ namespace humoto
             {
                 is_tds_started_ = false;
 
-                if(current_time_ms_ + time_ms < current_stance_.duration_ms_)
+                if (current_time_ms_ + time_ms < current_stance_.duration_ms_)
                 {
                     current_time_ms_ = current_time_ms_ + time_ms;
                     time_ms = 0;
@@ -532,4 +532,3 @@ namespace humoto
 
     }//end namespace walking
 }//end namespace humoto
-

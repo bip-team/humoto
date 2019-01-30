@@ -194,7 +194,7 @@ namespace humoto
                         -half_foot_length,  half_foot_length,
                         -half_total_width,  half_total_width;
 
-                    // With respect to the center of prseceding SS
+                    // With respect to the center of preceding SS
                     feet_.getLeft().foot_position_bounds_ss_ <<
                         -max_step_len_,     max_step_len_,
                          min_feet_dist_,    max_feet_dist_;

@@ -253,7 +253,7 @@ if(HUMOTO_BUILD_WITH_QI)
 
     # Boost
     if(HUMOTO_ENABLE_THREADS_FOR_LOGGING)
-        find_package(Boost REQUIRED thread system)
+        find_package(Boost REQUIRED thread system chrono)
         set(HUMOTO_USE_THREADS_FOR_LOGGING true)
     else()
         find_package(Boost REQUIRED)
@@ -271,7 +271,7 @@ else(HUMOTO_BUILD_WITH_QI)
 
     # Boost
     if(HUMOTO_ENABLE_THREADS_FOR_LOGGING)
-        find_package(Boost REQUIRED thread system)
+        find_package(Boost REQUIRED thread system chrono)
         set(HUMOTO_USE_THREADS_FOR_LOGGING true)
     else()
         find_package(Boost REQUIRED)
@@ -284,6 +284,7 @@ list(APPEND HUMOTO_MANDATORY_INCLUDES "${Boost_INCLUDE_DIRS}")
 
 if(HUMOTO_USE_THREADS_FOR_LOGGING)
     list(APPEND HUMOTO_MANDATORY_LIBRARIES  "${Boost_THREAD_LIBRARY}")
+    list(APPEND HUMOTO_MANDATORY_LIBRARIES  "${Boost_CHRONO_LIBRARY}")
     list(APPEND HUMOTO_MANDATORY_LIBRARIES  "${Boost_SYSTEM_LIBRARIES}")
 endif(HUMOTO_USE_THREADS_FOR_LOGGING)
 
@@ -386,7 +387,8 @@ set (CMAKE_CXX_FLAGS            "${CMAKE_CXX_FLAGS} -fPIC -pedantic -Wall")
 set (CMAKE_CXX_FLAGS            "${CMAKE_CXX_FLAGS} -Wempty-body -Wignored-qualifiers -Wmissing-field-initializers")
 set (CMAKE_CXX_FLAGS            "${CMAKE_CXX_FLAGS} -Wsign-compare -Wtype-limits -Wuninitialized -Woverloaded-virtual")
 
-set (CMAKE_CXX_FLAGS            "${CMAKE_CXX_FLAGS} -std=c++98")
+#set (CMAKE_CXX_FLAGS            "${CMAKE_CXX_FLAGS} -std=c++98")
+set (CMAKE_CXX_FLAGS            "${CMAKE_CXX_FLAGS} -std=c++11")
 
 
 include(TargetArch)
