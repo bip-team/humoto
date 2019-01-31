@@ -7,3 +7,4 @@ bridges/qpOASES/qpOASES
 *.o
 build/
 build-*/
+*.DS_Store
