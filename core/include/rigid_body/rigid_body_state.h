@@ -136,15 +136,15 @@ namespace humoto
                     RotaryState::unset();
                 }
 
-                void set(   const etools::Vector3 position,
-                			const etools::Vector3 rpy,
-                            const etools::Vector3 velocity = etools::Vector3::Zero(),
-                            const etools::Vector3 angular_velocity = etools::Vector3::Zero(),
-                            const etools::Vector3 acceleration = etools::Vector3::Zero(),
-                            const etools::Vector3 angular_acceleration = etools::Vector3::Zero())
+                void set(const etools::Vector3 position,
+                         const etools::Vector3 rpy,
+                         const etools::Vector3 velocity = etools::Vector3::Zero(),
+                         const etools::Vector3 angular_velocity = etools::Vector3::Zero(),
+                         const etools::Vector3 acceleration = etools::Vector3::Zero(),
+                         const etools::Vector3 angular_acceleration = etools::Vector3::Zero())
                 {
-                	PointMassState::set(position, velocity, acceleration);
-                	RotaryState::set(rpy, angular_velocity, angular_acceleration);
+                    PointMassState::set(position, velocity, acceleration);
+                    RotaryState::set(rpy, angular_velocity, angular_acceleration);
                 }
 
 
@@ -155,9 +155,9 @@ namespace humoto
                  * @param[in] parent parent
                  * @param[in] name name
                  */
-                void log(   humoto::Logger &logger HUMOTO_GLOBAL_LOGGER_IF_DEFINED,
-                            const LogEntryName &parent= LogEntryName(),
-                            const std::string &name = "rigid_body_state") const
+                void log(humoto::Logger &logger HUMOTO_GLOBAL_LOGGER_IF_DEFINED,
+                         const LogEntryName &parent= LogEntryName(),
+                         const std::string &name = "rigid_body_state") const
                 {
                     PointMassState::log(logger, parent, name);
                     RotaryState::log(logger, parent, name);
