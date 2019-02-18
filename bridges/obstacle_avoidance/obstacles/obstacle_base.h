@@ -17,6 +17,13 @@ namespace humoto
          */
         class HUMOTO_LOCAL ObstacleBase : public humoto::rigidbody::RigidBodyState
         {
+
+            #define HUMOTO_CONFIG_SECTION_ID "ObstacleBase"
+            #define HUMOTO_CONFIG_CONSTRUCTOR ObstacleBase
+            #define HUMOTO_CONFIG_ENTRIES \
+                HUMOTO_CONFIG_PARENT_CLASS(humoto::rigidbody::RigidBodyState)
+            #include HUMOTO_CONFIG_DEFINE_ACCESSORS
+
             public:
                 /**
                  * @brief Constructor.
