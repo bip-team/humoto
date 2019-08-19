@@ -79,6 +79,32 @@ namespace humoto
                 reset(0);
             }
 
+            /**
+             * @brief Get number of relaxed constraints.
+             *
+             */
+            void getRelaxedConstraintsIndicesAndNumber(Eigen::VectorXd & relaxedConstraintsIndices, Eigen::VectorXd & relaxedConstraintsSizes, unsigned int & numberOfRelaxedConstraints) const
+            {
+                HUMOTO_ASSERT(getNumberOfLevels() > 0, "Empty hierarchy.");
+                relaxedConstraintsIndices.resize(hierarchy_[0].relaxed_tasks_.size());
+                relaxedConstraintsSizes.resize(hierarchy_[0].relaxed_tasks_.size());
+                unsigned int indice = 0;
+                for(int i=0; i<hierarchy_[0].relaxed_tasks_.size();++i)
+                {
+                    relaxedConstraintsIndices[i] = indice;
+                    relaxedConstraintsSizes[i] = hierarchy_[0].relaxed_tasks_[i].ptr_->getNumberOfConstraints();
+                    indice += relaxedConstraintsSizes[i];
+                }
+                numberOfRelaxedConstraints = indice;
+            }
+
+            void getRelaxedConstraintsWeights(Eigen::VectorXd & gains) const
+            {
+                HUMOTO_ASSERT(getNumberOfLevels() > 0, "Empty hierarchy.");
+                gains.resize(hierarchy_[0].relaxed_tasks_.size());
+                for(int i=0; i<gains.size(); ++i)
+                    gains[i] = hierarchy_[0].relaxed_tasks_[i].ptr_->getRelaxationWeight();
+            }
 
             /**
              * @brief Add task to the optimization problem.
@@ -95,6 +121,16 @@ namespace humoto
                 hierarchy_[level_index].pushTask(task_pointer);
             }
 
+            /**
+             * @brief Add constraint (0 level task) to the relaxed tasks.
+             *
+             * @param[in,out] task_pointer  pointer to a task
+             *
+             */
+            void addRelaxedConstraint(  TaskSharedPointer task_pointer)
+            {
+                hierarchy_[0].addRelaxedConstraint(task_pointer);
+            }
 
             /**
              * @brief Form hierarchy.

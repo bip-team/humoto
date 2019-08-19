@@ -51,6 +51,12 @@ namespace humoto
             ~ControlProblem() {}
             ControlProblem() {}
 
+        public:
+            Eigen::MatrixXd R_;
+            unsigned int number_of_relaxed_constraints_;
+            Eigen::VectorXd relaxed_constraints_indices_;
+            Eigen::VectorXd relaxed_constraints_sizes_;
+
 
         public:
             /**

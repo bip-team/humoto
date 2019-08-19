@@ -118,7 +118,7 @@ namespace humoto
         {
             protected:
                 std::size_t  number_of_variables_;
-
+                double relaxation_weight_;
 
             protected:
                 /**
@@ -217,7 +217,10 @@ namespace humoto
                     return (number_of_variables_);
                 }
 
-
+                const double getRelaxationWeight() const
+                {
+                    return relaxation_weight_;
+                }
 
                 /**
                  * @brief Returns number of constraints in the task.

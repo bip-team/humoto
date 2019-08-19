@@ -193,6 +193,15 @@ namespace humoto
                 }
             }
 
+            /**
+             * @brief Add task to the optimization problem.
+             *
+             * @param[in,out] task_pointer  pointer to a task
+             */
+            void addRelaxedConstraint(TaskSharedPointer task_pointer)
+            {
+                relaxed_tasks_.push_back(TaskInfo(task_pointer));
+            }
 
         public:
             /**
@@ -233,7 +242,7 @@ namespace humoto
              * includes general and simple tasks.
              */
             std::list<TaskInfo>     tasks_;
-
+            std::vector<TaskInfo>   relaxed_tasks_;
 
 
         public:
