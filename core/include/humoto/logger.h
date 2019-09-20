@@ -9,8 +9,231 @@
 
 #pragma once
 
+#include <boost/algorithm/string.hpp>
+
 namespace humoto
 {
+    #ifndef LOGGER_FORMATTER
+    #define LOGGER_FORMATTER OctaveFormatter
+    #endif
+
+    /**
+     * @brief A collection of functions which format data to be parsable by
+     * python.
+     */
+    class HUMOTO_LOCAL PythonFormatter
+    {
+        public:
+            /**
+             * @brief Returns format description for Eigen matrices.
+             *
+             * @return Eigen IO format
+             */
+            static const Eigen::IOFormat& getEigenMatrixFormat()
+            {
+                static const Eigen::IOFormat    eigen_output_format(Eigen::FullPrecision, 0, ", ", "],[", "", "", "[", "];");
+                return (eigen_output_format);
+            }
+
+
+            static std::string getPreviousPrefix(std::string & name, std::string & prefix)
+            {
+                std::vector<std::string> result;
+                boost::split(result, name, boost::is_any_of("\n"));
+                if(result.size() > 1)
+                {
+                    prefix = result.back().erase(0,1);
+                    return "nothing";
+                }
+                else
+                {
+                    prefix = result.back();
+                    return "if not \"" + prefix + "\" in globals():" + prefix;
+                }
+            }
+
+            /**
+             * @brief Add a part to the given log entry name.
+             *
+             * @param[in] name      name
+             * @param[in] addition  subname
+             */
+            static void appendEntryName(std::string & name,
+                                        const std::string & addition)
+            {
+                if ((name.size() > 0) && (addition.size() > 0))
+                {
+                    std::string prefix;
+                    std::string result = getPreviousPrefix(name, prefix);
+                    if(result!="nothing")
+                        name = result;
+                    name += " = {}\nif \""+addition+"\" not in "+prefix+".keys():\n\t"+prefix+"[\""+addition+"\"]"; 
+                    //std::cout << name << std::endl << std::endl;
+                }
+            }
+
+
+            /**
+             * @brief Add a part to the given log entry name.
+             *
+             * @param[in] name      name
+             * @param[in] addition  subname
+             */
+            static void appendEntryName(std::string & name,
+                                        const char * addition)
+            {
+                if ((name.size() > 0) && ('\0' != addition[0]))
+                {
+                    std::string prefix;
+                    std::string result = getPreviousPrefix(name, prefix);
+                    if(result!="nothing")
+                        name = result;
+                    name += " = {}\nif \""+std::string(addition)+"\" not in "+prefix+".keys():\n\t"+prefix+"[\""+addition+"\"]"; 
+                    //std::cout << name << std::endl << std::endl;
+                }
+            }
+
+
+            /**
+             * @brief Add a part to the given log entry name.
+             *
+             * @param[in] name      name
+             * @param[in] index     index of a subentry
+             */
+            static void appendEntryName(std::string & name,
+                                        const std::size_t index)
+            {
+                std::string prefix;
+                std::string result = getPreviousPrefix(name, prefix);
+                if(result!="nothing")
+                    name = result;
+                std::string addition = boost::lexical_cast<std::string>(index);
+                name += " = {}\nif \""+addition+"\" not in "+prefix+".keys():\n\t"+prefix+"[\""+addition+"\"]"; 
+                //std::cout << name << std::endl << std::endl;
+            }
+
+            /**
+             * @brief Format and output a log entry (std::vector)
+             *
+             * @tparam t_Scalar type of vector elements
+             * @param[in,out] out   output stream
+             * @param[in] name      name of the log entry
+             * @param[in] vector    data vector
+             */
+            template <typename t_Scalar>
+                static void  formatAndOutputEntry(  std::ostream *out,
+                                                    const std::string & name,
+                                                    const std::vector<t_Scalar> &vector)
+            {
+                *out << name << " = " << "[";
+                for (std::size_t i = 0; i < vector.size(); ++i)
+                {
+                    *out << vector[i];
+                    if (i + 1 != vector.size())
+                    {
+                        *out << ",";
+                    }
+                }
+                *out << "];\n";
+            }
+
+
+            /**
+             * @brief Format and output a log entry (Eigen matrix)
+             *
+             * @tparam t_Scalar     (Eigen) scalar type
+             * @tparam t_rows       (Eigen) number of rows
+             * @tparam t_cols       (Eigen) number of columns
+             * @tparam t_flags      (Eigen) flags
+             *
+             * @param[in,out] out   output stream
+             * @param[in] name      name of the log entry
+             * @param[in] matrix    matrix
+             */
+            template<typename t_Scalar, int t_rows, int t_cols, int t_flags>
+                static void  formatAndOutputEntry(  std::ostream *out,
+                                                    const std::string & name,
+                                                    const Eigen::Matrix<t_Scalar, t_rows, t_cols, t_flags> &matrix)
+            {
+                *out << name << " = \\\n" << matrix.format(getEigenMatrixFormat()) << "\n";
+            }
+
+            /**
+             * @brief Format and output a log entry (Eigen vector)
+             *
+             * @tparam t_Scalar     (Eigen) scalar type
+             * @tparam t_rows       (Eigen) number of rows
+             * @tparam t_flags      (Eigen) flags
+             *
+             * @param[in,out] out   output stream
+             * @param[in] name      name of the log entry
+             * @param[in] matrix    vector
+             */
+            template<typename t_Scalar, int t_rows, int t_cols, int t_flags>
+                static void  formatAndOutputEntry(  std::ostream *out,
+                                                    const std::string & name,
+                                                    const Eigen::VectorXd &vector)
+            {
+                *out << name << " = \\\n" << vector.format(getEigenMatrixFormat()) << "\n";
+            }
+
+            /**
+             * @brief Format and output a log entry (std::string)
+             *
+             * @tparam t_Data       data type
+             * @param[in,out] out   output stream
+             * @param[in] name      name of the log entry
+             * @param[in] string    string
+             */
+            static void  formatAndOutputEntry(  std::ostream *out,
+                                                const std::string & name,
+                                                const std::string &string)
+            {
+
+                *out << name << " = '" << string << "';\n";
+            }
+
+            /**
+             * @brief Format and output a log entry (double)
+             *
+             * @tparam t_Data       data type
+             * @param[in,out] out   output stream
+             * @param[in] name      name of the log entry
+             * @param[in] data      data
+             */
+                static void  formatAndOutputEntry(  std::ostream *out,
+                                                    const std::string & name,
+                                                    const double & data)
+            {
+            	if(data==NAN)
+            	{
+                	*out << name << " = '" << "None" << "';\n";
+                }
+                else
+                {
+                	*out << name << " = '" << data << "';\n";
+                }
+            }
+
+            /**
+             * @brief Format and output a log entry (default)
+             *
+             * @tparam t_Data       data type
+             * @param[in,out] out   output stream
+             * @param[in] name      name of the log entry
+             * @param[in] data      data
+             */
+            template <typename t_Data>
+                static void  formatAndOutputEntry(  std::ostream *out,
+                                                    const std::string & name,
+                                                    const t_Data & data)
+            {
+                *out << name << " = '" << data << "';\n";
+            }
+    };
+
+
+
     /**
      * @brief A collection of functions which format data to be parsable by
      * MATLAB/Octave.
@@ -162,11 +385,13 @@ namespace humoto
     };
 
 
+    using Formatter = LOGGER_FORMATTER;
 
     /**
      * @brief Represents log entry name
      */
-    class HUMOTO_LOCAL LogEntryName
+    template <class t_Formatter>
+    class HUMOTO_LOCAL LogEntryNameTemplate
     {
         private:
             std::string     entry_name_;
@@ -176,7 +401,7 @@ namespace humoto
             /**
              * @brief Default constructor
              */
-            LogEntryName()
+            LogEntryNameTemplate()
             {
             }
 
@@ -186,7 +411,7 @@ namespace humoto
              *
              * @param[in] name
              */
-            LogEntryName (const std::string & name) : entry_name_(name)
+            LogEntryNameTemplate (const std::string & name) : entry_name_(name)
             {
             }
 
@@ -196,7 +421,7 @@ namespace humoto
              *
              * @param[in] name
              */
-            LogEntryName (const char * name) : entry_name_(name)
+            LogEntryNameTemplate (const char * name) : entry_name_(name)
             {
             }
 
@@ -206,7 +431,7 @@ namespace humoto
              *
              * @param[in] name
              */
-            LogEntryName (const LogEntryName & name) : entry_name_(name.entry_name_)
+            LogEntryNameTemplate (const LogEntryNameTemplate<t_Formatter> & name) : entry_name_(name.entry_name_)
             {
             }
 
@@ -229,9 +454,9 @@ namespace humoto
              *
              * @return this
              */
-            LogEntryName& add(const char * name)
+            LogEntryNameTemplate<t_Formatter>& add(const char * name)
             {
-                OctaveFormatter::appendEntryName(entry_name_, name);
+                t_Formatter::appendEntryName(entry_name_, name);
                 return (*this);
             }
 
@@ -243,9 +468,9 @@ namespace humoto
              *
              * @return this
              */
-            LogEntryName& add(const std::string & name)
+            LogEntryNameTemplate<t_Formatter>& add(const std::string & name)
             {
-                OctaveFormatter::appendEntryName(entry_name_, name);
+                t_Formatter::appendEntryName(entry_name_, name);
                 return (*this);
             }
 
@@ -257,9 +482,9 @@ namespace humoto
              *
              * @return this
              */
-            LogEntryName& add(const std::size_t index)
+            LogEntryNameTemplate<t_Formatter>& add(const std::size_t index)
             {
-                OctaveFormatter::appendEntryName(entry_name_, index);
+                t_Formatter::appendEntryName(entry_name_, index);
                 return (*this);
             }
 
@@ -272,14 +497,14 @@ namespace humoto
              *
              * @return output stream
              */
-            friend std::ostream& operator<< (std::ostream& out, const LogEntryName & log_entry_name)
+            friend std::ostream& operator<< (std::ostream& out, const LogEntryNameTemplate<t_Formatter> & log_entry_name)
             {
                 out << log_entry_name.entry_name_;
                 return(out);
             }
     };
 
-
+    using LogEntryName = LogEntryNameTemplate<Formatter>; // Default formatter is Octave/Matlab
 
     /**
      * @brief Logger base class (stream handling)
@@ -465,7 +690,7 @@ namespace humoto
      *
      * @tparam t_Data message data type
      */
-    template <typename t_Data>
+    template <typename t_Data, class t_Formatter>
         class HUMOTO_LOCAL LogMessage : public LogMessageBase
     {
         public:
@@ -495,7 +720,7 @@ namespace humoto
             /// @copydoc humoto::LogMessageBase::write
             virtual void write(std::ostream * out)
             {
-                OctaveFormatter::formatAndOutputEntry(out, entry_name_.getAsString(), data_);
+                t_Formatter::formatAndOutputEntry(out, entry_name_.getAsString(), data_);
             }
     };
 
@@ -552,7 +777,8 @@ namespace humoto
      *
      * @todo Consider using a nonblocking queue, e.g., <boost/lockfree/queue.hpp>.
      */
-    class HUMOTO_LOCAL Logger : public LoggerBase
+    template <class t_Formatter>
+    	class HUMOTO_LOCAL LoggerTemplate : public LoggerBase
     {
         public:
             std::size_t                     thread_sleep_ms_;
@@ -656,7 +882,7 @@ namespace humoto
             void start()
             {
                 interrupted_ = false;
-                processor_thread_ = boost::thread(&humoto::Logger::processQueue, this);
+                processor_thread_ = boost::thread(&humoto::LoggerTemplate<t_Formatter>::processQueue, this);
             }
 
 
@@ -667,7 +893,7 @@ namespace humoto
              * @param[in] thread_sleep_ms   how long the queue processing
              *                              thread should sleep if there is no data
              */
-            explicit Logger(const std::size_t thread_sleep_ms = default_thread_sleep_ms_)
+            explicit LoggerTemplate(const std::size_t thread_sleep_ms = default_thread_sleep_ms_)
             {
                 interrupted_ = true;
                 thread_sleep_ms_ = thread_sleep_ms;
@@ -681,7 +907,7 @@ namespace humoto
              * @param[in] thread_sleep_ms   how long the queue processing
              *                              thread should sleep if there is no data
              */
-            Logger( std::ostream & output_stream,
+            LoggerTemplate( std::ostream & output_stream,
                     const std::size_t thread_sleep_ms = default_thread_sleep_ms_) : LoggerBase(output_stream)
             {
                 thread_sleep_ms_ = thread_sleep_ms;
@@ -696,7 +922,7 @@ namespace humoto
              * @param[in] thread_sleep_ms   how long the queue processing
              *                              thread should sleep if there is no data
              */
-            Logger( const std::string &output_filename,
+            LoggerTemplate( const std::string &output_filename,
                     const std::size_t thread_sleep_ms = default_thread_sleep_ms_) : LoggerBase(output_filename)
             {
                 thread_sleep_ms_ = thread_sleep_ms;
@@ -707,7 +933,7 @@ namespace humoto
             /**
              * @brief Destructor
              */
-            ~Logger()
+            ~LoggerTemplate()
             {
                 interrupt();
             }
@@ -828,7 +1054,7 @@ namespace humoto
                             const t_Data & data,
                             EIGENTOOLS_EIGENTYPE_DISABLER_TYPE(t_Data) * dummy = NULL)
             {
-                pushMessage(new LogMessage<t_Data>(name, data));
+                pushMessage(new LogMessage<t_Data, t_Formatter>(name, data));
             }
 
 
@@ -856,7 +1082,7 @@ namespace humoto
                                         : EIGENTOOLS_CONSTANT_SIZE_ALIGN_TYPE
                                             | (Eigen::DenseBase<t_Derived>::IsRowMajor
                                                 ? Eigen::RowMajor
-                                                : Eigen::ColMajor)> >(name, matrix.eval())  );
+                                                : Eigen::ColMajor)>, t_Formatter >(name, matrix.eval())  );
             }
 
 
@@ -869,7 +1095,7 @@ namespace humoto
             void  log(  const LogEntryName & name,
                         const char *string)
             {
-                pushMessage(new LogMessage<std::string>(name, string));
+                pushMessage(new LogMessage<std::string, t_Formatter>(name, string));
             }
     };
 #else
@@ -878,13 +1104,14 @@ namespace humoto
      *
      * @attention NOT thread safe!
      */
-    class HUMOTO_LOCAL Logger : public LoggerBase
+    template <class t_Formatter>
+    class HUMOTO_LOCAL LoggerTemplate : public LoggerBase
     {
         public:
             /**
              * @brief Default constructor
              */
-            Logger()
+            LoggerTemplate()
             {
             }
 
@@ -894,7 +1121,7 @@ namespace humoto
              *
              * @param[in,out] output_stream output stream
              */
-            explicit Logger( std::ostream & output_stream) : LoggerBase(output_stream)
+            explicit LoggerTemplate( std::ostream & output_stream) : LoggerBase(output_stream)
             {
             }
 
@@ -904,7 +1131,7 @@ namespace humoto
              *
              * @param[in] output_filename name of the log file
              */
-            explicit Logger( const std::string &output_filename) : LoggerBase(output_filename)
+            explicit LoggerTemplate( const std::string &output_filename) : LoggerBase(output_filename)
             {
             }
 
@@ -936,7 +1163,7 @@ namespace humoto
                 void  log(  const LogEntryName & name,
                             const Eigen::DenseBase<t_Derived> &matrix)
             {
-                OctaveFormatter::formatAndOutputEntry(output_stream_, name.getAsString(), matrix.eval());
+                t_Formatter::formatAndOutputEntry(output_stream_, name.getAsString(), matrix.eval());
                 output_stream_->flush();
             }
 
@@ -959,11 +1186,14 @@ namespace humoto
                             const t_Data & data,
                             EIGENTOOLS_EIGENTYPE_DISABLER_TYPE(t_Data) * dummy = NULL)
             {
-                OctaveFormatter::formatAndOutputEntry(output_stream_, name.getAsString(), data);
+                t_Formatter::formatAndOutputEntry(output_stream_, name.getAsString(), data);
                 output_stream_->flush();
             }
-    };
+    }; 
 #endif // HUMOTO_USE_THREADS_FOR_LOGGING
+
+    using HUMOTO_LOCAL Logger = HUMOTO_LOCAL LoggerTemplate<Formatter>;
+
 }
 
 

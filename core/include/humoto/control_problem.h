@@ -52,7 +52,6 @@ namespace humoto
             ControlProblem() {}
 
 
-
         public:
             /**
              * @brief Initialize structure of the given solution based on the
