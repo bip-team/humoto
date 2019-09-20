@@ -119,6 +119,7 @@ namespace humoto
             protected:
                 std::size_t  number_of_variables_;
                 double relaxation_weight_;
+                double relaxation_offset_;
 
             protected:
                 /**
@@ -131,6 +132,7 @@ namespace humoto
                 ContainerBase()
                 {
                     number_of_variables_ = 0;
+                    relaxation_offset_ = 0;
                 }
 
 
@@ -220,6 +222,11 @@ namespace humoto
                 const double getRelaxationWeight() const
                 {
                     return relaxation_weight_;
+                }
+
+                const double getRelaxationOffset() const
+                {
+                    return relaxation_offset_;
                 }
 
                 /**

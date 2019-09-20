@@ -12,6 +12,40 @@
 
 namespace humoto
 {
+
+    /**
+     * @brief Information about a task in a hierarchy
+     */
+    class HUMOTO_LOCAL RelaxedTaskInfo
+    {
+        public:
+            /// task pointer
+            TaskSharedPointer ptr_;
+
+            /// location of the task constraints on a hierarchy level
+            Location        location_;
+
+            double gain;
+            double offset;
+
+
+        public:
+            /**
+             * @brief Constructor
+             *
+             * @param[in] ptr pointer
+             * @param[in] offset
+             * @param[in] length
+             */
+            RelaxedTaskInfo   (TaskSharedPointer ptr,
+                        const std::size_t offset = 0,
+                        const std::size_t length = 0)
+                : location_(offset, length)
+            {
+                ptr_ = ptr;
+            }
+    };
+
     /**
      * @brief This class represents one level of a hierarchy.
      */
@@ -200,7 +234,17 @@ namespace humoto
              */
             void addRelaxedConstraint(TaskSharedPointer task_pointer)
             {
-                relaxed_tasks_.push_back(TaskInfo(task_pointer));
+                double offset;
+                if(relaxed_tasks_.size() != 0)
+                {
+                    offset = relaxed_tasks_.back().location_.offset_+relaxed_tasks_.back().location_.length_;
+                }
+                else
+                {
+                    offset = 0;
+                }
+                double length = task_pointer->getNumberOfConstraints();
+                relaxed_tasks_.push_back(RelaxedTaskInfo(task_pointer, offset, length));
             }
 
         public:
@@ -241,9 +285,8 @@ namespace humoto
              * formulation of the Hessian can be slightly faster, if objective
              * includes general and simple tasks.
              */
-            std::list<TaskInfo>     tasks_;
-            std::vector<TaskInfo>   relaxed_tasks_;
-
+            std::list<TaskInfo>            tasks_;
+            std::vector<RelaxedTaskInfo>   relaxed_tasks_;
 
         public:
             /**
@@ -253,8 +296,6 @@ namespace humoto
             {
                 reset();
             }
-
-
 
             /**
              * @brief Get total number of constraints
@@ -267,7 +308,6 @@ namespace humoto
                         +
                         number_of_simple_constraints_);
             }
-
 
             /**
              * @brief Get number of simple constraints
