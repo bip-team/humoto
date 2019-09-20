@@ -22,10 +22,8 @@ namespace humoto
         protected:
             std::size_t     number_of_levels_;
 
-            std::vector< humoto::HierarchyLevel >       hierarchy_;
+            std::vector< humoto::HierarchyLevel >      hierarchy_;
             std::vector< std::size_t >                 number_of_constraints_;
-
-
 
         protected:
             /**
@@ -80,33 +78,6 @@ namespace humoto
             }
 
             /**
-             * @brief Get number of relaxed constraints.
-             *
-             */
-            void getRelaxedConstraintsIndicesAndNumber(Eigen::VectorXd & relaxedConstraintsIndices, Eigen::VectorXd & relaxedConstraintsSizes, unsigned int & numberOfRelaxedConstraints) const
-            {
-                HUMOTO_ASSERT(getNumberOfLevels() > 0, "Empty hierarchy.");
-                relaxedConstraintsIndices.resize(hierarchy_[0].relaxed_tasks_.size());
-                relaxedConstraintsSizes.resize(hierarchy_[0].relaxed_tasks_.size());
-                unsigned int indice = 0;
-                for(int i=0; i<hierarchy_[0].relaxed_tasks_.size();++i)
-                {
-                    relaxedConstraintsIndices[i] = indice;
-                    relaxedConstraintsSizes[i] = hierarchy_[0].relaxed_tasks_[i].ptr_->getNumberOfConstraints();
-                    indice += relaxedConstraintsSizes[i];
-                }
-                numberOfRelaxedConstraints = indice;
-            }
-
-            void getRelaxedConstraintsWeights(Eigen::VectorXd & gains) const
-            {
-                HUMOTO_ASSERT(getNumberOfLevels() > 0, "Empty hierarchy.");
-                gains.resize(hierarchy_[0].relaxed_tasks_.size());
-                for(int i=0; i<gains.size(); ++i)
-                    gains[i] = hierarchy_[0].relaxed_tasks_[i].ptr_->getRelaxationWeight();
-            }
-
-            /**
              * @brief Add task to the optimization problem.
              *
              * @param[in,out] task_pointer  pointer to a task
@@ -130,6 +101,12 @@ namespace humoto
             void addRelaxedConstraint(  TaskSharedPointer task_pointer)
             {
                 hierarchy_[0].addRelaxedConstraint(task_pointer);
+            }
+
+            void getRelaxedTasks(std::vector<RelaxedTaskInfo> & relaxed_tasks) const
+            {
+                HUMOTO_ASSERT(getNumberOfLevels() > 0, "Empty hierarchy.");
+                relaxed_tasks = hierarchy_[0].relaxed_tasks_;
             }
 
             /**
