@@ -576,6 +576,24 @@ namespace humoto
                 virtual void computeViolations( ViolationsConstraints & violations,
                                                 const Location & location,
                                                 const Solution & solution) const = 0;
+
+                /**
+                 * @brief Log data.
+                 *
+                 * @param[in,out] logger logger
+                 * @param[in] parent parent
+                 * @param[in] name name
+                 */
+                void    log(  humoto::Logger &logger HUMOTO_GLOBAL_LOGGER_IF_DEFINED,
+                              const LogEntryName &parent = LogEntryName(),
+                              const std::string &name = "constraints") const
+                {
+                    LogEntryName subname = parent;
+                    subname.add(name);
+
+                    ContainerBase::log(logger, parent, name);
+                    logger.log(LogEntryName(subname).add("isSimple"), isSimple());
+                }
         };
 
 
