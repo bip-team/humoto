@@ -116,6 +116,19 @@ namespace humoto
                 {
                     setDefaults();
                 }
+
+                void setPrintLevel(int in)
+                {
+                    switch(in)
+                    {
+                        case -2: options_.printLevel = qpOASES::PL_NONE; break;
+                        case -1: options_.printLevel = qpOASES::PL_LOW; break;
+                        case 0:  options_.printLevel = qpOASES::PL_MEDIUM; break;
+                        case 1:  options_.printLevel = qpOASES::PL_HIGH; break;
+                        case 2:  options_.printLevel = qpOASES::PL_TABULAR; break;
+                        case 3:  options_.printLevel = qpOASES::PL_DEBUG_ITER; break;
+                    }
+                }
         };
 
 
