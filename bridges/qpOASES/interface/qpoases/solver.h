@@ -106,6 +106,7 @@ namespace humoto
                 {
                     max_number_of_iterations_ = 1000;
                     max_cpu_time_ = 0.0;
+                    options_.enableRamping = qpOASES::BT_TRUE;
                 }
 
 
