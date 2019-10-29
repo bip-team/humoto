@@ -76,7 +76,7 @@ namespace humoto
             }
 
 
-        protected:
+        public:
             /**
              * @brief Form hierarchy.
              *
@@ -137,8 +137,46 @@ namespace humoto
                 HUMOTO_ASSERT(getNumberOfConstraints() > 0, "No constraints on a hierarchy level.");
             }
 
+            void updateNumberOfConstraints()
+            {
+                reset();
+
+                // loop over tasks
+                HUMOTO_ASSERT(tasks_.size() > 0, "No tasks on a hierarchy level.");
+
+                for (   std::list<TaskInfo>::iterator it = tasks_.begin();
+                        it != tasks_.end();
+                        ++it)
+                {
+                    std::size_t num_ctr = it->ptr_->getNumberOfConstraints();
+
+                    if (it->ptr_->isEquality())
+                    {
+                        number_of_equality_constraints_ += num_ctr;
+                    }
+
+                    if (it->ptr_->isTwoSidedInequality())
+                    {
+                        number_of_twosided_constraints_ += num_ctr;
+                    }
+
+                    if (it->ptr_->isSimple())
+                    {
+                        // number_of_general_constraints_ is added since all
+                        // simple constraints are added after general constraints
+                        it->location_ = Location(number_of_simple_constraints_ + number_of_general_constraints_, num_ctr);
+                        number_of_simple_constraints_ += num_ctr;
+                    }
+                    else
+                    {
+                        it->location_ = Location(number_of_general_constraints_, num_ctr);
+                        number_of_general_constraints_ += num_ctr;
+                    }     
+                }
+            }
 
 
+        protected:
             /**
              * @brief Form active set guess
              *
@@ -287,6 +325,7 @@ namespace humoto
              */
             std::list<TaskInfo>            tasks_;
             std::vector<RelaxedTaskInfo>   relaxed_tasks_;
+            bool linear_objective_;
 
         public:
             /**
@@ -294,6 +333,7 @@ namespace humoto
              */
             HierarchyLevel()
             {
+                linear_objective_ = false;
                 reset();
             }
 
@@ -308,6 +348,14 @@ namespace humoto
                         +
                         number_of_simple_constraints_);
             }
+            std::size_t getNumberOfConstraints()
+            {
+                updateNumberOfConstraints();
+                return (number_of_general_constraints_
+                        +
+                        number_of_simple_constraints_);
+            }
+
 
             /**
              * @brief Get number of simple constraints
@@ -318,7 +366,11 @@ namespace humoto
             {
                 return (number_of_simple_constraints_);
             }
-
+            std::size_t getNumberOfSimpleConstraints() 
+            {
+                updateNumberOfConstraints();
+                return (number_of_simple_constraints_);
+            }
 
             /**
              * @brief Get number of general constraints
@@ -329,7 +381,11 @@ namespace humoto
             {
                 return (number_of_general_constraints_);
             }
-
+            std::size_t getNumberOfGeneralConstraints()
+            {
+                updateNumberOfConstraints();
+                return (number_of_general_constraints_);
+            }
 
             /**
              * @brief Get number of inequality constraints
@@ -340,7 +396,11 @@ namespace humoto
             {
                 return (number_of_equality_constraints_);
             }
-
+            std::size_t getNumberOfEqualityConstraints()
+            {
+                updateNumberOfConstraints();
+                return (number_of_equality_constraints_);
+            }
 
             /**
              * @brief Get number of inequality constraints
@@ -351,7 +411,11 @@ namespace humoto
             {
                 return (getNumberOfConstraints() - getNumberOfEqualityConstraints());
             }
-
+            std::size_t getNumberOfInequalityConstraints()
+            {
+                updateNumberOfConstraints();
+                return (getNumberOfConstraints() - getNumberOfEqualityConstraints());
+            }
 
             /**
              * @brief Get number of inequality constraints, two-sided constraints counted twice.
@@ -362,7 +426,11 @@ namespace humoto
             {
                 return (getNumberOfInequalityConstraints() + number_of_twosided_constraints_);
             }
-
+            std::size_t getNumberOfInequalityConstraintsOneSided() 
+            {
+                updateNumberOfConstraints();
+                return (getNumberOfInequalityConstraints() + number_of_twosided_constraints_);
+            }
 
             /**
              * @brief True if all constraints on this level are simple
@@ -385,6 +453,19 @@ namespace humoto
                 return (getNumberOfConstraints() == number_of_equality_constraints_);
             }
 
+            std::vector<TaskSharedPointer> getTasksPtrs()
+            {
+                std::vector<TaskSharedPointer> tasks;
+
+                for (   std::list<TaskInfo>::const_iterator it = tasks_.begin();
+                        it != tasks_.end();
+                        ++it)
+                {
+                    tasks.push_back(it->ptr_); 
+                }
+
+                return tasks;
+            }
 
             /**
              * @brief Generates (general) objective containing all equality constraints on this level
@@ -541,6 +622,9 @@ namespace humoto
                         it->ptr_->addATAandATb(H, g);
                     }
                 }
+
+                if(linear_objective_)
+                    H.setZero();
             }
 
 

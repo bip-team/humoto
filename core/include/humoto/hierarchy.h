@@ -41,7 +41,6 @@ namespace humoto
             {
                 control_problem.initSolutionStructure(solution);
 
-
                 // loop over levels
                 HUMOTO_ASSERT(getNumberOfLevels() > 0, "Empty hierarchy.");
                 for (std::size_t i = 0; i < getNumberOfLevels(); ++i)
@@ -50,7 +49,6 @@ namespace humoto
                     number_of_constraints_[i] = hierarchy_[i].getNumberOfConstraints();
                 }
             }
-
 
             /**
              * @brief Form active set guess
@@ -75,6 +73,19 @@ namespace humoto
             OptimizationProblem()
             {
                 reset(0);
+            }
+
+            void updateNumberOfConstraints( humoto::Solution                & solution,
+                                            const humoto::Model             & model,
+                                            const humoto::ControlProblem    & control_problem,
+                                            const bool                      is_active_set_guessing_enabled)
+            { 
+                HUMOTO_ASSERT(getNumberOfLevels() > 0, "Empty hierarchy.");
+                for (std::size_t i = 0; i < getNumberOfLevels(); ++i)
+                {
+                    number_of_constraints_[i] = hierarchy_[i].getNumberOfConstraints();
+                }
+
             }
 
             /**

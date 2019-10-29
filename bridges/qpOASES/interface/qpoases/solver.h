@@ -104,7 +104,7 @@ namespace humoto
             public:
                 void setDefaults()
                 {
-                    max_number_of_iterations_ = 1000;
+                    max_number_of_iterations_ = 10000;
                     max_cpu_time_ = 0.0;
                     options_.enableRamping = qpOASES::BT_TRUE;
                 }
@@ -154,7 +154,6 @@ namespace humoto
 
                 humoto::QPProblem_ILU_ALU       qp_problem_;
 
-
                 /// Guess of the solution
                 const double * solution_guess_;
 
@@ -172,8 +171,8 @@ namespace humoto
                 /// Nonzero if constraints are specified
                 std::size_t    number_of_constraints_;
 
-                qpOASES::QProblem *  qp_;
-
+                public:
+                	qpOASES::QProblem *  qp_;
 
             private:
                 /// @copydoc humoto::Solver::initialize
@@ -186,9 +185,18 @@ namespace humoto
 
                     number_of_constraints_ = qp_problem_.getGeneralConstraints().getNumberOfConstraints();
 
-                    qp_ = new qpOASES::QProblem(sol_structure.getNumberOfVariables(),
-                                                number_of_constraints_,
-                                                qpOASES::HST_SEMIDEF);
+                    if(!hierarchy[1].linear_objective_)
+                    {
+                        qp_ = new qpOASES::QProblem(sol_structure.getNumberOfVariables(),
+                                                    number_of_constraints_,
+                                                    qpOASES::HST_SEMIDEF);
+                    }
+                    else
+                    {
+                        qp_ = new qpOASES::QProblem(sol_structure.getNumberOfVariables(),
+                                                    number_of_constraints_,
+                                                    qpOASES::HST_ZERO);
+                    }
                 }
 
 
@@ -214,7 +222,6 @@ namespace humoto
                     qpOASES::Constraints    *active_set_constraints_ptr = NULL;
 
                     qpOASES::returnValue    qpoases_return_value;
-
 
                     if (max_time != 0.0)
                     {
@@ -254,6 +261,12 @@ namespace humoto
 
                     int number_of_iterations = parameters_.max_number_of_iterations_;
 
+                    /*std::cout << "H_=" << qp_problem_.getHessian() << std::endl;
+                    std::cout << "g_=" << qp_problem_.getGradient() << std::endl;
+                    std::cout << "A =" << qp_problem_.getGeneralConstraints().getA() << std::endl;
+                    std::cout << "ubA =" << qp_problem_.getGeneralConstraints().getUpperBounds() << std::endl;
+                    std::cout << "lbA =" << qp_problem_.getGeneralConstraints().getLowerBounds() << std::endl;*/
+
                     qp_->setOptions (parameters_.options_);
                     qpoases_return_value =
                         qp_->init(  qp_problem_.getHessian().data(),
@@ -269,8 +282,6 @@ namespace humoto
                                     NULL, // Optimal dual solution vector
                                     active_set_bounds_ptr,
                                     active_set_constraints_ptr);
-
-
                     qp_->getPrimalSolution( solution.x_.data() );
 
 

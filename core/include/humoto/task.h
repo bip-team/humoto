@@ -241,6 +241,33 @@ namespace humoto
                                     const std::string & name = "task") const = 0;
 
         public:
+
+
+            virtual Eigen::MatrixXd &  getA()
+            {
+                HUMOTO_ASSERT(false, "getA not available for this class of constraints");
+            }
+
+            virtual Eigen::VectorXd &  getB()
+            {
+                HUMOTO_ASSERT(false, "getB not available for this class of constraints");
+            }
+
+            virtual Eigen::VectorXd &  getLowerBounds()
+            {
+                HUMOTO_ASSERT(false, "getLowerBounds not available for this class of constraints");
+            }
+
+            virtual Eigen::VectorXd &  getUpperBounds()
+            {
+                HUMOTO_ASSERT(false, "getUpperBounds not available for this class of constraints");
+            }
+
+            virtual void setAi(Eigen::MatrixXd &ai)
+            {
+                HUMOTO_ASSERT(false, "no setAi method in this class");
+            }
+
             /**
              * @brief Get description of the task.
              *
