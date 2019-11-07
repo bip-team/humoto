@@ -106,7 +106,7 @@ namespace humoto
                 {
                     max_number_of_iterations_ = 1000;
                     max_cpu_time_ = 0.0;
-                    options_.enableRamping = qpOASES::BT_TRUE;
+                    //options_.enableRamping = qpOASES::BT_TRUE;
                 }
 
 
@@ -280,7 +280,6 @@ namespace humoto
                     qp_->getPrimalSolution( solution.x_.data() );
                     Eigen::VectorXd y(qp_->getNV()+qp_->getNC());
                     qp_->getDualSolution(y.data());
-                    //solution.x_ = y.segment(0, qp_->getNV());
                     solution.lambda_.resize(qp_->getNC());
                     solution.lambda_ = y.segment(qp_->getNV(), qp_->getNC());
 
