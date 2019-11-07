@@ -261,12 +261,6 @@ namespace humoto
 
                     int number_of_iterations = parameters_.max_number_of_iterations_;
 
-                    /*std::cout << "H_=" << qp_problem_.getHessian() << std::endl;
-                    std::cout << "g_=" << qp_problem_.getGradient() << std::endl;
-                    std::cout << "A =" << qp_problem_.getGeneralConstraints().getA() << std::endl;
-                    std::cout << "ubA =" << qp_problem_.getGeneralConstraints().getUpperBounds() << std::endl;
-                    std::cout << "lbA =" << qp_problem_.getGeneralConstraints().getLowerBounds() << std::endl;*/
-
                     qp_->setOptions (parameters_.options_);
                     qpoases_return_value =
                         qp_->init(  qp_problem_.getHessian().data(),
@@ -282,9 +276,13 @@ namespace humoto
                                     NULL, // Optimal dual solution vector
                                     active_set_bounds_ptr,
                                     active_set_constraints_ptr);
+
                     qp_->getPrimalSolution( solution.x_.data() );
-
-
+                    Eigen::VectorXd y(qp_->getNV()+qp_->getNC());
+                    qp_->getDualSolution(y.data());
+                    //solution.x_ = y.segment(0, qp_->getNV());
+                    solution.lambda_.resize(qp_->getNC());
+                    solution.lambda_ = y.segment(qp_->getNV(), qp_->getNC());
 
                     switch (qpoases_return_value)
                     {
@@ -315,7 +313,7 @@ namespace humoto
                     active_set_guess_provided_ = false;
                 }
 
-
+            public:
 
                 /// @copydoc humoto::SolverGuessActiveSetMixin::getActiveSet
                 void getActiveSet(  humoto::ActiveSet                   &active_set,
@@ -418,7 +416,7 @@ namespace humoto
                     }
                 }
 
-
+            private:
                 /**
                  * @copydoc humoto::SolverGuessActiveSetMixin::setActiveSet
                  *

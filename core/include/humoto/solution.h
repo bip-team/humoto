@@ -184,6 +184,7 @@ namespace humoto
 
         public:
             Eigen::VectorXd             x_;
+            Eigen::VectorXd             lambda_;
             SolverStatus::Status  return_status_;
 
 
