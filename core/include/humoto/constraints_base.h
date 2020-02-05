@@ -120,6 +120,8 @@ namespace humoto
                 std::size_t  number_of_variables_;
                 double relaxation_weight_;
                 double relaxation_offset_;
+                Eigen::VectorXd relaxation_temporality_;
+                unsigned int relaxations_size_;
 
             protected:
                 /**
@@ -227,6 +229,16 @@ namespace humoto
                 const double getRelaxationOffset() const
                 {
                     return relaxation_offset_;
+                }
+
+                const std::size_t getRelaxationsSize() const
+                {
+                    return relaxations_size_;
+                }
+
+                const Eigen::VectorXd getRelaxationTemporality() const
+                {
+                    return relaxation_temporality_;
                 }
 
                 /**
