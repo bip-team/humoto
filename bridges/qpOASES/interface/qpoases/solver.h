@@ -104,11 +104,22 @@ namespace humoto
             public:
                 void setDefaults()
                 {
-                    max_number_of_iterations_ = 1000;
+                    max_number_of_iterations_ = 2000;
                     max_cpu_time_ = 0.0;
-                    //options_.enableRamping = qpOASES::BT_TRUE;
+                    options_.enableRamping = qpOASES::BT_FALSE;
                 }
 
+                void enableRamping(bool b)
+                {
+                    if(b)
+                    {
+                        options_.enableRamping = qpOASES::BT_TRUE;
+                    }
+                    else
+                    {
+                        options_.enableRamping = qpOASES::BT_FALSE;
+                    }
+                }
 
                 /**
                  * @brief Default constructor
