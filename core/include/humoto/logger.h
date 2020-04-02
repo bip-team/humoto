@@ -128,7 +128,15 @@ namespace humoto
                 *out << name << " = " << "[";
                 for (std::size_t i = 0; i < vector.size(); ++i)
                 {
-                    *out << vector[i];
+                    if(std::is_same<t_Scalar,std::string>::value)
+                    {
+                        *out << "\'" << vector[i] << "\'";
+                    }
+                    else
+                    {
+                        *out << vector[i];
+                    }
+
                     if (i + 1 != vector.size())
                     {
                         *out << ",";
@@ -190,7 +198,7 @@ namespace humoto
                                                 const std::string &string)
             {
 
-                *out << name << " = '" << string << "';\n";
+                *out << name << " = \'" << string << "\';\n";
             }
 
             /**

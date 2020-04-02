@@ -431,6 +431,9 @@ namespace humoto
                  */
                 virtual void copyBodyTo(Eigen::MatrixXd & A,
                                         const Location & location) const = 0;
+                virtual void copyBodyNamesTo(std::vector<std::string> & A,
+                                        const Location & location) const = 0;
+
 
 
                 /**
@@ -661,6 +664,7 @@ namespace humoto
 
                     t_Base::copyBoundsTo(container.getLowerBounds(), container.getUpperBounds(), ctr_location);
                     t_Base::copyBodyTo(container.getA(), ctr_location);
+                    t_Base::copyBodyNamesTo(container.getANames(), ctr_location);
 
                     return (ctr_location.offset_ + ctr_location.length_);
                 }
@@ -694,6 +698,7 @@ namespace humoto
 
                     container.getLowerBounds().segment(ctr_location.offset_, ctr_location.length_) = t_Base::getLowerBounds();
                     t_Base::copyBodyTo(container.getA(), ctr_location);
+                    t_Base::copyBodyNamesTo(container.getANames(), ctr_location);
 
                     return (ctr_location.offset_ + ctr_location.length_);
                 }
@@ -726,6 +731,7 @@ namespace humoto
 
                     container.getLowerBounds().segment(ctr_location.offset_, ctr_location.length_) = -t_Base::getUpperBounds();
                     t_Base::copyNegativeBodyTo(container.getA(), ctr_location);
+                    t_Base::copyBodyNamesTo(container.getANames(), ctr_location);
 
                     return (ctr_location.offset_ + ctr_location.length_);
                 }
@@ -823,6 +829,7 @@ namespace humoto
 
                     t_Base::copyEqualityBoundsTo(container.getB(), ctr_location);
                     t_Base::copyBodyTo(container.getA(), ctr_location);
+                    t_Base::copyBodyNamesTo(container.getANames(), ctr_location);
 
                     return (ctr_location.offset_ + ctr_location.length_);
                 }

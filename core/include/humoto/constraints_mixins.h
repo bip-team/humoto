@@ -439,6 +439,7 @@ namespace humoto
         {
             protected:
                 Eigen::MatrixXd     A_;
+                std::vector<std::string> ANames_;
 
 
             protected:
@@ -469,6 +470,7 @@ namespace humoto
                     {
                         A_.resize(number_of_constraints, t_Base::getNumberOfVariables());
                     }
+                    ANames_.resize(number_of_constraints);
                 }
 
 
@@ -478,6 +480,7 @@ namespace humoto
                                 const std::string &name = "constraints") const
                 {
                     logger.log(LogEntryName(parent).add(name).add("A"), A_);
+                    logger.log(LogEntryName(parent).add(name).add("ANames"), ANames_);
                 }
 
 
@@ -525,6 +528,17 @@ namespace humoto
                     return (A_);
                 }
 
+                std::vector<std::string> &  getANames()
+                {
+                    return (ANames_);
+                }
+
+                /// @copydoc getA
+                const std::vector<std::string> &  getANames() const
+                {
+                    return (ANames_);
+                }
+
 
                 /// @copydoc humoto::constraints::ConstraintsBase::copyBodyTo
                 void copyBodyTo(Eigen::MatrixXd & A, const Location & location) const
@@ -533,6 +547,13 @@ namespace humoto
                                     "Numbers of columns in constraint matrices do not match.");
 
                     A.block(location.offset_, 0, location.length_, A_.cols()) = A_;
+                }
+
+
+                void copyBodyNamesTo(std::vector<std::string> & A, const Location & location) const
+                {
+                	for(unsigned int i=0; i<location.length_; ++i)
+                    	A[location.offset_+i] = ANames_[i];
                 }
 
 
@@ -581,6 +602,7 @@ namespace humoto
         {
             protected:
                 Eigen::MatrixXd     A_;
+                std::vector<std::string>     ANames_;
                 std::ptrdiff_t      offset_;
 
 
@@ -616,6 +638,7 @@ namespace humoto
                     {
                         A_.resize(number_of_constraints, t_Base::getNumberOfVariables());
                     }
+                    ANames_.resize(number_of_constraints);
                 }
 
 
@@ -626,6 +649,7 @@ namespace humoto
                 {
                     logger.log(LogEntryName(parent).add(name).add("A"), A_);
                     logger.log(LogEntryName(parent).add(name).add("offset"), offset_);
+                    logger.log(LogEntryName(parent).add(name).add("ANames"), ANames_);
                 }
 
 
@@ -660,6 +684,17 @@ namespace humoto
                 const Eigen::MatrixXd &  getA() const
                 {
                     return (A_);
+                }
+
+                std::vector<std::string> &  getANames()
+                {
+                    return (ANames_);
+                }
+
+                /// @copydoc getA
+                const std::vector<std::string> &  getANames() const
+                {
+                    return (ANames_);
                 }
 
 
@@ -698,6 +733,12 @@ namespace humoto
                         <<  Eigen::MatrixXd::Zero(location.length_, offset_),
                             A_,
                             Eigen::MatrixXd::Zero(location.length_, right_space_size);
+                }
+
+                void copyBodyNamesTo(std::vector<std::string> & A, const Location & location) const
+                {
+                	for(unsigned int i=0; i<location.length_; ++i)
+                    	A[location.offset_+i] = ANames_[i];
                 }
 
 
@@ -744,6 +785,7 @@ namespace humoto
         {
             protected:
                 humoto::IndexVector I_; // vector of indices
+                std::vector<std::string> ANames_;
 
 
             protected:
@@ -772,6 +814,7 @@ namespace humoto
                                             const bool initialize_matrices = false)
                 {
                     I_.resize(number_of_constraints);
+                    ANames_.resize(number_of_constraints);
                 }
 
 
@@ -782,6 +825,7 @@ namespace humoto
                                 const std::string &name = "constraints") const
                 {
                     logger.log(LogEntryName(parent).add(name).add("A"), I_);
+                    logger.log(LogEntryName(parent).add(name).add("ANames"), ANames_);
                 }
 
 
@@ -826,6 +870,11 @@ namespace humoto
                     }
                 }
 
+                void copyBodyNamesTo(std::vector<std::string> & A, const Location & location) const
+                {
+                	for(unsigned int i=0; i<location.length_; ++i)
+                    	A[location.offset_+i] = ANames_[i];
+                }
 
                 /// @copydoc humoto::constraints::ConstraintsBase::copyBodyTo
                 virtual void copyNegativeBodyTo(Eigen::MatrixXd & A, const Location & location) const

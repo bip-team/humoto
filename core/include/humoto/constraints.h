@@ -40,6 +40,7 @@ namespace humoto
             public:
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getNumberOfVariables;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getA;
+                using HUMOTO_PARENT_CLASS_SHORTHAND::getANames;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getLowerBounds;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getUpperBounds;
 
@@ -87,6 +88,7 @@ namespace humoto
             public:
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getNumberOfVariables;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getA;
+                using HUMOTO_PARENT_CLASS_SHORTHAND::getANames;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getLowerBounds;
 
 
@@ -132,6 +134,7 @@ namespace humoto
             public:
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getNumberOfVariables;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getA;
+                using HUMOTO_PARENT_CLASS_SHORTHAND::getANames;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getUpperBounds;
 
 
@@ -177,6 +180,7 @@ namespace humoto
             public:
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getNumberOfVariables;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getA;
+                using HUMOTO_PARENT_CLASS_SHORTHAND::getANames;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getB;
 
 
@@ -301,6 +305,7 @@ namespace humoto
             public:
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getNumberOfVariables;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getA;
+                using HUMOTO_PARENT_CLASS_SHORTHAND::getANames;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getOffset;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getLowerBounds;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getUpperBounds;
@@ -350,6 +355,7 @@ namespace humoto
             public:
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getNumberOfVariables;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getA;
+                using HUMOTO_PARENT_CLASS_SHORTHAND::getANames;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getOffset;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getLowerBounds;
 
@@ -398,6 +404,7 @@ namespace humoto
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getNumberOfVariables;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getOffset;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getA;
+                using HUMOTO_PARENT_CLASS_SHORTHAND::getANames;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getUpperBounds;
 
 
@@ -445,6 +452,7 @@ namespace humoto
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getNumberOfVariables;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getOffset;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getA;
+                using HUMOTO_PARENT_CLASS_SHORTHAND::getANames;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getB;
 
 
@@ -515,6 +523,7 @@ namespace humoto
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getNumberOfVariables;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getOffset;
                 using HUMOTO_PARENT_CLASS_SHORTHAND::getA;
+                using HUMOTO_PARENT_CLASS_SHORTHAND::getANames;
 
 
 
