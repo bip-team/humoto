@@ -67,6 +67,8 @@ namespace humoto
                 variables_id_ = variables_id;
             }
 
+            virtual ~TaskZeroVariables() {};
+
 
             /**
              * @brief Form task
@@ -152,6 +154,8 @@ namespace humoto
             {
                 variables_indices_ = var_indices;
             }
+
+            virtual ~TaskZeroSelectedVariables() {};
 
 
             /**

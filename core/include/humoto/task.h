@@ -339,7 +339,7 @@ namespace humoto
              * @brief Protected destructor: prevent destruction of the child
              * classes through a base pointer.
              */
-            ~GeneralTaskBaseMixin() {}
+            virtual ~GeneralTaskBaseMixin() {};
 
 
             /**
