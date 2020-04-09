@@ -137,7 +137,6 @@ namespace humoto
                     relaxation_offset_ = 0;
                 }
 
-
                 /**
                  * @brief Set number of variables
                  *
@@ -221,22 +220,22 @@ namespace humoto
                     return (number_of_variables_);
                 }
 
-                const double getRelaxationWeight() const
+                double getRelaxationWeight() const
                 {
                     return relaxation_weight_;
                 }
 
-                const double getRelaxationOffset() const
+                double getRelaxationOffset() const
                 {
                     return relaxation_offset_;
                 }
 
-                const std::size_t getRelaxationsSize() const
+                std::size_t getRelaxationsSize() const
                 {
                     return relaxations_size_;
                 }
 
-                const Eigen::VectorXd getRelaxationTemporality() const
+                Eigen::VectorXd getRelaxationTemporality() const
                 {
                     return relaxation_temporality_;
                 }
