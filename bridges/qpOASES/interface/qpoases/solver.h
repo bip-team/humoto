@@ -324,6 +324,10 @@ namespace humoto
                 }
 
             public:
+                std::string getName(std::size_t i)
+                {
+                    return qp_problem_.general_constraints_.getANames()[i];
+                }
 
                 /// @copydoc humoto::SolverGuessActiveSetMixin::getActiveSet
                 void getActiveSet(  humoto::ActiveSet                   &active_set,
