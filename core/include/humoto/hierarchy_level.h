@@ -253,7 +253,7 @@ namespace humoto
              *
              * @param[in,out] task_pointer  pointer to a task
              */
-            void pushTask(TaskSharedPointer task_pointer)
+            void pushTask(TaskSharedPointer task_pointer, bool varying_size = false)
             {
                 if (task_pointer->isSimple())
                 {
@@ -263,6 +263,8 @@ namespace humoto
                 {
                     tasks_.push_front(TaskInfo(task_pointer));
                 }
+
+                if(varying_size) varying_size_tasks_.push_back(RelaxedTaskInfo(task_pointer));
             }
 
             /**
@@ -325,6 +327,7 @@ namespace humoto
              */
             std::list<TaskInfo>            tasks_;
             std::vector<RelaxedTaskInfo>   relaxed_tasks_;
+            std::vector<RelaxedTaskInfo>   varying_size_tasks_;
             bool linear_objective_;
 
         public:

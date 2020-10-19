@@ -241,7 +241,15 @@ namespace humoto
                                     const std::string & name = "task") const = 0;
 
         public:
+            unsigned int relaxation_order_;
+            bool relaxed_;
 
+        public:
+
+           virtual  std::size_t getVaryingNumberOfConstraints(const humoto::ControlProblem &control_problem) const
+            {
+                HUMOTO_ASSERT(false, "getVaryingNumberOfConstraints not available for this class of constraints");
+            }
 
             virtual Eigen::MatrixXd &  getA()
             {

@@ -97,10 +97,10 @@ namespace humoto
              * @todo It might be a good idea to check for collisions of task ids.
              */
             void pushTask(  TaskSharedPointer task_pointer,
-                            const std::size_t level_index)
+                            const std::size_t level_index, bool varying_size = false)
             {
                 HUMOTO_ASSERT(level_index < number_of_levels_, "Wrong hierarchy level number.");
-                hierarchy_[level_index].pushTask(task_pointer);
+                hierarchy_[level_index].pushTask(task_pointer, varying_size);
             }
 
             /**
