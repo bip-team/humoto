@@ -9,7 +9,7 @@
 
 #pragma once
 
-#include <lexlsi.h>
+#include <lexls/lexlsi.h>
 
 namespace humoto
 {
