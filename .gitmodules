@@ -16,3 +16,6 @@
 [submodule "bridges/config_msgpack/msgpack-c"]
 	path = bridges/config_msgpack/msgpack-c
 	url = https://github.com/msgpack/msgpack-c.git
+[submodule "bridges/lexls/lexls"]
+	path = bridges/lexls/lexls
+	url = https://github.com/jrl-umi3218/lexls.git
